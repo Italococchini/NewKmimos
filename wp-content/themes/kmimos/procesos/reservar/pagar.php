@@ -404,6 +404,7 @@
 		}
 
 	}
+	$_SESSION["pagando"] = "";
 
 
 	exit();
