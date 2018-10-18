@@ -130,7 +130,7 @@ print_r($ID);
 				$content .= '</ul>';
 		}
 	}else{
-		$content .= '<div>No agreg&oacute; mascota en el registro</div>'
+		$content .= '<div>No agreg&oacute; mascota en el registro</div>';
 	}
 	kmimos_mails_administradores_new( "Registro de Nuevo Cliente", $content );
 	//wp_mail( 'italococchini@gmail.com', "Registro de Nuevo Cliente", $content);
