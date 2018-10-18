@@ -7,6 +7,10 @@
 	extract($_POST);
 
 	$pedido_id = $wpdb->get_var("SELECT post_parent FROM wp_posts where ID = {$ID} and post_status in ( 'confirmed', 'complete' )");
+	$reserva_end = get_post_meta( $ID, '_booking_end', true );
+	if( $pedido_id > 0 && strtotime($reserva_end) < time() ){
+		$pedido_id = 0;
+ 	}
 
     $factura_id = $wpdb->get_var( "SELECT id FROM facturas WHERE receptor = 'cliente' and reserva_id = {$ID}" );
 
@@ -16,7 +20,7 @@
 
 	if( $nc_id > 0 ){
 		$msg = 'Ya existe una Nota de Credito asignada a la reserva #'.$ID;
-	}else{
+	}else{		
 		if( $factura_id > 0 ){
 			$msg = 'No se puede generar la nota de cr&eacute;dito por que la reserva ya esta facturada.';
 		}else{

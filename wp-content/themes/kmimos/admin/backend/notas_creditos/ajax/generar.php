@@ -101,7 +101,6 @@
 			$observaciones_cliente = 'Comision por penalizacion $ '.$comision ;
 		}
 
-
 	// Nota de Credito - Cuidador
 		$sql_cuidador = "INSERT INTO notas_creditos ( 
 				`tipo`,

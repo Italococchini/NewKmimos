@@ -178,7 +178,6 @@
 
                 // Facturar
                     $AckEnlaceFiscal = $CFDI->generar_Cfdi_Cliente($data_reserva);
-
                     if( !empty($AckEnlaceFiscal['ack']) ){
                         $ack = json_decode($AckEnlaceFiscal['ack']);
 
@@ -192,6 +191,11 @@
 
                         $cfdi = $ack;
                     }
+            }else{
+                $cfdi = [
+                    'error'=>'SI', 
+                    'msg'=>'Error al emitir la factura, datos invalidos o incompletos'
+                ];
             }
 
             return $cfdi;
