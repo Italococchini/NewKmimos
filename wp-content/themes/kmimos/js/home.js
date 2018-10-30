@@ -77,12 +77,6 @@ var limites = {
        jQuery('#servicios_adicionales').dropdown('show');
     });
     
-    jQuery(document).on('click', '[data-action="validate"]', function(e){
-        if( validar_busqueda_home() ){
-            jQuery('#popup-servicios').modal('show');
-        }
-    });
-
     jQuery('[data-target="patitas-felices"]').on('click', function(){
 
         if( jQuery('#cp_email').val() != '' && jQuery('#cp_nombre').val() != ''){
@@ -302,6 +296,13 @@ jQuery(document).on('click', '[data-target="iframe-testimonio"]', function(){
         jQuery('#testimonio').modal('show');
     }
 });
+
+jQuery(document).on('click', '[data-action="validate"]', function(e){
+    if( validar_busqueda_home() ){
+        jQuery('#popup-servicios').modal('show');
+    }
+});
+
 
 jQuery(document).on('click', '[data-target="close-testimonio"]', function (e) {
     stop_video();
