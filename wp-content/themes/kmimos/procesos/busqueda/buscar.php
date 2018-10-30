@@ -58,7 +58,8 @@
 	extract($_POST);
 
 	if( isset($_GET["q"]) ){
-		$servicios = explode('+', $_GET['q']);
+		$servicios = explode( '+', $_GET['q'] );
+		$_POST['servicios'] = $servicios;
 	}
 
 
