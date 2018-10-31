@@ -94,7 +94,7 @@ $datos = kmimos_get_info_syte();
 							<strong style="color: #fff!important">
 								Actualizamos nuestros términos y condiciones, necesitamos que los leas y aceptes para continuar
 							</strong>
-						</div> 
+						</div>
 						<h3 style="margin: 0; text-align: center;">TERMINOS Y CONDICIONES</h3>
 						<div class="terminos_container" style="height:300px!important;">
 							'.$NEW_HTML_TERMINOS.'

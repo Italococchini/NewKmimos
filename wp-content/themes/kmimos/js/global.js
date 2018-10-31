@@ -305,6 +305,7 @@ function show_login_modal(seccion){
 	switch(seccion){
         case "login":
             jQuery("#modal_login form").css("display", "none");
+            jQuery('.popup-login-condiciones').addClass('popuphide');
             jQuery("#form_login").css("display", "block");
             jQuery("#modal_login").css("display", "table");
         break;
