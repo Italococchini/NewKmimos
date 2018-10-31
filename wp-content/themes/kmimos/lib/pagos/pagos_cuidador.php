@@ -1,7 +1,7 @@
 <?php
 	error_reporting(E_ERROR);
 //date_default_timezone_set('America/Mexico_City');
-date_default_timezone_set('America/Caracas');
+//date_default_timezone_set('America/Caracas');
 
 $pagos = new PagoCuidador();
 
@@ -451,44 +451,40 @@ class PagoCuidador {
 	/// *************************
 
 	public function getPagosPendientes(){
-        $list_cuidadores = $this->db->get_results( 
-            "SELECT DISTINCT(user_id) as user_id
-                FROM cuidadores_reservas
-                WHERE estatus = 'pendiente'
-            ");
-        $pagos = [];
-        foreach ($list_cuidadores as $row) {
-        	$_pagos = [];
 
-            $balance = $this->balance( $row->user_id );
+    	$sql = "SELECT * FROM cuidadores_pagos WHERE estatus = 'pendiente'";
+    	$reservas = $this->db->get_results($sql);
 
-            if( $balance->disponible > 0 ){
-            	
-	            $cuidador = $this->db->get_row( "SELECT nombre, apellido 
-	            	FROM cuidadores WHERE user_id = ".$row->user_id);
+    	$disponible = 0;
 
-	            $_pagos[ $row->user_id ]['user_id'] = $row->user_id;
-	            $_pagos[ $row->user_id ]['nombre'] = $cuidador->nombre;
-	            $_pagos[ $row->user_id ]['apellido'] = $cuidador->apellido;
-	            $_pagos[ $row->user_id ]['total'] = $balance->disponible;
-	            $_pagos[ $row->user_id ]['cantidad'] = count($balance->detalle);
-	            $_pagos[ $row->user_id ]['estatus'] = '';
-	            $_pagos[ $row->user_id ]['fecha_creacion'] = date('Y-m-d', strtotime("now"));
+    	foreach ($reservas as $row) {
+    		$disponible += $row->total;
+    		$items = unserialize($row->detalle);
+    		foreach ($items as $item) {
+				$_pagos[ $row->user_id ]['detalle'][$item['reserva']]['reserva'] = $item['reserva'];
+    			if( array_key_exists($item['reserva'], $detalle) ){
+    				$_pagos[ $row->user_id ]['detalle'][$item['reserva']]['monto'] += $item['monto'];
+    			}else{
+    				$_pagos[ $row->user_id ]['detalle'][$item['reserva']]['monto'] = $item['monto'];
+    			}
+    		}
 
-	            foreach ($balance->detalle as $key => $val) {        	
-					$_pagos[ $row->user_id ]['detalle'][$key] = [
-						'reserva'=>$key,
-						'monto'=>$val
-					];
-	            }
+	        $cuidador = $this->db->get_row( "SELECT nombre, apellido 
+	        	FROM cuidadores WHERE user_id = ".$row->user_id);
 
-	            $_pagos[ $row->user_id ] = (object) $_pagos[ $row->user_id ];
+	        $_pagos[ $row->user_id ]['user_id'] = $row->user_id;
+	        $_pagos[ $row->user_id ]['nombre'] = $cuidador->nombre;
+	        $_pagos[ $row->user_id ]['apellido'] = $cuidador->apellido;
+	        $_pagos[ $row->user_id ]['total'] = $disponible;
+	        $_pagos[ $row->user_id ]['cantidad'] = count($_pagos[ $row->user_id ]['detalle']);
+	        $_pagos[ $row->user_id ]['estatus'] = '';
+	        $_pagos[ $row->user_id ]['fecha_creacion'] = date('Y-m-d', strtotime("now"));
+    	}
 
-	            if( !empty($_pagos) ){
-	            	$pagos = (object) $_pagos;
-	            }
-            }
+        $_pagos[ $row->user_id ] = (object) $_pagos[ $row->user_id ];
 
+        if( !empty($_pagos) ){
+        	$pagos = (object) $_pagos;
         }
         return (object) $pagos;
 	}
@@ -503,7 +499,7 @@ class PagoCuidador {
 	}	
 
 	public function getPagoGenerados( $desde, $hasta ){
-		$where = " WHERE estatus <> 'completed' ";
+		$where = " WHERE estatus <> 'completed' and estatus <> 'pendiente' ";
 		if( !empty($desde) && !empty($hasta) ){
 			$where = " and fecha_creacion >= '{$desde} 00:00:00' and fecha_creacion <= '{$hasta} 23:59:59' ";
 		}

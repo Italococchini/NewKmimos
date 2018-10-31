@@ -121,11 +121,10 @@
 	</article>
 
 	<article class="col-md-12 text-center">
-		<div class="col-md-8 col-md-offset-2">
-			<h4 class="text-center col-md-12" style="margin-bottom: 5px; font-weight: bold">
-				Puede seleccionar su pago ahora, y se hara un cobro de comision por transferencia bancaria
-			</h4>
-		</div>
+
+		<h4 class="text-left col-md-12" style="margin-bottom: 5px; font-weight: bold">
+			Puede seleccionar su pago ahora, y se hara un cobro de comision por transferencia bancaria
+		</h4>
 
 		<!-- Tiempo restante -->
 		<label id="tiempo_restante_parent" class="btn btn-default <?php echo (!$pay->retiro->habilitado)? '':'hidden'; ?>">
