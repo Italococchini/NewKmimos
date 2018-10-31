@@ -121,8 +121,11 @@
 	</article>
 
 	<article class="col-md-12 text-center">
-		<!-- Ultimo retiro -->
-		<label class="purple">ULTIMO RETIRO: <?php echo (!empty($pay->retiro->ultimo_retiro)) ? $pay->retiro->ultimo_retiro : 'NO POSEE' ; ?></label><br>
+		<div class="col-md-8 col-md-offset-2">
+			<h4 class="text-center col-md-12" style="margin-bottom: 5px; font-weight: bold">
+				Puede seleccionar su pago ahora, y se hara un cobro de comision por transferencia bancaria
+			</h4>
+		</div>
 
 		<!-- Tiempo restante -->
 		<label id="tiempo_restante_parent" class="btn btn-default <?php echo (!$pay->retiro->habilitado)? '':'hidden'; ?>">
@@ -138,10 +141,9 @@
 				<i class="fa fa-money"></i> Retirar ahora
 			</a>
 		</div>
-		<div class="col-md-8 col-md-offset-2">
-			<h4 class="text-center col-md-12" style="margin-bottom: 0px; font-weight: bold">
-				Puede seleccionar su pago ahora, y se hara un cobro de comision por transferencia bancaria
-			</h4>
+		<!-- Ultimo retiro -->
+		<div class="col-md-12" style="margin-top:5px;">
+			<label class="purple">ULTIMO RETIRO: <?php echo (!empty($pay->retiro->ultimo_retiro)) ? $pay->retiro->ultimo_retiro : 'NO POSEE' ; ?></label><br>
 		</div>
 
 	</article>
