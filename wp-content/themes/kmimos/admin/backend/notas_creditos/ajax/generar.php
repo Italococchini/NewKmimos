@@ -28,7 +28,6 @@
 	$reserva = kmimos_desglose_reserva_data( $pedido_id, true );
 	$inicio = date('Y-m-d',$reserva['servicio']['inicio']) ;
 
-
 	// *************************************
 	// Detalle de la Nota de Credito
 	// *************************************
@@ -94,10 +93,16 @@
 
 		$_detalle = serialize($detalle);
 
-	// *************************************
-	// Nota de Credito - Cuidador
-	// *************************************
+	// Validar tipo de nota de credito
+		if( strtolower($tipo_usuario) == 'cliente' ){
+			$comision = $total * 0.20;
+			$total -= $comision;
+			$CFDI = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
+			$observaciones_cliente = 'Comision por penalizacion $ '.$comision ;
+		}
 
+
+	// Nota de Credito - Cuidador
 		$sql_cuidador = "INSERT INTO notas_creditos ( 
 				`tipo`,
 				`user_id`,
@@ -116,38 +121,39 @@
 				'pendiente'
 			);";
 
-		$wpdb->query( $sql_cuidador );
 
-	// *************************************
 	// Nota de Credito - Cliente
-	// *************************************
+		$sql_cliente = "INSERT INTO notas_creditos ( 
+				`tipo`,
+				`user_id`,
+				`reserva_id`,
+				`monto`,
+				`detalle`,
+				`observaciones`,
+				`estatus`,
+				factura
+			) VALUES (
+				'cliente', 
+				".$reserva['cliente']['id'].", 
+				$reserva_id, 
+				$total,
+				'{$_detalle}',
+				'{$observaciones} - {$observaciones_cliente}',
+				'pendiente',
+				'{$factura_id}'
+			);";
 
-		$factura_id = $wpdb->get_var( "SELECT id FROM facturas WHERE receptor = 'cliente' and reserva_id = {$reserva_id}" );
-
-		if( $factura_id > 0 ){
-			$sql_cliente = "INSERT INTO notas_creditos ( 
-					`tipo`,
-					`user_id`,
-					`reserva_id`,
-					`monto`,
-					`detalle`,
-					`observaciones`,
-					`estatus`,
-					factura
-				) VALUES (
-					'cliente', 
-					".$reserva['cliente']['id'].", 
-					$reserva_id, 
-					$total,
-					'{$_detalle}',
-					'{$observaciones}',
-					'procesada',
-					{$factura_id}
-				);";
-
-			$wpdb->query( $sql_cliente );
-		}
+		$wpdb->query( $sql_cuidador );
+		$wpdb->query( $sql_cliente );
 
 	// *************************************
 	// Act. reserva
 	// *************************************		
+	// Saldo a favor
+		$sql_saldo = "
+			UPDATE wp_usermeta SET 
+				meta_value = meta_value + {$total} 
+			WHERE meta_key='kmisaldo' and user_id = {$reserva['cliente']['id']}
+		";
+
+		$wpdb->query( $sql_saldo );

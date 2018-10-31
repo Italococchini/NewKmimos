@@ -49,7 +49,8 @@
     cursor: pointer;
 }
 
-.bg-kmimos { background: #eeeeee; color: #07523c!important; border-radius: 10px!important;}
+.purple{ color:#6b1c9b; }
+.bg-kmimos { background: #eeeeee; color: #07523c; border-radius: 10px!important;}
 .kmimos .balance-box { background: #59C9A8; color: #07523c!important; }
 .green .balance-box { background: #32A3509c; color: #07523c!important; }
 .blue .balance-box { background: #4181ED9c; color: #07523c!important; }

@@ -2,7 +2,8 @@
     session_start();
     date_default_timezone_set('America/Mexico_City');
 
-    include_once('../lib/pagos.php');
+    $tema = dirname(dirname(dirname(dirname(__DIR__))));
+    include_once($tema.'/lib/pagos/pagos_cuidador.php');
  
     $actual = time();
 

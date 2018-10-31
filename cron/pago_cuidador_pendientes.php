@@ -11,6 +11,10 @@
 
 	global $wpdb;
 
+	print_r( $pagos->get_pago_by_user( 8631 ) );
+
+
+/*
 	$hoy = date("Y-m-d H:i:s");
 //	$desde = date("Y-m-01", strtotime($hoy));
 	$desde = date("2018-01-01", strtotime($hoy));
@@ -27,6 +31,7 @@
 
 				
 				$desglose = kmimos_desglose_reserva_data( $reserva['pedido'], true );
+print_r($desglose);
 
 				$existe = $pagos->db->get_var('SELECT id FROM cuidadores_reservas WHERE reserva_id='.$reserva_id);
 				if( $existe > 0 ){
@@ -60,10 +65,11 @@
 							'".serialize($desglose)."'
 						);";
 					$pagos->db->query( $SQL );
-					echo $SQL;
+
 				}
 			}
 		}
 	}
+*/
 ?>	
 </pre>

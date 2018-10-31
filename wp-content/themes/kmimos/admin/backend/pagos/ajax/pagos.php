@@ -2,7 +2,8 @@
     session_start();
     date_default_timezone_set('America/Mexico_City');
 
-    include_once('../lib/pagos.php');
+    $tema = dirname(dirname(dirname(dirname(__DIR__))));
+    include_once($tema.'/lib/pagos/pagos_cuidador.php');
 
     $data = array(
         "data" => array()
@@ -14,10 +15,13 @@
 
     $display_reserva_check = true;
     $display_btn_liberar = false;
+    $display_total_input = false;
 
     switch ( strtolower($tipo) ) {
         case 'nuevo':
-            $pagos_lists = $pagos->getPagoCuidador( $desde, $hasta );    
+            $pagos_lists = $pagos->getPagosPendientes();
+            $display_total_input = true;
+            $display_reserva_check = false;
             break;
         case 'generados':
             $pagos_lists = $pagos->getPagoGenerados( $desde, $hasta );
@@ -48,13 +52,13 @@
         "error" => "Error",
     ];
 
-//print_r($pagos_lists);
-
     $_SESSION['pago_cuidador'] = [];
 
     if( $pagos_lists != false ){
         $i = 0;
+
         foreach ($pagos_lists as $pago) {
+
 
             $_SESSION['pago_cuidador'][ $pago->user_id ] = $pago;
 
@@ -192,6 +196,13 @@
 
                 $comentarios .= '<br>'.$pago->observaciones;
 
+            $input_total = "$ <span id='monto_".$pago->user_id."'>".number_format($pago->total, 2,',', '.')."</span>";
+
+            if( $display_total_input ){
+                $input_total = "<input class='form-control' id='monto_".$pago->user_id."' value='".$pago->total."' >
+                <div>Disponible: $ ".number_format($pago->total, 2,',', '.')."</div>";
+            }
+
             $data["data"][] = array(
                 $checkbox,
                 date('Y-m-d',strtotime($pago->fecha_creacion)),
@@ -199,7 +210,7 @@
                 $pago->user_id,
                 utf8_encode($cuidador->nombre),
                 utf8_encode($cuidador->apellido),
-                "$ <span id='monto_".$pago->user_id."'>".number_format($pago->total, 2,',', '.')."</span>",
+                $input_total,
                 "<span id='cantidad_".$pago->user_id."'>".$pago->cantidad."</span>",
                 $detalle,
                 $autorizado_por,

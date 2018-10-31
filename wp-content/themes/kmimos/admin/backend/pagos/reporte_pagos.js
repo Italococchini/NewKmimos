@@ -100,20 +100,10 @@ jQuery(document).ready(function() {
 	    	var users = [];
 			jQuery.each(jQuery("[data-type='item_selected']:checked"), function(){
 				var user = jQuery(this).val();
-				var token = jQuery(this).attr('data-token');	
-				var reservas = [];
-
-				jQuery.each( jQuery('[name="reservas_'+user+'[]"]:checked'), function(e){
-					reservas.push( jQuery(this).val() );
-				});
-
 				users.push({
-					'token':token, 
 					'user_id':user, 
-					'reservas': reservas
+					'monto': jQuery('#monto_'+user).val()
 				});
-
-
 			});
 			console.log(users);
 			generar_solicitud( users, jQuery(this).attr('data-target') );

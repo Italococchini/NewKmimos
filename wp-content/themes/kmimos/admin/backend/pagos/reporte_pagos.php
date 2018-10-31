@@ -1,6 +1,7 @@
 <pre>
 <?php 
-    include_once('lib/pagos.php'); 
+    $tema = dirname(dirname(dirname(__DIR__)));
+    include_once($tema.'/lib/pagos/pagos_cuidador.php'); 
     $fecha = $pagos->getRangoFechas();
     $user = wp_get_current_user();
 ?>

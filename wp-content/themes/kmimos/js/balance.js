@@ -3,16 +3,17 @@ var table;
 var tr = document.getElementById('tiempo_restante');
 
 jQuery(document).ready(function(){
-    timer = setInterval(contador, 1000);
+    // habilitar boton de retiro
+    contador();
 
     jQuery('[data-action="popover"]').on('click', function(e){
         var content_old = jQuery( '#help' ).html();
         var content = jQuery(this).attr('data-content');
         if( content != content_old ){       
-            jQuery( '#help' ).css( 'visibility', 'visible' );
+            jQuery( '#help' ).css( 'display', 'block' );
             jQuery( '#help' ).html( content );
         }else{
-            jQuery( '#help' ).css( 'visibility', 'hidden' );
+            jQuery( '#help' ).css( 'display', 'none' );
             jQuery( '#help' ).html( '' );
         }
     });
@@ -36,16 +37,15 @@ jQuery(document).ready(function(){
     });
 
     jQuery('[name="periodo"]').on('change', function(e){
-        jQuery.post(
-            HOME+'admin/frontend/balance/ajax/update_periodo.php',
-            {'periodo': jQuery(this).val(), 'ID': user_id},
-            function(d){
-                if( d== 'YES' ){
-                    alert( "Datos actualizados" );
-                }else{
-                    alert( "Datos actualizados" );
-                }
-        });
+        jQuery('#retiro_dia').css('display', 'none');
+        if( jQuery(this).val() == 'semanal' ){
+            jQuery('#retiro_dia').css('display', 'block');
+        }
+        update_periodo();
+    });
+
+    jQuery('[name="periodo_dia"]').on('change', function(e){
+        update_periodo();
     });
 
     jQuery('#search-transacciones').on('click', function(e){
@@ -61,32 +61,52 @@ jQuery(document).ready(function(){
         jQuery('#retiros').modal('show');
     });
 
-    jQuery("[data-name='retiro_disponible']").on('change', function(e){
-        retiro_total =0;
-        jQuery.each(jQuery("[data-name='retiro_disponible']:checked"), function(){
-            retiro_total += parseFloat(jQuery(this).attr('data-monto'));
-        });
-        jQuery('#modal-subtotal').html( retiro_total );
-        jQuery('#modal-total').html( retiro_total - 10 );
+    jQuery('[name="monto"]').on('change', function(e){
+        var monto = jQuery(this).val();
+        var total = jQuery(this).attr('data-value');
+
+        if( monto > total ){
+            jQuery(this).val( total );
+            monto = total;
+            alert( "El monto no debe ser mayor al saldo disponible" );
+        }
+
+        jQuery('#modal-subtotal').html( monto );
+        jQuery('#modal-total').html( monto - 10 );
+
     });
 
-    jQuery('#retirar').on('click', function(e){        
-        var selected = [];
-        jQuery.each(jQuery("[data-name='retiro_disponible']:checked"), function(){
-            var reserva = jQuery(this).val();
-            selected.push(reserva);
-        });
-        jQuery.post(
-            HOME+'admin/frontend/balance/ajax/retirar.php',
-            {'reservas_selected': selected, 'ID': user_id, 'descripcion': jQuery('[name="descripcion"]').val()},
-            function(d){
-                console.log(d);
-                location.reload();
-            }
-        );
+    jQuery('#retirar').on('click', function(e){
+        var obj = jQuery(this);
+        if( !obj.hasClass('disabled') ){        
+            obj.addClass('disabled');
+            jQuery.post(
+                HOME+'admin/frontend/balance/ajax/retirar.php',
+                {'monto': jQuery('[name="monto"]').val(), 'ID': user_id, 'descripcion': jQuery('[name="descripcion"]').val()},
+                function(d){
+                    console.log(d);
+                    location.reload();
+                }
+            );
+        }else{
+            alert('Ya se envio la solicitud de retiro, por favor espere.');
+        }
     });
 
 });
+
+function update_periodo(){        
+    jQuery.post(
+        HOME+'admin/frontend/balance/ajax/update_periodo.php',
+        {'periodo': jQuery('[name="periodo"]').val(), 'dia': jQuery('[name="periodo_dia"]').val(), 'ID': user_id},
+        function(d){
+            if( d== 'YES' ){
+                alert( "Datos actualizados" );
+            }else{
+                alert( "Datos actualizados" );
+            }
+    });
+}
 
 function loadTabla(){
      
@@ -139,39 +159,33 @@ function loadTabla(){
 }
 
 function contador(){
-    var hoy=new Date()
-        console.log(hoy)
-        dias=0
-        horas=0
-        minutos=0
-        segundos=0
+    jQuery("#hour").text( tiempo.hora + ' h ' );
+    jQuery("#minute").text( tiempo.minuto + ' min ');
+    jQuery("#second").text( tiempo.segundo + ' s ');
 
-    var diferencia=(fecha.getTime()-hoy.getTime())/1000
-        dias=Math.floor(diferencia/86400)
-        diferencia=diferencia-(86400*dias)
-        horas=Math.floor(diferencia/3600)
-        diferencia=diferencia-(3600*horas)
-        minutos=Math.floor(diferencia/60)
-        diferencia=diferencia-(60*minutos)
-        segundos=Math.floor(diferencia)
-     
-    if ( horas==0 && minutos==0 && segundos==0 ){
-        jQuery('#tiempo_restante_parent').addClass('hidden');
-        jQuery('#boton-retiro').removeClass('hidden');
-        clearInterval(timer);
-        return;
-    }else{
-        tr.innerHTML = '';
+    tiempo_corriendo = setInterval(function(){
+        // Segundos
+        tiempo.segundo--;
+        if(tiempo.segundo <= 0)
+        {
+            tiempo.segundo = 59;
+            tiempo.minuto--;
+        }      
 
-        if( horas > 0 ){
-            tr.innerHTML = horas + " h ";   
-        }
-        if( minutos > 0 ){
-            tr.innerHTML += minutos + " min. "; 
-        }
-        if( segundos > 0 ){
-            tr.innerHTML += segundos + ' s';    
+        // Minutos
+        if(tiempo.minuto <= 0)
+        {
+            tiempo.minuto = 59;
+            tiempo.hora--;
         }
 
-    }
+        jQuery("#hour").text( tiempo.hora + ' h ' );
+        jQuery("#minute").text( tiempo.minuto + ' min ');
+        jQuery("#second").text( tiempo.segundo + ' s ');
+
+        if( tiempo.hora <= 0 && tiempo.minuto <= 0 && tiempo.segunso <= 0 ){
+            clearInterval(tiempo_corriendo);
+        }
+
+    }, 1000);
 }

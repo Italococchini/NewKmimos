@@ -10,49 +10,66 @@
 
 	$cuidador = $pagos->db->get_row(" SELECT pago_periodo FROM cuidadores WHERE user_id = {$user_id}");
 
+	$cuidador_periodo = ['periodo'=>'','dia'=>'','proximo_pago'=>'00/00/0000'];
+	if( !empty($cuidador->pago_periodo) ){
+		$cuidador_periodo = unserialize($cuidador->pago_periodo);
+	}
+
 	$periodo_retiro = [
 		'semanal',
 		'quincenal',
 		'mensual',
 	];
 
+	$periodo_dias = [
+		'lunes',
+		'martes',
+		'miercoles',
+		'jueves',
+		'viernes',
+	];
+
+	// Tiempo restante para retiro
+	$fecha1 = new DateTime($hoy);
+	$fecha2 = new DateTime($pay->retiro->tiempo_restante);
+	$intervalo = $fecha1->diff($fecha2);
+
 ?>
 
 <h1 class="titulo">Balance</h1>
 
 <section class="row text-right" style="margin-bottom: 10px;">
+
+	<h4 class="text-left col-md-12" style="margin-bottom: 0px; font-weight: bold">
+		Puedes programar tus pagos, con envíos de manera gratuita
+	</h4>
 	<dir class="col-md-4 text-left">
-
-		<!-- Total generados -->
-		<label>TOTAL GENERADOS: $ <?php echo number_format($pay->total_generado, 2, ',', '.'); ?> </label> 
-
 		<!-- Periodo de pago -->
 		<div class="input-group">
-		  <span class="input-group-addon" id="basic-addon1">Periodo de retiro: </span>
-		  <select class="form-control" name="periodo">
-		  	<?php 
+			<span class="input-group-addon" id="basic-addon1">Periodo de retiro: </span>
+			<select class="form-control" name="periodo">
+				<?php 
 			  	foreach( $periodo_retiro as $periodo ){ 
-			  		$select = ( $periodo == $cuidador->pago_periodo )? 'selected':'';
+			  		$select = ( $periodo == $cuidador_periodo['periodo'] )? 'selected':'';
 					echo "<option value='{$periodo}' {$select}>".ucfirst($periodo)."</option>";
 				} 
 			?>
-		  </select>
+			</select>
 		</div>
 	</dir>
-	<dir class="col-md-4 col-md-offset-4">
-
-		<!-- Ultimo retiro -->
-		<label>ULTIMO RETIRO: <?php echo (!empty($pay->retiro->ultimo_retiro)) ? $pay->retiro->ultimo_retiro : 'NO POSEE' ; ?></label><br>
-
-		<!-- Tiempo restante -->
-		<label id="tiempo_restante_parent" class="btn btn-default <?php echo (!$pay->retiro->habilitado)? '':'hidden'; ?>">
-			Tiempo restante: <span id="tiempo_restante"></span> 
-		</label> 
-
-		<!-- Boton de retiro -->
-		<a id="<?php echo ($pay->disponible>0)? '':'disabled_'; ?>boton-retiro" class="<?php echo ($pay->disponible>0)? '':'disabled'; ?> btn btn-primary  <?php echo ($pay->retiro->habilitado)? '':'hidden'; ?>" data-target="modal-retiros">
-			<i class="fa fa-money"></i> Retirar ahora
-		</a>
+	<dir class="col-md-4 text-left" id="retiro_dia" style="<?php echo ($cuidador_periodo['periodo']=='semanal')? 'display:block;' : 'display:none;' ; ?>">
+		<!-- Periodo de pago -->
+		<div class="input-group">
+			<span class="input-group-addon" id="basic-addon1">D&iacute;a de retiro: </span>	
+			<select class="form-control" name="periodo_dia">	
+				<?php 
+			  	foreach( $periodo_dias as $periodo ){ 
+			  		$select = ( $periodo == $cuidador_periodo['dia'] )? 'selected':'';
+					echo "<option value='{$periodo}' {$select}>".ucfirst($periodo)."</option>";
+				} 
+			?>
+			</select>
+		</div>
 	</dir>
 </section>
 
@@ -63,7 +80,8 @@
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>DISPONIBLE: </strong> Saldo disponible en cuenta"></i>
 			<span>DISPONIBLE</span> 
-			<div  style="font-size: 18px;">$ <?php echo number_format($pay->disponible, 2, ',','.'); ?></div>
+			<div style="padding:5px 0px; font-size: 18px;">$ <?php echo number_format($pay->disponible, 2, ',','.'); ?></div>
+			<small>Saldo disponible <br> para pagos y retiros</small>
 		</div>
 	</article>
 
@@ -72,31 +90,53 @@
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" data-action="popover" data-content="<strong>PROXIMO PAGO: </strong> Monto a pagar en la proxima periodo de pago" aria-hidden="true"></i>
 			<span>PROXIMO PAGO</span> 
-			<div  style="font-size: 18px;">$ <?php echo number_format($pay->proximo_pago, 2, ',','.'); ?></div>
+			<div style="padding:5px 0px; font-size: 18px;">$ <?php echo number_format($pay->proximo_pago, 2, ',','.'); ?></div>
+			<small>Fecha de pago <br> <?php echo $cuidador_periodo['proximo_pago']; ?></small>
 		</div>
 	</article>
 
 	<!-- En progreso -->
 	<article class="col-md-3">
 		<div class="alert bg-kmimos">
-			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>EN PROGRESO: </strong>Pagos realizados pendientes por aprobaci&oacute;n del banco"></i>
-			<span>EN PROGRESO</span> 
-			<div  style="font-size: 18px;">$ <?php echo number_format($pay->en_progreso, 2, ',','.'); ?></div>
+			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>EN TRANSITO: </strong>Pagos realizados pendientes por aprobaci&oacute;n del banco, el estatus puede tardar dos horas en cambiar"></i>
+			<span>EN TRANSITO</span> 
+			<div  style="padding:5px 0px; font-size: 18px;">$ <?php echo number_format($pay->en_progreso, 2, ',','.'); ?></div>
+			<small>El estatus puede tardar <br> dos horas en cambiar</small>
 		</div>
 	</article>
 
 	<!-- Retenido -->
 	<article class="col-md-3">
 		<div class="alert bg-kmimos">
-			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>RETENIDO: </strong> Montos retenidos por falta de datos de facturaci&oacute;n"></i>
+			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>RETENIDO: </strong>Saldo pendientes por asignar en cuenta"></i>
 			<span>RETENIDO</span> 
-			<div  style="font-size: 18px;">$ <?php echo number_format($pay->retenido, 2, ',','.'); ?></div>
+			<div  style="padding:5px 0px; font-size: 18px;">$ <?php echo number_format($pay->retenido, 2, ',','.'); ?></div>
+			<small>Pendiente por <br> asignar en cuenta</small>
 		</div>
 	</article>
 
 	<!-- Mensaje de ayuda -->
 	<article class="col-md-12 text-left">
-		<div class="alert alert-info" style="visibility: hidden;" role="alert" id='help'>asd</div>
+		<div class="alert alert-info" style="display:none;" role="alert" id='help'></div>
+	</article>
+
+	<article class="col-md-12 text-center">
+		<!-- Ultimo retiro -->
+		<label class="purple">ULTIMO RETIRO: <?php echo (!empty($pay->retiro->ultimo_retiro)) ? $pay->retiro->ultimo_retiro : 'NO POSEE' ; ?></label><br>
+
+		<!-- Tiempo restante -->
+		<label id="tiempo_restante_parent" class="btn btn-default <?php echo (!$pay->retiro->habilitado)? '':'hidden'; ?>">
+			Tiempo restante: 
+			<span id="hour"></span>  
+			<span id="minute"></span>
+			<span id="second"></span>
+		</label> 
+
+		<!-- Boton de retiro -->
+		<a id="<?php echo ($pay->disponible>0)? '':'disabled_'; ?>boton-retiro" class="<?php echo ($pay->disponible>0)? '':'disabled'; ?> btn btn-primary btn-lg <?php echo ($pay->retiro->habilitado)? '':'hidden'; ?>" data-target="modal-retiros">
+			<i class="fa fa-money"></i> Retirar ahora
+		</a>
+
 	</article>
 
 	<!-- Transacciones -->
@@ -142,24 +182,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Retirar ahora   <label>Saldo disponible: $ <?php echo number_format($pay->disponible, 2, ',','.'); ?></label></h4>
+        <h4 class="modal-title" id="myModalLabel"><label>Retirar ahora</label></h4>
       </div>
       <div class="modal-body">
+        <div class="alert alert-info">Costo de comisión por transacción $10 </div>
 
-        <div>    	
-        <?php foreach ($pay->detalle as $key => $val) { 
-        	if( $val > 0 ){
-		        echo "
-		        	<label style='background: #eee; padding:10px; border-radius: 5px;' > 
-		        		<input type='checkbox' data-name='retiro_disponible' value='{$key}' data-monto='{$val}'>
-	        			#{$key} 
-	        			<span style='border-radius: 5px; padding: 3px 3px 3px 3px; background: #fff;'>Monto: {$val}</span> 
-	        		</label>
-		        ";
-        	}
-        }?>
+        <h4 class="modal-title" id="myModalLabel" style="margin-bottom:10px;"><label>Saldo disponible: $ <?php echo number_format($pay->disponible, 2, ',','.'); ?></label></h4>
+
+        <div style="margin-bottom: 10px;">
+	        <label>Monto a retirar: </label>
+	        <input type="text" name="monto" maxlength="100" class="form-control" value="" data-value="<?php echo $pay->disponible; ?>">
         </div>
-
         <div>    	
 	        <label>Descripci&oacute;n: </label>
 	        <input type="text" name="descripcion" maxlength="100" class="form-control" value=""data-value="<?php echo $pay->disponible; ?>">
@@ -167,23 +200,32 @@
         <div class="text-right">
 	        <h4 style="color:#000;">Monto a retirar: $ <span id="modal-subtotal">0</span></h4>
 	        <h4 style="color:#000;">Comisi&oacute;n: $ -10,00</h4>
-	        <h4><strong>Total a transferir: $ <span id="modal-total">0</span></strong></h4>
+	        <h4><strong>Total a transferir: $ <span class="purple" id="modal-total">0</span></strong></h4>
         </div>
 
       </div>
       <div class="modal-footer">
 
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="retirar">Procesar</button>
+        <button type="button" class="btn btn-primary " id="retirar">Procesar</button>
       </div>
     </div>
   </div>
 </div>
 
+
+
+
+
+
 <script>
     var fecha = new Date('<?php echo $pay->retiro->tiempo_restante; ?>');
     var user_id = <?php echo $user_id; ?>;
 
-
-    
+    var tiempo_corriendo = null;
+    var tiempo = {
+        hora: <?php echo $intervalo->format('%H') ?>,
+        minuto: <?php echo $intervalo->format('%i') ?>,
+        segundo: <?php echo $intervalo->format('%s') ?>
+    };
 </script>

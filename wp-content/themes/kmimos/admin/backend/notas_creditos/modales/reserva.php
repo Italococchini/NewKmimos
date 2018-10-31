@@ -8,20 +8,34 @@
 
 	$pedido_id = $wpdb->get_var("SELECT post_parent FROM wp_posts where ID = {$ID} and post_status in ( 'confirmed', 'complete' )");
 
-	$reserva = [];
+    $factura_id = $wpdb->get_var( "SELECT id FROM facturas WHERE receptor = 'cliente' and reserva_id = {$ID}" );
+
+    $nc_id = $wpdb->get_var( "SELECT id FROM notas_creditos WHERE reserva_id = {$ID}" );
+
 	$show_nc = false;
-	if( $pedido_id > 0 ){
-		$show_nc = true;
 
-		$reserva = kmimos_desglose_reserva_data( $pedido_id, true );
+	if( $nc_id > 0 ){
+		$msg = 'Ya existe una Nota de Credito asignada a la reserva #'.$ID;
+	}else{
+		if( $factura_id > 0 ){
+			$msg = 'No se puede generar la nota de cr&eacute;dito por que la reserva ya esta facturada.';
+		}else{
+			$reserva = [];
+			if( $pedido_id > 0 ){
+				$show_nc = true;
 
-		$hoy = date('Y-m-d');
-		$ini = date('Y-m-d', $reserva['servicio']['inicio']);
-		$fin = date('Y-m-d', $reserva['servicio']['fin']);
+				$reserva = kmimos_desglose_reserva_data( $pedido_id, true );
 
-		$rango_inicio = ( $hoy >= $ini )? $hoy : $ini;
+				$hoy = date('Y-m-d');
+				$ini = date('Y-m-d', $reserva['servicio']['inicio']);
+				$fin = date('Y-m-d', $reserva['servicio']['fin']);
+
+				$rango_inicio = ( $hoy >= $ini )? $hoy : $ini;
+			}else{
+				$msg = 'No se puede generar la nota de cr&eacute;dito por que la reserva ya esta facturada.';
+			}
+		}
 	}
-
 ?>
 <script>
 	var tipo_servicio = "<?php echo strtolower($reserva['servicio']['tipo']) ?>";
@@ -30,7 +44,7 @@
 <?php if( !$show_nc ){ ?>
 	<div class="text-center" style="display: <?php echo $show_msg; ?>">
 		<p style=" font-weight: bold; padding: 20px 0px 0px 0px;">
-			La reserva debe estar completada o confirmada para realizar la nota de cr&eacute;dito
+			<?php echo $msg; ?>
 		</p>
 	</div>
 <?php }else{ ?>
@@ -55,6 +69,7 @@
 					<div>Tel&eacute;fono: <?php echo $reserva['cuidador']['telefono']; ?></div>
 				</article>
 			</section>
+
 			<div class="mas_info">
 				<span>Info cliente y cuidador</span>
 			</div>
@@ -70,6 +85,16 @@
 				</div>
 				<div>Desde: <?php echo date('d/m/Y', $reserva['servicio']['inicio']); ?> Hasta: <?php echo date('d/m/Y', $reserva['servicio']['fin']); ?></div>
 			</section>
+
+			<section>
+				<h1 class="popup-titulo">QUIEN SOLICITA LA MODIFICACI&Oacute;N?</h1>
+				<select name="tipo_usuario" class="form-control">
+					<option value="">Seleccione una opci&oacute;n</option>
+					<option value="cliente">Cliente</option>
+					<option value="cuidador">Cuidador</option>
+				</select>
+			</section>
+
 
 			<?php if( !empty($reserva['servicio']['variaciones']) ){ ?>
 			<section class="servicios">

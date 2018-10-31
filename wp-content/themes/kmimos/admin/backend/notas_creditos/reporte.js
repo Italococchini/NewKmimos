@@ -111,6 +111,13 @@ jQuery(document).ready(function() {
 		jQuery('#show_notas_creditos').attr('data-id', jQuery(this).val());
 	});
 
+	jQuery(document).on('change', '[name="tipo_usuario"]', function(e){
+		jQuery(".servicios").css('display', 'none');
+		if(jQuery(this).val() == 'cliente' || jQuery(this).val() == 'cuidador'){
+			jQuery(".servicios").css('display', 'block');
+		}
+	});	
+
 	jQuery(document).on('click', "#nc_save", function(e){
 		jQuery.post(
 			TEMA+'/admin/backend/notas_creditos/ajax/generar.php',

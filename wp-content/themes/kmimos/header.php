@@ -53,7 +53,8 @@
 	$wlabel = add_wlabel();
 	$HTML .= '
 		<script type="text/javascript"> 
-			var pines = [], HOME = "'.getTema().'/"; 
+			var pines = []; 
+			var HOME = "'.getTema().'/"; 
 			var RAIZ = "'.get_home_url().'/"; 
 			var AVATAR = "";
             var wlabel = "'.$wlabel.'";
