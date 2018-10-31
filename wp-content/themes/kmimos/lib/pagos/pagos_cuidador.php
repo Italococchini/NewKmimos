@@ -168,37 +168,37 @@ class PagoCuidador {
 				}
 
 				$sql = '';
-				if( $existe > 0 ){
-					// actualizar montos
-					$sql = "UPDATE `cuidadores_reservas` SET 
-						disponible = {$total_a_pagar},
-						estatus = '{$estatus}'
-					WHERE user_id = {$user_id} AND reserva_id=".$row->reserva_id;
-				}else{
-					// insertar reserva
-					$sql = "INSERT INTO `cuidadores_reservas`( 
-						`user_id`,
-						`reserva_id`,
-						`checkin`,
-						`checkout`,
-						`total_dias`,
-						`disponible`,
-						`total_reserva`,
-						`estatus`
-					) VALUES (
-						{$user_id},
-						".$row->reserva_id.",
-						'".$row->booking_start."',
-						'".$row->booking_end."',
-						{$total_noches},
-						{$total_a_pagar},
-						'{$total_a_pagar}',
-						'{$estatus}'
-					);";
+				if( $total_a_pagar > 0 ){				
+					if( $existe > 0 ){
+						// actualizar montos
+						$sql = "UPDATE `cuidadores_reservas` SET 
+							disponible = {$total_a_pagar},
+							estatus = '{$estatus}'
+						WHERE user_id = {$user_id} AND reserva_id=".$row->reserva_id;
+					}else{
+						// insertar reserva
+						$sql = "INSERT INTO `cuidadores_reservas`( 
+							`user_id`,
+							`reserva_id`,
+							`checkin`,
+							`checkout`,
+							`total_dias`,
+							`disponible`,
+							`total_reserva`,
+							`estatus`
+						) VALUES (
+							{$user_id},
+							".$row->reserva_id.",
+							'".$row->booking_start."',
+							'".$row->booking_end."',
+							{$total_noches},
+							{$total_a_pagar},
+							'{$total_a_pagar}',
+							'{$estatus}'
+						);";
+					}
+					$this->db->query( $sql );
 				}
-
-				$this->db->query( $sql );
-
 		}
 
 		return $total_a_pagar;
@@ -636,24 +636,34 @@ class PagoCuidador {
 		return $fecha;
 	}
 
-	public function dia_semana( $dia ){
+	public function dia_semana( $dia, $periodo ){
     	$d = getdate();
-		$dias = [
-			'lunes' => 'Monday',
-			'martes' => 'Tuesday',
-			'miercoles' => 'Wednesday',
-			'jueves' => 'Thursday',
-			'viernes' => 'Friday',
-		];
-
 		$hoy = $d[0];
-		$lunes = strtotime('next mon', $hoy);
 
-		if( strtolower($dia) == 'lunes' ){
-			$fecha = date('Y-m-d',$lunes);
-		}else{
-			$fecha = date('Y-m-d',strtotime('next '.$dias[ strtolower($dia) ], $lunes));
-		}
+	    $_periodo = [
+	    	'semanal' => 7,
+	    	'quincenal' => 15,
+	    	'mensual' => 30,
+	    ];
+
+	    if( $periodo == 'semanal' ){	    	
+			$dias = [
+				'lunes' => 'Monday',
+				'martes' => 'Tuesday',
+				'miercoles' => 'Wednesday',
+				'jueves' => 'Thursday',
+				'viernes' => 'Friday',
+			];
+			$lunes = strtotime('next mon', $hoy);
+			if( strtolower($dia) == 'lunes' ){
+				$fecha = date('Y-m-d',$lunes);
+			}else{
+				$fecha = date('Y-m-d',strtotime('next '.$dias[ strtolower($dia) ], $lunes));
+			}
+	    }else{	
+	    	$hoy = date('Y-m-d H:i:s');
+			$fecha = date('Y-m-d',strtotime($hoy.' +'.$_periodo[ strtolower($periodo) ].' day') );
+	    }
 		return $fecha;
 	}
 

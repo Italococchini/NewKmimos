@@ -41,7 +41,7 @@
 <section class="row text-right" style="margin-bottom: 10px;">
 
 	<h4 class="text-left col-md-12" style="margin-bottom: 0px; font-weight: bold">
-		Puedes programar tus pagos, con envíos de manera gratuita
+		Puedes programar tus pagos semanal, quincenal o mensual de manera gratuita
 	</h4>
 	<dir class="col-md-4 text-left">
 		<!-- Periodo de pago -->
@@ -91,7 +91,7 @@
 			<i class="fa balance-help fa-question-circle" data-action="popover" data-content="<strong>PROXIMO PAGO: </strong> Monto a pagar en la proxima periodo de pago" aria-hidden="true"></i>
 			<span>PROXIMO PAGO</span> 
 			<div style="padding:5px 0px; font-size: 18px;">$ <?php echo number_format($pay->proximo_pago, 2, ',','.'); ?></div>
-			<small>Fecha de pago <br> <?php echo $cuidador_periodo['proximo_pago']; ?></small>
+			<small>Fecha de pago <br> <span id="fecha_pago"><?php echo $cuidador_periodo['proximo_pago']; ?></span></small>
 		</div>
 	</article>
 
@@ -133,9 +133,12 @@
 		</label> 
 
 		<!-- Boton de retiro -->
-		<a id="<?php echo ($pay->disponible>0)? '':'disabled_'; ?>boton-retiro" class="<?php echo ($pay->disponible>0)? '':'disabled'; ?> btn btn-primary btn-lg <?php echo ($pay->retiro->habilitado)? '':'hidden'; ?>" data-target="modal-retiros">
-			<i class="fa fa-money"></i> Retirar ahora
-		</a>
+		<div class="col-md-12">		
+			<a id="<?php echo ($pay->disponible>0)? '':'disabled_'; ?>boton-retiro" class="<?php echo ($pay->disponible>0)? '':'disabled'; ?> btn btn-primary btn-lg <?php echo ($pay->retiro->habilitado)? '':'hidden'; ?>" data-target="modal-retiros">
+				<i class="fa fa-money"></i> Retirar ahora
+			</a>
+		</div>
+		<small class="col-md-4 col-md-offset-4">Puede seleccionar su pago ahora, y se hara un cobro de comision por transferencia bancaria</small>
 
 	</article>
 

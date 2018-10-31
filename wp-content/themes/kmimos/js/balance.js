@@ -100,11 +100,9 @@ function update_periodo(){
         HOME+'admin/frontend/balance/ajax/update_periodo.php',
         {'periodo': jQuery('[name="periodo"]').val(), 'dia': jQuery('[name="periodo_dia"]').val(), 'ID': user_id},
         function(d){
-            if( d== 'YES' ){
-                alert( "Datos actualizados" );
-            }else{
-                alert( "Datos actualizados" );
-            }
+            jQuery('#fecha_pago').html(d);
+            console.log(d);
+            alert( "Datos actualizados" );
     });
 }
 

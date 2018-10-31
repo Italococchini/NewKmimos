@@ -4,14 +4,8 @@
 
     extract( $_POST );
 
-    $_periodo = [
-    	'semanal' => 7,
-    	'quincenal' => 15,
-    	'mensual' => 30,
-    ];
-
 	$hoy = date( "Y/m/d H:i:s" );
-	$proximo_pago = $pagos->dia_semana( $dia );
+	$proximo_pago = $pagos->dia_semana( $dia, $periodo );
 
 	$cuidador_periodo = [
 		'periodo'=> $periodo,
@@ -23,3 +17,5 @@
     $result = $pagos->db->query( 
     	"UPDATE cuidadores SET pago_periodo = '{$dato}' WHERE user_id={$ID}" 
     );
+
+    echo $proximo_pago;
