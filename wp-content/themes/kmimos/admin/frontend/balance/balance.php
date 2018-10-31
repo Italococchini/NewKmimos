@@ -138,7 +138,11 @@
 				<i class="fa fa-money"></i> Retirar ahora
 			</a>
 		</div>
-		<small class="col-md-4 col-md-offset-4">Puede seleccionar su pago ahora, y se hara un cobro de comision por transferencia bancaria</small>
+		<div class="col-md-8 col-md-offset-2">
+			<h4 class="text-center col-md-12" style="margin-bottom: 0px; font-weight: bold">
+				Puede seleccionar su pago ahora, y se hara un cobro de comision por transferencia bancaria
+			</h4>
+		</div>
 
 	</article>
 
