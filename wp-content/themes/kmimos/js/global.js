@@ -4,6 +4,10 @@ jQuery( document ).ready(function() {
         return target.replace(new RegExp(search, 'g'), replacement);
     };
 
+    jQuery('#leer_testimonio').on('click', function(e){
+        jQuery( "#popup-iniciar-sesion .popup-login-condiciones .terminos_container" ).scrollTop(999999999999999);
+    });
+
     jQuery( "#popup-iniciar-sesion .popup-login-condiciones .terminos_container" ).scroll(function() {
         if( jQuery( "#popup-iniciar-sesion .popup-login-condiciones .terminos_container" )[0].scrollHeight <= ( parseInt( jQuery( "#popup-iniciar-sesion .popup-login-condiciones .terminos_container" ).scrollTop() ) + 700  ) ){
             jQuery( "#login_submit" ).removeClass("btn_disable");
