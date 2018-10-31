@@ -5,7 +5,7 @@ jQuery( document ).ready(function() {
     };
 
     jQuery('#leer_testimonio').on('click', function(e){
-        jQuery( "#popup-iniciar-sesion .popup-login-condiciones .terminos_container" ).scrollTop(999999999999999);
+        jQuery( "#popup-iniciar-sesion .popup-login-condiciones .terminos_container" ).scrollTop(999999999999999999999999999999);
     });
 
     jQuery( "#popup-iniciar-sesion .popup-login-condiciones .terminos_container" ).scroll(function() {

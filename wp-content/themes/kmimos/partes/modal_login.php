@@ -90,7 +90,7 @@ $datos = kmimos_get_info_syte();
 						</div>
 					</div>
 					<div class="popuphide popup-login-condiciones" style="padding:15px">
-						<div class="alert alert-danger" style="background-color:#a94442;">
+						<div class="alert alert-danger" style="background-color:#a94442ba;">
 							<strong style="color: #fff!important">
 								Actualizamos nuestros términos y condiciones, necesitamos que los leas y aceptes para continuar
 							</strong>
@@ -100,7 +100,7 @@ $datos = kmimos_get_info_syte();
 							'.$NEW_HTML_TERMINOS.'
 						</div>
 						<div class="text-right" style="font-size:20px;">
-							<i class="fa fa-arrow-down" aria-hidden="true" id="leer_testimonio" style="cursor:pointer;"></i>
+							<i class="fa fa-arrow-circle-down" aria-hidden="true" id="leer_testimonio" style="cursor:pointer;color:#a94442;"></i>
 						</div>
 						<a href="#" id="login_submit" class="km-btn-correo btn_disable">
 							ACEPTAR TERMINOS Y CONDICIONES
