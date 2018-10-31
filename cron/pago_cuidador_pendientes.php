@@ -11,7 +11,11 @@
 
 	global $wpdb;
 
-	print_r( $pagos->get_pago_by_user( 8631 ) );
+ 	$cuidadores = $pagos->get_cuidadores_reservas_activas();
+
+ 	foreach ($cuidadores as $row) {
+		$pagos->get_pago_by_user( $row->post_author ) ;
+ 	}
 
 
 /*

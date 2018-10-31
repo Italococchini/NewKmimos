@@ -48,10 +48,11 @@ class PagoCuidador {
 			$dias = $_dias['dia'];
 
 			// Calculo de pago cuidador
-				$monto = $this->calculo_pago_cuidador( 
+				$saldo_cuidador = $this->calculo_pago_cuidador( 
 					$row->reserva_id,
 					$row->total
 				);
+				$monto = $saldo_cuidador;
 
 			// Debitar Notas de credito 
 				$notas_creditos = $this->get_NC( $user_id );
@@ -161,12 +162,17 @@ class PagoCuidador {
 				$existe = $this->db->get_var("SELECT id FROM cuidadores_reservas WHERE user_id = {$user_id} AND reserva_id=".$row->reserva_id 
 				);
 
+				$estatus = 'pendiente';
+				if( $monto == $total_transacciones ){
+					$estatus = 'pagado';
+				}
+
 				$sql = '';
 				if( $existe > 0 ){
 					// actualizar montos
 					$sql = "UPDATE `cuidadores_reservas` SET 
 						disponible = {$total_a_pagar},
-						estatus = 'pendiente'
+						estatus = '{$estatus}'
 					WHERE user_id = {$user_id} AND reserva_id=".$row->reserva_id;
 				}else{
 					// insertar reserva
@@ -186,8 +192,8 @@ class PagoCuidador {
 						'".$row->booking_end."',
 						{$total_noches},
 						{$total_a_pagar},
-						'".$row->total."',
-						'pendiente'
+						'{$total_a_pagar}',
+						'{$estatus}'
 					);";
 				}
 
@@ -751,6 +757,25 @@ class PagoCuidador {
 			}
 
 		return $pago_cuidador ; 
+	}
+
+	public function get_cuidadores_reservas_activas(){
+		$hoy = date( 'Ymdhis' );
+		$sql = "SELECT 
+				DISTINCT(pr.post_author) 
+			FROM wp_posts as r
+				LEFT JOIN wp_postmeta as rm ON rm.post_id = r.ID and rm.meta_key = '_booking_order_item_id' 
+				LEFT JOIN wp_postmeta as rm_cost ON rm_cost.post_id = r.ID and rm_cost.meta_key = '_booking_cost'
+				LEFT JOIN wp_postmeta as rm_start ON rm_start.post_id = r.ID and rm_start.meta_key = '_booking_start'
+				LEFT JOIN wp_postmeta as rm_end ON rm_end.post_id = r.ID and rm_end.meta_key = '_booking_end'
+				LEFT JOIN wp_woocommerce_order_itemmeta as pri ON (pri.order_item_id = rm.meta_value and pri.meta_key = '_product_id')
+				LEFT JOIN wp_posts as pr ON pr.ID = pri.meta_value
+			WHERE r.post_type = 'wc_booking' 
+				and not r.post_status like '%cart%' 
+				and r.post_status = 'confirmed'
+				AND ( '{$hoy}' >= rm_start.meta_value and '{$hoy}' <= rm_end.meta_value )
+			";
+		return $this->db->get_results( $sql );
 	}
 
 	protected function get_reserva_activas_by_user( $user_id, $reserva_id=0 ){
