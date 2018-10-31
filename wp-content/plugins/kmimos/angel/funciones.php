@@ -513,6 +513,10 @@
                             "name"  => "Datos de Facturaci&oacute;n",
                             "icono" => "33"
                         ),
+                        array("name"  => "Mis Facturas",
+                            "url"   => get_home_url()."/perfil-usuario/mis-facturas",
+                            "icono" => "33"
+                        ),
                         array(
                             "url"   => $salir,
                             "name"  => "Cerrar Sesión",
@@ -548,6 +552,10 @@
                         array(
                             "url"   => get_home_url()."/perfil-usuario/datos-de-facturacion/",
                             "name"  => "Datos de Facturaci&oacute;n",
+                            "icono" => "33"
+                        ),
+                        array("name"  => "Mis Facturas",
+                            "url"   => get_home_url()."/perfil-usuario/mis-facturas",
                             "icono" => "33"
                         ),
                         array(

@@ -135,7 +135,7 @@
 		</label> 
 
 		<!-- Boton de retiro -->
-		<div class="col-md-12">		
+		<div class="col-md-12">
 			<a id="<?php echo ($pay->disponible>0)? '':'disabled_'; ?>boton-retiro" class="<?php echo ($pay->disponible>0)? '':'disabled'; ?> btn btn-primary btn-lg <?php echo ($pay->retiro->habilitado)? '':'hidden'; ?>" data-target="modal-retiros">
 				<i class="fa fa-money"></i> Retirar ahora
 			</a>

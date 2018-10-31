@@ -2,9 +2,18 @@
 
 	global $wpdb;
 
-	$cuidador_id = get_current_user_id();
+	$NotasCredito = '';
+	include( "notas-creditos.php" );
 
-	$sql = "SELECT * FROM facturas WHERE cuidador_id = {$cuidador_id} ORDER BY fechaGeneracion DESC";
+	$user_id = get_current_user_id();
+	$ocultar_comisiones = 'block';
+	if( !is_petsitters() ){
+		$sql = "SELECT * FROM facturas WHERE cliente_id = {$user_id} ORDER BY fechaGeneracion DESC";
+		$ocultar_comisiones = 'none';
+	}else{
+		$sql = "SELECT * FROM facturas WHERE cuidador_id = {$user_id} ORDER BY fechaGeneracion DESC";
+	}
+
 	$facturas = $wpdb->get_results($sql);
 
 	$listado_fecha = [];
@@ -154,13 +163,18 @@
 			    <li role="presentation" class="active">
 			    	<a href="#Liquidaciones" aria-controls="Liquidaciones" role="tab" data-toggle="tab">Liquidaciones</a>
 			    </li>
-			    <li role="presentation"><a href="#Comisiones" aria-controls="Comisiones" role="tab" data-toggle="tab">Comisiones</a></li>
+			    <li role="presentation" style="display:'.$ocultar_comisiones.';"><a href="#Comisiones" aria-controls="Comisiones" role="tab" data-toggle="tab">Comisiones</a>
+			    </li>
+			    <li role="presentation">
+			    	<a href="#notas_credito" aria-controls="notas_credito" role="tab" data-toggle="tab">Notas de Cr&eacute;dito</a>
+			    </li>
 			  </ul>
 
 			  <!-- Tab panes -->
 			  <div class="tab-content">
 			    <div role="tabpanel" class="tab-pane active" id="Liquidaciones">'.$Liquidaciones.'</div>
 			    <div role="tabpanel" class="tab-pane" id="Comisiones">'.$Comisiones.'</div>
+			    <div role="tabpanel" class="tab-pane" id="notas_credito">'.$NotasCredito.'</div>
 			  </div>
 
 			</div>
