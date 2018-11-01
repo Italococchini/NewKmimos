@@ -19,7 +19,7 @@
 			$detalle = unserialize($item->detalle); ?>
 
 			<?php 
-				$sql = "SELECT numeroReferencia FROM factura WHERE reserva_id = {$item->factura}";
+				$sql = "SELECT numeroReferencia FROM factura WHERE reserva_id = ".$item->factura;
 				$numeroReferencia = $wpdb->get_var($sql);
 
 				$codigo_factura = $item->factura;
