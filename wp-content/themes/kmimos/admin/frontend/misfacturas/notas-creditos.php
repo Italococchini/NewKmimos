@@ -22,6 +22,9 @@
 				$factura = $wpdb->get_row( "
 					SELECT * FROM factura WHERE reserva_id = {$item->factura} 
 				" );
+
+print_r($factura);
+
 				$codigo_factura = '';
 				if( isset($factura->reserva_id) ){
 					$codigo_factura = $factura->reserva_id.'_'.$factura->numeroReferencia;
