@@ -100,13 +100,13 @@
 			}
 
 		}
-		
+
 		$Comisiones = construir_listado(['cuidador'=>$factura_array['cuidador']]);
 		$Liquidaciones = construir_listado(['cliente'=>$factura_array['cliente']]);
 
 		$Comisiones = ( !empty($Comisiones) )? $Comisiones : '<h1 class="titulo titulo_pequenio">Sin datos para mostrar</h1>';
 		$Liquidaciones = ( !empty($Liquidaciones) )? $Liquidaciones : '<h1 class="titulo titulo_pequenio">Sin datos para mostrar</h1>';
-
+		
 		sort($listado_fecha['mes']);
 		sort($listado_fecha['anio']);
 		$select_mes = '<option value="0">Mes</option>';

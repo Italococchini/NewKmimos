@@ -184,6 +184,7 @@ function mostrarAyuda( objID ){
 }
 
 function download( archivos ){
+console.log(archivos);    
     jQuery.post(HOME+"procesos/generales/download_zip.php", {'fact_selected': archivos}, function(e){
         e = JSON.parse(e);
         if( e['estatus'] == "listo" ){
