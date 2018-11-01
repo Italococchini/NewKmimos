@@ -23,10 +23,8 @@
 					SELECT * FROM factura WHERE reserva_id = {$item->factura} 
 				" );
 
-print_r($factura);
-
-				$codigo_factura = '';
-				if( isset($factura->reserva_id) ){
+				$codigo_factura = $item->factura;
+				if( isset( $factura->reserva_id ) ){
 					$codigo_factura = $factura->reserva_id.'_'.$factura->numeroReferencia;
 				}
 			?>
