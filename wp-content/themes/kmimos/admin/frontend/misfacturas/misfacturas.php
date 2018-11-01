@@ -101,7 +101,6 @@
 
 		}
 		
-
 		$Comisiones = construir_listado(['cuidador'=>$factura_array['cuidador']]);
 		$Liquidaciones = construir_listado(['cliente'=>$factura_array['cliente']]);
 
@@ -120,6 +119,7 @@
 		if( empty($select_mes) && empty($select_anio) ){
 			$ocultar = 'hidden';
 		}
+	}
 
 		//BUILD TABLE
 		$CONTENIDO .= '
@@ -180,9 +180,7 @@
 			</div>
 
 		';
-	}else{
-		$CONTENIDO .= "<h1 style='line-height: normal;'>Usted aún no tiene facturas.</h1><hr>";
-	}
+
 
 ?>
 

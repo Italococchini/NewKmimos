@@ -17,30 +17,45 @@
 <?php if( count($notas_creditos) > 0 ){
 		foreach( $notas_creditos as $item ){ 
 			$detalle = unserialize($item->detalle); ?>
+
+			<?php 
+				$factura = $wpdb->get_row( "
+					SELECT * FROM factura WHERE reserva_id = {$item->factura} 
+				" );
+				$codigo_factura = '';
+				if( isset($factura->reserva_id) ){
+					$codigo_factura = $factura->reserva_id.'_'.$factura->numeroReferencia;
+				}
+			?>
+
 			<div class="vlz_tabla vlz_desplegado col-md-12">
-				<div class="vlz_tabla_superior">
-			    	<div class="vlz_tabla_cuidador vlz_celda">
+				<div class="vlz_tabla_superior" style="margin-left:10px; width: 98%;">
+			    	<div class="vlz_tabla_cuidador vlz_celda" style="width: 20%;">
 			    		<span>Fecha</span>
 			    		<div><?php echo date('Y-m-d', strtotime($item->fecha)); ?></div>
 			    	</div>
-			    	<div class="vlz_tabla_cuidador vlz_cerrar">
+			    	<div class="vlz_tabla_cuidador vlz_cerrar" style="width: 20%;">
 			    		<span>Reserva</span>
 			    		<div><?php echo $item->reserva_id; ?></div>
 			    	</div>
-			    	<div class="vlz_tabla_cuidador vlz_cerrar">
+			    	<div class="vlz_tabla_cuidador vlz_cerrar" style="width: 20%;">
 			    		<span>Monto</span>
 			    		<div>$ <?php echo number_format($item->monto, 2, ',', '.'); ?></div>
 			    	</div>
-			    	<div class="vlz_tabla_cuidador vlz_cerrar">
+			    	<div class="vlz_tabla_cuidador vlz_cerrar" style="width: 20%;">
 			    		<span>Factura</span>
 			    		<div><?php echo (!empty($item->factura))? $item->factura : "---"; ?></div>
 			    	</div>
+			    	<div class="vlz_tabla_cuidador vlz_botones boton_interno" style="width: 95%; display:block!important; margin:0px!important;">
+			    		<br> 
+						<a data-pdfxml="<?php echo $codigo_factura; ?>" class="vlz_accion vlz_ver"> <i class="fa fa-cloud-download" aria-hidden="true"></i> PDF y XML</a>
+			    	</div>
 				</div>
-				<div class="vlz_tabla_cuidador vlz_botones vlz_celda boton_interno">
+				<div class="vlz_tabla_cuidador vlz_botones vlz_celda boton_interno" style="margin-left:10px; width: 98%;">
 					<i class="fa fa-times ver_reserva_init_closet inactive_control" aria-hidden="true"></i>
 					<a class="ver_reserva_init_fuera">Ver</a>
 				</div>
-				<div class="vlz_tabla_inferior inactive_control">
+				<div class="vlz_tabla_inferior inactive_control" style="margin-left:10px; width: 98%;">
 					<div class="desglose_reserva">
 		    			<div class="text-left"><strong>Detalle</strong></div>
 		    			<?php foreach( $detalle as $det ){ ?>
