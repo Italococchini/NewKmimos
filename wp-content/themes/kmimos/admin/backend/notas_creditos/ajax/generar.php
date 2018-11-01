@@ -8,6 +8,7 @@
 
     $tema = (dirname(dirname(dirname(dirname(__DIR__)))));
     include_once($tema."/admin/backend/notas_creditos/lib/notas_creditos.php");
+    include_once($tema."/lib/enlaceFiscal/CFDI.php");
     global $wpdb;
 
 	$total = 0;
@@ -39,7 +40,7 @@
 
 				if( in_array($code, $s_principal) ){
 					$noches = $_POST[ 'noches_'.$code ];	
-					$prorrateo = $item[3] * $noches;
+					$prorrateo = $item[3] * $noches * $item[0];
 					if( $prorrateo > 0 ){				
 						$detalle[] = [  
 							'fecha' => $_POST[ 'hasta_'.$code ],
@@ -100,7 +101,27 @@
 			$CFDI = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 			$observaciones_cliente = 'Comision por penalizacion $ '.$comision ;
 		}
- 
+
+	// generar Notas de Credito EnlaceFiscal
+		$NC_data = [
+			'user_id' => $reserva['cuidador']['id'],
+			'detalle' => $detalle,
+			'total'   => $total,
+			'reserva_id' => $reserva_id,
+			'consecutivo' => date('m'),
+			'cuidador' => ['id'=>$reserva['cuidador']['id']],
+			'cliente' => ['id'=>$reserva['cliente']['id']],
+			'tipo'=>'cuidador',
+		];
+		$cfdi_cuidador = $CFDI->generar_Cfdi_NotasCreditos( $NC_data );
+		$factura_id_cuidador = $reserva_id . $NC_data['consecutivo'];
+
+		$NC_data['user_id'] = $reserva['cliente']['id'];
+		$NC_data['consecutivo'] += 1;
+		$NC_data['tipo'] = 'cliente';
+		$cfdi_cliente = $CFDI->generar_Cfdi_NotasCreditos( $NC_data );
+		$factura_id_cliente = $reserva_id . $NC_data['consecutivo'];
+
 	// Nota de Credito - Cuidador
 		$sql_cuidador = "INSERT INTO notas_creditos ( 
 				`tipo`,
@@ -109,7 +130,8 @@
 				`monto`,
 				`detalle`,
 				`observaciones`,
-				`estatus`
+				`estatus`,
+				factura
 			) VALUES (
 				'cuidador', 
 				".$reserva['cuidador']['id'].", 
@@ -117,9 +139,9 @@
 				$total, 
 				'{$_detalle}',
 				'{$observaciones}',
-				'pendiente'
+				'pendiente',
+				'{$factura_id_cuidador}'
 			);";
-
 
 	// Nota de Credito - Cliente
 		$sql_cliente = "INSERT INTO notas_creditos ( 
@@ -139,20 +161,20 @@
 				'{$_detalle}',
 				'{$observaciones} - {$observaciones_cliente}',
 				'pendiente',
-				'{$factura_id}'
+				'{$factura_id_cliente}'
 			);";
 
-		$wpdb->query( $sql_cuidador );
-		$wpdb->query( $sql_cliente );
+		if( isset($cfdi_cuidador['estatus']) && $cfdi_cuidador['estatus']=='aceptado'){
+			$wpdb->query( $sql_cuidador );
+		}
+		if( isset($cfdi_cliente['estatus']) && $cfdi_cliente['estatus']=='aceptado'){
+			$wpdb->query( $sql_cliente );
+			// Saldo a favor
+				$sql_saldo = "
+					UPDATE wp_usermeta SET 
+						meta_value = meta_value + {$total} 
+					WHERE meta_key='kmisaldo' and user_id = {$reserva['cliente']['id']}
+				";
 
-	// *************************************
-	// Act. reserva
-	// *************************************		
-	// Saldo a favor
-		$sql_saldo = "
-			UPDATE wp_usermeta SET 
-				meta_value = meta_value + {$total} 
-			WHERE meta_key='kmisaldo' and user_id = {$reserva['cliente']['id']}
-		";
-
-		$wpdb->query( $sql_saldo );
+				$wpdb->query( $sql_saldo );
+		}

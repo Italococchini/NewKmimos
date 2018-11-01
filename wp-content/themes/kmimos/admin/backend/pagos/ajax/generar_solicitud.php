@@ -39,11 +39,7 @@
                     'comentario'=> $comentarios,
                 ];
 				
-                $temp = $pagos->cargar_retiros( $pago->user_id, $item['monto'], $comentarios, $admin_id );
-				$row_id = $temp['pago_id'];
-
-				if( $row_id > 0 ){
-
+ 
 					// Parametros solicitud
 	                    $payoutData = array(
 	                        'method' => 'bank_account',
@@ -57,9 +53,9 @@
 	                    );
 	                    
 	                //  Enviar solicitud a OpenPay
+                        $estatus = 'Autorizado';
 	                    try{
 	                        $payout = $openpay->payouts->create($payoutData);
-	                        $estatus = 'Autorizado';
 	                        if( $payout->status == 'in_progress' ){
 	                            $observaciones = '';
 	                            $estatus = 'in_progress';
@@ -92,16 +88,12 @@
 	                    }
 	                
 	                //  Actualizar registro
-	                    $pagos->db->query("
-	                    	UPDATE cuidadores_pagos 
-	                    	SET 
-	                    		estatus='".$estatus."', 
-	                    		observaciones='".$observaciones."', 
-	                    		openpay_id='".$openpay_id."',
-	                    		autorizado='".serialize($autorizaciones)."' 
-	                    	WHERE id = " . $row_id 
-	                   	);
-				}
+	                   	if( !empty($openpay_id) && $estatus != 'error'){    
+	                   	               		
+		                    $pagos->db->registrar_pago( $item['user_id'], $item['monto'], $openpay_id );
+
+	                   	}
+				
 
 				print_r($sql);
 

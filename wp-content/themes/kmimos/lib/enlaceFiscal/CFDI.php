@@ -138,11 +138,170 @@ class CFDI {
 		return $data;
 	}
 
+	public function generar_Cfdi_NotasCreditos( $data=[] ){
+
+		$data['receptor']['razon_social'] = 'Publico en General';
+		$data['tipo_pago'] = 'PAGO'; 
+
+		if( !array_key_exists( 'consecutivo', $data ) ){
+			$data['consecutivo'] = '';
+		}
+
+		// Configuracion general
+			$conf = $this->get_configuracion( [ 
+				'servicio_tipo_pago' => $data['tipo_pago'] 
+			]);
+			extract($conf);
+
+		// Varibles de Estructura
+			$data['fechaEmision'] = date('Y-m-d H:i:s', strtotime("now -1 minute"));
+ 			$partidas = [];
+			$_subtotal = 0;
+			$_impuesto = 0;
+			$_total = 0;
+
+		// Parametros obligatorios segun EnlaceFiscal 
+			$serie = 'CC';
+			$uso = 'G02';
+			$metodo_pago = 'PUE';
+			$clave_sat = '84111506';
+			$unidad = 'ACT';
+
+		// Agregar Partida: Penalizacion
+			if( isset($data['detalle']) && !empty($data['detalle']) ){
+				foreach ($data['detalle'] as $item) {
+
+						$cantidad = 1;
+
+					// Calcular precio base de la partida
+						$base = $item['costo'] / $base_iva; // Costo del servicio sin Impuesto
+
+						$subtotal = $base * $cantidad;
+
+					// Calcular impuestos
+						$impuesto = $subtotal * $tasaCuota;
+						$impuesto = number_format($impuesto, 2, ".", "" );
+
+					// Desglose general de la factura
+					// *************************************
+						$_impuesto += number_format($impuesto, 2, ".", "" );
+						$_subtotal += number_format($subtotal, 2, ".", "" );
+						$_total += $subtotal + $impuesto; 
+
+					// Agregar la partida a la factura
+					// *************************************
+						$partidas[] = [
+						    "cantidad" => $cantidad,
+						    "claveUnidad" => $unidad,
+						    "claveProdServ" => $clave_sat, //  9011150.0 por definir
+						    "descripcion" => $item['titulo'],
+						    "valorUnitario" =>(float) number_format($base, 2, '.', ''),
+						    "importe" => (float) number_format( $subtotal, 2, '.', ''),
+						    "Impuestos" => [
+						    	0 => [
+									"tipo" => "traslado",
+									"claveImpuesto" => "IVA",
+									"tipoFactor" => "tasa",
+									"tasaOCuota" => (float) $tasaCuota,
+									"baseImpuesto" => (float) number_format( $subtotal, 2, '.', ''),
+									"importe" => (float) number_format( $impuesto, 2, '.', '')
+							    ]
+						    ]
+						];
+				}
+			}
+
+		// Estructura de datos CFDI
+			$CFDi = [
+				"CFDi" => [
+					"modo" => $this->modo,
+					"versionEF" => "6.0",
+					"serie" => $serie, //"FAA",
+					"folioInterno" => $data['reserva_id'].$data['consecutivo'],
+					"tipoMoneda" => "MXN",
+					"fechaEmision" => $data['fechaEmision'], //"2017-02-22 11:03:43",
+					"subTotal" => (float) number_format($_subtotal,2, ".", "" ), //"20.00", ( Sin IVA )
+					"total" => (float) number_format( $_total, 2, '.', ''), // "23.20" ( Con IVA )
+					"rfc" => $this->RFC,
+					"DatosDePago" => [
+						"metodoDePago" => "PUE",
+						"formaDePago" => $formaDePago, 
+					],
+					"Receptor" => [
+						"rfc" => $this->RFC, //$data['receptor']['rfc'],
+						"nombre" => $data['receptor']['razon_social'],
+						"usoCfdi" => $uso, //"gastos"
+						"DomicilioFiscal" => [
+			                "calle" => $data['receptor']['calle'],
+			                "noExterior" => $data['receptor']['noExterior'],
+			                "noInterior" => $data['receptor']['noInterior'],
+			                "colonia" => $data['receptor']['colonia'],
+			                "localidad" => $data['receptor']['localidad'],
+			                "municipio" => $data['receptor']['city'],
+			                "estado" => $data['receptor']['estado'],
+			                "pais" => "Mexico",
+			                "cp" => $data['receptor']['postcode']
+			            ]
+					],
+					"Partidas" => $partidas,
+					"Impuestos" => [
+						"Totales" => [
+							"traslados" =>  (float) number_format( $_impuesto, 2, '.', '')
+						],
+						"Impuestos" => [
+							0 => [
+								"tipo" => "traslado",
+								"claveImpuesto" => "IVA",
+								"tipoFactor" => "tasa",
+								"tasaOCuota" => (float)$tasaCuota,
+								"importe" =>(float) number_format( $_impuesto, 2, '.', '')
+							]
+						]
+					]
+				]
+			];
+
+			// configuracion para publico en general
+			if( $data['receptor']['razon_social'] == 'Publico en General' ){
+				unset($CFDi['CFDi']["Receptor"]['DomicilioFiscal']);
+			}
+
+	 	// return $CFDi;
+		$cfdi_respuesta = $this->request( $CFDi, 'generarCfdi' );
+
+		$estatus = '';
+		$referencia = '';
+		if( !empty($cfdi_respuesta) ){
+			$ack = json_decode($cfdi_respuesta);
+
+		    // Datos complementarios
+		    $data_reserva['comentario'] = '';
+		    $data_reserva['subtotal'] = $CFDi['CFDi']['subTotal'];
+		    $data_reserva['impuesto'] = $CFDi['CFDi']['Impuestos']['Totales']['traslados'];
+		    $data_reserva['total'] = $CFDi['CFDi']['total'];
+
+			$this->guardarCfdi( $data['tipo'], $data, $ack );
+
+			if( $ack->AckEnlaceFiscal->estatusDocumento == 'aceptado' ){
+				$estatus = $ack->AckEnlaceFiscal->estatusDocumento;
+				$referencia = $ack->AckEnlaceFiscal->numeroReferencia;
+			}
+		}
+
+		return [ 
+			'ack' => $cfdi_respuesta, 
+			'estatus' => $estatus,
+			'referencia' => $referencia,
+		];
+	
+
+	}
+
 	// Generar CFDI para el Cliente ( Monto: 100% )
 	public function generar_Cfdi_Cliente( $data=[] ){
 
-		if( !array_key_exists( 'consecutivo', $data_reserva ) ){
-			$data_reserva['consecutivo'] = '';
+		if( !array_key_exists( 'consecutivo', $data ) ){
+			$data['consecutivo'] = '';
 		}
 		
 		// Configuracion general

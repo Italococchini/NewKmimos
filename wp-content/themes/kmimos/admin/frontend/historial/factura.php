@@ -54,18 +54,10 @@ $informacion = 'Ocurrio un problema al tratar de procesar la solitiud';
 					// Generar CFDI
 					$enlaceFiscal = $CFDI->generar_Cfdi_Cliente($data_reserva);
 
-/*echo '<br><br><br><br><br><br><div class="row">';
-echo '<pre style="float:left; width:50%; padding:10px;">';
-print_r($enlaceFiscal['cfdi']);
-echo '</pre>';
-*/ 
 					$respuesta = [];
 					if( !empty($enlaceFiscal['ack']) ){
 						$ack = json_decode($enlaceFiscal['ack']);
-/*echo '<pre style="float:left; width:50%; padding:10px;">';
-print_r($ack);
-echo '</pre></div>';
-*/ 
+
 					    // Datos complementarios
 					    $data_reserva['comentario'] = '';
 					    $data_reserva['subtotal'] = $enlaceFiscal['cfdi']['CFDi']['subTotal'];
