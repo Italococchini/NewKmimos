@@ -140,6 +140,10 @@ class CFDI {
 
 	// Generar CFDI para el Cliente ( Monto: 100% )
 	public function generar_Cfdi_Cliente( $data=[] ){
+
+		if( !array_key_exists( 'consecutivo', $data_reserva ) ){
+			$data_reserva['consecutivo'] = '';
+		}
 		
 		// Configuracion general
 			$conf = $this->get_configuracion( [ 
@@ -429,7 +433,7 @@ class CFDI {
 					"modo" => $this->modo,
 					"versionEF" => "6.0",
 					"serie" => $serie, //"FAA",
-					"folioInterno" => $data['servicio']['id_reserva'],
+					"folioInterno" => $data['servicio']['id_reserva'].$data['consecutivo'],
 					"tipoMoneda" => "MXN",
 					"fechaEmision" => $data['fechaEmision'], //"2017-02-22 11:03:43",
 					"subTotal" => (float) number_format($_subtotal,2, ".", "" ), //"20.00", ( Sin IVA )

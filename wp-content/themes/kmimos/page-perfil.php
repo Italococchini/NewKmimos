@@ -158,7 +158,7 @@
 			wp_enqueue_style('datos-de-facturacion-css', getTema()."/css/datos-de-facturacion.css", array(), '1.0.0');
 			wp_enqueue_script('factura', getTema()."/js/factura.js", array("jquery", "global_js"), '1.0.0');
 		break;
-		// para el cuidador
+		// para el cuidador y cliente
 		case 'mis-facturas':
 		    wp_enqueue_style('misfacturas', getTema()."/css/misfacturas.css", array(), '1.0.0');
 			wp_enqueue_style('misfacturas_responsive', getTema()."/css/responsive/misfacturas_responsive.css", array(), '1.0.0');
