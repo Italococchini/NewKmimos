@@ -99,7 +99,7 @@
 				</select>
 			</section>
 
-
+    
 			<?php if( !empty($reserva['servicio']['variaciones']) ){ ?>
 			<section class="servicios">
 				<h1 class="popup-titulo">SERVICIO: <?php echo strtoupper($reserva['servicio']['tipo']); ?></h1>
