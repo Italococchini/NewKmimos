@@ -19,7 +19,8 @@
 			$detalle = unserialize($item->detalle); ?>
 
 			<?php 
-				$numeroReferencia = $wpdb->get_var("SELECT numeroReferencia FROM factura WHERE reserva_id = {$item->factura}");
+				$sql = "SELECT numeroReferencia FROM factura WHERE reserva_id = {$item->factura}";
+				$numeroReferencia = $wpdb->get_var($sql);
 
 				$codigo_factura = $item->factura;
 				if( !empty($numeroReferencia) ){
@@ -71,6 +72,7 @@
 			    		</div>
 					</div>
 				</div>
+				<div style="display: none;" data-italo><?php echo $sql; ?></div>
 			</div>
 <?php } }else{ ?>
 	<div class="alert alert-info">No hay datos disponibles para mostrar.</div>
