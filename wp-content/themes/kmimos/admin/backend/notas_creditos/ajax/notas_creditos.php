@@ -41,14 +41,14 @@
                 $item->id,
                 date( 'Y-m-d', strtotime($item->fecha) ),
                 $item->user_id,
-                $nombre,
-                $apellido,
+                utf8_encode($nombre),
+                utf8_encode($apellido),
                 $item->reserva_id,
                 number_format($item->monto, 2, ',', '.'),
                 $item->factura,
                 $detalle,
                 $item->estatus,
-                $item->observaciones
+                utf8_encode($item->observaciones)
             );
 
         }
