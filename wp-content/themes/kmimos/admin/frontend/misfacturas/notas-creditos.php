@@ -24,8 +24,8 @@
 				" );
 
 				$codigo_factura = $item->factura;
-				if( isset( $factura->reserva_id ) ){
-					$codigo_factura = $factura->reserva_id.'_'.$factura->numeroReferencia;
+				if( !empty($factura->numeroReferencia) ){
+					$codigo_factura = $item->factura.'_'.$factura->numeroReferencia;
 				}
 			?>
 
