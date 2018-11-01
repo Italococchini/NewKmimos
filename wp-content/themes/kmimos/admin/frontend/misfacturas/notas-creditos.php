@@ -19,13 +19,11 @@
 			$detalle = unserialize($item->detalle); ?>
 
 			<?php 
-				$factura = $wpdb->get_row( "
-					SELECT * FROM factura WHERE reserva_id = {$item->factura} 
-				" );
+				$numeroReferencia = $wpdb->get_var("SELECT numeroReferencia FROM factura WHERE reserva_id = {$item->factura}");
 
 				$codigo_factura = $item->factura;
-				if( !empty($factura->numeroReferencia) ){
-					$codigo_factura = $item->factura.'_'.$factura->numeroReferencia;
+				if( !empty($numeroReferencia) ){
+					$codigo_factura = $item->factura.'_'.$numeroReferencia;
 				}
 			?>
 
