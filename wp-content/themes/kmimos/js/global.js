@@ -290,6 +290,12 @@ function getAjaxData(url,method, datos){
     }).responseText;
 }
 
+jQuery('#popup-iniciar-sesion').on('shown.bs.modal', function () {
+    jQuery('.popup-iniciar-sesion-1').removeClass('popuphide');
+    jQuery('.popup-login-condiciones').addClass('popuphide');
+    jQuery('.popup-olvidaste-contrasena').addClass('popuphide');
+});
+
 /*MODAL SHOW*/
 jQuery(document).on('click', '.modal_show' ,function(e){
     modal_show(this)
