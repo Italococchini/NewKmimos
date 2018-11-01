@@ -255,7 +255,7 @@
 
 	if( !isset($MENU["head"]) ){
 		$menus_normal = '
-			<li><a class="modal_show" style="padding-right: 15px" href="javascript:;" data-target="#popup-iniciar-sesion">INICIAR SESIÓN</a></li>
+			<li><a class="modal_show" style="padding-right: 15px" href="show_login_modal("login");" data-target="#popup-iniciar-sesion">INICIAR SESIÓN</a></li>
 			<li><a class="modal_show" style="padding-left: 15px; border-left: 1px solid white;" data-target="#popup-registrarte">REGISTRARME</a></li>
 			<!-- <li style="border-top:1px solid #e8e8e8;"><a href="'.get_home_url().'/ayuda" class="pd-tb11 menu-link"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Ayuda</a></li> -->
 		';
