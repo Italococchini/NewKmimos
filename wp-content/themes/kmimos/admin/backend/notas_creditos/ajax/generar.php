@@ -96,17 +96,13 @@
 		$_detalle = serialize($detalle);
 
 	// Validar tipo de nota de credito
-$r='';
 		if( strtolower($tipo_usuario) == 'cliente' ){
 			$comision = $total * 0.20;
 			$total -= $comision;
 			$r = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 			$observaciones_cliente = 'Comision por penalizacion $ '.$comision ;
+print_r($r);
 		}
-print_r( $r );
-
-exit();
-
 	// generar Notas de Credito EnlaceFiscal
 		$NC_data = [
 			'user_id' => $reserva['cuidador']['id'],
