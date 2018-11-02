@@ -15,6 +15,9 @@
 	$detalle = [];
     extract($_POST);
 
+print_r($_POST);
+exit();
+
 	$tiene_nota_credito = $wpdb->get_var("
 		SELECT id 
 		FROM notas_creditos 
@@ -49,8 +52,7 @@
 							'tamano'=> $item[1],
 							'noches'=> $item[2],
 							'costo' => $prorrateo,
-							'precio_base' => $item[3],
-							
+							'precio_base' => $item[3],							
 						];
 						$total += $prorrateo;
 					}
