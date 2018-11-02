@@ -231,6 +231,12 @@ class PagoCuidador {
 		}
 
 		if( !empty($reservas) ){
+			$monto_pago = $monto;
+			$tipo = 'pago_k';
+			if( $id_admin == 0){
+				$monto_pago = $monto - $this->comision_retiro;
+				$tipo = 'pago_c';
+			}
 
 			// Cargar Transacciones
 			$sql = "INSERT INTO `cuidadores_transacciones` ( 
@@ -242,7 +248,7 @@ class PagoCuidador {
 				`reservas`,
 				comision
 			) VALUES (
-				'pago_c', 
+				'{$tipo}', 
 				{$user_id},
 				'',
 				'Retiro de saldo', 
@@ -257,10 +263,6 @@ class PagoCuidador {
 			$cuidador = $this->db->get_var("SELECT banco FROM cuidadores WHERE user_id = {$user_id}");
 			$banco = unserialize($cuidador);
 
-			$monto_pago = $monto;
-			if( $id_admin == 0){
-				$monto_pago = $monto - $this->comision_retiro;
-			}
 			$sql_pago = "
 				INSERT INTO `cuidadores_pagos`( 
 					`admin_id`,
@@ -293,6 +295,86 @@ class PagoCuidador {
 		}
 
 		return 0;
+	}
+
+	public function registrar_pago( $user_id, $total, $openpay_id ){
+		// buscar solicitudes de pago del cuidador
+		$solicitudes = $this->db->get_results( "
+			SELECT * 
+			FROM cuidadores_pagos 
+			WHERE user_id = {$user_id} and estatus = 'pendiente'
+		");
+
+		// debitar y asignar pago a las solicitudes
+		if( !empty($solicitudes) ){
+			$resto = $total;
+			foreach ($solicitudes as $solicitud) {
+				// Si el monto es mayor o igual
+				if( $resto >= $solicitud->total ){
+					$resto -= $solicitud->total;
+					$sql = "UPDATE cuidadores_pagos SET 
+							estatus = 'completed', 
+							openpay_id='$openpay_id' 
+						WHERE id = ".$solicitud->id;
+					$this->db->query($sql);
+			echo $sql;
+				}else{
+				// Si el monto es menor 
+					# diferencia
+					$dif = $solicitud->total - $resto;
+
+					#cambiar referencia y estatus: modificacion
+					$sql = "UPDATE cuidadores_pagos SET 
+							estatus = 'completed', 
+							total = {$resto},
+							openpay_id='$openpay_id',
+							observaciones='Solicitud de pago modificada'
+						WHERE id = ".$solicitud->id;
+					$this->db->query($sql);
+			echo $sql;
+
+					$sql_insert = "INSERT INTO `cuidadores_pagos`(
+						`admin_id`, 
+						`user_id`, 
+						`total`, 
+						`cantidad`, 
+						`estatus`, 
+						`detalle`, 
+						`autorizado`, 
+						`openpay_id`, 
+						`observaciones`, 
+						`cuenta`, 
+						`titular`, 
+						`banco`
+					) VALUES (
+						".$solicitud->admin_id.", 
+						".$solicitud->user_id.", 
+						".$dif.", 
+						".$solicitud->cantidad.", 
+						'pendiente',
+						'".$solicitud->detalle."', 
+						'".$solicitud->autorizado."', 
+						'".$openpay_id."', 
+						".$solicitud->observaciones.", 
+						".$solicitud->cuenta.", 
+						".$solicitud->titular.", 
+						".$solicitud->banco."
+					);";
+					$this->db->query($sql_insert);
+			echo $sql_insert;
+
+					#generar una solicitud por el resto
+						# dividir reservas
+
+					#generar una solicitud por la diferencia de la solicitud
+						# dividir reservas diferencia					
+				}
+
+			}
+
+
+		}
+
 	}
 
 	/// *************************

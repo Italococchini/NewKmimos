@@ -231,12 +231,6 @@ class PagoCuidador {
 		}
 
 		if( !empty($reservas) ){
-			$monto_pago = $monto;
-			$tipo = 'pago_k';
-			if( $id_admin == 0){
-				$monto_pago = $monto - $this->comision_retiro;
-				$tipo = 'pago_c';
-			}
 
 			// Cargar Transacciones
 			$sql = "INSERT INTO `cuidadores_transacciones` ( 
@@ -248,7 +242,7 @@ class PagoCuidador {
 				`reservas`,
 				comision
 			) VALUES (
-				'{$tipo}', 
+				'pago_c', 
 				{$user_id},
 				'',
 				'Retiro de saldo', 
@@ -263,6 +257,10 @@ class PagoCuidador {
 			$cuidador = $this->db->get_var("SELECT banco FROM cuidadores WHERE user_id = {$user_id}");
 			$banco = unserialize($cuidador);
 
+			$monto_pago = $monto;
+			if( $id_admin == 0){
+				$monto_pago = $monto - $this->comision_retiro;
+			}
 			$sql_pago = "
 				INSERT INTO `cuidadores_pagos`( 
 					`admin_id`,
@@ -295,39 +293,6 @@ class PagoCuidador {
 		}
 
 		return 0;
-	}
-
-	public function registrar_pago( $user_id, $total, $openpay_id ){
-		// buscar solicitudes de pago del cuidador
-		$solicitudes = $this->db->get_results( "
-			SELECT * 
-			FROM cuidadores_pagos 
-			WHERE user_id = {$user_id} and estatus = 'pendiente'
-		");
-
-		// debitar y asignar pago a las solicitudes
-		if( !empty($solicitudes) ){
-			$resto = $total;
-			foreach ($solicitudes as $solicitud) {
-				// Si el monto es mayor o igual
-				if( $resto >= $solicitud->total ){
-					$resto -= $solicitud->total;
-					$sql = "";
-				}
-
-			}
-
-italo			
-			// Si el monto es menor 
-				#cambiar referencia y estatus: modificacion
-				#generar una solicitud por el resto
-					# dividir reservas
-
-				#generar una solicitud por la diferencia de la solicitud
-					# dividir reservas diferencia
-
-		}
-
 	}
 
 	/// *************************
