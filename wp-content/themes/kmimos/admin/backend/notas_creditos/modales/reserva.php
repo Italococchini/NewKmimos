@@ -10,7 +10,7 @@
 
 
 	$reserva_end = get_post_meta( $ID, '_booking_end', true );
-	if( $pedido_id > 0 && date('Y-m-d') <= date('Y-m-d', $reserva_end) ){
+	if( $pedido_id > 0 && date('Y-m-d') >= date('Y-m-d', strtotime($reserva_end)) ){
 		$pedido_id = 0;
  	}
 
@@ -49,7 +49,7 @@
 </script> 
 
 <?php if( !$show_nc ){ ?>
-	<input type="text" value="<?php print_r($pedido_id.' > 0 && '. date('Y-m-d') .'<='. date('Y-m-d', $reserva_end))?>">
+	<input type="text" value="<?php print_r($pedido_id.' > 0 && '. date('Y-m-d') .'<='. date('Y-m-d', strtotime($reserva_end)))?>">
 	<div class="text-center" style="display: <?php echo $show_msg; ?>">
 		<p style=" font-weight: bold; padding: 20px 0px 0px 0px;">
 			<?php echo $msg; ?>
