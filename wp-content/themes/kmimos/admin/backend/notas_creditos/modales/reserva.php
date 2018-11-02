@@ -9,7 +9,8 @@
 	$pedido_id = $wpdb->get_var("SELECT post_parent FROM wp_posts where ID = {$ID} and post_status in ( 'confirmed', 'complete' )");
 
 	$reserva_end = get_post_meta( $ID, '_booking_end', true );
-	if( $pedido_id > 0 && date('YmdHis',strtotime($reserva_end)) <= date('YmdHis') ){
+
+	if( $pedido_id > 0 && date('Y-m-d') <= date('Y-m-d', $reserva_end) ){
 		$pedido_id = 0;
  	}
     $factura_id = $wpdb->get_var( "SELECT id FROM facturas WHERE receptor = 'cliente' and reserva_id = {$ID}" );
@@ -46,8 +47,6 @@
 </script> 
 
 <?php if( !$show_nc ){ ?>
-	<input type="text" value="<?php print_r("SELECT post_parent FROM wp_posts where ID = {$ID} and post_status in ( 'confirmed', 'complete' )")?>">
-	<input type="text" value="<?php print_r($pedido_id.' > 0 && '. date('YmdHis',strtotime($reserva_end)) .'<= '.date('YmdHis'))?>">
 	<div class="text-center" style="display: <?php echo $show_msg; ?>">
 		<p style=" font-weight: bold; padding: 20px 0px 0px 0px;">
 			<?php echo $msg; ?>
