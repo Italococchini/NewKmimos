@@ -11,7 +11,7 @@
 
 	$reserva_end = get_post_meta( $ID, '_booking_end', true );
 	if( $pedido_id > 0 && date('Y-m-d') >= date('Y-m-d', strtotime($reserva_end)) ){
-		$pedido_id = 0;
+		//$pedido_id = 0;
  	}
 
 
