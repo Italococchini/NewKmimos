@@ -313,7 +313,7 @@ class PagoCuidador {
 				if( $resto >= $solicitud->total ){
 					$resto -= $solicitud->total;
 					$sql = "UPDATE cuidadores_pagos SET 
-							estatus = 'completed', 
+							estatus = 'in_progress', 
 							openpay_id='$openpay_id' 
 						WHERE id = ".$solicitud->id;
 					$this->db->query($sql);
@@ -321,17 +321,17 @@ class PagoCuidador {
 				}else{
 				// Si el monto es menor 
 					# diferencia
-					$dif = $solicitud->total - $resto;
+					$solicitud->total -= $resto;
 
 					#cambiar referencia y estatus: modificacion
-					$sql = "UPDATE cuidadores_pagos SET 
-							estatus = 'completed', 
+					$sql_update = "UPDATE cuidadores_pagos SET 
+							estatus = 'in_progress', 
 							total = {$resto},
 							openpay_id='$openpay_id',
 							observaciones='Solicitud de pago modificada'
 						WHERE id = ".$solicitud->id;
-					$this->db->query($sql);
-			echo $sql;
+					$this->db->query($sql_update);
+			echo $sql_update;
 
 					$sql_insert = "INSERT INTO `cuidadores_pagos`(
 						`admin_id`, 
@@ -349,16 +349,16 @@ class PagoCuidador {
 					) VALUES (
 						".$solicitud->admin_id.", 
 						".$solicitud->user_id.", 
-						".$dif.", 
+						".$solicitud->total.", 
 						".$solicitud->cantidad.", 
 						'pendiente',
 						'".$solicitud->detalle."', 
 						'".$solicitud->autorizado."', 
 						'".$openpay_id."', 
-						".$solicitud->observaciones.", 
-						".$solicitud->cuenta.", 
-						".$solicitud->titular.", 
-						".$solicitud->banco."
+						'".$solicitud->observaciones."', 
+						'".$solicitud->cuenta."', 
+						'".$solicitud->titular."', 
+						'".$solicitud->banco."'
 					);";
 					$this->db->query($sql_insert);
 			echo $sql_insert;
