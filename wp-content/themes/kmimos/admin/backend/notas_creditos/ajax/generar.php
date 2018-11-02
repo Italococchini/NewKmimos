@@ -30,8 +30,6 @@
 	$reserva = kmimos_desglose_reserva_data( $pedido_id, true );
 	$inicio = date('Y-m-d',$reserva['servicio']['inicio']) ;
 
-print_r($_POST);
-exit();
 
 	// *************************************
 	// Detalle de la Nota de Credito
@@ -101,7 +99,7 @@ exit();
 		if( strtolower($tipo_usuario) == 'cliente' ){
 			$comision = $total * 0.20;
 			$total -= $comision;
-			$CFDI = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
+//			$CFDI = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 			$observaciones_cliente = 'Comision por penalizacion $ '.$comision ;
 		}
 
