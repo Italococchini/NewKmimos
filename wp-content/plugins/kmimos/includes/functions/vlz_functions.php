@@ -125,6 +125,9 @@
     if( !function_exists('factura_penalizacion') ){
         function factura_penalizacion( $user_id, $id_orden, $id_reserva , $monto ){
             global $wpdb;
+
+            return;
+
             include( dirname(dirname(dirname(dirname(__DIR__))))."/themes/kmimos/lib/enlaceFiscal/CFDI.php" );
             
             $cfdi = false;
@@ -175,9 +178,7 @@
                         '0'=> [ 'total' => $monto ],
                     ];
 
-
                 // Facturar
-/*                    
                     $AckEnlaceFiscal = $CFDI->generar_Cfdi_Cliente($data_reserva);
                     if( !empty($AckEnlaceFiscal['ack']) ){
                         $ack = json_decode($AckEnlaceFiscal['ack']);
@@ -192,7 +193,7 @@
 
                         $cfdi = $ack;
                     }
-*/
+
             }else{
                 $cfdi = [
                     'error'=>'SI', 
