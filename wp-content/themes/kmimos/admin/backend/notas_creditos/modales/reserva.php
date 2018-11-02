@@ -46,6 +46,7 @@
 </script> 
 
 <?php if( !$show_nc ){ ?>
+	<input type="text" value="<?php print_r($pedido_id.' > 0 && '. date('YmdHis',strtotime($reserva_end)) .'<= '.date('YmdHis'))?>">
 	<div class="text-center" style="display: <?php echo $show_msg; ?>">
 		<p style=" font-weight: bold; padding: 20px 0px 0px 0px;">
 			<?php echo $msg; ?>
