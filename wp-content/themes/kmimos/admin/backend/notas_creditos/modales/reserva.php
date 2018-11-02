@@ -162,6 +162,7 @@
 					</div>
 				</article>
 				<?php } ?>
+				
 			</section>
 			<?php } ?>
 
