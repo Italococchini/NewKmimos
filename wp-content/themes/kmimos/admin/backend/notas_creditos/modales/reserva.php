@@ -48,7 +48,6 @@
 	var tipo_servicio = "<?php echo strtolower($reserva['servicio']['tipo']) ?>";
 </script> 
 
-	<input type="text" value="<?php print_r(date('Y-m-d', strtotime($reserva_end)))?>">
 <?php if( !$show_nc ){ ?>
 	<div class="text-center" style="display: <?php echo $show_msg; ?>">
 		<p style=" font-weight: bold; padding: 20px 0px 0px 0px;">
