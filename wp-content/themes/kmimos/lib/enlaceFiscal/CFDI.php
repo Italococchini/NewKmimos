@@ -356,7 +356,6 @@ class CFDI {
 		// Agregar Partida: Penalizacion
 			if( isset($data['servicio']['penalizado']) && !empty($data['servicio']['penalizado']) ){
 				foreach ($data['servicio']['penalizado'] as $item) {
-					$codigo_sat = $this->db->get_var("SELECT value FROM facturas_configuracion WHERE clave ='Cancelacion por penalizacion'" );
 
 						$cantidad = 1;
 
@@ -380,7 +379,7 @@ class CFDI {
 						$partidas[] = [
 						    "cantidad" => $cantidad,
 						    "claveUnidad" => "DAY",
-						    "claveProdServ" => $codigo_sat, //  9011150.0 por definir
+						    "claveProdServ" => '84111506', //  90111500 por definir
 						    "descripcion" => 'Pago de comision por penalizacion',
 						    "valorUnitario" =>(float) number_format($base, 2, '.', ''),
 						    "importe" => (float) number_format( $subtotal, 2, '.', ''),

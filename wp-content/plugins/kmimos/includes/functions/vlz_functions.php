@@ -126,7 +126,11 @@
         function factura_penalizacion( $user_id, $id_orden, $id_reserva , $monto ){
             global $wpdb;
 
-            include(dirname(dirname(dirname(dirname(__DIR__))))."/themes/kmimos/lib/enlaceFiscal/CFDI.php");
+            if( !class_exists('CFDI') ){
+                include_once(dirname(dirname(dirname(dirname(__DIR__))))."/themes/kmimos/lib/enlaceFiscal/CFDI.php");
+            }else{
+                $CFDI = new CFDI();
+            }
             
             $cfdi = false;
             $consecutivo = 0;
@@ -134,7 +138,6 @@
             if( !empty($factura) ){
                 $consecutivo = count($factura);
             }
-
             // Desglose de reserva
             $data_reserva = kmimos_desglose_reserva_data($id_orden, true);
 
@@ -189,7 +192,7 @@
 
                         $CFDI->guardarCfdi( 'cliente', $data_reserva, $ack );
 
-                        $cfdi = $ack;
+                        return $AckEnlaceFiscal['ack'];
                     }else{
                         $cfdi = $AckEnlaceFiscal;
                     }

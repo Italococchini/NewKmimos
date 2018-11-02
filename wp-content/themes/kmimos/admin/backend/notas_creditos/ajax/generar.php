@@ -103,7 +103,9 @@ $r='';
 			$r = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 			$observaciones_cliente = 'Comision por penalizacion $ '.$comision ;
 		}
-print_r($r);
+print_r( $r );
+
+exit();
 
 	// generar Notas de Credito EnlaceFiscal
 		$NC_data = [
