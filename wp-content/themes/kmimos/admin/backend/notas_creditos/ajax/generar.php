@@ -15,8 +15,6 @@
 	$detalle = [];
     extract($_POST);
 
-print_r($_POST);
-exit();
 
 	$tiene_nota_credito = $wpdb->get_var("
 		SELECT id 
@@ -31,6 +29,9 @@ exit();
 
 	$reserva = kmimos_desglose_reserva_data( $pedido_id, true );
 	$inicio = date('Y-m-d',$reserva['servicio']['inicio']) ;
+
+print_r($_POST);
+exit();
 
 	// *************************************
 	// Detalle de la Nota de Credito
