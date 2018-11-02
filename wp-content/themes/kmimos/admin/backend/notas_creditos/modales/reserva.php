@@ -8,12 +8,10 @@
 
 	$pedido_id = $wpdb->get_var("SELECT post_parent FROM wp_posts where ID = {$ID} and post_status in ( 'confirmed', 'complete' )");
 
-/*
 	$reserva_end = get_post_meta( $ID, '_booking_end', true );
-	if( $pedido_id > 0 && strtotime($reserva_end) < time() ){
+	if( $pedido_id > 0 && date('YmdHis',strtotime($reserva_end)) <= date('YmdHis') ){
 		$pedido_id = 0;
  	}
-*/
     $factura_id = $wpdb->get_var( "SELECT id FROM facturas WHERE receptor = 'cliente' and reserva_id = {$ID}" );
 
     $nc_id = $wpdb->get_var( "SELECT id FROM notas_creditos WHERE reserva_id = {$ID}" );
