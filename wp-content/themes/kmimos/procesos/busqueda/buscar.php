@@ -564,9 +564,9 @@
     		$separador = ( !empty($views_id) )? ',', ''; 
     		$views_id .= $separador.$val;
     		if( $count == 10 ){
-		    	$db->query( 
+		    	/*$db->query( 
 		    		"UPDATE cuidadores SET total_impresiones = total_impresiones + 1 WHERE id in ( {$views_id} )" 
-		    	);
+		    	);*/
     		}
     	}
     }
