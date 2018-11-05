@@ -503,8 +503,6 @@
 														id = ".$existe->id.";";
 												$wpdb->query( $SQL );
 
-												echo $SQL;
-
 											}
 				   						} 
 
@@ -532,7 +530,6 @@
 													WHERE 
 														reserva_id = ".$value->reserva_id;
 												$wpdb->query( $SQL );
-												echo $SQL;
 
 											}
 
