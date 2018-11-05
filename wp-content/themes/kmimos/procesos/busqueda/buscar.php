@@ -463,6 +463,9 @@
     $home = $db->get_var("SELECT option_value FROM wp_options WHERE option_name = 'siteurl'");
 
     /* SQL cuidadores */
+    	if( !empty($orderby) ){
+    		$orderby = ", {$orderby}";
+    	}
 
 	    $sql = "
 	    SELECT 
@@ -488,18 +491,23 @@
 	    WHERE 
 	        activo = '1' and cuidadores.hospedaje_desde >= 1 {$condiciones} {$ubicaciones_filtro} {$FILTRO_UBICACION} {$FILTRO_ESPECIA}
 	    	{$GATOS_CONDICION}
-	    ORDER BY {$orderby}";
+	    ORDER BY total_impresiones ASC {$orderby}";
 
-/*
+	    /*
 		echo "<pre>";
 			print_r( $sql );
 		echo "</pre>";
-*/
+		*/
+		
+
+
 		// print_r( $FILTRO_ESPECIA );
 
     /* FIN SQL cuidadores */
 
     $cuidadores = $db->get_results($sql);
+
+    $views_ids = []; 
 
     $pines = array(); $pines_ubicados = array();
     if( $cuidadores != false ){
@@ -530,6 +538,8 @@
 	    		$grados = 0;
 	    	}
 
+	    	$views_ids[] = $cuidador->id;
+
 			$pines[] = array(
 				"ID"   => $cuidador->id,
 				"post_id"   => $cuidador->id_post,
@@ -546,6 +556,11 @@
 			);
 
 		}
+    }
+
+    $views_id = implode( ',', $views_ids );
+    if( !empty($views_id) ){
+	    $wpdb->query( "UPDATE cuidadores SET total_impresiones = total_impresiones + 1 WHERE id in ( {$views_id} )" );
     }
 
 	$pines_json = json_encode($pines);
