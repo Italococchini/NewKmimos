@@ -43,11 +43,13 @@ function get_cupones_reserva( $reserva_id ){
                 $cupon_tipo = ( $tipo != '' ) ? " Tipo: ".$tipo : '' ;
 
                 // Saldo a favor
+                $es_saldo=false;
                 if( strpos($cupon->name, 'saldo-') !== false ){
+
+	                $es_saldo=true;
                     $info = " [ ".$cupon->name .": $ " .$cupon->monto . " Tipo: Saldo a favor ] ";
 				    $tooltip = (!empty($info))? 'data-toggle="tooltip" data-placement="top" title="'.$info.'"' : '' ;
-		    	    $detalle[ 'kmimos' ] = '
-				        <small class="items-span" '.$tooltip.' style="color:#fff; background:#88e093!important; padding: 10px;">
+		    	    $detalle[ 'kmimos' ] = '<small class="items-span" '.$tooltip.' style="color:#fff; background:#88e093!important; padding: 10px;">
 				            <label style="margin-bottom: 0px;">
 				                    <strong>Saldo a favor </strong>
 				                    <span class="badge" style="margin-left: 10px;">
@@ -59,7 +61,7 @@ function get_cupones_reserva( $reserva_id ){
                 }
 
                 // Cupones a Kmimos
-                if( $tipo == 'compartido' ||  $tipo == 'kmimos' ){
+                if( ($tipo == 'compartido' ||  $tipo == 'kmimos') || ( empty($tipo) && !$es_saldo ) ) {
                 	$monto_kmimos = $cupon->monto;	                
 	                if( $tipo == 'compartido' ){
 		                $percent_kmimos = $wpdb->get_var("SELECT m.meta_value 
@@ -73,8 +75,7 @@ function get_cupones_reserva( $reserva_id ){
 
                     $info = " [ ".$cupon->name .": $ " .$cupon->monto . " Tipo: ".$tipo . " ] ";
 				    $tooltip = (!empty($info))? 'data-toggle="tooltip" data-placement="top" title="'.$info.'"' : '' ;
-		    	    $detalle[ 'kmimos' ] .= '
-				        <small class="items-span" '.$tooltip.' style="color:#fff; background:#8d88e0!important; padding: 10px;">
+		    	    $detalle[ 'kmimos' ] .= '<small class="items-span" '.$tooltip.' style="color:#fff; background:#8d88e0!important; padding: 10px;">
 				            <label style="margin-bottom: 0px;">
 				                    <strong>'.$cupon->name .'</strong>
 				                    <span class="badge" style="margin-left: 10px;">
@@ -100,8 +101,7 @@ function get_cupones_reserva( $reserva_id ){
 	                
                     $info = " [ ".$cupon->name .": $ " .$cupon->monto . " Tipo: ".$tipo . " ] ";
 				    $tooltip = (!empty($info))? 'data-toggle="tooltip" data-placement="top" title="'.$info.'"' : '' ;
-		    	    $detalle[ 'cuidador' ] = '
-				        <small class="items-span" '.$tooltip.' style="color:#fff; background:#e0888c!important; padding: 10px;">
+		    	    $detalle[ 'cuidador' ] = '<small class="items-span" '.$tooltip.' style="color:#fff; background:#e0888c!important; padding: 10px;">
 				            <label style="margin-bottom: 0px;">
 				                    <strong>'.$cupon->name .'</strong>
 				                    <span class="badge" style="margin-left: 10px;">
@@ -111,6 +111,8 @@ function get_cupones_reserva( $reserva_id ){
 				        </small>
 				    ';
                 }
+
+
             }
         }
     }

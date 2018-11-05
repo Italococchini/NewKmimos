@@ -132,10 +132,10 @@
 										<th>Total a pagar ($)</th>
 										<th>Monto Pagado ($)</th>
 										<th>Monto Remanente ($)</th>
-										<th># Pedido</th>
-										<th>Observaci&oacute;n</th>
 										<th>Cupones kmimos</th>
 										<th>Cupones Cuidador</th>
+										<th># Pedido</th>
+										<th>Observaci&oacute;n</th>
 			    					</tr>
 			  					</thead>
 			  					<tbody> <?php 
@@ -402,10 +402,10 @@
 												$meta_reserva['_booking_cost'],
 												$meta_Pedido['_order_total'],
 												$meta_Pedido['_wc_deposits_remaining'],
-												$reserva->nro_pedido,
-												$estatus['sts_largo'],
 												$cupones['kmimos'],
 												$cupones['cuidador'],
+												$reserva->nro_pedido,
+												$estatus['sts_largo'],
 											];
 
 											$data_sql = [
@@ -442,7 +442,9 @@
 												$meta_Pedido['_order_total'],
 												$meta_Pedido['_wc_deposits_remaining'],
 												$reserva->nro_pedido,
-												$estatus['sts_largo']
+												$estatus['sts_largo'],
+												$cupones['kmimos'],
+												$cupones['cuidador'],
 											];
 
 											echo "<tr>";
@@ -485,6 +487,25 @@
 												}
 											}
 
+											if( 
+												( empty($existe->cupones_kmimos)   && !empty($cupones['kmimos']) ) || 
+												( empty($existe->cupones_cuidador) && !empty($cupones['cuidador']) )
+											){
+
+												// update registro db
+												$SQL = "
+													UPDATE 
+														reporte_reserva 
+													SET 
+														cupones_kmimos = '".$cupones['kmimos']."',
+														cupones_cuidador = '".$cupones['cuidador']."'
+													WHERE 
+														id = ".$existe->id.";";
+												$wpdb->query( $SQL );
+
+												echo $SQL;
+
+											}
 				   						} 
 
 				   					}else{
@@ -492,8 +513,28 @@
 										$count = 0;
 										foreach ($reservas as $key => $value) {
 											$count++;
+											
+											if( 
+												( empty($value->cupones_kmimos)   && !empty($cupones['kmimos']) ) || 
+												( empty($value->cupones_cuidador) && !empty($cupones['cuidador']) )
+											){
+												$cupones = get_cupones_reserva( $value->reserva_id );
+												$value->cupones_cuidador = $cupones['cuidador'];
+												$value->cupones_kmimos = $cupones['kmimos'];
 
-											$cupones = get_cupones_reserva( $value->reserva_id );
+												// update registro db
+												$SQL = "
+													UPDATE 
+														reporte_reserva 
+													SET 
+														cupones_kmimos = '{$cupones['kmimos']}',
+														cupones_cuidador = '{$cupones['cuidador']}'
+													WHERE 
+														reserva_id = ".$value->reserva_id;
+												$wpdb->query( $SQL );
+												echo $SQL;
+
+											}
 
 											$data = [
 												array(
@@ -559,10 +600,10 @@
 												$value->total_a_pagar,
 												$value->monto_pagado,
 												$value->monto_remanente,
+												$value->cupones_kmimos,
+												$value->cupones_cuidador,
 												$value->pedido,
 												$value->observacion,
-												$cupones['kmimos'],
-												$cupones['cuidador'],
 											];
 
 											echo "<tr>";
