@@ -564,8 +564,8 @@
 		$views_id = $views_ids[0];
 	}
     if( !empty($views_id) ){
-    	//print_r("UPDATE cuidadores SET total_impresiones = total_impresiones + 1 WHERE id in ( {$views_id} )");
-	    $wpdb->query( "UPDATE cuidadores SET total_impresiones = total_impresiones + 1 WHERE id in ( {$views_id} )" );
+    	print_r("UPDATE cuidadores SET total_impresiones = total_impresiones + 1 WHERE id in ( {$views_id} )");
+	    //$wpdb->query( "UPDATE cuidadores SET total_impresiones = total_impresiones + 1 WHERE id in ( {$views_id} )" );
     }
 
 	$pines_json = json_encode($pines);
