@@ -507,7 +507,7 @@
 
     $cuidadores = $db->get_results($sql);
 
-    $views_ids = []; 
+    //$views_ids = []; 
 
     $pines = array(); $pines_ubicados = array();
     if( $cuidadores != false ){
@@ -538,7 +538,7 @@
 	    		$grados = 0;
 	    	}
 
-	    	$views_ids[] = $cuidador->id;
+	    	// $views_ids[] = $cuidador->id;
 
 			$pines[] = array(
 				"ID"   => $cuidador->id,
@@ -558,20 +558,6 @@
 		}
     }
 
-		    	/*
-    if( count($views_ids)>1 ){
-    	foreach ($views_ids as $val) {
-    		$count++;
-    		$separador = ( !empty($views_id) )? ',', ''; 
-    		$views_id .= $separador.$val;
-    		if( $count == 10 ){
-		    	$db->query( 
-		    		"UPDATE cuidadores SET total_impresiones = total_impresiones + 1 WHERE id in ( {$views_id} )" 
-		    	);
-    		}
-    	}
-    }
-		    	*/
 	
 
 	$pines_json = json_encode($pines);

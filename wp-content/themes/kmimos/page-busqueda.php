@@ -16,6 +16,8 @@
 
     get_header();
 
+	global $wpdb;
+
     $user_id = get_current_user_id();
 
     if( !isset($_SESSION)){ session_start(); }
@@ -47,7 +49,8 @@
 
     $pagina = vlz_get_page();
 
-	if(!$_POST || $_GET["new"] == true ){
+//	if(!$_POST || $_GET["new"] == true ){
+	if( empty($_SESSION['resultado_busqueda']) || $_GET["new"] == true ){
 		$_POST["USER_ID"] = $user_id;
 		include('procesos/busqueda/buscar.php');
 	}
@@ -70,11 +73,19 @@
 		for ($i=$paginacion["inicio"]; $i < $paginacion["fin"]; $i++) {
 			$cuidador = $resultados[$i];
 			$CUIDADORES .= get_ficha_cuidador($cuidador, $i, $favoritos, $TIPO_DISEÑO);
+
+			// Agregar impresion en resultado de busqueda
+			$_SESSION["views_search"] = ( isset( $_SESSION["views_search"] ) )?  $_SESSION["views_search"] : [];
+
+			if( !in_array($cuidador->user_id, $_SESSION["views_search"]) ){
+				$wpdb->query("UPDATE cuidadores SET total_impresiones = total_impresiones + 1 WHERE user_id = ".$cuidador->user_id);
+				$_SESSION["views_search"][] = $cuidador->user_id;
+			}
+
 		}
 	}else{
 		//$CUIDADORES .= "<h2 style='padding-right: 20px!important; font-size: 21px; text-align: justify; margin: 10px 0px;'>No tenemos resultados para esta búsqueda, si quieres intentarlo de nuevo pícale <a  style='color: #00b69d; font-weight: 600;' href='".get_home_url()."/'>aquí,</a> o aplica otro filtro de búsqueda.</h2>";
 	}
-
 	$busqueda = getBusqueda();
 
 /*	echo "<pre>";
