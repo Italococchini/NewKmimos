@@ -349,7 +349,7 @@
 
     /* Filtro nombre  */
 	    if( isset($nombre) ){ 
-	    	if( $nombre != "" ){ 
+	    	if( !empty($nombre) ){ 
 	    		$query_by_nombre = "( post_cuidador.post_title LIKE '%".$nombre."%' "; 
 
 	    		// Eliminar caracteres especiales
