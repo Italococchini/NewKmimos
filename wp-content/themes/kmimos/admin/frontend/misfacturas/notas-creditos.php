@@ -43,7 +43,7 @@
 			    		<div>$ <?php echo number_format($item->monto, 2, ',', '.'); ?></div>
 			    	</div>
 			    	<div class="vlz_tabla_cuidador vlz_cerrar" style="width: 20%;">
-			    		<span>Factura</span>
+			    		<span>Número de documento</span>
 			    		<div><?php echo (!empty($item->factura))? $item->factura : "---"; ?></div>
 			    	</div>
 			    	<div class="vlz_tabla_cuidador vlz_botones boton_interno" style="width: 95%; display:block!important; margin:0px!important;">

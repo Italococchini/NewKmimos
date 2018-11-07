@@ -15,19 +15,19 @@
 				Balance
 			</a>
 		</li>
-		<li role="presentation" class="">
+		<!-- li role="presentation" class="">
 			<a href="#notas_creditos" aria-controls="notas_creditos" role="tab" data-toggle="tab">
 				Notas de Cr&eacute;ditos
 			</a>
-		</li>
+		</li -->
 
 	</ul>
 
 	<!-- Tab panes -->
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane" id="notas_creditos">
-			<?php include_once("notas-creditos.php");?>
-		</div>
+		<!--div role="tabpanel" class="tab-pane active" id="notas_creditos">
+			<?php #include_once("notas-creditos.php");?>
+		</div-->
 		<div role="tabpanel" class="tab-pane active" id="balance">
 			<?php include_once("balance.php");?>
 		</div>

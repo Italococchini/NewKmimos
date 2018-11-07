@@ -161,7 +161,7 @@ class CFDI {
 			$_total = 0;
 
 		// Parametros obligatorios segun EnlaceFiscal 
-			$serie = 'CC';
+			$serie = 'NC';
 			$uso = 'G02';
 			$metodo_pago = 'PUE';
 			$clave_sat = '84111506';

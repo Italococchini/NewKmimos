@@ -10,7 +10,7 @@
 
 	$cuidador = $pagos->db->get_row(" SELECT pago_periodo FROM cuidadores WHERE user_id = {$user_id}");
 
-	$cuidador_periodo = ['periodo'=>'','dia'=>'','proximo_pago'=>'00/00/0000'];
+	$cuidador_periodo = ['periodo'=>'semanal','dia'=>'jueves','proximo_pago'=>'00/00/0000'];
 	if( !empty($cuidador->pago_periodo) ){
 		$cuidador_periodo = unserialize($cuidador->pago_periodo);
 	}
@@ -122,13 +122,14 @@
 
 	<article class="col-md-12 text-center">
 
-		<h4 class="text-left col-md-12" style="margin-bottom: 5px; font-weight: bold">
-			Puede seleccionar su pago ahora, y se hara un cobro de comision por transferencia bancaria
+		<h4 class="text-center col-md-12" style="margin-bottom: 5px; font-weight: bold">
+			Quieres recibir tu pago antes? <br>
+			<small><strong>Con esta opción puedes hacerlo (comisión bancaria $10)</strong></small>
 		</h4>
 
 		<!-- Tiempo restante -->
-		<label id="tiempo_restante_parent" class="btn btn-default <?php echo (!$pay->retiro->habilitado)? '':'hidden'; ?>">
-			Tiempo restante: 
+		<label id="tiempo_restante_parent" class="btn btn-primary disabled <?php echo (!$pay->retiro->habilitado)? '':'hidden'; ?>">
+			<i class="fa fa-clock-o" aria-hidden="true"></i>  
 			<span id="hour"></span>  
 			<span id="minute"></span>
 			<span id="second"></span>
@@ -136,16 +137,22 @@
 
 		<!-- Boton de retiro -->
 		<div class="col-md-12">
-			<!-- a id="<?php echo ($pay->disponible>0)? '':'disabled_'; ?>boton-retiro" class="<?php echo ($pay->disponible>0)? '':'disabled'; ?> btn btn-primary btn-lg <?php echo ($pay->retiro->habilitado)? '':'hidden'; ?>" data-target="modal-retiros">
-				<i class="fa fa-money"></i> Retirar ahora
-			</a -->
-			<a id="boton-retiro" class="btn btn-primary btn-lg" data-target="modal-retiros">
+			<a id="<?php echo ($pay->disponible>0)? '':'disabled_'; ?>boton-retiro" class="<?php echo ($pay->disponible>0)? '':'disabled'; ?> btn btn-primary btn-lg <?php echo ($pay->retiro->habilitado)? '':'hidden'; ?>" data-target="modal-retiros">
 				<i class="fa fa-money"></i> Retirar ahora
 			</a>
 		</div>
+		
+
 		<!-- Ultimo retiro -->
 		<div class="col-md-12" style="margin-top:5px;">
 			<label class="purple">ULTIMO RETIRO: <?php echo (!empty($pay->retiro->ultimo_retiro)) ? $pay->retiro->ultimo_retiro : 'NO POSEE' ; ?></label><br>
+		</div>
+		<div class="col-md-12">
+			<br>
+			<br>
+			<a id="boton-retiro" class="btn btn-primary btn-lg" data-target="modal-retiros">
+				<i class="fa fa-money"></i> <small>Retirar ahora (Prueba)</small>
+			</a>
 		</div>
 
 	</article>
@@ -198,11 +205,13 @@
       <div class="modal-body">
         <div class="alert alert-info">Costo de comisión por transacción $10 </div>
 
-        <h4 class="modal-title" id="myModalLabel" style="margin-bottom:10px;"><label>Saldo disponible: $ <?php echo number_format($pay->disponible, 2, ',','.'); ?></label></h4>
+        <h4 class="modal-title" id="myModalLabel" style="margin-bottom:10px;">
+        	<label>Saldo disponible: $ <?php echo number_format($pay->disponible, 2, ',','.'); ?></label>
+        </h4>
 
         <div style="margin-bottom: 10px;">
 	        <label>Monto a retirar: </label>
-	        <input type="text" name="monto" maxlength="100" class="form-control" value="" data-value="<?php echo $pay->disponible; ?>">
+	        <input type="text" name="monto" minlength="2" maxlength="10" class="form-control" value="" data-value="<?php echo $pay->disponible; ?>">
         </div>
         <div>    	
 	        <label>Descripci&oacute;n: </label>

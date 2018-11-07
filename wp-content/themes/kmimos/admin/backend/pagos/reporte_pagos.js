@@ -2,9 +2,9 @@ var table = ""; var CTX = "";
 var fechas = '';
 
 // Variables por defecto de busqueda
-var _hiddenDefault = { "nuevo":[1,2,9,11], 'generados': [0] };
-var _tipo = 'nuevo';
-var _hiddenColumns = _hiddenDefault.nuevo;
+var _hiddenDefault = { "nuevo":[1,2,10,12], 'generados': [0,7], 'aprobar': [7] };
+var _tipo = 'aprobar';
+var _hiddenColumns = _hiddenDefault.aprobar;
 
 jQuery(document).ready(function() {
 
@@ -69,10 +69,21 @@ jQuery(document).ready(function() {
 		jQuery('#'+id).addClass('active');
 		jQuery('#'+id+'-tab').addClass('active');
 
-		_hiddenColumns = _hiddenDefault.nuevo;
+		_hiddenColumns = _hiddenDefault.aprobar;
 		jQuery('[name="ini"]').val(fecha.ini);
 		jQuery('[name="fin"]').val(fecha.fin);
 		jQuery('#opciones-nuevo').css('display', 'block');
+		jQuery('#btn_aprobar').css('display', 'none');
+		jQuery('#btn_procesar').css('display', 'none');
+
+
+		if( jQuery('#'+id).attr('href') == 'aprobar' ){
+			jQuery('#btn_aprobar').css('display', 'block');
+		}
+		if( jQuery('#'+id).attr('href') == 'nuevo' ){
+			jQuery('#btn_procesar').css('display', 'block');
+			_hiddenColumns = _hiddenDefault.nuevo;
+		}
 
 		if( jQuery('#'+id).attr('href') == 'generados' || jQuery('#'+id).attr('href') == 'completado'){
 			jQuery('#opciones-nuevo').css('display', 'none');
@@ -93,7 +104,46 @@ jQuery(document).ready(function() {
 		jQuery('[name="fin"]').val("YYYY-MM-DD");
 		loadTabla( _tipo, _hiddenColumns );
 	});
- 
+ 	
+ 	// *********************************
+ 	// Autorizar pago 
+ 	// *********************************
+    jQuery(document).on('click', '[data-action="aprobar"]', function(e){
+    	e.preventDefault();
+    	if( jQuery(this).attr('data-target') == 'autorizado' ){		
+	    	var users = [];
+			jQuery.each( jQuery("[data-type='item_selected']:checked"), function(){
+				var user = jQuery(this).val();
+				var reserva = [];
+
+				console.log( jQuery('[name="reservas_'+user+'[]"]:checked') );
+				jQuery.each( jQuery('[name="reservas_'+user+'[]"]:checked'), function(){
+					reserva.push( jQuery(this).val() );
+				});
+
+				users.push({
+					'user_id': user, 
+					'reservas': reserva,
+				});
+			});
+			console.log(users);
+			aprobar_pago( users, jQuery(this).attr('data-target') );
+    	}else{
+    		cerrar();
+    	}
+	});
+
+    jQuery("[data-modal='aprobar']").on('click', function(){
+    	if( jQuery("[data-type='item_selected']:checked").size() > 0 ){
+    		abrir_link( jQuery(this) );
+    	}else{
+    		alert('Debe seleccionar los registros a procesar');
+    	}
+    });  
+	  
+ 	// *********************************
+ 	// Procesar pago 
+ 	// *********************************
     jQuery(document).on('click', '[data-action="procesar"]', function(e){
     	e.preventDefault();
     	if( jQuery(this).attr('data-target') == 'autorizado' ){		
@@ -102,7 +152,8 @@ jQuery(document).ready(function() {
 				var user = jQuery(this).val();
 				users.push({
 					'user_id':user, 
-					'monto': jQuery('#monto_'+user).val()
+					'monto': jQuery('#monto_'+user).val(),
+					'comentario': jQuery('#comentario_'+user).val(),
 				});
 			});
 			console.log(users);
@@ -155,6 +206,12 @@ jQuery(document).ready(function() {
 		updateTotalTag();
 	});
 
+	jQuery(document).on('change', "[data-target='input_total']", function(e){
+		var user = jQuery(this).attr('data-user');
+		jQuery( '[data-global="'+user+'"]' ).attr( 'data-total' , jQuery(this).val());
+		updateTotalTag();
+	});
+
 	jQuery(document).on('click', "[data-target='liberar']", function(e){
 		jQuery.post(
 			TEMA+'/admin/backend/pagos/ajax/liberar_solicitud.php',
@@ -192,7 +249,9 @@ function updateTotalTag(){
     		jQuery(this).attr('checked', false);
     	}
     });
-	jQuery('#pagosNuevos-tab span').html('$ '+total);
+	jQuery('.nav-item a.active span').html('$ '+total);
+	// jQuery('#pagosNuevos-tab span').html('$ '+total);
+	console.log( jQuery('.nav-item > a.active > span') );
 }
 
 function total_pagos_generados(){
@@ -217,6 +276,23 @@ function generar_solicitud( users, accion ){
 		},
 		function(data){
 			jQuery('#pagosNuevos-tab span').html('$ 0');
+			loadTabla( _tipo, _hiddenColumns );	
+			cerrar();
+		}
+	);
+}
+
+function aprobar_pago( users, accion ){
+	jQuery.post(
+		TEMA+'/admin/backend/pagos/ajax/aprobar_pago.php',
+		{
+			'ID':ID, 
+			'users':users,
+			'accion':accion, 
+			'comentario': jQuery('[name="observaciones"]').val()
+		},
+		function(data){
+			jQuery('.nav-item a.active span').html('$ 0');
 			loadTabla( _tipo, _hiddenColumns );	
 			cerrar();
 		}

@@ -25,7 +25,7 @@ class PagoCuidador {
 	}
 
 	/// *************************
-	/// Calculo pago al cuidador
+	/// Pago al cuidador
 	/// *************************
 
 	public function get_pago_by_user( $user_id ){
@@ -262,34 +262,48 @@ class PagoCuidador {
 			// Cargar pagos
 			$cuidador = $this->db->get_var("SELECT banco FROM cuidadores WHERE user_id = {$user_id}");
 			$banco = unserialize($cuidador);
+			$pago_id =0;
+			$existe_retiro = $this->db->get_row(
+				"SELECT * from cuidadores_pagos where user_id = {$user_id} and estatus = 'pendiente'");
+			if( isset($existe_retiro->id) && $existe_retiro->id > 0 ){
 
-			$sql_pago = "
-				INSERT INTO `cuidadores_pagos`( 
-					`admin_id`,
-					`user_id`,
-					`total`,
-					`cantidad`,
-					`estatus`,
-					`detalle`,
-					`observaciones`,
-					`cuenta`,
-					`titular`,
-					`banco`
-				) VALUES (
-					{$id_admin},
-					{$user_id},
-					{$monto_pago},
-					".count($reservas_pagos).",
-					'pendiente',
-					'".serialize($reservas_pagos)."',
-					'Solicitud de retiro por el cuidador ( Comision: $10 )',
-					'".$banco['cuenta']."',
-					'".$banco['titular']."',
-					'".$banco['banco']."'
-				);
-			";
-			$this->db->query($sql_pago);
-			$pago_id = $this->db->insert_id();
+				// italo Ajustar detalle de reserva (merge)
+
+				$sql_pago = "UPDATE cuidadores_pagos SET 
+						total = total + {$monto_pago}
+					WHERE id = ".$existe_retiro->id
+				;
+				$this->db->query($sql_pago);
+				$pago_id = $existe_retiro->id;
+			}else{
+				$sql_pago = "
+					INSERT INTO `cuidadores_pagos`( 
+						`admin_id`,
+						`user_id`,
+						`total`,
+						`cantidad`,
+						`estatus`,
+						`detalle`,
+						`observaciones`,
+						`cuenta`,
+						`titular`,
+						`banco`
+					) VALUES (
+						{$id_admin},
+						{$user_id},
+						{$monto_pago},
+						".count($reservas_pagos).",
+						'pendiente',
+						'".serialize($reservas_pagos)."',
+						'Solicitud de retiro por el cuidador ( Comision: $10 )',
+						'".$banco['cuenta']."',
+						'".$banco['titular']."',
+						'".$banco['banco']."'
+					);
+				";
+				$this->db->query($sql_pago);
+				$pago_id = $this->db->insert_id();
+			}
 
 			return ['transaccion_id'=>$tra_id, 'pago_id'=>$pago_id, 'sql'=>$sql_pago];
 		}
@@ -297,7 +311,7 @@ class PagoCuidador {
 		return 0;
 	}
 
-	public function registrar_pago( $user_id, $total, $openpay_id ){
+	public function registrar_pago( $user_id, $total, $openpay_id, $comentario='' ){
 		// buscar solicitudes de pago del cuidador
 		$solicitudes = $this->db->get_results( "
 			SELECT * 
@@ -309,72 +323,70 @@ class PagoCuidador {
 		if( !empty($solicitudes) ){
 			$resto = $total;
 			foreach ($solicitudes as $solicitud) {
-				// Si el monto es mayor o igual
-				if( $resto >= $solicitud->total ){
-					$resto -= $solicitud->total;
-					$sql = "UPDATE cuidadores_pagos SET 
-							estatus = 'in_progress', 
-							openpay_id='$openpay_id' 
-						WHERE id = ".$solicitud->id;
-					$this->db->query($sql);
-			echo $sql;
-				}else{
-				// Si el monto es menor 
-					# diferencia
-					$solicitud->total -= $resto;
+				if( $resto > 0 ){
+					// Si el monto es mayor o igual
+					if( $resto >= $solicitud->total ){
+						$resto -= $solicitud->total;
+						$sql = "UPDATE cuidadores_pagos SET 
+								estatus = 'in_progress', 
+								openpay_id='$openpay_id' 
+								observaciones=concat(observaciones,'<br>', {$comentario})
+							WHERE id = ".$solicitud->id;
+						$this->db->query($sql);
+					}else{
+					// Si el monto es menor 
+						# diferencia
+						$solicitud->total -= $resto;
 
-					#cambiar referencia y estatus: modificacion
-					$sql_update = "UPDATE cuidadores_pagos SET 
-							estatus = 'in_progress', 
-							total = {$resto},
-							openpay_id='$openpay_id',
-							observaciones='Solicitud de pago modificada'
-						WHERE id = ".$solicitud->id;
-					$this->db->query($sql_update);
-			echo $sql_update;
+						# cambiar referencia y estatus: modificacion
+						$sql_update = "UPDATE cuidadores_pagos SET 
+								estatus = 'in_progress', 
+								total = {$resto},
+								openpay_id='$openpay_id',
+								observaciones=concat(observaciones,'<br>', '{$comentario}')
+							WHERE id = ".$solicitud->id;
+						$this->db->query($sql_update);
+						$sql_insert = "INSERT INTO `cuidadores_pagos`(
+							`admin_id`, 
+							`user_id`, 
+							`total`, 
+							`cantidad`, 
+							`estatus`, 
+							`detalle`, 
+							`autorizado`, 
+							`openpay_id`, 
+							`observaciones`, 
+							`cuenta`, 
+							`titular`, 
+							`banco`
+						) VALUES (
+							".$solicitud->admin_id.", 
+							".$solicitud->user_id.", 
+							".$solicitud->total.", 
+							".$solicitud->cantidad.", 
+							'pendiente',
+							'".$solicitud->detalle."', 
+							'".$solicitud->autorizado."', 
+							'".$openpay_id."', 
+							'".$solicitud->observaciones."', 
+							'".$solicitud->cuenta."', 
+							'".$solicitud->titular."', 
+							'".$solicitud->banco."'
+						);";
+						$this->db->query($sql_insert);
+						$resto = 0;
+ 
+						#generar una solicitud por el resto
+							# dividir reservas
 
-					$sql_insert = "INSERT INTO `cuidadores_pagos`(
-						`admin_id`, 
-						`user_id`, 
-						`total`, 
-						`cantidad`, 
-						`estatus`, 
-						`detalle`, 
-						`autorizado`, 
-						`openpay_id`, 
-						`observaciones`, 
-						`cuenta`, 
-						`titular`, 
-						`banco`
-					) VALUES (
-						".$solicitud->admin_id.", 
-						".$solicitud->user_id.", 
-						".$solicitud->total.", 
-						".$solicitud->cantidad.", 
-						'pendiente',
-						'".$solicitud->detalle."', 
-						'".$solicitud->autorizado."', 
-						'".$openpay_id."', 
-						'".$solicitud->observaciones."', 
-						'".$solicitud->cuenta."', 
-						'".$solicitud->titular."', 
-						'".$solicitud->banco."'
-					);";
-					$this->db->query($sql_insert);
-			echo $sql_insert;
-
-					#generar una solicitud por el resto
-						# dividir reservas
-
-					#generar una solicitud por la diferencia de la solicitud
-						# dividir reservas diferencia					
+						#generar una solicitud por la diferencia de la solicitud
+							# dividir reservas diferencia					
+					}
 				}
-
 			}
 
 
 		}
-
 	}
 
 	/// *************************
@@ -480,12 +492,6 @@ class PagoCuidador {
 		return ( $total > 0 )? $total : 0;
 	}
 
-	protected function get_NC( $user_id, $reserva=0 ){
-		$where_reserva = ( $reserva > 0 )? ' AND reserva_id = '.$reserva : '' ;
-		$total = $this->db->get_var( "SELECT SUM(monto) as total FROM notas_creditos WHERE user_id = {$user_id} and tipo='cuidador' and estatus='pendiente' {$where_reserva}");
-		return ( $total > 0 )? $total : 0;
-	}
-
 	protected function ultimo_retiro( $user_id ){
 		$sql = "SELECT fecha FROM cuidadores_transacciones WHERE user_id = {$user_id} AND tipo='pago_c' ORDER BY id desc limit 1";
 		$fecha = $this->db->get_var( $sql );
@@ -504,6 +510,11 @@ class PagoCuidador {
 		return ( $pendiente > 0 )? $pendiente : 0 ;
 	}
 
+	protected function get_total_generado( $user_id ){
+		$total = $this->db->get_var( "SELECT SUM(total_reserva) as total FROM cuidadores_reservas WHERE user_id = {$user_id} " );
+		return ( $total > 0 )? $total : 0 ;
+	}
+
 	protected function total_transacciones_by_reserva( $user_id, $reserva_id ){
 		$list = $this->db->get_results( "SELECT * FROM cuidadores_transacciones WHERE user_id = {$user_id} AND reservas like '%i:{$reserva_id}%' " );
 		$total = 0;
@@ -518,19 +529,118 @@ class PagoCuidador {
 		return ( $total > 0 )? $total : 0 ;
 	}
 
-	protected function get_total_generado( $user_id ){
-		$total = $this->db->get_var( "SELECT SUM(total_reserva) as total FROM cuidadores_reservas WHERE user_id = {$user_id} " );
-		//$NC = $this->get_NC( $user_id );
-		//if( $NC > 0 ){
-		//	$total -=  $NC;
-		//}
-		return ( $total > 0 )? $total : 0 ;
+	protected function get_NC( $user_id, $reserva=0 ){
+		$where_reserva = ( $reserva > 0 )? ' AND reserva_id = '.$reserva : '' ;
+		$total = $this->db->get_var( "SELECT SUM(monto) as total FROM notas_creditos WHERE user_id = {$user_id} and tipo='cuidador' and estatus='pendiente' {$where_reserva}");
+		return ( $total > 0 )? $total : 0;
 	}
-
 
 	/// *************************
 	/// Reporte Backpanel
 	/// *************************
+
+	public function getPagosPorAprobar( $desde, $hasta ){
+		if( empty($desde) || empty($hasta) ){
+			return [];
+		}
+
+		$reservas = $this->getReservas($desde, $hasta);
+
+		$obj_pagos = [];
+		$pagos = [];
+		$detalle = [];
+		$count = 1;
+
+		$dev = [];
+		if( !empty($reservas) ){
+			foreach ($reservas as $row) {
+
+				$total = 0;
+                $existe = $this->db->get_row( 'SELECT * FROM cuidadores_reservas WHERE reserva_id = '.$row->reserva_id );
+
+                if( !isset( $existe->id ) ){
+
+					// Datos del cuidador
+						$cuidador = $this->db->get_row('SELECT * FROM cuidadores WHERE user_id = '.$row->cuidador_id);
+
+						$pagos[ $row->cuidador_id ]['fecha_creacion'] = date('Y-m-d', strtotime("now"));
+						$pagos[ $row->cuidador_id ]['user_id'] = $row->cuidador_id; 
+						$pagos[ $row->cuidador_id ]['nombre'] = $cuidador->nombre ; 
+						$pagos[ $row->cuidador_id ]['apellido'] = $cuidador->apellido ; 
+						$pagos[ $row->cuidador_id ]['estatus'] = '';
+
+					// Meta de padido
+						$meta_pedido = $this->getMetaPedido( $row->pedido_id );
+
+					// Metodos de pago
+						$method_payment = '';
+						if( !empty($meta_pedido['_payment_method_title']) ){
+							$method_payment = $meta_pedido['_payment_method_title']; 
+						}else{
+							if( !empty($meta_reserva['modificacion_de']) ){
+								$method_payment = 'Saldo a favor' ; 
+							}else{
+								$method_payment = 'Manual'; 
+							}
+						}
+
+					// Calculo por reserva
+						$monto = $this->calculo_pago_cuidador( 
+							$row->reserva_id,
+							$row->total
+						);
+
+					// Transacciones y Notas de Credito
+						$nc = $this->get_NC( $row->cuidador_id, $row->reserva_id);
+						$tr = $this->total_transacciones_by_reserva( $row->cuidador_id, $row->reserva_id);
+
+					// Cualcular saldo
+						$monto -= ( $nc + $tr );
+
+					// Separadores
+						if( $count == 4 ){
+							$separador = '<br><br>';
+							$count=1;
+						}else{
+							$separador = '';
+							$count++;
+						}
+
+					// Detalle de Reservas	
+						if( !isset($pagos[ $row->cuidador_id ]['detalle']) ){
+							$pagos[ $row->cuidador_id ]['detalle']=[]; 
+						}
+						if( $monto > 0 ){
+							$pagos[ $row->cuidador_id ]['detalle'][$row->reserva_id] = [
+								'reserva'=>$row->reserva_id,
+								'monto'=>$monto,
+								'booking_start' => date('Y-m-d', strtotime($row->booking_start) ),
+								'booking_end' => date('Y-m-d', strtotime($row->booking_end) ),
+							];
+					    }
+
+						if( array_key_exists('total', $pagos[ $row->cuidador_id ]) ){
+							$monto = $pagos[ $row->cuidador_id ]['total'] + $monto;
+						}
+
+						if( array_key_exists('total_row', $pagos[ $row->cuidador_id ]) ){
+							$total = $pagos[ $row->cuidador_id ]['total_row'] + 1;
+						}
+
+					// Total a pagar
+						$pagos[ $row->cuidador_id ]['total'] = $monto;
+						$pagos[ $row->cuidador_id ]['cantidad'] = count($pagos[ $row->cuidador_id ]['detalle']);
+
+					// Object
+						if( $monto > 0 ){
+							$obj_pagos[$row->cuidador_id ] = (object) $pagos[$row->cuidador_id ];
+						}
+				}
+			}
+		}
+		
+		return $obj_pagos;
+	}
 
 	public function getPagosPendientes(){
 
@@ -604,8 +714,6 @@ class PagoCuidador {
 		return $this->db->get_results($sql);
 	}
 
-
-
 	/// *************************
 	/// Funciones
 	/// *************************
@@ -635,6 +743,10 @@ class PagoCuidador {
 					if( isset($cuidador->nombre) || isset($cuidador->apellido) ){
 							
 					// Datos del cuidador
+						/*
+						$pagos[ $row->cuidador_id ]['booking_start'] = date('Y-m-d', strtotime($row->booking_start));
+						$pagos[ $row->cuidador_id ]['booking_end'] = date('Y-m-d', strtotime($row->booking_start));
+						*/
 						$pagos[ $row->cuidador_id ]['fecha_creacion'] = date('Y-m-d', strtotime("now"));
 						$pagos[ $row->cuidador_id ]['user_id'] = $row->cuidador_id; 
 						$pagos[ $row->cuidador_id ]['nombre'] = $cuidador->nombre ; 
@@ -937,11 +1049,13 @@ class PagoCuidador {
 				r.ID as reserva_id,
 				r.post_parent as pedido_id,
 				( IFNULL(rm_cost.meta_value,0) ) as total,
-				rm_start.meta_value as booking_start
+				rm_start.meta_value as booking_start,
+				rm_end.meta_value as booking_end
 			FROM wp_posts as r
 				LEFT JOIN wp_postmeta as rm ON rm.post_id = r.ID and rm.meta_key = '_booking_order_item_id' 
 				LEFT JOIN wp_postmeta as rm_cost ON rm_cost.post_id = r.ID and rm_cost.meta_key = '_booking_cost'
 				LEFT JOIN wp_postmeta as rm_start ON rm_start.post_id = r.ID and rm_start.meta_key = '_booking_start'
+				LEFT JOIN wp_postmeta as rm_end ON rm_end.post_id = r.ID and rm_end.meta_key = '_booking_end'
 				LEFT JOIN wp_woocommerce_order_itemmeta as pri ON (pri.order_item_id = rm.meta_value and pri.meta_key = '_product_id')
 				LEFT JOIN wp_posts as pr ON pr.ID = pri.meta_value
 			WHERE r.post_type = 'wc_booking' 

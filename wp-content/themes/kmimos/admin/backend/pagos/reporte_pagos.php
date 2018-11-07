@@ -33,10 +33,12 @@
                 <form id="form-search" name="search">
                     <span><label class="fecha">Desde: </label><input type="date" name="ini" value="<?php echo $fecha['ini']; ?>"></span>
                     <span><label class="fecha">Hasta: <input type="date" name="fin" 
-                        min="<?php echo $fecha['min']; ?>" 
-                        max="<?php echo $fecha['max']; ?>" 
                         value="<?php echo $fecha['fin']; ?>"></label></span> 
                     <button class="btn btn-defaut" id="btn-search"><i class="fa fa-search"></i> Buscar</button>
+                    <!--
+                        min="<?php echo $fecha['min']; ?>" 
+                        max="<?php echo $fecha['max']; ?>" 
+                    -->
                 </form>
             </div>
         </div>
@@ -107,8 +109,12 @@
         </dir>
         <div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
+
               <li class="nav-item">
-                <a class="nav-link active" id="pagosNuevos-tab" data-toggle="tab" href="nuevo" role="tab" aria-controls="pagosNuevos" aria-selected="true">Pendientes de pago <span class="badge-total">$ 0</span></a>
+                <a class="nav-link active" id="pagosAprobar-tab" data-toggle="tab" href="aprobar" role="tab" aria-controls="pagosAprobar" aria-selected="true">Por aprobar <span class="badge-total">$ 0</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pagosNuevos-tab" data-toggle="tab" href="nuevo" role="tab" aria-controls="pagosNuevos" aria-selected="true">Pendientes de pago <span class="badge-total">$ 0</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="pagosGenerados-tab" data-toggle="tab" href="generados" role="tab" aria-controls="pagosGenerados" aria-selected="false">Enviadas a pago <span class="badge-total">$ 0</span></a>
@@ -119,7 +125,8 @@
             </ul>
 
             <div class="botones_container" id="opciones-nuevo">
-                <button class="btn btn-success" data-titulo='Procesar solicitudes de pago' data-modal='autorizar' data-id="0" ><i class="fa fa-money"></i> Generar Solicitud de pago</button>
+                <button id="btn_aprobar" class="btn btn-primary" data-titulo='Aprobar pagos' data-modal='aprobar' data-id="0" ><i class="fa fa-money"></i> Aprobar pagos</button>
+                <button id="btn_procesar" class="btn btn-success" data-titulo='Procesar solicitudes de pago' data-modal='autorizar' data-id="0" style="display:none;"><i class="fa fa-money"></i> Generar Solicitud de pago</button>
             </div>
             
             <table id="example" class="table table-striped table-bordered nowrap" cellspacing="0" style="min-width: 100%;">
@@ -132,6 +139,7 @@
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Total a pagar</th>
+                        <th>Revisión</th>
                         <th>Cant. Reservas</th>
                         <th>Det. Reservas</th>
                         <th>Autorizado por.</th>

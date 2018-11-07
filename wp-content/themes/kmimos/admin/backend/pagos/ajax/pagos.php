@@ -16,12 +16,19 @@
     $display_reserva_check = true;
     $display_btn_liberar = false;
     $display_total_input = false;
-
+    $validar_cuenta = true;
+    $display_comentario_input = false;
+    
     switch ( strtolower($tipo) ) {
+        case 'aprobar':
+            $pagos_lists = $pagos->getPagosPorAprobar( $desde, $hasta );
+            $validar_cuenta = false;
+            break;
         case 'nuevo':
             $pagos_lists = $pagos->getPagosPendientes();
             $display_total_input = true;
             $display_reserva_check = false;
+            $display_comentario_input = true;
             break;
         case 'generados':
             $pagos_lists = $pagos->getPagoGenerados( $desde, $hasta );
@@ -59,7 +66,6 @@
 
         foreach ($pagos_lists as $pago) {
 
-
             $_SESSION['pago_cuidador'][ $pago->user_id ] = $pago;
 
             // Datos del cuidador
@@ -71,7 +77,7 @@
             // Validar si el cuidador tiene datos bancarios
                 $token = md5(serialize($pago->detalle));
                 $checkbox = "<input type='checkbox' data-type='item_selected' data-total='".$pago->total."' name='item_selected[]' data-token='".$token."' value='".$pago->user_id."' data-global='".$pago->user_id."'>";
-                if( !empty($cuidador->banco) ){
+                if( !empty($cuidador->banco) || !$validar_cuenta ){
                     //$botones .= "<button style='padding:5px;'><i class='fa fa-money'></i> Generar Solicitud de pago</button>"; 
                 }else{
                     $botones .= "No posee datos bancarios"; 
@@ -109,7 +115,6 @@
                             'saldo' => '#88e093',
                             'ambos' => '#e0888c',
                         ];
-
 
                         $info = '';
                         $color = $colores['normal'];
@@ -199,8 +204,11 @@
             $input_total = "$ <span id='monto_".$pago->user_id."'>".number_format($pago->total, 2,',', '.')."</span>";
 
             if( $display_total_input ){
-                $input_total = "<input class='form-control' id='monto_".$pago->user_id."' value='".$pago->total."' >
+                $input_total = "<input class='form-control' data-target='input_total' data-user='".$pago->user_id."' id='monto_".$pago->user_id."' value='".$pago->total."' >
                 <div>Disponible: $ ".number_format($pago->total, 2,',', '.')."</div>";
+            }
+            if( $display_comentario_input ){
+                $input_comentario = "<input class='form-control' id='comentario_".$pago->user_id."' value='' >";
             }
 
             $data["data"][] = array(
@@ -211,13 +219,13 @@
                 utf8_encode($cuidador->nombre),
                 utf8_encode($cuidador->apellido),
                 $input_total,
+                $input_comentario,
                 "<span id='cantidad_".$pago->user_id."'>".$pago->cantidad."</span>",
                 $detalle,
                 $autorizado_por,
                 $botones,
                 $comentarios,
             );
-
         }
     }
 

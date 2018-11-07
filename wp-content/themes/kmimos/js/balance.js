@@ -71,6 +71,12 @@ jQuery(document).ready(function(){
             alert( "El monto no debe ser mayor al saldo disponible" );
         }
 
+        if( monto < 20 ){
+            jQuery(this).val( 20 );
+            monto = 20;
+            alert( "El monto no debe ser menor a $20" );
+        }
+
         jQuery('#modal-subtotal').html( monto );
         jQuery('#modal-total').html( monto - 10 );
 

@@ -90,7 +90,7 @@
 	                //  Actualizar registro
 	                   	if( !empty($openpay_id) && $estatus != 'error'){    
   		
-		                    $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id );
+		                    $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id, $item['comentario'] );
 
 	                   	}
 				
