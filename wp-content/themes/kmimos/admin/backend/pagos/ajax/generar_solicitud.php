@@ -27,8 +27,10 @@
     		$pago = $_pagos[ $item['user_id'] ];
     		$total = 0;
 
+print_r($pago);
+
     		// Metadatos
-	    		$cuidador = $pagos->db->get_row("SELECT user_id, nombre, apellido, banco FROM cuidadores WHERE user_id = {$pago->user_id}");
+	    		$cuidador = $pagos->db->get_row("SELECT user_id, nombre, apellido, banco, email FROM cuidadores WHERE user_id = {$pago->user_id}");
 	    		$banco = unserialize($cuidador->banco);
 			
 		    // Autorizaciones
@@ -91,6 +93,26 @@
 	                   	if( !empty($openpay_id) && $estatus != 'error'){    
   		
 		                    $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id, $item['comentario'] );
+		                    if( $item['parcial'] ){
+
+		                    	include($raiz.'/wp-load.php');
+							    $mensaje = buildEmailTemplate(
+							        'pagos/parcial',
+							        [
+		                    			'name' => $pago->nombre.' '.$pago->apellido,
+		                    			'monto' => $item['monto'],
+		                    			'comentarios' => $item['comentario']
+		                    		]
+							    );
+
+							    $mensaje = buildEmailHtml(
+							        $mensaje, 
+							        []
+							    );
+ 
+							    wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
+
+		                    }
 
 	                   	}
 				

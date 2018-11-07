@@ -274,6 +274,7 @@ class PagoCuidador {
 					WHERE id = ".$existe_retiro->id
 				;
 				$this->db->query($sql_pago);
+				
 				$pago_id = $existe_retiro->id;
 			}else{
 				$sql_pago = "

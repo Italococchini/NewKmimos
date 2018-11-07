@@ -154,6 +154,7 @@ jQuery(document).ready(function() {
 					'user_id':user, 
 					'monto': jQuery('#monto_'+user).val(),
 					'comentario': jQuery('#comentario_'+user).val(),
+					'parcial': jQuery(this).attr('data-parcial'), 
 				});
 			});
 			console.log(users);
@@ -208,6 +209,12 @@ jQuery(document).ready(function() {
 
 	jQuery(document).on('change', "[data-target='input_total']", function(e){
 		var user = jQuery(this).attr('data-user');
+
+		jQuery( '[data-global="'+user+'"]' ).attr( 'data-parcial' , false);
+		if( jQuery( '[data-global="'+user+'"]' ).attr('data-total') > jQuery(this).val() ){
+			jQuery( '[data-global="'+user+'"]' ).attr( 'data-parcial' , true);
+		}
+
 		jQuery( '[data-global="'+user+'"]' ).attr( 'data-total' , jQuery(this).val());
 		updateTotalTag();
 	});
