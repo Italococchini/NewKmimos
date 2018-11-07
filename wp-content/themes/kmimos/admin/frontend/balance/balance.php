@@ -14,8 +14,8 @@
 		'periodo'=>'semanal',
 		'dia'=>'jueves',
 		'proximo_pago'=>'00/00/0000', 
-		'primera_quincena' => '0000/00/00', 
-        'segunda_quincena'=> '0000/00/00' 
+		'primera_quincena' => '15', 
+        'segunda_quincena'=> '30' 
     ];
 	if( !empty($cuidador->pago_periodo) ){
 		$cuidador_periodo = unserialize($cuidador->pago_periodo);
