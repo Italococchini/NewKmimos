@@ -32,3 +32,5 @@
     		break;
     }
     echo $proximo_pago;
+
+    print_r($cuidador_periodo);

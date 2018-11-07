@@ -21,6 +21,8 @@
 		$cuidador_periodo = unserialize($cuidador->pago_periodo);
 	}
 
+print_r($cuidador_periodo);
+
 	$periodo_retiro = [
 		'semanal',
 		'quincenal',
