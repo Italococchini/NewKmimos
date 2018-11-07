@@ -540,9 +540,10 @@ class PagoCuidador {
 
 	protected function pagos_no_disponible(){
 		$hoy = date('Y-m-d');
-		$next_year = date('Y-m-d', strtotime( $hoy." +1 year" ));
+		$desde = date('Y-m-d', strtotime( $hoy." +1 day" ));
+		$hasta = date('Y-m-d', strtotime( $hoy." +1 year" ));
 
-		$reservas = $this->getReservas( $hoy, $next_year );
+		$reservas = $this->getReservas( $desde, $hasta );
 		$total = 0;
 		foreach ($reservas as $reserva) {
 			$total += $reserva->total;
