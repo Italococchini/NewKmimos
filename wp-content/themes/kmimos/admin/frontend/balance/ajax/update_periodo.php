@@ -33,4 +33,4 @@
     }
     echo $proximo_pago;
 
-    print_r($cuidador_periodo);
+   // print_r($cuidador_periodo);

@@ -21,7 +21,7 @@
 		$cuidador_periodo = unserialize($cuidador->pago_periodo);
 	}
 
-print_r($cuidador_periodo);
+// print_r($user_id);
 
 	$periodo_retiro = [
 		'semanal',
