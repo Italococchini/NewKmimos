@@ -10,7 +10,13 @@
 
 	$cuidador = $pagos->db->get_row(" SELECT pago_periodo FROM cuidadores WHERE user_id = {$user_id}");
 
-	$cuidador_periodo = ['periodo'=>'semanal','dia'=>'jueves','proximo_pago'=>'00/00/0000'];
+	$cuidador_periodo = [
+		'periodo'=>'semanal',
+		'dia'=>'jueves',
+		'proximo_pago'=>'00/00/0000', 
+		'primera_quincena' => '0000/00/00', 
+        'segunda_quincena'=> '0000/00/00' 
+    ];
 	if( !empty($cuidador->pago_periodo) ){
 		$cuidador_periodo = unserialize($cuidador->pago_periodo);
 	}
@@ -34,6 +40,31 @@
 	$fecha2 = new DateTime($pay->retiro->tiempo_restante);
 	$intervalo = $fecha1->diff($fecha2);
 
+
+		
+	$display_semanal = 'none';
+	$display_p_quincena = 'none';
+	$display_s_quincena = 'none';
+
+	$titulo_q1="";
+	$titulo_q2="";
+
+	switch ($cuidador_periodo['periodo']) {
+		case 'semanal':
+			$display_semanal = 'inline-block';
+			break;
+		case 'quincenal':
+			$display_p_quincena = 'inline-block';
+			$display_s_quincena = 'inline-block';
+			$titulo_q1 = '1er. pago';
+			$titulo_q2 = '2do. pago';
+			break;
+		case 'mensual':
+			$display_p_quincena = 'inline-block';
+			$titulo_q1 = 'D&iacute;a de pago';
+			break;
+	}
+
 ?>
 
 <h1 class="titulo">Balance</h1>
@@ -43,7 +74,8 @@
 	<h4 class="text-left col-md-12" style="margin-bottom: 0px; font-weight: bold">
 		Puedes programar tus pagos semanal, quincenal o mensual de manera gratuita
 	</h4>
-	<dir class="col-md-4 text-left">
+ 
+	<div class="col-md-4 text-left">
 		<!-- Periodo de pago -->
 		<div class="input-group">
 			<span class="input-group-addon" id="basic-addon1">Periodo de retiro: </span>
@@ -53,12 +85,13 @@
 			  		$select = ( $periodo == $cuidador_periodo['periodo'] )? 'selected':'';
 					echo "<option value='{$periodo}' {$select}>".ucfirst($periodo)."</option>";
 				} 
-			?>
+				?>
 			</select>
 		</div>
-	</dir>
-	<dir class="col-md-4 text-left" id="retiro_dia" style="<?php echo ($cuidador_periodo['periodo']=='semanal')? 'display:block;' : 'display:none;' ; ?>">
-		<!-- Periodo de pago -->
+	</div>
+
+	<div class="col-md-4 text-left" id="semanal" 
+	style=" display:<?php echo $display_semanal; ?>;">
 		<div class="input-group">
 			<span class="input-group-addon" id="basic-addon1">D&iacute;a de retiro: </span>	
 			<select class="form-control" name="periodo_dia">	
@@ -67,16 +100,47 @@
 			  		$select = ( $periodo == $cuidador_periodo['dia'] )? 'selected':'';
 					echo "<option value='{$periodo}' {$select}>".ucfirst($periodo)."</option>";
 				} 
-			?>
+				?>
 			</select>
 		</div>
-	</dir>
+	</div>
+
+	<div class="col-md-4 text-left" id="primera_quincena" 
+	style=" display:<?php echo $display_p_quincena; ?>;">
+		<div class="input-group">
+			<span class="input-group-addon" id="lbl-p-quincena"><?php echo $titulo_q1; ?></span>	
+			<select class="form-control" name="primera_quincena" style="font-size: 12px;">
+				<?php
+				for ($i=1; $i < 31; $i++) { 
+				 	$select = ( $i == $cuidador_periodo['primera_quincena'] )? 'selected':'';
+					echo "<option value='{$i}' {$select}>D&iacute;a ".$i." de cada mes</option>";
+				}
+				?>
+			</select>
+		</div>
+	</div>	
+
+	<div class="col-md-4 text-left" id="segunda_quincena" 
+	style=" display:<?php echo $display_s_quincena; ?>;">
+		<div class="input-group">
+			<span class="input-group-addon" id="lbl-s-quincena"><?php echo $titulo_q2; ?></span>	
+			<select class="form-control" name="segunda_quincena" style="font-size: 12px;">
+				<?php
+				for ($i=1; $i < 31; $i++) { 
+				 	$select = ( $i == $cuidador_periodo['segunda_quincena'] )? 'selected':'';
+					echo "<option value='{$i}' {$select}>D&iacute;a ".$i." de cada mes</option>";
+				}
+				?>
+			</select>		 
+		</div>
+	</div>
+	 
 </section>
 
-<section class="row">
+<section class="row" style="margin-top: 20px;">
 
 	<!-- Disponible -->
-	<article class="col-md-3">
+	<article class="col-md-3" style="width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>DISPONIBLE: </strong> Saldo disponible en cuenta"></i>
 			<span>DISPONIBLE</span> 
@@ -86,7 +150,7 @@
 	</article>
 
 	<!-- Proximo pago -->
-	<article class="col-md-3">
+	<article class="col-md-3" style="width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" data-action="popover" data-content="<strong>PROXIMO PAGO: </strong> Monto a pagar en la proxima periodo de pago" aria-hidden="true"></i>
 			<span>PROXIMO PAGO</span> 
@@ -96,7 +160,7 @@
 	</article>
 
 	<!-- En progreso -->
-	<article class="col-md-3">
+	<article class="col-md-3" style="width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>EN TRANSITO: </strong>Pagos realizados pendientes por aprobaci&oacute;n del banco, el estatus puede tardar dos horas en cambiar"></i>
 			<span>EN TRANSITO</span> 
@@ -106,12 +170,22 @@
 	</article>
 
 	<!-- Retenido -->
-	<article class="col-md-3">
+	<article class="col-md-3" style="width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>RETENIDO: </strong>Saldo pendientes por asignar en cuenta"></i>
 			<span>RETENIDO</span> 
 			<div  style="padding:5px 0px; font-size: 18px;">$ <?php echo number_format($pay->retenido, 2, ',','.'); ?></div>
 			<small>Pendiente por <br> asignar en cuenta</small>
+		</div>
+	</article>
+
+	<!-- Pagos futuros -->
+	<article class="col-md-3" style="width: 20%;">
+		<div class="alert bg-kmimos">
+			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>NO DISPONIBLE: </strong>Pagos a futuro disponibles una vez que inicie la reserva."></i>
+			<span>NO DISPONIBLE</span> 
+			<div  style="padding:5px 0px; font-size: 18px;">$ <?php echo number_format($pay->no_disponible, 2, ',','.'); ?></div>
+			<small>Disponibles una vez <br> que inicie la reserva</small>
 		</div>
 	</article>
 

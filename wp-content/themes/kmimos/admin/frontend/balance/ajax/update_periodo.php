@@ -10,7 +10,9 @@
 	$cuidador_periodo = [
 		'periodo'=> $periodo,
 		'dia'=> $dia,
-		'proximo_pago'=> $proximo_pago
+		'proximo_pago'=> $proximo_pago,
+        'primera_quincena' => $primera_quincena, 
+        'segunda_quincena' => $segunda_quincena, 
 	];
 
 	$dato = serialize($cuidador_periodo);
@@ -18,4 +20,15 @@
     	"UPDATE cuidadores SET pago_periodo = '{$dato}' WHERE user_id={$ID}" 
     );
 
+    switch ( $periodo ) {
+    	case 'semanal':
+    		
+    		break;
+    	case 'quincenal':
+    		
+    		break;
+    	case 'mensual':
+    		
+    		break;
+    }
     echo $proximo_pago;

@@ -37,14 +37,37 @@ jQuery(document).ready(function(){
     });
 
     jQuery('[name="periodo"]').on('change', function(e){
-        jQuery('#retiro_dia').css('display', 'none');
-        if( jQuery(this).val() == 'semanal' ){
-            jQuery('#retiro_dia').css('display', 'block');
+        
+        jQuery('#semanal').css('display', 'none');
+        jQuery('#primera_quincena').css('display', 'none');
+        jQuery('#segunda_quincena').css('display', 'none');
+
+        switch( jQuery(this).val() ) {
+            case 'semanal':
+                jQuery('#semanal').css('display', 'inline-block');
+                break;
+            case 'quincenal':
+                jQuery('#primera_quincena').css('display', 'inline-block');
+                jQuery('#segunda_quincena').css('display', 'inline-block');
+
+                jQuery('#lbl-p-quincena').html('1er. pago');
+                jQuery('#lbl-s-quincena').html('2do. pago');
+                break;
+            case 'mensual':
+                jQuery('#primera_quincena').css('display', 'inline-block');
+                jQuery('#lbl-p-quincena').html('D&iacute;a de pago');
+                break;
         }
         update_periodo();
     });
 
     jQuery('[name="periodo_dia"]').on('change', function(e){
+        update_periodo();
+    });
+    jQuery('[name="primera_quincena"]').on('change', function(e){
+        update_periodo();
+    });
+    jQuery('[name="segunda_quincena"]').on('change', function(e){
         update_periodo();
     });
 
@@ -104,7 +127,13 @@ jQuery(document).ready(function(){
 function update_periodo(){        
     jQuery.post(
         HOME+'admin/frontend/balance/ajax/update_periodo.php',
-        {'periodo': jQuery('[name="periodo"]').val(), 'dia': jQuery('[name="periodo_dia"]').val(), 'ID': user_id},
+        {
+            'periodo': jQuery('[name="periodo"]').val(), 
+            'dia': jQuery('[name="periodo_dia"]').val(), 
+            'primera_quincena': jQuery('[name="primera_quincena"]').val(), 
+            'segunda_quincena': jQuery('[name="segunda_quincena"]').val(), 
+            'ID': user_id
+        },
         function(d){
             jQuery('#fecha_pago').html(d);
             console.log(d);

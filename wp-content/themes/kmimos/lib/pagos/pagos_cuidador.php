@@ -404,6 +404,7 @@ class PagoCuidador {
 		$total_disponible = $this->detalle_disponible( $user_id );
 		$proximo_pago = $this->proximo_pago( $user_id );
 		$total_retenido = $this->total_retenido( $user_id );
+		$no_disponible = $this->pagos_no_disponible();
 
 		$ultimo_retiro = $this->ultimo_retiro( $user_id );
 		if( !empty($ultimo_retiro) ){
@@ -415,6 +416,7 @@ class PagoCuidador {
 
 		$pay = (object)[
 			"disponible" 		=> $total_disponible['total'],
+			"no_disponible" 	=> $no_disponible,
 			"proximo_pago"		=> $proximo_pago,
 			"en_progreso"		=> $total_en_progreso,
 			"retenido"			=> $total_retenido,
@@ -533,6 +535,18 @@ class PagoCuidador {
 	protected function get_NC( $user_id, $reserva=0 ){
 		$where_reserva = ( $reserva > 0 )? ' AND reserva_id = '.$reserva : '' ;
 		$total = $this->db->get_var( "SELECT SUM(monto) as total FROM notas_creditos WHERE user_id = {$user_id} and tipo='cuidador' and estatus='pendiente' {$where_reserva}");
+		return ( $total > 0 )? $total : 0;
+	}
+
+	protected function pagos_no_disponible(){
+		$hoy = date('Y-m-d');
+		$next_year = date('Y-m-d', strtotime( $hoy." +1 year" ));
+
+		$reservas = $this->getReservas( $hoy, $next_year );
+		$total = 0;
+		foreach ($reservas as $reserva) {
+			$total += $reserva->total;
+		}
 		return ( $total > 0 )? $total : 0;
 	}
 
@@ -1089,7 +1103,7 @@ class PagoCuidador {
 		return $metas;	
 	}
 
-	protected function diferenciaDias($inicio, $fin){
+	protected function diferenciaDias( $inicio, $fin ){
 		$fecha1 = new DateTime($inicio);
 		$fecha2 = new DateTime($fin);
 		$intervalo = $fecha1->diff($fecha2);

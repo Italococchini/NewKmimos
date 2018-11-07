@@ -90,11 +90,9 @@ print_r($pago);
 	                    }
 	                
 	                //  Actualizar registro
-	                   	if( !empty($openpay_id) && $estatus != 'error'){    
-  		
+	                   	if( !empty($openpay_id) && $estatus != 'error'){
 		                    $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id, $item['comentario'] );
 		                    if( $item['parcial'] ){
-
 		                    	include($raiz.'/wp-load.php');
 							    $mensaje = buildEmailTemplate(
 							        'pagos/parcial',
@@ -104,17 +102,12 @@ print_r($pago);
 		                    			'comentarios' => $item['comentario']
 		                    		]
 							    );
-
 							    $mensaje = buildEmailHtml(
 							        $mensaje, 
 							        []
 							    );
- 
 							    wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
-
 		                    }
-
 	                   	}
-				
     	}
     }
