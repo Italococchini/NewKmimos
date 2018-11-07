@@ -50,9 +50,6 @@
 	$titulo_q2="";
 
 	switch ($cuidador_periodo['periodo']) {
-		case 'semanal':
-			$display_semanal = 'inline-block';
-			break;
 		case 'quincenal':
 			$display_p_quincena = 'inline-block';
 			$display_s_quincena = 'inline-block';
@@ -62,6 +59,10 @@
 		case 'mensual':
 			$display_p_quincena = 'inline-block';
 			$titulo_q1 = 'D&iacute;a de pago';
+			break;
+		case 'semanal':
+		default:
+			$display_semanal = 'inline-block';
 			break;
 	}
 
