@@ -1,6 +1,7 @@
 input[type="checkbox"]{
 	margin: 20px 0px!important;
 }
+input[type="email"],
 input[type="text"]{
 	padding: 20px;
 	margin: 5px!important;
@@ -18,6 +19,27 @@ h2{
 	color: #fff!important;
 	font-family: "Gotham black"!important;
 }
+.km-ficha-bg{
+	height: 260px!important;
+}
+.overlay header {
+	position: relative;
+	padding: 30px 65px;
+}
+.overlay header div a{
+	color: #fff!important;
+}
+.overlay header div{
+	color: #fff;
+	position: relative;
+	text-align: right;
+	color: #fff;
+	width: 100%;
+	vertical-align: middle; 
+	position: relative;
+	right: 0px;
+}
+
 p.subtitle{
 	font-size: 14px;
 	color: #fff;
