@@ -6,6 +6,7 @@ jQuery( document ).ready( function(){
 	});
 });
 
+var mail_admin_registro = false;
 var globalData = "";
  
 jQuery(document).on("click", '[data-target="#popup-registrarte"]' ,function(e){
@@ -822,14 +823,19 @@ jQuery( document ).on('keypress', '[data-charset]', function(e){
 });
 
 function finalizar_proceso(){
-	jQuery.post(
-		HOME+'procesos/login/enviar_mail_admin.php', 
-		{
-			'email' : jQuery("#email_1").val(),
-		}, 
-		function(_result){
-	    location.href = jQuery("#btn_iniciar_sesion").attr("data-url");
-	});
+	if( !mail_admin_registro ){	
+		mail_admin_registro = true;
+		jQuery.post(
+			HOME+'procesos/login/enviar_mail_admin.php', 
+			{
+				'email' : jQuery("#email_1").val(),
+			}, 
+			function(_result){
+				mail_admin_registro = false;
+		    	location.href = jQuery("#btn_iniciar_sesion").attr("data-url");
+			}
+		);
+	}
 }
 
 /*POPUP INICIAR SESIÓN*/

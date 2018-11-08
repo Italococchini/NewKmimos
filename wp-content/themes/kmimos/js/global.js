@@ -1,3 +1,5 @@
+var aceptar_terminos = false;
+
 jQuery( document ).ready(function() {
     String.prototype.replaceAll = function(search, replacement) {
         var target = this;
@@ -18,8 +20,7 @@ jQuery( document ).ready(function() {
     jQuery('#mostrar_terminos').on('click', function(e){
         e.preventDefault();
         if( validar_login() ){
-            jQuery('.popup-iniciar-sesion-1').addClass('popuphide');
-            jQuery('.popup-login-condiciones').removeClass('popuphide');
+            validar_terminos();
         }
     });
 
@@ -51,7 +52,20 @@ jQuery( document ).ready(function() {
 	jQuery("#login_submit").on("click", function(e){
 
         if( !jQuery( "#login_submit" ).hasClass('btn_disable')  ){
-            logear();
+              
+                jQuery.post(
+                    HOME+"/procesos/login/terminos_aceptar.php", 
+                    {
+                        usu: jQuery("#form_login #usuario").val(),
+                    },
+                    function( data ) {
+                        aceptar_terminos = false;
+                        console.log( 'logear' );
+                        logear();
+                    },
+                    "json"
+                );
+                   
         }else{
             alert("Debe leer los terminos y condiciones primero.");
         }
@@ -232,6 +246,33 @@ function social_verificar( social_network, id, email ){
 
 }
 
+function validar_terminos( usr ){
+    var btn = jQuery('#mostrar_terminos');
+    btn.html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i> INICIANDO SESI&Oacute;N');
+
+    if( !aceptar_terminos ){
+        aceptar_terminos = true;   
+        jQuery.post(
+            HOME+"/procesos/login/terminos_validar.php", 
+            {
+                usu: jQuery("#form_login #usuario").val(),
+            },
+            function( data ) {
+                aceptar_terminos = false;
+                btn.html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i> INICIAR SESI&Oacute;N');
+                console.log(data.sts);
+
+                if( data.sts == 'si' ){
+                    logear();
+                }else{
+                    jQuery('.popup-iniciar-sesion-1').addClass('popuphide');
+                    jQuery('.popup-login-condiciones').removeClass('popuphide');
+                }
+            },
+            "json"
+        );
+    }
+}
 
 function validar_login( fields = ['usuario', 'clave'] ){
     jQuery('[data-id="alert_login"]').remove();

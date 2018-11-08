@@ -1,6 +1,7 @@
 <?php
 /*wp_enqueue_script('index.js', getTema()."/js/index.js", array("jquery"), '1.0.0');*/
 
+
 include dirname(__DIR__).'/terminos_HTML.php';
 $NEW_HTML_TERMINOS = "";
 $parrafos = explode("\n", $HTML_TERMINOS);
