@@ -24,7 +24,7 @@
 			display:inline-flex; 
 			height:100vh; 
 			background-position: center bottom ; 
-			background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.png);
+			background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);
 			background-size: cover;
 		">
 

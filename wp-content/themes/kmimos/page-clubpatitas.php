@@ -33,7 +33,7 @@
 
 ?>
 	
-	<div class="km-ficha-bg" style="background-image: url(<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-2.png'; ?>)">
+	<div class="km-ficha-bg" style="background-image: url(<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-2.jpg'; ?>)">
 		<div class="overlay">
 			<header>
 				<div>
