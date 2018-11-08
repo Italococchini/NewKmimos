@@ -106,7 +106,7 @@ $datos = kmimos_get_info_syte();
 						<a href="#" id="login_submit" class="km-btn-correo btn_disable">
 							ACEPTAR TERMINOS Y CONDICIONES
 						</a>
-						<a href="#" class="km-btn-correo" data-dismiss="modal" style="    background: #eaeaea;color: #b3b3b3;">
+						<a href="#" class="_km-btn-correo" data-dismiss="modal" style="background: #eaeaea;color: #b3b3b3;">
 							No acepto los terminos y condiciones
 						</a>
 					</div>
