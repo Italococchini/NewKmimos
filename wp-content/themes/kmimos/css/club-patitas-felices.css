@@ -58,6 +58,15 @@ p.subtitle{
 	border-radius: 10px;
 	padding: 10px 30px!important;
 }
+.btn-club-azul{
+	margin-top: 50px;
+	border:1px solid #007BDC!important; 
+	background: #007BDC!important; 
+	margin:5px 0px; 
+	color: #fff;
+	border-radius: 10px;
+	padding: 10px 30px!important;
+}
 .title-secundario{
 	font-size: 16px;
 	font-weight: bold;

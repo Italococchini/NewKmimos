@@ -55,13 +55,13 @@
  	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
  	if( empty($cupon) || $cupon == null ){
 		// generar cupon
-		$cupon = substr($nombre, 0,2);
-		$cupon .= substr($apellido, 0,2);
+		$cupon = substr(trim($nombre), 0,1);
+		$cupon .= substr(trim($apellido), 0,1);
 		$cupon .= $user->ID;
 		$cupon = strtoupper($cupon);
 		$id = kmimos_crear_cupon( $cupon, 150 ); 		
 		if( $id > 0 ){
-			update_user_meta( $user->ID, 'club-patitas-cupon', $cupon );
+			update_user_meta( $user->ID, 'club-patitas-cupon', utf8_encode($cupon) );
 		}
  	}
 

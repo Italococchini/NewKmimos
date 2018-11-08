@@ -39,7 +39,7 @@
 				<div>
 					<a>Ver mis créditos</a>
 					|
-					<a>Obtener mi código</a>
+					<a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
 				</div>
 			</header>
 			<div class="col-md-6 pull-right text-center align-bottom">
