@@ -2217,6 +2217,9 @@ footer input:focus{
     float: right;
     }
 
+.terminos_container{
+	height: 300px!important;
+}
 
 
 
@@ -2266,6 +2269,12 @@ footer input:focus{
 	}
 	button.close:hover {
 		color: black;
+	}
+	.terminos_container{
+		height: 100px!important;
+	}
+	#titulo_terminos{
+		font-size: 12px;
 	}
 }
 @media (min-width: 767px) {
