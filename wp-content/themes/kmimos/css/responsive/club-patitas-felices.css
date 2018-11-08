@@ -21,6 +21,7 @@
 	}
 	#sidebar{
 		padding-left: 15px!important;
+		height: auto;
 	}
 	.title-secundario {
     	font-size: 13px;
