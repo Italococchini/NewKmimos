@@ -43,17 +43,19 @@ foreach ($comportamientos_db as $value) {
 
 $comportamientos_str = '<div class="km-registro-checkbox">';
 $i = 0;
-foreach ($comportamientos as $key => $value) {
-    $comportamientos_str .= '
-    	<div class="km-registro-checkbox-opcion">
-			<p>'.$value.'</p>
-			<div class="km-check-gato">
-				<input type="checkbox" value="0" id="km-check-gato-'.$i.'" class="km-check-gatos" name="comportamiento_gatos_'.$key.'" />
-				<label for="km-check-gato-'.$i.'"></label>
+if( !empty($comportamientos) ){
+	foreach ($comportamientos as $key => $value) {
+	    $comportamientos_str .= '
+	    	<div class="km-registro-checkbox-opcion">
+				<p>'.$value.'</p>
+				<div class="km-check-gato">
+					<input type="checkbox" value="0" id="km-check-gato-'.$i.'" class="km-check-gatos" name="comportamiento_gatos_'.$key.'" />
+					<label for="km-check-gato-'.$i.'"></label>
+				</div>
 			</div>
-		</div>
-    ';
-    $i++;
+	    ';
+	    $i++;
+	}
 }
 
 $comportamientos_str .= '</div>';

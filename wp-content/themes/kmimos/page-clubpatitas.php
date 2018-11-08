@@ -7,6 +7,7 @@
     $no_top_menu = false;
 
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
+    wp_enqueue_style('club_responsive', getTema()."/css/responsive/club-patitas-felices.css", array(), '1.0.0');
 
 	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.0');
 
@@ -33,23 +34,22 @@
 
 ?>
 	
-	<div class="km-ficha-bg" style="background-image: url(<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-2.jpg'; ?>)">
-		<div class="overlay">
-			<header>
-				<div>
-					<a>Ver mis créditos</a>
-					|
-					<a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
-				</div>
-			</header>
-			<div class="col-md-6 pull-right text-center align-bottom">
-				<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
-				<h2>Club de las patitas felices</h2>
-				<p class="subtitle">El club que te recompensa por que tus amigos reserven estadías con Kmimos</p>
-			</div>			
+	<header class="row" style="background-image: url(<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-2.jpg'; ?>)">
+		<div class="col-xm-12 col-sm-12 col-md-12">
+			<a href="#">Ver mis créditos</a>
+			|
+			<a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
 		</div>
-	</div>
+		<div class="col-sm-8 col-xs-8 col-md-6 text-center pull-right">
+			<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
+			<h2>Club de las patitas felices</h2>
+			<p class="subtitle">El club que te recompensa por que tus amigos reserven estadías con Kmimos</p>
+		</div>
+	</header>
 	<div class="body-club">
+		<section class="col-xs-12 col-sm-12 col-md-7 hidden-md hidden-lg">
+			<h3 class=" text-left"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
+		</section>
 		<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 <?php echo $display_registro; ?>">
 			<div class="text-center col-md-10 col-md-offset-1 text-center">
 				<h3 class="title-secundario">¡Estás a un paso de ser parte del club!</h3>
@@ -69,8 +69,9 @@
 			</div>
 		</aside>
 		<section id="club-content" class="col-xs-12 col-sm-12 col-md-7 " style="<?php echo $center_content; ?>">
-			 
-			<h3 class=" text-left"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
+
+			<h3 class="hidden-xs hidden-sm text-left"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
+
 		 	<p class="text-justify">El club de las patitas felices te recompensa con $150 MXN para que los uses en cualquiera de nuestros servicios. Es muy sencillo, por cada vez que compartas tu código de las patitas felices tu referido obtendrá $150 MXN para utilizarlo en su primera reserva y una vez que complete su reservación a ti se te abonarán tus $150 MXN de crédito en Kmimos. </p>
 			<div class="item col-md-10">	
 				<div class="media">
