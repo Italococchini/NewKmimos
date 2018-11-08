@@ -285,7 +285,7 @@
 		$avatar=get_home_url()."/wp-content/themes/kmimos/images/image.png";
 			} 	
 
-	if( isset($no_top_menu) && $no_top_menu	){
+	if( !isset($no_top_menu) || !$no_top_menu ){
 
 		if( !is_user_logged_in() ){
 			$HTML .= '	
