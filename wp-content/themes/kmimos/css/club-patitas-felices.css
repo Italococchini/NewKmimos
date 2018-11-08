@@ -4,7 +4,7 @@ input[type="checkbox"]{
 input[type="email"],
 input[type="text"]{
 	padding: 20px;
-	margin: 5px!important;
+	margin: 10px 0px!important;
 	text-align: center;
 }
 a{
@@ -87,7 +87,7 @@ p.subtitle{
 }
 
 #club-content{
-	margin-left: 50px;
+	padding-left: 50px;
 }
 .media-body p{
 	margin: 0px!important;
@@ -97,4 +97,34 @@ p.subtitle{
 }
 .item{
 	margin-left: 5px;
+}
+
+
+
+/* ******************** Compartir ******************** */
+#compartir-club-cover{
+	display:inline-flex; 
+	height:100vh;
+	background-position: center bottom ; 
+	background-size: cover;
+}
+.compartir-section{
+	display:inline-flex; 
+	height: calc(100vh - 30px) ; 
+	margin-top: 30px;
+	vertical-align: middle;
+	padding: 0px 15px;
+}
+.titulo{
+	color: #515151!important;
+	font-size: 23px!important;
+}
+.cupon{
+	padding:20px 20px!important; 
+	background:#ccc;
+	color:#7D169E;
+	border-radius:15px;
+	font-size: 50px;
+	font-weight: bold;
+	margin-bottom:20px;
 }

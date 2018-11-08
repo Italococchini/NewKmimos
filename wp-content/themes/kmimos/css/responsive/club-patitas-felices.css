@@ -1,4 +1,5 @@
 @media (max-width: 992px){
+
 	header {
 		margin-right: 0px!important;
 		margin-left: 0px!important;
@@ -17,6 +18,37 @@
 	}
 	header p{
 		font-size: 10px!important;
+	}
+	#sidebar{
+		padding-left: 15px!important;
+	}
+	.title-secundario {
+    	font-size: 13px;
+	}
+	#club-content{
+		margin: 0px auto;
+		padding-left: 15px;
+	}
+	label.terminos{
+		font-size: 11px;
+	}
+	.btn-club{
+		width: 100%;
+	}
+
+
+	/******** compartir **********/
+	#compartir-club-cover{ 
+		height:40vh;
+	}
+	.btn-club-azul{
+		width: 100%;
+	}
+	.titulo{
+		font-size: 22px!important;
+	}
+	.cupon{
+		padding: 20px 15px!important; 
 	}
 }
 @media (max-width: 768px){

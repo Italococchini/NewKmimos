@@ -13,33 +13,22 @@
     $no_top_menu = false;
 
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
-
+    wp_enqueue_style('club_responsive', getTema()."/css/responsive/club-patitas-felices.css", array(), '1.0.0');
 	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.0');
 
 	get_header();
 ?>
 	
-	<div class="body-club">
-		<aside class="col-xs-12 col-sm-12 col-md-5" style="
-			display:inline-flex; 
-			height:100vh; 
-			background-position: center bottom ; 
-			background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);
-			background-size: cover;
-		">
-
+	<div class="content-compartir-club">
+		<aside id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
 		</aside>
-		<section class="col-xs-12 col-sm-12 col-md-7 " style="<?php echo $center_content; ?>" style="
-			display:inline-flex; 
-			height:100vh; 
-			margin-top: 30px;
-			vertical-align: middle;
-		">
-			<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
-			<h2 style="color: #515151!important;">¡Ya eres parte del club!</h2>
+		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
+			
 			<dir class="col-md-8 col-md-offset-2">
-
-				<div class="row">				
+				
+				<div class="row">
+					<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
+					<h2 class="titulo">¡Ya eres parte del club!</h2>
 					<p style="
 						font-weight: bold; 
 						font-size: 18px; 
@@ -47,15 +36,7 @@
 						margin-top: 10%;
 						">Tu código único del club</p>
 
-					<div style="
-						padding:20px 20px!important; 
-						background:#ccc;
-						color:#7D169E;
-						border-radius:15px;
-						font-size: 50px;
-						font-weight: bold;
-						margin-bottom:20px;
-						">
+					<div class="cupon">
 						<?php echo strtoupper($cupon); ?>
 					</div>
 
@@ -66,10 +47,10 @@
 				</div>
 
 				<div class="row" style="margin-top: 30px;">
-					<div class="col-md-6 text-center">
+					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
 						<button class="btn btn-club-azul">Descargar PDF</button>
 					</div>
-					<div class="col-md-6 text-center">
+					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
 						<button class="btn btn-club-azul">Compartir ahora</button>
 					</div>
 				</div>

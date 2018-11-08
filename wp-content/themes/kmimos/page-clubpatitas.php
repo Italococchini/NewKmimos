@@ -19,7 +19,7 @@
 	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
  	if( !empty($cupon) ){
 		$display_registro = 'hidden';
-		$center_content = 'margin:0 auto!important;';
+		$center_content = 'col-md-offset-2';
 	}
 	$email = '';
 	$nombre = '';
@@ -47,9 +47,9 @@
 		</div>
 	</header>
 	<div class="body-club">
-		<section class="col-xs-12 col-sm-12 col-md-7 hidden-md hidden-lg">
-			<h3 class=" text-left"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
-		</section>
+		<aside class="col-xs-12 col-sm-12 col-md-7 hidden-md hidden-lg">
+			<h3 class="text-center" style="margin:10px 0px;"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
+		</aside>
 		<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 <?php echo $display_registro; ?>">
 			<div class="text-center col-md-10 col-md-offset-1 text-center">
 				<h3 class="title-secundario">¡Estás a un paso de ser parte del club!</h3>
@@ -58,7 +58,7 @@
 					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="apellido" placeholder="Apellido" value="<?php echo $apellido; ?>" <?php echo $readonly; ?>>
 					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="email" name="email" placeholder="Direccion correo electronico" value="<?php echo $email; ?>" <?php echo $readonly; ?>>
 					 
-				    <label>
+				    <label class="terminos">
 				      <input name="terminos" required type="checkbox"> <strong>Acepto los <a href="">términos y condiciones</a> del club</strong>
 				    </label>
 					 
@@ -68,7 +68,7 @@
 				</form>
 			</div>
 		</aside>
-		<section id="club-content" class="col-xs-12 col-sm-12 col-md-7 " style="<?php echo $center_content; ?>">
+		<section id="club-content" class="col-xs-12 col-sm-12 col-md-7 <?php echo $center_content; ?>">
 
 			<h3 class="hidden-xs hidden-sm text-left"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
 
