@@ -47,14 +47,16 @@
 
             $data["data"][] = array(
                 $value->user_id,
-                $value->usuario,
-                $value->contactos,
-                $tipo,
+                utf8_encode($value->usuario),
+                utf8_encode($value->contactos),
+                utf8_encode($tipo),
                 $value->ip,
                 $value->fecha
             );
         }
     }
+
+    print_r($data);
 
     echo json_encode($data);
 
