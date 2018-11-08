@@ -3,7 +3,8 @@
         Template Name: Club patitas
     */
     $url_img = get_home_url() .'/wp-content/themes/kmimos/images/club-patitas/';
-    $no_top_menu = true;
+    
+    $no_top_menu = false;
 
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
 

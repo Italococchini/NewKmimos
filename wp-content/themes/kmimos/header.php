@@ -284,8 +284,8 @@
 	if($avatar== get_home_url()."/wp-content/themes/kmimos/images/noimg.png"){
 		$avatar=get_home_url()."/wp-content/themes/kmimos/images/image.png";
 			} 	
-
-	if( !isset($no_top_menu) || !$no_top_menu ){
+	global $no_top_menu;
+	if( !isset($no_top_menu) ){
 
 		if( !is_user_logged_in() ){
 			$HTML .= '	
