@@ -10,8 +10,15 @@
 
 	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.0');
 
-
 	get_header();
+
+	$display_registro = '';
+	$center_content = '';
+	if( is_user_logged_in() ){
+		$display_registro = 'hidden';
+		$center_content = 'margin:0 auto!important;';
+	}
+
 ?>
 	
 	<div class="km-ficha-bg" style="background-image: url(<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-2.png'; ?>)">
@@ -31,16 +38,16 @@
 		</div>
 	</div>
 	<div class="body-club">
-		<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 ">
+		<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 <?php echo $display_registro; ?>">
 			<div class="text-center col-md-10 col-md-offset-1 text-center">
 				<h3 class="title-secundario">¡Estás a un paso de ser parte del club!</h3>
 				<form method="post" action="#" id="form-registro">
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="" placeholder="Nombre">
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="" placeholder="Apellido">
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="email" name="" placeholder="Direccion correo electronico">
+					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="nombre" placeholder="Nombre">
+					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="apellido" placeholder="Apellido">
+					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="email" name="email" placeholder="Direccion correo electronico">
 					 
 				    <label>
-				      <input required type="checkbox"> <strong>Acepto los <a href="">términos y condiciones</a> del club</strong>
+				      <input name="terminos" required type="checkbox"> <strong>Acepto los <a href="">términos y condiciones</a> del club</strong>
 				    </label>
 					 
 					<button type="submit" class="btn btn-club btn-lg btn-info">
@@ -49,7 +56,7 @@
 				</form>
 			</div>
 		</aside>
-		<section id="club-content" class="col-xs-12 col-sm-12 col-md-7 ">
+		<section id="club-content" class="col-xs-12 col-sm-12 col-md-7 " style="<?php echo $center_content; ?>">
 			 
 			<h3 class=" text-left"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
 		 	<p class="text-justify">El club de las patitas felices te recompensa con $150 MXN para que los uses en cualquiera de nuestros servicios. Es muy sencillo, por cada vez que compartas tu código de las patitas felices tu referido obtendrá $150 MXN para utilizarlo en su primera reserva y una vez que complete su reservación a ti se te abonarán tus $150 MXN de crédito en Kmimos. </p>
