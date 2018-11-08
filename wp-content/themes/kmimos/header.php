@@ -285,100 +285,104 @@
 		$avatar=get_home_url()."/wp-content/themes/kmimos/images/image.png";
 			} 	
 
-	if( !is_user_logged_in() ){
-		$HTML .= '	
-			<nav class="navbar navbar-fixed-top bg-transparent">
-			<div class="container">
-				<div class="navbar-header ">
-					<button type="button" class="navbar-toggle sin_logear" id="ver_menu">
-						<img src="'.$avatar.'" width="40px" height="40px" class="'.$avatar_circle.'">
-					</button>
-					<a class="navbar-brand" href="'.get_home_url().'">
-						<img data-wlabel="logo" id="logo-white" src="'.getTema().'/images/new/km-logos/km-logo'.$wlabel.'.png" height="60px">
-						<img data-wlabel="logo" id="logo-black" src="'.getTema().'/images/new/km-logos/km-logo-negro'.$wlabel.'.png" style="display:none;" height="60px">
-					</a>
-				</div>
-				<ul class="hidden-xs nav-login">
-					<li><a id="login" href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">INICIAR SESIÓN</a></li>
-					<li><a href="#" style="padding-left: 15px; border-left: 1px solid white;" role="button" data-target="#popup-registrarte">REGISTRARME</a></li>
-				</ul>	
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="'.get_home_url().'/busqueda" class="hidden-xs km-nav-link">BUSCAR CUIDADOR</a></li>
-					<li><a href="'.get_home_url().'/quiero-ser-cuidador-certificado-de-perros" class="hidden-xs km-btn-primary">QUIERO SER CUIDADOR</a></li>
-		    	</ul>
-				<div id="menu_movil" class="hidden-sm hidden-md hidden-lg">
+	if( isset($no_top_menu) && $no_top_menu	){
 
-					<div class="menu_movil_interno">
-						<div class="cerrar_menu_movil clearfix initial_menu_movil">
-							<button type="button" class="menu_movil_close" aria-hidden="true">×</button>
-						</div>
-						<div class="clearfix container_menu">
-							<form class="barra_buscar_movil" method="POST" action="'.get_home_url().'/wp-content/themes/kmimos/procesos/busqueda/buscar.php">
-								<i class="fa fa-search"></i>
-								<input type="hidden" name="redireccionar" value="1" />
-								<input type="text" id="txt_buscar" placeholder="Buscar cuidador" name="nombre"  />
-							</form>
-
-							<ul class="nav navbar-nav">
-								<li><a href="javascript:;" data-target="#popup-iniciar-sesion" class="km-nav-link" role="button">Iniciar sesión</a></li>
-								<li><a href="javascript:;" data-target="#popup-registrarte" class="km-nav-link" role="button" >Registrarme</a></li>
-								<li><a href="'.get_home_url().'/quiero-ser-cuidador-certificado-de-perros" class="km-nav-link">Quiero ser cuidador</a></li>
-								<!-- <li style="border-top:1px solid #e8e8e8;"><a href="'.get_home_url().'/ayuda" class="pd-tb11 menu-link"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Ayuda</a></li> -->
-					    	</ul>
-					    </div>
-				    </div>
-			    </div>
-			</div>
-		</nav>
-		';
-	}else{
-		$HTML .= '	
-			<nav class="navbar navbar-fixed-top bg-transparent">
+		if( !is_user_logged_in() ){
+			$HTML .= '	
+				<nav class="navbar navbar-fixed-top bg-transparent">
 				<div class="container">
-					<button type="button" class="navbar-toggle" id="ver_menu">
-						<img src="'.$avatar.'" width="40px" height="40px" class="'.$avatar_circle.'">
-					</button>
 					<div class="navbar-header ">
+						<button type="button" class="navbar-toggle sin_logear" id="ver_menu">
+							<img src="'.$avatar.'" width="40px" height="40px" class="'.$avatar_circle.'">
+						</button>
 						<a class="navbar-brand" href="'.get_home_url().'">
 							<img data-wlabel="logo" id="logo-white" src="'.getTema().'/images/new/km-logos/km-logo'.$wlabel.'.png" height="60px">
 							<img data-wlabel="logo" id="logo-black" src="'.getTema().'/images/new/km-logos/km-logo-negro'.$wlabel.'.png" style="display:none;" height="60px">
 						</a>
 					</div>
-					<ul class="nav navbar-nav navbar-right hidden-xs">
-						<li class="dropdown" data-obj="avatar">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<img src="'.$avatar.'" width="60px" height="60px" class="img-circle"> 
-							</a>
-							<ul class="dropdown-menu"  style="background: #fff;">
-								'.$menus_normal.'
-							</ul>
-			        	</li>
+					<ul class="hidden-xs nav-login">
+						<li><a id="login" href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">INICIAR SESIÓN</a></li>
+						<li><a href="#" style="padding-left: 15px; border-left: 1px solid white;" role="button" data-target="#popup-registrarte">REGISTRARME</a></li>
+					</ul>	
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="'.get_home_url().'/busqueda" class="hidden-xs km-nav-link">BUSCAR CUIDADOR</a></li>
+						<li><a href="'.get_home_url().'/quiero-ser-cuidador-certificado-de-perros" class="hidden-xs km-btn-primary">QUIERO SER CUIDADOR</a></li>
 			    	</ul>
-
 					<div id="menu_movil" class="hidden-sm hidden-md hidden-lg">
 
 						<div class="menu_movil_interno">
-							<div class="cerrar_menu_movil initial_menu_movil clearfix">
+							<div class="cerrar_menu_movil clearfix initial_menu_movil">
 								<button type="button" class="menu_movil_close" aria-hidden="true">×</button>
 							</div>
-
 							<div class="clearfix container_menu">
 								<form class="barra_buscar_movil" method="POST" action="'.get_home_url().'/wp-content/themes/kmimos/procesos/busqueda/buscar.php">
 									<i class="fa fa-search"></i>
-									<input type="hidden" name="USER_ID" value="'.$user_id.'" />
 									<input type="hidden" name="redireccionar" value="1" />
 									<input type="text" id="txt_buscar" placeholder="Buscar cuidador" name="nombre"  />
 								</form>
+
 								<ul class="nav navbar-nav">
-									'.$menus_normal.'
+									<li><a href="javascript:;" data-target="#popup-iniciar-sesion" class="km-nav-link" role="button">Iniciar sesión</a></li>
+									<li><a href="javascript:;" data-target="#popup-registrarte" class="km-nav-link" role="button" >Registrarme</a></li>
+									<li><a href="'.get_home_url().'/quiero-ser-cuidador-certificado-de-perros" class="km-nav-link">Quiero ser cuidador</a></li>
+									<!-- <li style="border-top:1px solid #e8e8e8;"><a href="'.get_home_url().'/ayuda" class="pd-tb11 menu-link"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Ayuda</a></li> -->
 						    	</ul>
 						    </div>
 					    </div>
-	
-
-			    </div>
+				    </div>
+				</div>
 			</nav>
-		';
+			';
+		}else{
+			$HTML .= '	
+				<nav class="navbar navbar-fixed-top bg-transparent">
+					<div class="container">
+						<button type="button" class="navbar-toggle" id="ver_menu">
+							<img src="'.$avatar.'" width="40px" height="40px" class="'.$avatar_circle.'">
+						</button>
+						<div class="navbar-header ">
+							<a class="navbar-brand" href="'.get_home_url().'">
+								<img data-wlabel="logo" id="logo-white" src="'.getTema().'/images/new/km-logos/km-logo'.$wlabel.'.png" height="60px">
+								<img data-wlabel="logo" id="logo-black" src="'.getTema().'/images/new/km-logos/km-logo-negro'.$wlabel.'.png" style="display:none;" height="60px">
+							</a>
+						</div>
+						<ul class="nav navbar-nav navbar-right hidden-xs">
+							<li class="dropdown" data-obj="avatar">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<img src="'.$avatar.'" width="60px" height="60px" class="img-circle"> 
+								</a>
+								<ul class="dropdown-menu"  style="background: #fff;">
+									'.$menus_normal.'
+								</ul>
+				        	</li>
+				    	</ul>
+
+						<div id="menu_movil" class="hidden-sm hidden-md hidden-lg">
+
+							<div class="menu_movil_interno">
+								<div class="cerrar_menu_movil initial_menu_movil clearfix">
+									<button type="button" class="menu_movil_close" aria-hidden="true">×</button>
+								</div>
+
+								<div class="clearfix container_menu">
+									<form class="barra_buscar_movil" method="POST" action="'.get_home_url().'/wp-content/themes/kmimos/procesos/busqueda/buscar.php">
+										<i class="fa fa-search"></i>
+										<input type="hidden" name="USER_ID" value="'.$user_id.'" />
+										<input type="hidden" name="redireccionar" value="1" />
+										<input type="text" id="txt_buscar" placeholder="Buscar cuidador" name="nombre"  />
+									</form>
+									<ul class="nav navbar-nav">
+										'.$menus_normal.'
+							    	</ul>
+							    </div>
+						    </div>
+		
+
+				    </div>
+				</nav>
+			';
+		}
+
 	}
 
 	if( !is_user_logged_in() ){

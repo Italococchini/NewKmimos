@@ -1,0 +1,69 @@
+input[type="checkbox"]{
+	margin: 20px 0px!important;
+}
+input[type="text"]{
+	padding: 20px;
+	margin: 5px!important;
+	text-align: center;
+}
+a{
+	color: #17ad8f!important;
+}
+section{
+	padding-top: 20px!important;
+	padding-bottom: 60px; 
+}
+h2{
+	font-size: 40px!important;
+	color: #fff!important;
+	font-family: "Gotham black"!important;
+}
+p.subtitle{
+	font-size: 14px;
+	color: #fff;
+}
+.align-bottom{
+	vertical-align: bottom;
+	bottom: 0px;
+}
+.body-club{
+	display: flex;
+}
+.btn-club{
+	border:1px solid #6B1C9A!important; 
+	background: #6B1C9A!important; 
+	margin:5px 0px; 
+	border-radius: 10px;
+	padding: 10px 30px!important;
+}
+.title-secundario{
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+#sidebar div {
+	display: table-cell!important;
+	vertical-align: middle;
+}
+
+#sidebar{
+	padding-top:5%!important;
+	padding-left:0px!important;
+	padding-bottom:5%!important;
+	display: inline-flex;
+	height: 130%;
+	background: #ccc;
+}
+
+#club-content{
+	margin-left: 50px;
+}
+.media-body p{
+	margin: 0px!important;
+}
+.media-body{
+	vertical-align: middle!important;
+}
+.item{
+	margin-left: 5px;
+}
