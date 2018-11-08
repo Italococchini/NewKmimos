@@ -46,7 +46,7 @@
 					<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
 				</div>
 
-				<div class="row" style="margin-top: 30px;">
+				<div class="row" style="margin: 30px 0px; ">
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
 						<button class="btn btn-club-azul">Descargar PDF</button>
 					</div>
