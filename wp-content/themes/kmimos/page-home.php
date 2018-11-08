@@ -398,7 +398,7 @@
 		<!-- SECCIÓN 4 - CLUB PATITAS FELICES -->
 		<div class="km-club-patitas" style="background-image: url('.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-3.png);">
 			<div class="row">
-				<header class="col-sm-12 col-xs-8 col-md-5 pull-right text-center">
+				<header class="col-sm-12 col-xs-8 col-md-4 pull-right text-center">
 					<img src="'.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png">
 					<h2>
 						Club de las patitas felices
