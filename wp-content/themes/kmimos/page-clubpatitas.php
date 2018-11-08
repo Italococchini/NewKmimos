@@ -14,9 +14,21 @@
 
 	$display_registro = '';
 	$center_content = '';
-	if( is_user_logged_in() ){
+	$user = wp_get_current_user();
+	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
+ 	if( !empty($cupon) ){
 		$display_registro = 'hidden';
 		$center_content = 'margin:0 auto!important;';
+	}
+	$email = '';
+	$nombre = '';
+	$apellido = '';
+	$readonly='';	
+	if( isset($user->ID) && $user->ID > 0 ){
+		$email = $user->user_email;
+		$nombre = $user->user_firstname ;
+		$apellido = $user->user_lastname ;
+		$readonly = 'readonly';
 	}
 
 ?>
@@ -42,9 +54,9 @@
 			<div class="text-center col-md-10 col-md-offset-1 text-center">
 				<h3 class="title-secundario">¡Estás a un paso de ser parte del club!</h3>
 				<form method="post" action="#" id="form-registro">
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="nombre" placeholder="Nombre">
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="apellido" placeholder="Apellido">
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="email" name="email" placeholder="Direccion correo electronico">
+					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="nombre" placeholder="Nombre" value="<?php echo $nombre; ?>" <?php echo $readonly; ?>>
+					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="apellido" placeholder="Apellido" value="<?php echo $apellido; ?>" <?php echo $readonly; ?>>
+					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="email" name="email" placeholder="Direccion correo electronico" value="<?php echo $email; ?>" <?php echo $readonly; ?>>
 					 
 				    <label>
 				      <input name="terminos" required type="checkbox"> <strong>Acepto los <a href="">términos y condiciones</a> del club</strong>
