@@ -11,7 +11,7 @@ jQuery(document).ready( function (){
 		        function(d){
 		        	console.log(d);
 					btn.removeClass('disabled');
-					//location.reload();
+					location.href='/club-patitas-felices/compartir';
 		    });
 		}
 	});
