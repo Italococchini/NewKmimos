@@ -288,7 +288,7 @@
 
         <div style="margin-bottom: 10px;">
 	        <label>Monto a retirar: </label>
-	        <input type="text" name="monto" minlength="2" maxlength="10" class="form-control" value="" data-value="<?php echo $pay->disponible; ?>">
+	        <input type="text" data-charset="num" name="monto" minlength="2" maxlength="10" class="form-control" value="" data-value="<?php echo $pay->disponible; ?>">
         </div>
         <div>    	
 	        <label>Descripci&oacute;n: </label>

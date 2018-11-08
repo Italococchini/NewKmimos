@@ -108,7 +108,11 @@ jQuery(document).ready(function() {
 	});
 
 	jQuery(document).on('change', '[name="reserva"]', function(e){
-		jQuery('#show_notas_creditos').attr('data-id', jQuery(this).val());
+		if( jQuery(this).val() != '' ){
+			jQuery('#show_notas_creditos').attr('data-id', jQuery(this).val());	
+		}else{
+			alert( "Debe agregar el numero de reserva" );
+		}
 	});
 
 	jQuery(document).on('change', '[name="tipo_usuario"]', function(e){
