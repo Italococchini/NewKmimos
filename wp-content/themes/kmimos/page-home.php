@@ -3,8 +3,10 @@
         Template Name: Home
     */
 
+    wp_enqueue_style('home_club_responsive', getTema()."/css/responsive/club_patitas_home.css", array(), '1.0.0');
     wp_enqueue_style('home_kmimos', getTema()."/css/home_kmimos.css", array(), '1.0.0');
     wp_enqueue_style('home_responsive', getTema()."/css/responsive/home_responsive.css", array(), '1.0.0');
+
     wp_enqueue_script('buscar_home', getTema()."/js/home.js", array(), '1.0.0');
     wp_enqueue_script('select_localidad', getTema()."/js/select_localidad.js", array(), '1.0.0');
     wp_enqueue_script('check_in_out', getTema()."/js/fecha_check_in_out.js", array(), '1.0.0');
@@ -394,28 +396,21 @@
 		<!-- FIN SECCIÓN 3 - TESTIMONIALES -->
 
 		<!-- SECCIÓN 4 - CLUB PATITAS FELICES -->
-		<div class="km-club" style="
-			background-image: url('.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-3.png);
-		    background-position: left center;
-		    background-size: cover;">
-			<div class="container">
-				<div class="row">
-
-					<div class="col-md-5 pull-right text-center" style="padding: 80px 15px;">
-						<img src="'.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png">
-						<h2 style="margin-top:15px;font-size:35px;color:#fff;font-family: "Gotham black"!important;">Club de las patitas felices</h2>
-						<p style="font-size:18px;color:#fff;">Únete al club que te recompensa por cada amigo tuyo que reserve con un cuidador Kmimos</p>
-						<a class="btn" style="border:1px solid #3387e0!important; 
-							background: #3387e0!important; 
-							margin: 60px 0px 10px 0px; 
-							color:#fff;
-							font-size: 20px!important;
-							border-radius: 10px;
-							padding: 10px 60px!important;"
-
-							href="'.get_home_url().'/club-patitas-felices">Ingresa aquí</a>
-					</div>
-
+		<div class="km-club-patitas" style="background-image: url('.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-3.png);">
+			<div class="row">
+				<header class="col-sm-12 col-xs-8 col-md-5 pull-right text-center">
+					<img src="'.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png">
+					<h2>
+						Club de las patitas felices
+					</h2>
+					<p>
+						Únete al club que te recompensa por cada amigo tuyo que reserve con un cuidador Kmimos
+					</p>
+				</header>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-xs-12 col-md-8 pull-right text-center">
+					<a class="btn btn-club-patitas" href="'.get_home_url().'/club-patitas-felices">Ingresa aquí</a>
 				</div>
 			</div>
 		</div>

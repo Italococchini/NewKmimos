@@ -1,0 +1,52 @@
+.km-club-patitas{
+	background-position: left center;
+	background-size: cover;
+	margin: 50px 0px;
+	padding: 40px 15px;
+}
+.km-club-patitas p{
+	font-size:18px;
+	color:#fff;
+}
+.km-club-patitas h2{
+	margin-top:15px;
+	font-size:30px;
+	color:#fff;
+	font-family: "Gotham black"!important;
+}
+.btn-club-patitas{
+	border:1px solid #3387e0!important; 
+	background: #3387e0!important; 
+	margin: 60px 0px 10px 0px; 
+	color:#fff;
+	font-size: 20px!important;
+	border-radius: 10px;
+	padding: 10px 60px!important;
+}
+
+@media (max-width: 992px){
+	.km-club-patitas{
+	    background-repeat: no-repeat;
+	    background-size: contain!important;
+	}
+	.km-club-patitas img{
+		width: 50px;
+	}
+	.km-club-patitas h2{
+		font-size: 12px!important;
+		margin: 5px 0px;
+	}
+	.km-club-patitas p{
+		font-size: 10px!important;
+	}
+	.btn-club-patitas{
+		margin: 0px!important;
+	    padding: 6px 60px !important;
+	}
+}
+@media (max-width: 768px){
+}
+@media (max-width: 480px){
+}
+@media (max-width: 350px){
+}
