@@ -103,12 +103,14 @@ $datos = kmimos_get_info_syte();
 						<div class="text-right" style="font-size:20px;">
 							<i class="fa fa-arrow-circle-down" aria-hidden="true" id="leer_testimonio" style="cursor:pointer;color:#a94442;"></i>
 						</div>
-						<a href="#" id="login_submit" class="km-btn-correo btn_disable">
+						<a href="#" id="login_submit" class="km-btn-correo km-home-btn-correo btn_disable">
 							ACEPTAR TERMINOS Y CONDICIONES
 						</a>
-						<a href="#" class="_km-btn-correo" data-dismiss="modal" style="background: #eaeaea;color: #b3b3b3;">
-							No acepto los terminos y condiciones
-						</a>
+						<div class="text-center">
+							<a href="#" class="km-link-correo" data-dismiss="modal" style="color: #b3b3b3;">
+								No acepto los terminos y condiciones
+							</a>
+						</div>
 					</div>
 					<div class="popuphide popup-olvidaste-contrasena">
 						<p class="popup-tit">¿OLVIDASTE TU CONTRASEÑA?</p>

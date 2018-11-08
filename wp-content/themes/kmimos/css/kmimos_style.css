@@ -2272,6 +2272,10 @@ footer input:focus{
 	}
 	.terminos_container{
 		height: 160px!important;
+		margin: 20px 0px 5px 0px;
+	}
+	.km-home-btn-correo{
+		margin: 5px 0px;
 	}
 	#titulo_terminos{
 		font-size: 12px;
