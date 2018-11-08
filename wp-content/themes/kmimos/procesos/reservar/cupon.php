@@ -18,12 +18,19 @@ ini_set('display_errors', '0');
 		/* Cupones Especiales */
  
 			// cupones club patitas felices 			
-			$cupon_club = $db->get_var( "SELECT meta_key FROM wp_usermeta WHERE meta_value = '".$cupon."'" );
-			if( strtolower($cupon_club) == 'club-patitas-cupon' ){
-				$contar_reservas = $db->get_var( "SELECT count(ID) FROM wp_posts WHERE post_author = '{$cliente}' and post_status in ('cancelled, complete, confirmed, modified, paid, unpaid') and post_type = 'wc_booking'" );
-				if( $contar_reservas > 0 ){
+			$cupon_club = $db->get_row( "SELECT * FROM wp_usermeta WHERE meta_value = '".$cupon."'" );
+			if( isset($cupon_club->meta_key) && strtolower($cupon_club->meta_key) == 'club-patitas-cupon' ){
+				if( isset($cupon_club->user_id) && $cupon_club->user_id != $cliente ){				
+					$contar_reservas = $db->get_var( "SELECT count(ID) FROM wp_posts WHERE post_author = '{$cliente}' and post_status in ('cancelled, complete, confirmed, modified, paid, unpaid') and post_type = 'wc_booking'" );
+					if( $contar_reservas > 0 ){
+						echo json_encode(array(
+							"error" => "El cupón [ {$cupon} ] solo puede ser aplicado en la primera reserva."
+						));
+						exit;
+					}
+				}else{
 					echo json_encode(array(
-						"error" => "El cupón [ {$cupon} ] solo puede ser aplicado en la primera reserva."
+						"error" => "El cupón [ {$cupon} ] no puede ser usado por su propietario."
 					));
 					exit;
 				}
