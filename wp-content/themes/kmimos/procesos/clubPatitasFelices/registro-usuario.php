@@ -68,7 +68,7 @@
 	        $message_mail = str_replace('[email]', $email, $message_mail);
 	        $message_mail = str_replace('[pass]', $password, $message_mail);
 	        $message_mail = str_replace('[url]', site_url(), $message_mail);
-	        $message_mail = str_replace('[cupon]', $cupon, $message_mail);
+	        $message_mail = str_replace('[CUPON]', $cupon, $message_mail);
 
 	        wp_mail( 'italococchini@gmail.com', "¡Bienvenid@ al club!", $message_mail);
 
