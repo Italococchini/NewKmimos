@@ -17,6 +17,9 @@
 
 	$mail_seccion_usuario ='';
 
+	//$URL_SITE = get_home_url();
+	$URL_SITE = 'http://kmimosmx.sytes.net/QA2/';
+
  	// Registro de Usuario en Kmimos
 	if(!isset($user->ID)){
 	    $password = md5(wp_generate_password( 5, false ));
@@ -62,7 +65,7 @@
 	        $message_mail = file_get_contents($mail_file);
 
 	        $message_mail = str_replace('[NUEVOS_USUARIOS]', $mail_seccion_usuario, $message_mail);
-	        $message_mail = str_replace('[URL_IMG]', get_home_url()."/wp-content/themes/kmimos/images", $message_mail);
+	        $message_mail = str_replace('[URL_IMG]', $URL_SITE."/wp-content/themes/kmimos/images", $message_mail);
 
 	        $message_mail = str_replace('[name]', $nombre.' '.$apellido, $message_mail);
 	        $message_mail = str_replace('[email]', $email, $message_mail);
