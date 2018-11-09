@@ -29,6 +29,7 @@ header {
 	background-repeat: no-repeat;
 	background-size: cover; 
 	background-position: left center; 
+	margin: 0px;
 }
 header div a{
 	color: #fff!important;
