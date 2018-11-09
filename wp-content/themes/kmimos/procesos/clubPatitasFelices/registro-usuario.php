@@ -68,9 +68,9 @@
 	        $message_mail = str_replace('[email]', $email, $message_mail);
 	        $message_mail = str_replace('[pass]', $password, $message_mail);
 	        $message_mail = str_replace('[url]', site_url(), $message_mail);
+	        $message_mail = str_replace('[cupon]', $cupon, $message_mail);
 
-	        $message = get_email_html($message_mail, false, true, $user_id);
-	        wp_mail( $email, "Kmimos México Gracias por registrarte! Kmimos la NUEVA forma de cuidar a tu perro!", $message);
+	        wp_mail( $email, "¡Bienvenid@ al club!", $message_mail);
 
 		}
  	}

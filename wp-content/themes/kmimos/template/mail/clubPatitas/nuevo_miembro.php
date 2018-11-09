@@ -57,10 +57,9 @@
 		background-position: left center;
 		background-repeat: no-repeat;
 		font-weight: normal;
-		font-size: 13px; 
-		color:#fff;
-	" >
-		www.kmimos.com.mx/club-patitas-felices
+		font-size: 13px;
+	">
+		<span style="color:#fff;">www.kmimos.com.mx/club-patitas-felices</span>
 	</div>
 
 </div>
