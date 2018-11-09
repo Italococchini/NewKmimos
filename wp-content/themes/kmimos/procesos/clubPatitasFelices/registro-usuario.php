@@ -10,10 +10,13 @@
 	$email = $_POST['email'];
  	$meta = explode('@', $email);
 	$username = $meta[0];
+	$password='';
 
 	// Verificar si existe el email
 	$user = get_user_by( 'email', $email );	
- 
+
+	$mail_seccion_usuario ='';
+
  	// Registro de Usuario en Kmimos
 	if(!isset($user->ID)){
 	    $password = md5(wp_generate_password( 5, false ));
@@ -32,18 +35,8 @@
 	    $user->set_role( 'subscriber' );
 
 	    //MESSAGE
-        $mail_file = realpath('../../template/mail/registro.php');
-
-        $message_mail = file_get_contents($mail_file);
-
-        $message_mail = str_replace('[name]', $nombre.' '.$apellido, $message_mail);
-        $message_mail = str_replace('[email]', $email, $message_mail);
-        $message_mail = str_replace('[pass]', $password, $message_mail);
-        $message_mail = str_replace('[url]', site_url(), $message_mail);
-        $message_mail = str_replace('[URL_IMGS]', get_home_url()."/wp-content/themes/kmimos/images/emails", $message_mail);
-
-        $message = get_email_html($message_mail, false, true, $user_id);
-        wp_mail( $email, "Kmimos México Gracias por registrarte! Kmimos la NUEVA forma de cuidar a tu perro!", $message);
+        $mail_file = realpath('../../template/mail/clubPatitas/nuevo_usuario.php');
+        $mail_seccion_usuario = file_get_contents($mail_file);
 
         //USER LOGIN
         $user = get_user_by( 'ID', $user_id );
@@ -62,6 +55,23 @@
 		$id = kmimos_crear_cupon( $cupon, 150 ); 		
 		if( $id > 0 ){
 			update_user_meta( $user->ID, 'club-patitas-cupon', utf8_encode($cupon) );
+
+		    //MESSAGE
+	        $mail_file = realpath('../../template/mail/clubPatitas/nuevo_miembro.php');
+
+	        $message_mail = file_get_contents($mail_file);
+
+	        $message_mail = str_replace('[NUEVOS_USUARIOS]', $mail_seccion_usuario, $message_mail);
+	        $message_mail = str_replace('[URL_IMG]', get_home_url()."/wp-content/themes/kmimos/images", $message_mail);
+
+	        $message_mail = str_replace('[name]', $nombre.' '.$apellido, $message_mail);
+	        $message_mail = str_replace('[email]', $email, $message_mail);
+	        $message_mail = str_replace('[pass]', $password, $message_mail);
+	        $message_mail = str_replace('[url]', site_url(), $message_mail);
+
+	        $message = get_email_html($message_mail, false, true, $user_id);
+	        wp_mail( $email, "Kmimos México Gracias por registrarte! Kmimos la NUEVA forma de cuidar a tu perro!", $message);
+
 		}
  	}
 

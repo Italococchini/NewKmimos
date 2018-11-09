@@ -6,7 +6,10 @@
 
 	$content = '';
 
-	$ID = $wpdb->get_var("SELECT ID FROM wp_users WHERE user_email = '".$email."'");
+	$user_row = $wpdb->get_row("SELECT * FROM wp_users WHERE user_email = '".$email."'");
+	
+	$ID = $user_row->ID;
+	$fecha_registro = $user_row->user_registered;
 
 	$userdata = get_user_meta($ID);
 	$mascotas = kmimos_get_my_pets($ID);
@@ -133,4 +136,4 @@ print_r($ID);
 		$content .= '<div>No agreg&oacute; mascota en el registro</div>';
 	}
 	kmimos_mails_administradores_new( "Registro de Nuevo Cliente", $content );
-	//wp_mail( 'italococchini@gmail.com', "Registro de Nuevo Cliente", $content);
+	wp_mail( 'italococchini@gmail.com', "Registro de Nuevo Cliente ".$fecha_registro, $content);
