@@ -363,7 +363,19 @@
 							AND DATE_FORMAT(post_date, '%m-%d-%Y') between DATE_FORMAT('2017-05-12','%m-%d-%Y') and DATE_FORMAT(now(),'%m-%d-%Y')" );
 
 				if(  $_SESSION['admin_sub_login'] != 'YES' && $count_reservas == 1){
-			   		if(isset($cliente["id"])){	
+			   		if(isset($cliente["id"])){
+				   	
+				   		// buscar cupones
+				   		$cupones = $wpdb->get_var("");
+
+
+				   		// validar si son del club
+
+
+				   		// enviar email de confirmacion al propietario
+
+
+				   		/*
 				   		$user_referido = get_user_meta($cliente["id"], 'landing-referencia', true);
 				   		if(!empty($user_referido)){
 							$username = $cliente["nombre"];
@@ -374,10 +386,10 @@
 							if(isset($user_participante->user_email)){
 								wp_mail( $user_participante->user_email, "¡Felicidades, otro perrhijo moverá su colita de felicidad!", $html );
 							}
-						} 
+						}
+						*/
 					}
 				}
-
 
 			}
 

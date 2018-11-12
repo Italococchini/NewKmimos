@@ -12,8 +12,19 @@
 
 ?>
 
+	<style type="text/css">
+		.km-ficha-bg{
+			background-image: url(<?php echo getTema().'/images/new/ayuda/Ayuda-Kmimos.jpg'; ?>);
+		}
+		@media (max-width: 700px) {	
+			.km-ficha-bg{
+				background-image: url(<?php echo getTema().'/images/new/ayuda/Ayuda-Kmimos-responsive.jpg'; ?>);
+			}
+		}
+	</style>
 
-	<div class="km-ficha-bg" style="background-image: url(<?php echo getTema().'/images/new/ayuda/kmimos_ayuda.jpg'; ?>)">
+
+	<div class="km-ficha-bg">
 		<div class="overlay"></div>
 	</div>
 	<div class="body body-ayuda container">
@@ -45,7 +56,7 @@
 	<section class="temas-sugeridos">
 		<div class="sugeridos-content text-center">
 			<div class="container">
-			<a href="<?php echo get_home_url(); ?>/ayuda/no-encontraste-lo-que-buscas"><h3 class="title-category">¿No encontraste lo que buscas?</h3></a><br> 
+			<a href="<?php echo get_home_url(); ?>/preguntas-frecuentes/no-encontraste-lo-que-buscas"><h3 class="title-category">¿No encontraste lo que buscas?</h3></a><br> 
 			<a href="<?php echo get_home_url(); ?>/contacta-con-nosotros/"><b> Cont&aacute;ctanos</b></a>
 			</div>
 		</div>

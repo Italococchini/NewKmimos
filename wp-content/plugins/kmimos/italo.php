@@ -274,7 +274,7 @@
 				'menu_position' => 3,
 				'public' => true,
 				'has_archive' => false,
-				'rewrite' => array('slug' => 'ayuda'),
+				'rewrite' => array('slug' => 'preguntas-frecuentes'),
 				'supports' => array( 'title', 'editor', 'thumbnail', 'seccion' ),
 	            'taxonomies' => array( 'seccion' ),
 	            'menu_icon' => '',
@@ -282,31 +282,6 @@
 		);		
 	}
 	add_action( 'init', 'create_posts_type' );
-	/**
-	 * END Seccion de ayuda Kmimos
- 	 */
-
-	if(!function_exists('italo_include_script')){
-	    function italo_include_script(){
-	        
-	    }
-	}
-
-	if(!function_exists('italo_include_admin_script')){
-	    function italo_include_admin_script(){
-	        include_once('dashboard/assets/config_backpanel.php');
-	        wp_enqueue_script('faq_script', getTema()."/js/faq.js", array(), '1.0.0');
-	        wp_enqueue_script('cupon_script', getTema()."/js/admin_cupon.js", array(), '1.0.0');
-	        $HTML = '
-					<script type="text/javascript"> 
-						var HOME = "'.getTema().'/"; 
-						var RAIZ = "'.get_home_url().'/"; 
-					</script>';
-			echo comprimir_styles($HTML);
-	    }
-	}
-
-
 	if(!function_exists('get_form_filtrar_ayuda')){
 		function get_form_filtrar_ayuda(){
 			echo '
@@ -384,7 +359,7 @@
 	}
 
 	/* Temas Sugeridos */
-	if(!function_exists('get_ayuda_sugeridos')){
+	if(!function_exists('get_ayuda_postBySeccion')){
 		function get_ayuda_postBySeccion( $parent='' ){
 
 			
@@ -425,7 +400,7 @@
 				foreach ($seccionessugeridos as $categoria) { 
 
 					$postsugeridos = $wpdb->get_results("select p.ID,p.post_title from wp_term_relationships tr 
-						inner join wp_posts p on tr.object_id=p.ID where tr.term_taxonomy_id=".$categoria->term_id." limit 2");
+						inner join wp_posts p on tr.object_id=p.ID where tr.term_taxonomy_id=".$categoria->term_id."  order by ID asc limit 4");
 
 					//$article .= '<h3 class="title-category">'.$categoria->name.'</h3>';
 
@@ -449,7 +424,8 @@
 						$numeropost=$cant->cantidadpost;
 					}
 
-/*					if($numeropost>2){
+					/*
+					if($numeropost>2){
 						$article .= '<a style="text-decoration:none" href="'.get_home_url().'/ayuda-ver-mas?categoria='.$categoria->term_id.'"><p">Ver más</p></a>';
 					}*/
 					
@@ -472,7 +448,7 @@
 		}
 	}
 
-if(!function_exists('get_categoria_pregunta')){
+	if(!function_exists('get_categoria_pregunta')){
  		function get_categoria_pregunta($id_post){
  				global $wpdb;
 				$HTML= '';
@@ -482,13 +458,13 @@ if(!function_exists('get_categoria_pregunta')){
 					 where object_id=".$id_post);
 				$article = '';
 				foreach ($categoriapadre as $post) { 
-/*
+				/*
 						$article .= '
 							<article>
 									<h3><b>'.$post->name.'</b></h3>
 							</article>
 						';
-*/
+				*/
 						$article = $post->name;
 					}
 
@@ -498,7 +474,7 @@ if(!function_exists('get_categoria_pregunta')){
 			}
 		}
 
-if(!function_exists('get_ayuda_relacionados')){
+	if(!function_exists('get_ayuda_relacionados')){
 		function get_ayuda_relacionados($id_post){
 				global $wpdb;
 				$HTML= '';
@@ -540,15 +516,12 @@ if(!function_exists('get_ayuda_relacionados')){
 			}
 		}
 
-if(!function_exists('get_preguntas_categoria')){
+	if(!function_exists('get_preguntas_categoria')){
 	    function get_preguntas_categoria($id_categoria){
 	    		global $wpdb;
 				$HTML= '';
 
-
-
-
-				$preguntas = $wpdb->get_results("select p.ID,p.post_title,t.name as namecategoria from wp_term_relationships tr 
+			$preguntas = $wpdb->get_results("select p.ID,p.post_title,t.name as namecategoria from wp_term_relationships tr 
 						inner join wp_posts p on tr.object_id=p.ID 
 						inner join wp_term_taxonomy tx on tr.term_taxonomy_id = tx.term_taxonomy_id
 						inner join wp_terms t on tx.term_id=t.term_id
@@ -563,16 +536,9 @@ if(!function_exists('get_preguntas_categoria')){
 					$nombreCategoria=$post->namecategoria;
 							$article .= ' <a style="text-decoration:none" href="'.get_the_permalink($post->ID).'">
 										<h3>'.$post->post_title.'</h3>
-									</a>
-								
+									</a>								
 							';
-
-
 					}
-
-					
-
-
 					if( $article != '' ){
 					$HTML = '
 					<section class="row text-left">
@@ -587,12 +553,34 @@ if(!function_exists('get_preguntas_categoria')){
 				}
 
 
-				}
-				print_r($HTML);
-
+			}
+			print_r($HTML);
+		}
 	}
-}
 
+	/**
+	 * END Seccion de ayuda Kmimos
+ 	 */
+
+	if(!function_exists('italo_include_script')){
+	    function italo_include_script(){
+	        
+	    }
+	}
+
+	if(!function_exists('italo_include_admin_script')){
+	    function italo_include_admin_script(){
+	        include_once('dashboard/assets/config_backpanel.php');
+	        wp_enqueue_script('faq_script', getTema()."/js/faq.js", array(), '1.0.0');
+	        wp_enqueue_script('cupon_script', getTema()."/js/admin_cupon.js", array(), '1.0.0');
+	        $HTML = '
+					<script type="text/javascript"> 
+						var HOME = "'.getTema().'/"; 
+						var RAIZ = "'.get_home_url().'/"; 
+					</script>';
+			echo comprimir_styles($HTML);
+	    }
+	}
 
 	if(!function_exists('validar_perfil_completo')){
 	    function validar_perfil_completo(){

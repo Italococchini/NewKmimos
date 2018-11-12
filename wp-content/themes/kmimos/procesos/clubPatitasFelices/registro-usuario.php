@@ -38,7 +38,7 @@
 	    $user->set_role( 'subscriber' );
 
 	    //MESSAGE
-        $mail_file = realpath('../../template/mail/clubPatitas/nuevo_usuario.php');
+        $mail_file = realpath('../../template/mail/clubPatitas/parte/nuevo_usuario.php');
         $mail_seccion_usuario = file_get_contents($mail_file);
 
         //USER LOGIN
