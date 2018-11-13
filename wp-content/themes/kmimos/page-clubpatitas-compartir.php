@@ -3,6 +3,10 @@
         Template Name: Club patitas Compartir
     */
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+
 	$user = wp_get_current_user();
 	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
  	if( empty($cupon) ){
