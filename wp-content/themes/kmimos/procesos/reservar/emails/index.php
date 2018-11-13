@@ -420,7 +420,7 @@
 									reserva,
 									comision
 								)values(
-									'saldo',
+									'saldo_club',
 									{$propietario_id},
 									NOW(),
 									'',
