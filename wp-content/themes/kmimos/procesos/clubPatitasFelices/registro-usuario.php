@@ -51,30 +51,31 @@
  	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
  	if( empty($cupon) || $cupon == null ){
 		// generar cupon
-		$cupon = substr(trim($nombre), 0,1);
-		$cupon .= substr(trim($apellido), 0,1);
-		$cupon .= $user->ID;
-		$cupon = strtoupper($cupon);
-		$id = kmimos_crear_cupon( $cupon, 150 ); 		
-		if( $id > 0 ){
-			update_user_meta( $user->ID, 'club-patitas-cupon', utf8_encode($cupon) );
+		if( $user->ID > 0 ){
+			$cupon = substr(trim($nombre), 0,1);
+			$cupon .= substr(trim($apellido), 0,1);
+			$cupon .= $user->ID;
+			$cupon = strtoupper($cupon);
+			$id = kmimos_crear_cupon( $cupon, 150 ); 		
+			if( $id > 0 ){
+				update_user_meta( $user->ID, 'club-patitas-cupon', utf8_encode($cupon) );
 
-		    //MESSAGE
-	        $mail_file = realpath('../../template/mail/clubPatitas/nuevo_miembro.php');
+			    //MESSAGE
+		        $mail_file = realpath('../../template/mail/clubPatitas/nuevo_miembro.php');
 
-	        $message_mail = file_get_contents($mail_file);
+		        $message_mail = file_get_contents($mail_file);
 
-	        $message_mail = str_replace('[NUEVOS_USUARIOS]', $mail_seccion_usuario, $message_mail);
-	        $message_mail = str_replace('[URL_IMG]', $URL_SITE."/wp-content/themes/kmimos/images", $message_mail);
+		        $message_mail = str_replace('[NUEVOS_USUARIOS]', $mail_seccion_usuario, $message_mail);
+		        $message_mail = str_replace('[URL_IMG]', $URL_SITE."/wp-content/themes/kmimos/images", $message_mail);
 
-	        $message_mail = str_replace('[name]', $nombre.' '.$apellido, $message_mail);
-	        $message_mail = str_replace('[email]', $email, $message_mail);
-	        $message_mail = str_replace('[pass]', $password, $message_mail);
-	        $message_mail = str_replace('[url]', site_url(), $message_mail);
-	        $message_mail = str_replace('[CUPON]', $cupon, $message_mail);
+		        $message_mail = str_replace('[name]', $nombre.' '.$apellido, $message_mail);
+		        $message_mail = str_replace('[email]', $email, $message_mail);
+		        $message_mail = str_replace('[pass]', $password, $message_mail);
+		        $message_mail = str_replace('[url]', site_url(), $message_mail);
+		        $message_mail = str_replace('[CUPON]', $cupon, $message_mail);
 
-	        wp_mail( 'italococchini@gmail.com', "¡Bienvenid@ al club!", $message_mail);
-
+		        wp_mail( 'italococchini@gmail.com', "¡Bienvenid@ al club!", $message_mail);
+			}
 		}
  	}
 
