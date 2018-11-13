@@ -31,14 +31,23 @@
 		$apellido = $user->user_lastname ;
 		$readonly = 'readonly';
 	}
-
 ?>
+	
+
+	
 	
 	<header class="row" style="background-image: url(<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-2.jpg'; ?>)">
 		<div class="col-xm-12 col-sm-12 col-md-12">
-			<a href="#">Ver mis créditos</a>
-			|
-			<a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
+			<?php if( !is_user_logged_in() ){ ?>
+				<a href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Ver mis créditos</a>
+				|
+				<a href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Obtener mi código</a>
+			<?php }else{ ?>
+				<a href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Ver mis créditos</a>
+				|
+				<a href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Obtener mi código</a>				
+			<?php } ?>
+
 		</div>
 		<div class="col-sm-8 col-xs-8 col-md-6 text-center pull-right">
 			<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
