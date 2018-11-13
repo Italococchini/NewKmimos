@@ -21,7 +21,7 @@
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="Kmimos - Club de las Patitas Felices" />
 		<meta property="og:description"   content="Suma huellas a nuestro club y gana descuentos" />
-		<meta property="og:image"         content="<?php echo $url; ?>" />
+		<meta property="og:image"         content="'.strtoupper($cupon).'" />
 	';
 
 	get_header();
@@ -64,23 +64,6 @@
 					<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
 				</div>
 
-				<!-- INI Compartir -->
-				<div class="row text-center" style="margin: 30px 0px; ">
-					<div class="col-md-6 col-md-offset-3">
-						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8;padding: 20px; border-radius:50px;">
-							<a class="btn btn-info twitter-share-button"
-						  		href="https://twitter.com/intent/tweet?text=Suma%20huellas%20y%20gana%20descuentos%20<?php echo $url;?>"
-						  		target="_blank">
-								<i class="fa fa-twitter"></i> Tweet
-							</a>
-						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8;padding: 20px; border-radius:50px;">
-							<div class="fb-share-button" data-href="<?php echo $url;?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
-						</div>
-					</div>
-				</div>
-				<!-- FIN Compartir -->
-
 				<div class="row" style="margin: 30px 0px; ">
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
 						<button class="btn btn-club-azul" onClick="downloadPDF();">Descargar PDF</button>
@@ -89,6 +72,23 @@
 						<button class="btn btn-club-azul">Compartir ahora</button>
 					</div>
 				</div>
+
+				<!-- INI Compartir -->
+				<div class="row text-center" style="margin: 30px 0px; ">
+					<div class="col-md-6 col-md-offset-3">
+						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8;padding: 20px; border-radius:50px;">
+							<a class="btn btn-info twitter-share-button"
+						  		href="https://twitter.com/intent/tweet?text=Suma%20huellas%20y%20gana%20descuentos%20<?php echo strtoupper($cupon);?>"
+						  		target="_blank">
+								<i class="fa fa-twitter"></i> Tweet
+							</a>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8;padding: 20px; border-radius:50px;">
+							<div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
+						</div>
+					</div>
+				</div>
+				<!-- FIN Compartir -->
 
 			</dir>
 
