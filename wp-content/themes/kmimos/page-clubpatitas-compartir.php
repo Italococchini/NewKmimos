@@ -48,10 +48,10 @@
 
 				<!-- INI Compartir -->
 				<div class="row text-center" style="margin: 30px 0px; ">
-					<div class="col-md-6 col-md-offset-3">					
-						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8padding: 20px; border-radius:50px;"><i class="fa fa-twitter"></i></div>
-						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8padding: 20px; border-radius:50px;"><i class="fa fa-facebook"></i></div>
-						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8padding: 20px; border-radius:50px;"><i class="fa fa-envelope"></i></div>
+					<div class="col-md-6 col-md-offset-3">
+						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8;padding: 20px; border-radius:50px;"><i class="fa fa-twitter"></i></div>
+						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8;padding: 20px; border-radius:50px;"><i class="fa fa-facebook"></i></div>
+						<div class="col-md-4 col-sm-4 col-xs-12" style="color:#fff;background:#0D7AD8;padding: 20px; border-radius:50px;"><i class="fa fa-envelope"></i></div>
 					</div>
 				</div>
 				<!-- FIN Compartir -->
