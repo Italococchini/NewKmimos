@@ -79,6 +79,7 @@ ini_set('display_errors', '1');
 
 				<!-- INI Compartir -->
 				<div id="redes-sociales" class="row text-center" style="margin: 30px 0px; display:none;">
+					<div style="text-align:center;margin:5px 0px;">Comparte en las redes sociales</div>
 					<div class="col-md-6 col-md-offset-3">
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<a class="btn btn-info twitter-share-button"
