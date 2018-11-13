@@ -1,6 +1,6 @@
 <?php
 	/*
-        Template Name: Club patitas Compartir
+        Template Name: Club patitas Creditos
     */
 
 	$user = wp_get_current_user();
