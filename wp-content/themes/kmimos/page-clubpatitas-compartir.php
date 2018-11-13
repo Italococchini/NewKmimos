@@ -69,7 +69,7 @@ ini_set('display_errors', '1');
 
 					<!-- INI Compartir -->
 					<div id="redes-sociales" class="row text-center" style="margin: 30px 0px; display:none;">
-						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="col-md-6 col-sm-6 col-xs-12 text-right">
 							<a class="btn btn-info twitter-share-button"
 								style="color:#fff;"
 						  		href="https://twitter.com/intent/tweet?text=Suma%20huellas%20y%20gana%20descuentos%20CUPON%20<?php echo strtoupper($cupon);?>"
@@ -77,7 +77,7 @@ ini_set('display_errors', '1');
 								<i class="fa fa-twitter"></i> Tweet
 							</a>
 						</div>
-						<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="col-md-6 col-sm-6 col-xs-12 text-left">
 							<div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
 						</div>
 					</div>
