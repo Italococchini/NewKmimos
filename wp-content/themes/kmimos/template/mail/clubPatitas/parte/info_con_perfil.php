@@ -9,7 +9,7 @@
 	background:#e4e2e22b;
 	">
 
-	<div style="text-align: center; vertical-align: middle; display: table-cell;">
+	<div style="text-align: center;">
 		<div style="
 			margin: 20px 0px; 
 			color: #0d7ad8; 
@@ -19,19 +19,23 @@
 		<div>
 			Tu código único del club
 		</div>
-		<div>
+		<div style="
+			padding: 5px 10px; 
+			margin: 10px 0px;
+			font-weight: bold;
+		">
 			<span style="
-				font-size: 17px;
-				padding: 20px; 
-				border-radius: 30px;
-				border: 3px solid #ccc; 
+				border-radius: 10px;
+				border: 2px solid #ccc; 
+				font-size: 22px;
+				padding: 10px 70px;
 			">
 				[CUPON]
 			</span>
 		</div>
 		<div style="margin: 25px 0px;">
 			<a href="[url]" style="
-				padding: 10px 70px;
+				padding: 10px 80px;
 				background: #6b1c9a;
 				font-size: 12px;
 				color: #fff; 

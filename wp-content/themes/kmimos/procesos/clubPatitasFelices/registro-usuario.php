@@ -43,8 +43,8 @@
 
         //USER LOGIN
         $user = get_user_by( 'ID', $user_id );
-        wp_set_current_user($user_id, $user->user_login);
-        wp_set_auth_cookie($user_id);
+        //wp_set_current_user($user_id, $user->user_login);
+        //wp_set_auth_cookie($user_id);
 	}
 
  	// Registro de Usuario en Club de patitas felices
@@ -77,5 +77,26 @@
 
 		}
  	}
+
+// Testing correo confirmacion
+		    //MESSAGE
+	        $__mail_file = realpath('../../template/mail/clubPatitas/parte/info_sin_perfil.php');
+	        $info = file_get_contents($__mail_file);
+
+	        $_mail_file = realpath('../../template/mail/clubPatitas/notificacion_de_uso.php');
+	        $_message_mail = file_get_contents($_mail_file);	        
+
+	        $_message_mail = str_replace('[INFO]', $info, $_message_mail);
+	        $_message_mail = str_replace('[URL_IMG]', $URL_SITE."/wp-content/themes/kmimos/images", $_message_mail);
+
+	        $_message_mail = str_replace('[name]', $nombre.' '.$apellido, $_message_mail);
+	        $_message_mail = str_replace('[email]', $email, $_message_mail);
+	        $_message_mail = str_replace('[pass]', $password, $_message_mail);
+	        $_message_mail = str_replace('[url]', site_url(), $_message_mail);
+	        $_message_mail = str_replace('[CUPON]', $cupon, $_message_mail);
+
+	        wp_mail( 'italococchini@gmail.com', "¡Usaron tu cupon!", $_message_mail);
+
+
 
  	echo $cupon;

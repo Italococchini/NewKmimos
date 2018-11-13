@@ -8,7 +8,58 @@
 	box-shadow: -1px 79px 114px -45px rgba(0,0,0,0.13);
 	background:#e4e2e22b;
 	">
-	<img src="[IMG_URL]/club-patitas/nuevo-usuario.jpg" style="width: 100%;">			
+
+	<div style="width: 100%; display: flex; vertical-align: middle;border: 1px solid #ccc;">
+		
+		<div style="width: 40%;margin:0 auto; display: inline-block; vertical-align: middle; border: 1px solid #ccc;">
+			<div style="
+				margin: 20px 0px; 
+				color: #0d7ad8; 
+				font-weight: bold;
+				font-size: 12px;
+			">
+				¡Sigue compartiendo y no dejes de ganar!
+			</div>
+			<div style="
+				font-size: 10px;
+			">
+				Tu código único del club
+			</div>
+			<div style="
+				margin: 10px 0px;
+				font-weight: bold;
+				border-radius: 10px;
+				border: 2px solid #ccc; 
+				padding: 10px;
+			">
+				<span style="
+					font-size: 18px;
+				">
+					[CUPON]
+				</span>
+			</div>
+		</div>
+
+		<div style="width: 49%;margin:0 auto; display: flex; vertical-align: middle; border: 1px solid #ccc;">
+			<a href="[url]" style="
+				text-decoration: none;
+				background: #6b1c9a;
+				border-radius: 10px;
+				border: 1px solid #6b1c9a; 
+				color:#fff;
+				font-weight: bold;
+				margin: 10px auto;
+				padding: 10px;
+				text-align: center;
+				vertical-align: middle;
+				width: 100%;
+			">Compartir ahora
+			</a>
+		</div>
+
+	</div>
+
+ 	<img src="[IMG_URL]/club-patitas/nuevo-usuario.jpg" style="width: 100%;">			
 	<p style="
 		font-size: 13px;
 		font-weight: bold;
@@ -24,14 +75,6 @@
 		<div style="width: 50%; margin: 0 auto;">
 		    <div style='display: table-cell;'>
 		        <img src='[IMG_URL]emails/identificacion.png' style='' >
-		    </div>
-		    <div style='display: table-cell; vertical-align:top; width: 80%; height: 10vh; text-align: left; padding-left: 16px;'>
-		        <div style='font-size: 11px; font-weight: bold; letter-spacing: -0.1px; color: #0d7ad9;'>E-mail</div>                   
-		        <div style='font-family: Arial; font-size: 12px; font-weight: bold; letter-spacing: -0.1px; color: #000000; margin-bottom: 12px;'>
-		        	<a href="mailto:[email]" style="color: #000; text-decoration: none;">[email]</a>
-		        </div>
-		        <div style='font-family: Arial; font-size: 11px; font-weight: bold; letter-spacing: -0.1px; color: #0d7ad9;'>Contraseña</div>
-		        <div style='font-family: Arial; font-size: 12px; font-weight: bold; letter-spacing: -0.1px; color: #000000;'>[pass]</div>    
 		    </div>
 		</div>
 	</div>

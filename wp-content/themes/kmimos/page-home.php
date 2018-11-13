@@ -409,7 +409,7 @@
 				</header>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 col-xs-12 col-md-8 pull-right text-center">
+				<div class="col-sm-6 col-xs-12 col-md-4 pull-right text-center">
 					<a class="btn btn-club-patitas" href="'.get_home_url().'/club-patitas-felices">Ingresa aquí</a>
 				</div>
 			</div>

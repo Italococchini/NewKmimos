@@ -12,25 +12,25 @@
 			color: #0d7ad8; 
 			font-weight: bold;
 		">¡Felicidades, alguien ha usado tu código!</h1>
-		<div>
-			Has obtenido
-		</div>
-		<div style="
-			padding: 20px; 
-			font-size: 30px;
-			margin: 10px 0px;
-			font-weight: bold;
-		">
-			<span style="
-				padding: 20px; 
-				border-radius: 30px;
-				border: 3px solid #ccc; 
-			">
-				[CUPON]
-			</span>
-		</div>
 
-		<p>Tus créditos han sido abonados a tu perfil del club de las patitas felices y los podrás usar en cualquiera de los servicios ofrecidos en la plataforma Kmimos. ¡Muchas gracias!</p>		
+		<div style="width: 400px; margin: 0 auto;">		
+			<div>
+				Has obtenido
+			</div>
+			<div style="
+				border-radius: 30px;
+				background: #f4f4f4; 
+				color: #7dd0c3;
+				font-size: 47px;
+				font-weight: bold;
+				margin: 10px 0px;
+				padding: 20px 0px; 
+				width: 100%;
+			">
+				150 MXN
+			</div>
+			<p>Tus créditos han sido abonados a tu perfil del club de las patitas felices y los podrás usar en cualquiera de los servicios ofrecidos en la plataforma Kmimos. ¡Muchas gracias!</p>	
+		</div>
 
 	</div>
 
@@ -46,7 +46,7 @@
 		font-weight: normal;
 		font-size: 13px;
 	">
-		<span style="color:#fff;">www.kmimos.com.mx/club-patitas-felices</span>
+		<a href="https://www.kmimos.com.mx/club-patitas-felices" style="text-decoration: none; color:#fff!important;">kmimos.com.mx/club-patitas-felices</a>
 	</div>
 
 </div>
