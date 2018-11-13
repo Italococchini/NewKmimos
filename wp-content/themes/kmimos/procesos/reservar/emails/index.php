@@ -383,6 +383,7 @@
 				   		$propietario_id=0;
 				   		$propietario_nombre = '';
 				   		$propietario_apellido = '';
+				   		$propietario_email = '';
 				   		$cupon_code = '';
 				   		if( !empty($cupones) ){			   			
 
@@ -392,7 +393,6 @@
 					   				select user_id from wp_usermeta where meta_key = 'club-patitas-cupon' and meta_value = '".$cupon->name."'
 					   			");
 					   			if( $propietario_id > 0 ){
-
 					   				$propietario_nombre = get_user_meta( $propietario_id, 'first_name', true );
 					   				$propietario_apellido = get_user_meta( $propietario_id, 'last_name', true );
 					   				$cupon_code = $cupon->name;
@@ -433,8 +433,9 @@
 
 								// enviar email
 								$mail_info = realpath( $PATH_TEMPLATE.'/template/mail/clubPatitas/partes/info_sin_perfil.php');
-								if( !empty($propietario_nombre) && !empty($propietario_apellido) ){
-									$mail_info = realpath( 
+								$phone = get_user_meta( $propietario_id, 'user_phone', true );
+								if( !empty($phone) ){
+									$mail_info = realpath(
 										$PATH_TEMPLATE.'/template/mail/clubPatitas/partes/info_con_perfil.php'
 									);
 								}
@@ -451,13 +452,14 @@
 								$message_mail = str_replace('[url]', site_url(), $message_mail);
 								$message_mail = str_replace('[CUPON]', $cupon_code, $message_mail);
 
-								wp_mail( 'italococchini@gmail.com', "Confirmación de uso cupon Club Patitas Felices!", $message_mail);
+								$propietario = get_userdata($propietario_id);
+								if( isset($propietario->user_email) ){
+									wp_mail( $propietario->user_email, "Confirmación de uso cupon Club Patitas Felices!", $message_mail);
+								}
 
 							}				   		
 
 				   		}
-
-
 
 				   		/*
 				   		$user_referido = get_user_meta($cliente["id"], 'landing-referencia', true);
