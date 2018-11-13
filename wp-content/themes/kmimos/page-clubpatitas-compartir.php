@@ -46,6 +46,14 @@
 					<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
 				</div>
 
+				<!-- INI Compartir -->
+				<div class="row text-center" style="margin: 30px 0px; ">
+					<div class="col-md-4 col-sm-12"><i class="fa fa-twitter"></i></div>
+					<div class="col-md-4 col-sm-12"><i class="fa fa-facebook"></i></div>
+					<div class="col-md-4 col-sm-12"><i class="fa fa-mail"></i></div>
+				</div>
+				<!-- FIN Compartir -->
+
 				<div class="row" style="margin: 30px 0px; ">
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
 						<button class="btn btn-club-azul" onClick="downloadPDF();">Descargar PDF</button>
