@@ -398,6 +398,35 @@
 					   			}
 					   		}
 							if( $propietario_id > 0 ){
+
+								// agregar saldo a favor
+								$saldo = get_user_meta( $propietario_id, 'kmisaldo', true );
+								$saldo += 150;
+								if( update_user_meta( $propietario_id, 'kmisaldo', $saldo ) ){
+									// agregar transaccion en balance
+									$wpdb->query("INSERT INTO cuidadores_transacciones (
+										tipo,
+										user_id,
+										fecha,
+										referencia,
+										descripcion,
+										monto,
+										reserva,
+										comision
+									)values(
+										'saldo',
+										{$propietario_id},
+										NOW(),
+										'',
+										'Saldo a favor Club de las patitas felices ".$cupon_code."',
+										150,
+										'',
+										0									
+									) 
+									");
+								}
+
+								// enviar email
 								$mail_info = realpath( $PATH_TEMPLATE.'/template/mail/clubPatitas/partes/info_sin_perfil.php');
 								if( !empty($propietario_nombre) && !empty($propietario_apellido) ){
 									$mail_info = realpath( 
