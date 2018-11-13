@@ -18,7 +18,7 @@
 				Has obtenido
 			</div>
 			<div style="
-				border-radius: 30px;
+				border-radius: 20px;
 				background: #f4f4f4; 
 				color: #7dd0c3;
 				font-size: 47px;

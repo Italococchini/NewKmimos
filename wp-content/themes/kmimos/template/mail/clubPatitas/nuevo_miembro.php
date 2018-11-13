@@ -23,7 +23,7 @@
 		">
 			<span style="
 				padding: 20px; 
-				border-radius: 30px;
+				border-radius: 20px;
 				border: 3px solid #ccc; 
 			">
 				[CUPON]
