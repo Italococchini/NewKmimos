@@ -387,7 +387,7 @@ wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"]
 				                INNER JOIN wp_woocommerce_order_itemmeta as meta ON 
 				                	meta.order_item_id = items.order_item_id
 				                INNER JOIN wp_posts as p ON 
-				                	p.ID = ".$reserva_id." and p.post_type = 'wc_booking' 
+				                	p.ID = ".$servicio["id_reserva"]." and p.post_type = 'wc_booking' 
 				                WHERE meta.meta_key = 'discount_amount'
 				                    and items.`order_id` = p.post_parent
 				                    and not items.order_item_name like ('saldo-%')
