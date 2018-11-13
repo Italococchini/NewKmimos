@@ -21,7 +21,7 @@ ini_set('display_errors', '1');
 	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.0');
 
 	$metas = '
-		<meta property="og:url"           content="'..'" />
+		<meta property="og:url"           content="'.strtoupper($cupon).'" />
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="Kmimos - Club de las Patitas Felices" />
 		<meta property="og:description"   content="Suma huellas a nuestro club y gana descuentos" />
