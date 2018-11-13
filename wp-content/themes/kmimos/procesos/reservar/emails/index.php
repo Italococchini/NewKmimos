@@ -1,5 +1,7 @@
 <?php
-	
+	error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 	extract($_GET);
 	if( isset($_GET["id_orden"]) ){
 		include((dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))."/wp-load.php");
