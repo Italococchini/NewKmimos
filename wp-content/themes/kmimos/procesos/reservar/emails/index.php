@@ -355,6 +355,7 @@
 
 				include("confirmacion.php");
 
+wp_mail( 'italococchini@gmail.com', "prueba", "prueba envio email");
 
 				$count_reservas = $wpdb->get_var( "SELECT  
 							count(ID) as cant
@@ -364,6 +365,7 @@
 							AND post_author = ".$cliente["id"]."
 							AND DATE_FORMAT(post_date, '%m-%d-%Y') between DATE_FORMAT('2017-05-12','%m-%d-%Y') and DATE_FORMAT(now(),'%m-%d-%Y')" );
 
+wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"]. );
 				$message_mail='';
 				$paso = "1";
 //				if(  $_SESSION['admin_sub_login'] != 'YES' && $count_reservas == 1){
@@ -391,7 +393,7 @@
 				   		$propietario_apellido = '';
 				   		$cupon_code = '';
 				   		if( !empty($cupones) ){			   			
-$paso .= "4";
+						$paso .= "4";
 
 					   		// Validar si son del club 
 					   		foreach ($cupones as $key => $cupon) {
@@ -399,7 +401,7 @@ $paso .= "4";
 					   				select user_id from wp_usermeta where meta_key = 'club-patitas-cupon' and meta_value = '".$cupon->name."'
 					   			");
 					   			if( $propietario_id > 0 ){
-$paso .= "5";
+								$paso .= "5";
 
 					   				$propietario_nombre = get_user_meta( $propietario_id, 'first_name', true );
 					   				$propietario_apellido = get_user_meta( $propietario_id, 'last_name', true );
@@ -412,13 +414,13 @@ $paso .= "5";
 					   		}
 							if( $propietario_id > 0 ){
 
-$paso .= "6";
+							$paso .= "6";
 								// agregar saldo a favor
 								$saldo = get_user_meta( $propietario_id, 'kmisaldo', true );
 								$saldo += 150;
 								if( update_user_meta( $propietario_id, 'kmisaldo', $saldo ) ){
 
-$paso .= "7";
+							$paso .= "7";
 									// agregar transaccion en balance
 									$wpdb->query("INSERT INTO cuidadores_transacciones (
 										tipo,
@@ -462,7 +464,7 @@ $paso .= "7";
 								$message_mail = str_replace('[url]', site_url(), $message_mail);
 								$message_mail = str_replace('[CUPON]', $cupon_code, $message_mail);
 
-$paso .= "8";
+							$paso .= "8";
 
 							}				   		
 
