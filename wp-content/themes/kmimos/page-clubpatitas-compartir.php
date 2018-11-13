@@ -80,14 +80,14 @@ ini_set('display_errors', '1');
 				<!-- INI Compartir -->
 				<div class="row text-center" style="margin: 30px 0px; ">
 					<div class="col-md-6 col-md-offset-3">
-						<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="col-md-6 col-sm-6 col-xs-12">
 							<a class="btn btn-info twitter-share-button"
 						  		href="https://twitter.com/intent/tweet?text=Suma%20huellas%20y%20gana%20descuentos%20CUPON%20<?php echo strtoupper($cupon);?>"
 						  		target="_blank">
 								<i class="fa fa-twitter"></i> Tweet
 							</a>
 						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="col-md-6 col-sm-6 col-xs-12">
 							<div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
 						</div>
 					</div>
