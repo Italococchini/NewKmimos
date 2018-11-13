@@ -61,7 +61,7 @@ function loadTabla(){
         ],
         "scrollX": true,
         "ajax": {
-            "url": TEMA+'/procesos/clubPatitasFelices/ajax/creditos.php',
+            "url": HOME+'/procesos/clubPatitasFelices/ajax/creditos.php',
             "type": "POST"
         }
 	});
