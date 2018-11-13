@@ -9,39 +9,39 @@
 	background:#e4e2e22b;
 	">
 
-	<div style="width: 100%; display: flex; vertical-align: middle;border: 1px solid #ccc;">
-		
-		<div style="width: 40%;margin:0 auto; display: inline-block; vertical-align: middle; border: 1px solid #ccc;">
-			<div style="
-				margin: 20px 0px; 
-				color: #0d7ad8; 
-				font-weight: bold;
-				font-size: 12px;
-			">
-				¡Sigue compartiendo y no dejes de ganar!
-			</div>
-			<div style="
-				font-size: 10px;
-			">
-				Tu código único del club
-			</div>
-			<div style="
-				margin: 10px 0px;
-				font-weight: bold;
-				border-radius: 10px;
-				border: 2px solid #ccc; 
-				padding: 10px;
-			">
-				<span style="
-					font-size: 18px;
+	<table width="100%">
+		<tr>
+			<td width="50%">
+				<p style="
+					margin: 20px 0px; 
+					color: #0d7ad8; 
+					font-weight: bold;
+					font-size: 12px;
 				">
-					[CUPON]
-				</span>
-			</div>
-		</div>
-
-		<div style="width: 49%;margin:0 auto; display: flex; vertical-align: middle; border: 1px solid #ccc;">
-			<a href="[url]" style="
+					¡Sigue compartiendo y no dejes de ganar!
+				</p>
+				<p style="
+					font-size: 10px;
+				">
+					Tu código único del club
+				</p>
+				<p style="
+					margin: 10px 0px;
+					font-weight: bold;
+					border-radius: 10px;
+					border: 2px solid #ccc; 
+					padding: 10px;
+				">
+					<span style="
+						font-size: 18px;
+					">
+						[CUPON]
+					</span>
+				</p>
+			</td>
+			<td width="50%">
+				<a href="[url]">
+				<div style="
 				text-decoration: none;
 				background: #6b1c9a;
 				border-radius: 10px;
@@ -49,15 +49,16 @@
 				color:#fff;
 				font-weight: bold;
 				margin: 10px auto;
-				padding: 10px;
+				padding: 10px 0px;
 				text-align: center;
 				vertical-align: middle;
-				width: 100%;
-			">Compartir ahora
-			</a>
-		</div>
-
-	</div>
+				width: 80%;
+				">Compartir ahora
+				</div>
+				</a>
+			</td>
+		</tr>
+	</table>
 
  	<img src="[IMG_URL]/club-patitas/nuevo-usuario.jpg" style="width: 100%;">			
 	<p style="
