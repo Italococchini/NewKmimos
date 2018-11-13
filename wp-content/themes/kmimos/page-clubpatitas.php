@@ -45,7 +45,7 @@
 			<?php }else{ ?>
 				<a href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Ver mis créditos</a>
 				|
-				<a href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Obtener mi código</a>				
+				<a href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Obtener mi código</a>					
 			<?php } ?>
 
 		</div>

@@ -271,6 +271,7 @@
 	$avatar_circle = '';
 	if( !is_user_logged_in() ){
 		include_once('partes/modal_login.php');
+		echo 'login';
 	}else{
 		$current_user = wp_get_current_user();
 		$user_id = $current_user->ID;
