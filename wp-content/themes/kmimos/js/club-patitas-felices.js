@@ -1,6 +1,14 @@
 var table;
 jQuery(document).ready( function (){
 
+	jQuery('#compartir_now').on('click', function(e){
+		var obj = jQuery('#redes-sociales');
+		if( obj.css('display') == 'none' ){
+			obj.css('display', 'block');
+		}else{
+			obj.css('display', 'none');
+		}
+	});
 	jQuery('#form-registro').on('submit', function(e){
 		e.preventDefault();
 		var btn = jQuery('#form-registro button[type="submit"]');

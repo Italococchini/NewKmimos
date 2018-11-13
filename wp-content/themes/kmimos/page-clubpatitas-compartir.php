@@ -73,15 +73,16 @@ ini_set('display_errors', '1');
 						<button class="btn btn-club-azul" onClick="downloadPDF();">Descargar PDF</button>
 					</div>
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
-						<button class="btn btn-club-azul">Compartir ahora</button>
+						<button id="compartir_now" class="btn btn-club-azul">Compartir ahora</button>
 					</div>
 				</div>
 
 				<!-- INI Compartir -->
-				<div class="row text-center" style="margin: 30px 0px; ">
+				<div id="redes-sociales" class="row text-center" style="margin: 30px 0px; display:none;">
 					<div class="col-md-6 col-md-offset-3">
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<a class="btn btn-info twitter-share-button"
+								style="color:#fff;"
 						  		href="https://twitter.com/intent/tweet?text=Suma%20huellas%20y%20gana%20descuentos%20CUPON%20<?php echo strtoupper($cupon);?>"
 						  		target="_blank">
 								<i class="fa fa-twitter"></i> Tweet
