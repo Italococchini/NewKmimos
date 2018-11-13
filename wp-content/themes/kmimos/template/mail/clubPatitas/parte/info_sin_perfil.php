@@ -1,12 +1,12 @@
 <div style="
 	width: 100%; 
 	text-align: center;
-	padding-bottom: 10px;
+	padding: 10px 5px;
 	margin-bottom: 50px;
 	-webkit-box-shadow: -1px 79px 114px -45px rgba(0,0,0,0.13);
 	-moz-box-shadow: -1px 79px 114px -45px rgba(0,0,0,0.13);
 	box-shadow: -1px 79px 114px -45px rgba(0,0,0,0.13);
-	background:#e4e2e22b;
+	background:#f5f5f5b8;
 	">
 
 	<table width="100%">

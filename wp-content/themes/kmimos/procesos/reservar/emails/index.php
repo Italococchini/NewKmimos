@@ -366,13 +366,62 @@
 			   		if(isset($cliente["id"])){
 				   	
 				   		// buscar cupones
-				   		$cupones = $wpdb->get_var("");
-
+				   		$cupones = $this->db->get_results("SELECT items.order_item_name as name
+				            FROM `wp_woocommerce_order_items` as items 
+				                INNER JOIN wp_woocommerce_order_itemmeta as meta ON 
+				                	meta.order_item_id = items.order_item_id
+				                INNER JOIN wp_posts as p ON 
+				                	p.ID = ".$reserva_id." and p.post_type = 'wc_booking' 
+				                WHERE meta.meta_key = 'discount_amount'
+				                    and items.`order_id` = p.post_parent
+				                    and not items.order_item_name like ('saldo-%')
+				            ;");
 
 				   		// validar si son del club
+				   		$propietario_id=0;
+				   		$propietario_nombre = '';
+				   		$propietario_apellido = '';
+				   		$cupon_code = '';
+				   		if( !empty($cupones) ){			   			
+					   		// Validar si son del club 
+					   		foreach ($cupones as $key => $cupon) {
+					   			$propietario_id = $wpdb->get_var("
+					   				select user_id from wp_usermeta where meta_key = 'club-patitas-cupon' and meta_value = '".$cupon->name."'
+					   			");
+					   			if( $propietario_id > 0 ){
+					   				$propietario_nombre = get_user_meta( $propietario_id, 'first_name', true );
+					   				$propietario_apellido = get_user_meta( $propietario_id, 'last_name', true );
+					   				$cupon_code = $cupon->name;
+					   				break;
+					   			}else{
+					   				$propietario_id = 0;
+					   			}
+					   		}
+							if( $propietario_id > 0 ){
+								$mail_info = realpath( $PATH_TEMPLATE.'/template/mail/clubPatitas/partes/info_sin_perfil.php');
+								if( !empty($propietario_nombre) && !empty($propietario_apellido) ){
+									$mail_info = realpath( 
+										$PATH_TEMPLATE.'/template/mail/clubPatitas/partes/info_con_perfil.php'
+									);
+								}
+								$message_info = file_get_contents($mail_info);
 
+								$mail_file = realpath( 
+									$PATH_TEMPLATE.'/template/mail/clubPatitas/notificacion_de_uso.php'
+								);
+								$message_mail = file_get_contents($mail_file);
 
-				   		// enviar email de confirmacion al propietario
+								$message_mail = str_replace('[INFO]', $message_info, $message_mail);
+								$message_mail = str_replace('[URL_IMG]', site_url()."/wp-content/themes/kmimos/images", $message_mail);
+								$message_mail = str_replace('[name]', $propietario_nombre.' '.$propietario_apellido, $message_mail);
+								$message_mail = str_replace('[url]', site_url(), $message_mail);
+								$message_mail = str_replace('[CUPON]', $cupon_code, $message_mail);
+
+								wp_mail( 'italococchini@gmail.com', "¡Bienvenid@ al club!", $message_mail);
+							}				   		
+
+				   		}
+
 
 
 				   		/*
