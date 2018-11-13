@@ -1,6 +1,6 @@
 <?php
-	error_reporting(E_ALL);
-ini_set('display_errors', '1');
+//	error_reporting(E_ALL);
+//ini_set('display_errors', '1');
 
 	extract($_GET);
 	if( isset($_GET["id_orden"]) ){
@@ -371,7 +371,7 @@ ini_set('display_errors', '1');
 			   		if(isset($cliente["id"])){
 
 				   		// buscar cupones
-				   		$cupones = $this->db->get_results("SELECT items.order_item_name as name
+				   		$cupones = $wpdb->get_results("SELECT items.order_item_name as name
 				            FROM `wp_woocommerce_order_items` as items 
 				                INNER JOIN wp_woocommerce_order_itemmeta as meta ON 
 				                	meta.order_item_id = items.order_item_id
