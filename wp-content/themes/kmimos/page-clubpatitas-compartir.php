@@ -48,7 +48,7 @@
 
 				<div class="row" style="margin: 30px 0px; ">
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
-						<button class="btn btn-club-azul">Descargar PDF</button>
+						<button class="btn btn-club-azul" onClick="downloadPDF();">Descargar PDF</button>
 					</div>
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
 						<button class="btn btn-club-azul">Compartir ahora</button>

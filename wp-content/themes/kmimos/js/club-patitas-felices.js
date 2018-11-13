@@ -1,10 +1,6 @@
 var table;
 jQuery(document).ready( function (){
 
-	jQuery('.pdf_club').on('click', function(e){
-		downloadPDF();
-	});
-
 	jQuery('#form-registro').on('submit', function(e){
 		e.preventDefault();
 		var btn = jQuery('#form-registro button[type="submit"]');
