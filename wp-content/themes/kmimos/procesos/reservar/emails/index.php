@@ -355,17 +355,23 @@ ini_set('display_errors', '1');
 
 				include("confirmacion.php");
 
+try{	
 wp_mail( 'italococchini@gmail.com', "prueba", "prueba envio email");
+}catch(Exception $e){}
 
-				$count_reservas = $wpdb->get_var( "SELECT  
+				$sql = "SELECT  
 							count(ID) as cant
 						FROM wp_posts
 						WHERE post_type = 'wc_booking' 
 							AND not post_status like '%cart%' AND post_status = 'confirmed' 
 							AND post_author = ".$cliente["id"]."
-							AND DATE_FORMAT(post_date, '%m-%d-%Y') between DATE_FORMAT('2017-05-12','%m-%d-%Y') and DATE_FORMAT(now(),'%m-%d-%Y')" );
+							AND DATE_FORMAT(post_date, '%m-%d-%Y') between DATE_FORMAT('2017-05-12','%m-%d-%Y') and DATE_FORMAT(now(),'%m-%d-%Y')";
+				$count_reservas = $wpdb->get_var( $sql );
 
-wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"]. );
+try{	
+wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"] );
+}catch(Exception $e){}
+
 				$message_mail='';
 				$paso = "1";
 //				if(  $_SESSION['admin_sub_login'] != 'YES' && $count_reservas == 1){
