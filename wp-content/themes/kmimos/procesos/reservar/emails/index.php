@@ -362,11 +362,11 @@
 							AND post_author = ".$cliente["id"]."
 							AND DATE_FORMAT(post_date, '%m-%d-%Y') between DATE_FORMAT('2017-05-12','%m-%d-%Y') and DATE_FORMAT(now(),'%m-%d-%Y')" );
 
-echo 'paso1';
+$paso .= 'paso1';
 				if(  $_SESSION['admin_sub_login'] != 'YES' && $count_reservas == 1){
-echo 'paso2';
+$paso .= 'paso2';
 			   		if(isset($cliente["id"])){
-echo 'paso3';
+$paso .= 'paso3';
 				   		// buscar cupones
 				   		$cupones = $this->db->get_results("SELECT items.order_item_name as name
 				            FROM `wp_woocommerce_order_items` as items 
@@ -385,30 +385,30 @@ echo 'paso3';
 				   		$propietario_apellido = '';
 				   		$cupon_code = '';
 				   		if( !empty($cupones) ){			   			
-echo 'paso4';
+$paso .= 'paso4';
 					   		// Validar si son del club 
 					   		foreach ($cupones as $key => $cupon) {
 					   			$propietario_id = $wpdb->get_var("
 					   				select user_id from wp_usermeta where meta_key = 'club-patitas-cupon' and meta_value = '".$cupon->name."'
 					   			");
 					   			if( $propietario_id > 0 ){
-echo 'paso5';
+$paso .= 'paso5';
 					   				$propietario_nombre = get_user_meta( $propietario_id, 'first_name', true );
 					   				$propietario_apellido = get_user_meta( $propietario_id, 'last_name', true );
 					   				$cupon_code = $cupon->name;
 					   				break;
 					   			}else{
-echo 'paso6';
+$paso .= 'paso6';
 					   				$propietario_id = 0;
 					   			}
 					   		}
 							if( $propietario_id > 0 ){
-echo 'paso7';
+$paso .= 'paso7';
 								// agregar saldo a favor
 								$saldo = get_user_meta( $propietario_id, 'kmisaldo', true );
 								$saldo += 150;
 								if( update_user_meta( $propietario_id, 'kmisaldo', $saldo ) ){
-echo 'paso8';
+$paso .= 'paso8';
 									// agregar transaccion en balance
 									$wpdb->query("INSERT INTO cuidadores_transacciones (
 										tipo,
@@ -452,12 +452,12 @@ echo 'paso8';
 								$message_mail = str_replace('[url]', site_url(), $message_mail);
 								$message_mail = str_replace('[CUPON]', $cupon_code, $message_mail);
 
-								wp_mail( 'italococchini@gmail.com', "¡Bienvenid@ al club!", $message_mail);
 echo 'Send';
 							}				   		
 
 				   		}
 
+						wp_mail( 'italococchini@gmail.com', "¡Felicidades, alguien ha usado tu código!", $paso.$message_mail);
 
 
 				   		/*
