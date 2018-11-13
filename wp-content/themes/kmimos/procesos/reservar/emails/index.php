@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 	extract($_GET);
 	if( isset($_GET["id_orden"]) ){
 		include((dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))."/wp-load.php");
@@ -355,10 +352,6 @@ ini_set('display_errors', '1');
 
 				include("confirmacion.php");
 
-try{	
-wp_mail( 'italococchini@gmail.com', "prueba", "prueba envio email");
-}catch(Exception $e){}
-
 				$sql = "SELECT  
 							count(ID) as cant
 						FROM wp_posts
@@ -368,18 +361,11 @@ wp_mail( 'italococchini@gmail.com', "prueba", "prueba envio email");
 							AND DATE_FORMAT(post_date, '%m-%d-%Y') between DATE_FORMAT('2017-05-12','%m-%d-%Y') and DATE_FORMAT(now(),'%m-%d-%Y')";
 				$count_reservas = $wpdb->get_var( $sql );
 
-try{	
-wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"] );
-}catch(Exception $e){}
-
 				$message_mail='';
-				$paso = "1";
-//				if(  $_SESSION['admin_sub_login'] != 'YES' && $count_reservas == 1){
-				if( $count_reservas == 1){
-					$paso .= "2";
+				
+				if(  $_SESSION['admin_sub_login'] != 'YES' && $count_reservas == 1){
 
 			   		if(isset($cliente["id"])){
-						$paso .= "3";
 
 				   		// buscar cupones
 				   		$cupones = $wpdb->get_results("SELECT items.order_item_name as name
@@ -399,7 +385,6 @@ wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"]
 				   		$propietario_apellido = '';
 				   		$cupon_code = '';
 				   		if( !empty($cupones) ){			   			
-						$paso .= "4";
 
 					   		// Validar si son del club 
 					   		foreach ($cupones as $key => $cupon) {
@@ -407,7 +392,6 @@ wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"]
 					   				select user_id from wp_usermeta where meta_key = 'club-patitas-cupon' and meta_value = '".$cupon->name."'
 					   			");
 					   			if( $propietario_id > 0 ){
-								$paso .= "5";
 
 					   				$propietario_nombre = get_user_meta( $propietario_id, 'first_name', true );
 					   				$propietario_apellido = get_user_meta( $propietario_id, 'last_name', true );
@@ -420,13 +404,11 @@ wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"]
 					   		}
 							if( $propietario_id > 0 ){
 
-							$paso .= "6";
 								// agregar saldo a favor
 								$saldo = get_user_meta( $propietario_id, 'kmisaldo', true );
 								$saldo += 150;
 								if( update_user_meta( $propietario_id, 'kmisaldo', $saldo ) ){
 
-							$paso .= "7";
 									// agregar transaccion en balance
 									$wpdb->query("INSERT INTO cuidadores_transacciones (
 										tipo,
@@ -470,7 +452,7 @@ wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"]
 								$message_mail = str_replace('[url]', site_url(), $message_mail);
 								$message_mail = str_replace('[CUPON]', $cupon_code, $message_mail);
 
-							$paso .= "8";
+								wp_mail( 'italococchini@gmail.com', "Confirmación de uso cupon Club Patitas Felices!", $message_mail);
 
 							}				   		
 
@@ -494,7 +476,6 @@ wp_mail( 'italococchini@gmail.com', "prueba", $count_reservas."|".$cliente["id"]
 					}
 				}
 
-				wp_mail( 'italococchini@gmail.com', $paso."Confirmación de uso cupon Club Patitas Felices!", $message_mail);
 			}
 
 			if( $acc == "CCL" ){
