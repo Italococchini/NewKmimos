@@ -68,7 +68,7 @@ ini_set('display_errors', '1');
 					<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
 
 					<!-- INI Compartir -->
-					<div id="redes-sociales" class="row text-center" style="margin: 30px 0px; display:none;">
+					<div id="redes-sociales" class="row text-center" style="margin: 30px 0px 0px 0px; display:none;">
 						<div class="col-md-6 col-sm-6 col-xs-12 text-right">
 							<a class="btn btn-info twitter-share-button"
 								style="color:#fff;"
