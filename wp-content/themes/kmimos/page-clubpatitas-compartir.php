@@ -66,21 +66,9 @@ ini_set('display_errors', '1');
 					<p>Recuerda, por cada vez que alguien use tu código y complete una reservación con un Cuidador
 					Kmimos <strong>tú ganas $150 MXN</strong> acumulables.</p>
 					<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
-				</div>
 
-				<div class="row" style="margin: 30px 0px; ">
-					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
-						<button class="btn btn-club-azul" onClick="downloadPDF();">Descargar PDF</button>
-					</div>
-					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
-						<button id="compartir_now" class="btn btn-club-azul">Compartir ahora</button>
-					</div>
-				</div>
-
-				<!-- INI Compartir -->
-				<div id="redes-sociales" class="row text-center" style="margin: 30px 0px; display:none;">
-					<div style="text-align:center;margin:5px 0px;">Comparte en las redes sociales</div>
-					<div class="col-md-6 col-md-offset-3">
+					<!-- INI Compartir -->
+					<div id="redes-sociales" class="row text-center" style="margin: 30px 0px; display:none;">
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<a class="btn btn-info twitter-share-button"
 								style="color:#fff;"
@@ -93,8 +81,18 @@ ini_set('display_errors', '1');
 							<div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
 						</div>
 					</div>
+					<!-- FIN Compartir -->
+
 				</div>
-				<!-- FIN Compartir -->
+
+				<div class="row" style="margin: 30px 0px; ">
+					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
+						<button class="btn btn-club-azul" onClick="downloadPDF();">Descargar PDF</button>
+					</div>
+					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
+						<button id="compartir_now" class="btn btn-club-azul">Compartir ahora</button>
+					</div>
+				</div>
 
 			</dir>
 
