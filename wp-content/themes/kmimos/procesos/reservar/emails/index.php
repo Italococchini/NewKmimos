@@ -364,11 +364,14 @@
 							AND post_author = ".$cliente["id"]."
 							AND DATE_FORMAT(post_date, '%m-%d-%Y') between DATE_FORMAT('2017-05-12','%m-%d-%Y') and DATE_FORMAT(now(),'%m-%d-%Y')" );
 
-
+				$message_mail='';
+				$paso = "1";
 //				if(  $_SESSION['admin_sub_login'] != 'YES' && $count_reservas == 1){
 				if( $count_reservas == 1){
+					$paso .= "2";
 
 			   		if(isset($cliente["id"])){
+						$paso .= "3";
 
 				   		// buscar cupones
 				   		$cupones = $wpdb->get_results("SELECT items.order_item_name as name
@@ -388,6 +391,7 @@
 				   		$propietario_apellido = '';
 				   		$cupon_code = '';
 				   		if( !empty($cupones) ){			   			
+$paso .= "4";
 
 					   		// Validar si son del club 
 					   		foreach ($cupones as $key => $cupon) {
@@ -395,6 +399,7 @@
 					   				select user_id from wp_usermeta where meta_key = 'club-patitas-cupon' and meta_value = '".$cupon->name."'
 					   			");
 					   			if( $propietario_id > 0 ){
+$paso .= "5";
 
 					   				$propietario_nombre = get_user_meta( $propietario_id, 'first_name', true );
 					   				$propietario_apellido = get_user_meta( $propietario_id, 'last_name', true );
@@ -407,11 +412,13 @@
 					   		}
 							if( $propietario_id > 0 ){
 
+$paso .= "6";
 								// agregar saldo a favor
 								$saldo = get_user_meta( $propietario_id, 'kmisaldo', true );
 								$saldo += 150;
 								if( update_user_meta( $propietario_id, 'kmisaldo', $saldo ) ){
 
+$paso .= "7";
 									// agregar transaccion en balance
 									$wpdb->query("INSERT INTO cuidadores_transacciones (
 										tipo,
@@ -455,7 +462,7 @@
 								$message_mail = str_replace('[url]', site_url(), $message_mail);
 								$message_mail = str_replace('[CUPON]', $cupon_code, $message_mail);
 
-								wp_mail( 'italococchini@gmail.com', "Confirmación de uso cupon Club Patitas Felices!", $message_mail);
+$paso .= "8";
 
 							}				   		
 
@@ -479,6 +486,7 @@
 					}
 				}
 
+				wp_mail( 'italococchini@gmail.com', $paso."Confirmación de uso cupon Club Patitas Felices!", $message_mail);
 			}
 
 			if( $acc == "CCL" ){
