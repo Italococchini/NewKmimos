@@ -28,9 +28,9 @@
 				
 				<div class="row">
 					<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
-					<h2 class="titulo">¡Tus cr&eacute;ditos del club!</h2>
+					<h2 style="margin: 10px 0px;"class="titulo">¡Tus cr&eacute;ditos del club!</h2>
 					<hr>
-					<table id="example" class="table table-striped table-bordered nowrap" cellspacing="0" style="min-width: 100%;">
+					<table id="example" class="table table-striped table-bordered nowrap" cellspacing="0" style="width: 100%;">
 		                <thead>
 		                    <tr>
 		                        <th></th>
