@@ -18,9 +18,9 @@ try{
 		</head>
 		<body>
 			
-			<div style="width: 1000px; height: 1000px;">
-				<div id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="
+			<div id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="
 				height: 1000px; width: 500px;" >
+					
 					<img height="1000px" width="500px" src="'.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg">
 
 					<img src="'.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png">
