@@ -417,13 +417,13 @@
 									referencia,
 									descripcion,
 									monto,
-									reserva,
+									reservas,
 									comision
 								)values(
 									'saldo_club',
 									{$propietario_id},
 									NOW(),
-									'',
+									'".$servicio["id_reserva"]."',
 									'Saldo a favor Club de las patitas felices ".$cupon_code."',
 									150,
 									'',
