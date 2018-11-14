@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 	session_start();
 	include ( '../../../../../wp-load.php' );
@@ -19,7 +21,7 @@
  	if( !empty($cupon) ){
 		// generar cupon
 		if( $user->ID > 0 ){
-		 
+
 	        $mail_file = realpath('../../../template/mail/clubPatitas/nuevo_miembro.php');
 
 	        $message_mail = file_get_contents($mail_file);
@@ -33,30 +35,18 @@
 	        $message_mail = str_replace('[url]', site_url(), $message_mail);
 	        $message_mail = str_replace('[CUPON]', $cupon, $message_mail);
 
-	        require_once '../../../lib/dompdf/autoload.inc.php';
-			require_once '../../../lib/dompdf/lib/html5lib/Parser.php';
-			require_once '../../../lib/dompdf/lib/php-font-lib/src/FontLib/Autoloader.php';
-			require_once '../../../lib/dompdf/lib/php-svg-lib/src/autoload.php';
-			require_once '../../../lib/dompdf/src/Autoloader.php';
-			Dompdf\Autoloader::register();
+	        require_once '../../../lib/mpdf/mpdf.php';
+			$mpdf=new mPDF();
 
-			use Dompdf\Dompdf;
+			$html = utf8_encode($message_mail);
 
-			// instantiate and use the dompdf class
-			$dompdf = new Dompdf();
-			$dompdf->loadHtml( $message_mail );
+			$mpdf->WriteHTML($html);
 
-			// (Optional) Setup the paper size and orientation
-			$dompdf->setPaper('letter', 'portrait');
+			// Genera el fichero y fuerza la descarga
+			$mpdf->Output('nombre.pdf','D'); 
 
-			// Render the HTML as PDF
-			$dompdf->render();
-
-			// Output the generated PDF to Browser
-			$dompdf->stream();
+ 
 
 		}
  	}
 
-
- 	echo $cupon;

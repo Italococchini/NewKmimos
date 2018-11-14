@@ -34,3 +34,6 @@ monitor/servicios_old/
 monitor/recursos - Sucursales/
 /index.php
 wp-content/plugins/rvcfdi-para-woocommerce/
+wp-content/themes/kmimos/lib/mpdf/src/QrCode/data/
+wp-content/themes/kmimos/lib/mpdf/ttfonts/Sun-ExtA.ttf
+wp-content/themes/kmimos/lib/mpdf/ttfonts/Sun-ExtB.ttf
