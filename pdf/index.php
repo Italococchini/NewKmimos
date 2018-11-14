@@ -17,9 +17,9 @@
 ?>
 
 	<div class="content-compartir-club">
-		<aside id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
-		</aside>
-		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
+		<div id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
 			
 			<dir class="col-md-8 col-md-offset-2">
 				
@@ -46,7 +46,7 @@
 
 			</dir>
 
-		</section>
+		</div>
 	</div>
 <?php
 	$html = ob_get_contents();
