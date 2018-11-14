@@ -24,7 +24,7 @@
 				"></div>
 				<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
 					
-					<dir class="col-md-8 col-md-offset-2 text-center">
+					<div class="col-md-8 col-md-offset-2 text-center">
 						
 						<div class="row">
 							<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
@@ -47,7 +47,7 @@
 
 						</div>
 
-					</dir>
+					</div>
 
 				</div>
 			</div>

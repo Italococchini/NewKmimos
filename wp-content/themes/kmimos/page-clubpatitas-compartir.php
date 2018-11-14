@@ -46,7 +46,7 @@ ini_set('display_errors', '1');
 		</aside>
 		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
 			
-			<dir class="col-md-8 col-md-offset-2">
+			<div class="col-md-8 col-md-offset-2">
 				
 				<div class="row">
 					<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
@@ -94,10 +94,11 @@ ini_set('display_errors', '1');
 					</div>
 				</div>
 
-			</dir>
+			</div>
 
 		</section>
 	</div>
+
 <?php 
 	$no_display_footer = true;
  	get_footer(); 
