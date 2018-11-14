@@ -56,6 +56,7 @@ if( !empty($cupon) ){
 
 // Generar PDF
 ob_end_clean();
+ob_start();
 include_once( '../wp-content/themes/kmimos/page-clubpatitas-compartir.php' );
 $html = ob_get_contents();
 ob_end_clean();
