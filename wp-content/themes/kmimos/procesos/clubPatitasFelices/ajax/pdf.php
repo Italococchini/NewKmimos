@@ -35,7 +35,7 @@ ini_set('display_errors', '1');
 	        $message_mail = str_replace('[url]', site_url(), $message_mail);
 	        $message_mail = str_replace('[CUPON]', $cupon, $message_mail);
 
-	        require_once '../../../lib/mpdf/mpdf.php';
+	        require_once '../../../lib/mpdf/src/Mpdf.php';
 			$mpdf=new mPDF();
 
 			$html = utf8_encode($message_mail);
