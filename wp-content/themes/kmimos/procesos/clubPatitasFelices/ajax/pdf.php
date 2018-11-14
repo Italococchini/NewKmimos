@@ -36,7 +36,7 @@ ini_set('display_errors', '1');
 	        $message_mail = str_replace('[CUPON]', $cupon, $message_mail);
 
 	        require_once '../../../lib/vendor/autoload.php';
-			$mpdf = new \Mpdf\Mpdf();
+			$mpdf = new \Mpdf\Mpdf(['tempDir' => '../../../../../../wp-content/uploads/temp']);
 
 			$html = utf8_encode($message_mail);
 
