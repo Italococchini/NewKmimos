@@ -17,12 +17,13 @@ try{
 		    <link rel="stylesheet" type="text/css" media="all" href="'.getTema().'/css/club-patitas-felices.css"></link>
 		</head>
 		<body>
-		
+			
+			<div style="width: 1000px; height: 1000px;">
 				<div id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="
 				height: 1000px; width: 500px; float:left;display:inline-block; background-repeat:no-repeat;background-position:center top;
 					background-image: url('.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);
 				"></div>
-				<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="border:1px solid #ccc;height: 500px; width: 400px; float:right; display:inline-block;">
+				<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="border:1px solid #ccc;height: 1000px; width: 400px; float:right; display:inline-block;">
 	
 					<img src="'.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png">
 					<h2 class="titulo">¡Ya eres parte del club!</h2>
@@ -43,7 +44,7 @@ try{
 					<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
 
 				</div>
-		
+			</div>		
 		</body>
 	</html>';
 
