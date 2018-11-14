@@ -66,7 +66,7 @@
 		        $message_mail = file_get_contents($mail_file);
 
 		        $message_mail = str_replace('[NUEVOS_USUARIOS]', $mail_seccion_usuario, $message_mail);
-		        $message_mail = str_replace('[URL_IMG]', $URL_SITE."/wp-content/themes/kmimos/images", $message_mail);
+		        $message_mail = str_replace('[IMG_URL]', $URL_SITE."/wp-content/themes/kmimos/images", $message_mail);
 
 		        $message_mail = str_replace('[name]', $nombre.' '.$apellido, $message_mail);
 		        $message_mail = str_replace('[email]', $email, $message_mail);

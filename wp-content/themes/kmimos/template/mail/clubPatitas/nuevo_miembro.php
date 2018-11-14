@@ -2,7 +2,7 @@
 <div style="width: 600px; margin: 0 auto; font-family: sans-serif; ">
 	
 	<div style="width: 100%">
-		<img src="[IMG_URL]/club-patitas/header-nuevo.jpg" style="width: 100%;">			
+		<img src="[IMG_URL]/club-patitas/header_nuevo.jpg" style="width: 100%;">			
 	</div>
 
 	<div style="padding: 0px 15px; width: 90%; margin: 0 auto; text-align: center;">
@@ -12,7 +12,7 @@
 			color: #0d7ad8; 
 			font-weight: bold;
 		">¡Bienvenid@ al club!</h1>
-		<div>
+		<div style="text-align: center;">
 			Tu código único del club
 		</div>
 		<div style="
@@ -37,7 +37,7 @@
 
 		<div style="margin: 60px 0px;">
 			<a href="[url]/club-patitas-felices/compartir" style="
-				padding: 15px 60px;
+				padding: 15px 60px 15px 60px;
 				background: #0d7ad8;
 				color: #fff; 
 				border-radius: 10px;

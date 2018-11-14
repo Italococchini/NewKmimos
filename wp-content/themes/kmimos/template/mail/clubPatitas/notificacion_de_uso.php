@@ -2,7 +2,7 @@
 <div style="width: 600px; margin: 0 auto; font-family: sans-serif; ">
 	
 	<div style="width: 100%">
-		<img src="[IMG_URL]/club-patitas/header-nuevo.jpg" style="width: 100%;">			
+		<img src="[IMG_URL]/club-patitas/header_nuevo.jpg" style="width: 100%;">			
 	</div>
 
 	<div style="padding: 0px 15px; width: 90%; margin: 0 auto; text-align: center;">

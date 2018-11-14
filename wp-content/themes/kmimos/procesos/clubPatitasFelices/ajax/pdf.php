@@ -43,7 +43,7 @@ ini_set('display_errors', '1');
 			$mpdf->WriteHTML($html);
 
 			// Genera el fichero y fuerza la descarga
-			$mpdf->Output('nombre.pdf','D'); 
+			$mpdf->Output('nombre.pdf','D'); exit;
 
  
 
