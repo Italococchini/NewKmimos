@@ -90,7 +90,7 @@ ini_set('display_errors', '1');
 						<button class="btn btn-club-azul" onClick="downloadPDF();">Descargar PDF</button>
 					</div>
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
-						<button id="compartir_now" class="btn btn-club-azul">Compartir ahora</button>
+						<button id="compartir_now" target="_blank" href="<?php echo get_home_url(); ?>/pdf/pdf_club.php" class="btn btn-club-azul">Compartir ahora</button>
 					</div>
 				</div>
 
