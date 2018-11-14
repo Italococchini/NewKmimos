@@ -42,7 +42,7 @@
 		</aside>
 		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
 			
-			<dir class="col-md-12 ">
+			<dir class="col-md-10 col-xs-12">
 				
 				<div class="row">
 					<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">

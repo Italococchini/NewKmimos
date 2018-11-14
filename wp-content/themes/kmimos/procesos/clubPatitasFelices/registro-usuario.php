@@ -10,7 +10,7 @@
 	$email = $_POST['email'];
  	$meta = explode('@', $email);
 	$username = $meta[0];
-	$password='';
+	$clave='';
 
 	// Verificar si existe el email
 	$user = get_user_by( 'email', $email );	
@@ -22,7 +22,8 @@
 
  	// Registro de Usuario en Kmimos
 	if(!isset($user->ID)){
-	    $password = md5(wp_generate_password( 5, false ));
+		$clave = wp_generate_password( 5, false );
+	    $password = md5($clave);
 	    $user_id  = wp_create_user( $username, $password, $email );
 	
 	    wp_update_user( array( 'ID' => $user_id, 'display_name' => "{$nombre}" ));		
@@ -70,7 +71,7 @@
 
 		        $message_mail = str_replace('[name]', $nombre.' '.$apellido, $message_mail);
 		        $message_mail = str_replace('[email]', $email, $message_mail);
-		        $message_mail = str_replace('[pass]', $password, $message_mail);
+		        $message_mail = str_replace('[pass]', $clave, $message_mail);
 		        $message_mail = str_replace('[url]', site_url(), $message_mail);
 		        $message_mail = str_replace('[CUPON]', $cupon, $message_mail);
 
