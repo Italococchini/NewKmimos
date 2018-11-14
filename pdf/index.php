@@ -3,6 +3,7 @@
 	require dirname(__DIR__).'/wp-load.php';
 	use Spipu\Html2Pdf\Html2Pdf;
 
+try{
 	$user = wp_get_current_user();
 	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
 
@@ -60,3 +61,6 @@
 	$html2pdf = new Html2Pdf();
 	$html2pdf->writeHTML( $html );
 	$html2pdf->output();
+}catch(Exception $e){
+	echo $e->getMessage();
+}
