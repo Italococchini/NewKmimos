@@ -52,6 +52,8 @@
 	$html = ob_get_contents();
 	ob_end_clean();
 
-	$html2pdf = new Html2Pdf();
-	$html2pdf->writeHTML( $html );
-	$html2pdf->output();
+echo $html;
+
+	// $html2pdf = new Html2Pdf();
+	// $html2pdf->writeHTML( $html );
+	// $html2pdf->output();
