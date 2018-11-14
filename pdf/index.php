@@ -17,9 +17,9 @@ try{
 		    <link rel="stylesheet" type="text/css" media="all" href="'.getTema().'/css/club-patitas-felices.css"></link>
 		</head>
 		<body>
-			<div class="content-compartir-club">
+			<div class="content-compartir-club" style="width: 1500px; height: 2000px;">
 				<div id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="
-				height: 1100px; width: 500px; float:left; background-position:top center;
+				height: 1700px; width: 500px; float:left; background-repeat:no-repeat;background-position:top center;
 					background-image: url('.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);
 				"></div>
 				<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="height: 500px; width: 400px; float:left;">
