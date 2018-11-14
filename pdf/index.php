@@ -5,6 +5,8 @@
 
 	$user = wp_get_current_user();
 	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
+
+	ob_start();
 ?>
 	<!DOCTYPE html>
 	<html>
@@ -52,6 +54,8 @@
 		</body>
 	</html>
 <?php
-	// $html2pdf = new Html2Pdf();
-	// $html2pdf->writeHTML( $html );
-	// $html2pdf->output();
+	$html = ob_get_contents();
+	ob_end_clean();
+	$html2pdf = new Html2Pdf();
+	$html2pdf->writeHTML( $html );
+	$html2pdf->output();
