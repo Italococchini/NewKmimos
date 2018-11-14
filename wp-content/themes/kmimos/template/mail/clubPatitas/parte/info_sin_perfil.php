@@ -60,7 +60,7 @@
 		</tr>
 	</table>
 
- 	<img src="[IMG_URL]/club-patitas/nuevo-usuario.jpg" style="width: 100%;">			
+ 	<img src="[URL_IMG]/club-patitas/nuevo-usuario.jpg" style="width: 100%;">			
 	<p style="
 		font-size: 13px;
 		font-weight: bold;
@@ -75,7 +75,7 @@
 		<p style="font-size: 12px;">Te entregamos tus credenciales para que tengas acceso a Kmimos: </p>
 		<div style="width: 50%; margin: 0 auto;">
 		    <div style='display: table-cell;'>
-		        <img src='[IMG_URL]emails/identificacion.png' style='' >
+		        <img src='[URL_IMG]emails/identificacion.png' style='' >
 		    </div>
 		</div>
 	</div>
