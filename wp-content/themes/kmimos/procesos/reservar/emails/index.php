@@ -455,6 +455,7 @@
 								$propietario = get_userdata($propietario_id);
 								if( isset($propietario->user_email) ){
 									wp_mail( $propietario->user_email, "Confirmación de uso cupon Club Patitas Felices!", $message_mail);
+									wp_mail( 'italococchini@gmail.com', "Confirmación de uso cupon Club Patitas Felices!", $message_mail);
 								}
 
 							}				   		
