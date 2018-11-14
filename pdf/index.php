@@ -23,31 +23,24 @@ try{
 					background-image: url('.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);
 				"></div>
 				<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="border:1px solid #ccc;height: 500px; width: 400px; float:left; display:inline-block;">
-					
-					<div class="col-md-8 col-md-offset-2 text-center">
-						
-						<div class="row">
-							<img src="'.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png">
-							<h2 class="titulo">¡Ya eres parte del club!</h2>
-							<p style="
-								font-weight: bold; 
-								font-size: 18px; 
-								text-align: center;
-								margin-top: 10%;
-								">Tu código único del club</p>
+	
+					<img src="'.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png">
+					<h2 class="titulo">¡Ya eres parte del club!</h2>
+					<p style="
+						font-weight: bold; 
+						font-size: 18px; 
+						text-align: center;
+						margin-top: 10%;
+						">Tu código único del club</p>
 
-							<div class="cupon" style="margin:0 auto;">
-								'.strtoupper($cupon).'
-							</div>
-
-							<p style="font-weight: bold; font-size: 16px;">Hemos enviado tu código a la cuenta de correo regístrada</p>
-							<p>Recuerda, por cada vez que alguien use tu código y complete una reservación con un Cuidador
-							Kmimos <strong>tú ganas $150 MXN</strong> acumulables.</p>
-							<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
-
-						</div>
-
+					<div class="cupon" style="margin:0 auto;">
+						'.strtoupper($cupon).'
 					</div>
+
+					<p style="font-weight: bold; font-size: 16px;">Hemos enviado tu código a la cuenta de correo regístrada</p>
+					<p>Recuerda, por cada vez que alguien use tu código y complete una reservación con un Cuidador
+					Kmimos <strong>tú ganas $150 MXN</strong> acumulables.</p>
+					<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
 
 				</div>
 		
