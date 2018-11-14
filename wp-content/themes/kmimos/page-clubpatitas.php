@@ -43,7 +43,7 @@
 				|
 				<a href="#" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Obtener mi código</a>
 			<?php }else{ ?>
-				<a href="<?php echo get_home_url(); ?>/club-patitas-felices/creditos" data-target="#popup-iniciar-sesion" style="padding-right: 15px" role="button" data-toggle="modal">Ver mis créditos</a>
+				<a href="<?php echo get_home_url(); ?>/club-patitas-felices/creditos">Ver mis créditos</a>
 				|
 	            <a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
 			<?php } ?>
