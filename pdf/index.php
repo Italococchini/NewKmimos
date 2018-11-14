@@ -7,7 +7,7 @@
 	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
 
 	ob_start();
-?>
+?> 
 	<!DOCTYPE html>
 	<html>
 		<head>
