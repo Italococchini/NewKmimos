@@ -19,7 +19,7 @@ try{
 		<body>
 			<div class="content-compartir-club">
 				<div id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="
-				height: 500px; width: 40%; float:left;
+				height: 800px; width: 35%; float:left; background-position:top center;
 					background-image: url('.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);
 				"></div>
 				<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="height: 500px; width: 40%; float:left;">
@@ -36,7 +36,7 @@ try{
 								margin-top: 10%;
 								">Tu código único del club</p>
 
-							<div class="cupon">
+							<div class="cupon" style="margin:0 auto;">
 								'.strtoupper($cupon).'
 							</div>
 
