@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 	session_start();
-	include ( '../../../../../wp-load.php' );
+	include_once( '../../../../../../wp-load.php' );
 
 	// usuario
 	$user = wp_get_current_user();
