@@ -53,10 +53,10 @@
 		</body>
 	</html>
 <?php
-	$home_dir = realpath(dirname(__DIR__));
 	$html = ob_get_contents();
 	ob_end_clean();
-	$html = str_replace(get_home_url(), $home_dir, $html);
+//	$home_dir = realpath(dirname(__DIR__));
+//	$html = str_replace(get_home_url(), $home_dir, $html);
 	$html2pdf = new Html2Pdf();
 	$html2pdf->writeHTML( $html );
 	$html2pdf->output();
