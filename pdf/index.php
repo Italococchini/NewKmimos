@@ -15,7 +15,6 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 			<link rel="stylesheet" type="text/css" media="all" href="<?php echo getTema(); ?>/css/bootstrap.min.css"></link>
 		    <link rel="stylesheet" type="text/css" media="all" href="<?php echo getTema(); ?>/css/club-patitas-felices.css"></link>
-
 		</head>
 		<body>
 			<div class="content-compartir-club">
@@ -54,8 +53,11 @@
 		</body>
 	</html>
 <?php
+	$home_dir = dirname(__DIR__);
 	$html = ob_get_contents();
+	$html = str_replace(get_home_url(), $home_url, $html);
 	ob_end_clean();
+
 	$html2pdf = new Html2Pdf();
 	$html2pdf->writeHTML( $html );
 	$html2pdf->output();
