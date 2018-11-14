@@ -19,9 +19,10 @@ try{
 		<body>
 			<div class="content-compartir-club">
 				<div id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="
+				height: 500px; width: 40%; float:left;
 					background-image: url('.getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);
 				"></div>
-				<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="'.$center_content.'">
+				<div class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="height: 500px; width: 40%; float:left;">
 					
 					<div class="col-md-8 col-md-offset-2 text-center">
 						
