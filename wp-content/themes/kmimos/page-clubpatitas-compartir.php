@@ -87,7 +87,7 @@ ini_set('display_errors', '1');
 
 				<div class="row" style="margin: 30px 0px; ">
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
-						<a class="btn btn-club-azul" target="_blank" href="<?php echo get_home_url(); ?>/pdf/pdf_club.php">Descargar PDF</a>
+						<a style="color:white!important;" class="btn btn-club-azul" target="_blank" href="<?php echo get_home_url(); ?>/pdf/pdf_club.php">Descargar PDF</a>
 					</div>
 					<div class="col-md-6 col-sm-12 col-xs-12 text-center">
 						<button id="compartir_now" class="btn btn-club-azul">Compartir ahora</button>
