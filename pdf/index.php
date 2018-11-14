@@ -55,11 +55,11 @@ try{
 	</html>
 <?php
 	$html = ob_get_contents();
-	ob_end_clean();
 	$home_dir = realpath(dirname(__DIR__));
 	$html = str_replace(get_home_url(), $home_dir, $html);
 	$html2pdf = new Html2Pdf();
 	$html2pdf->writeHTML( $html );
+	ob_end_clean();
 	$html2pdf->output();
 }catch(Exception $e){
 	echo $e->getMessage();
