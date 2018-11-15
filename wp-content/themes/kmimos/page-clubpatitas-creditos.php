@@ -10,7 +10,7 @@
 	}
 	
     $url_img = get_home_url() .'/wp-content/themes/kmimos/images/club-patitas/';
-    //$no_top_menu = false;
+    $no_top_menu = false;
 
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
     wp_enqueue_style('club_responsive', getTema()."/css/responsive/club-patitas-felices.css", array(), '1.0.0');
@@ -40,7 +40,7 @@
 	<div class="content-compartir-club" style="z-index: 5px!important;">
 		<aside id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
 		</aside>
-		<section clss="text-center" style="z-index: 5px!important;padding: 20px 0px!important; ">
+		<section clss="text-center" style="padding: 20px 0px!important; ">
             <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Club Patitas Felices</a>
 			<span style="padding:0px 10px;">|</span>
             <a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
