@@ -46,8 +46,8 @@
         //USER LOGIN
         if (!isset($_SESSION)) { session_start(); }
         $user = get_user_by( 'ID', $user_id );
-        wp_set_current_user($user_id, $user->user_login);
-        wp_set_auth_cookie($user_id);
+        //wp_set_current_user($user_id, $user->user_login);
+        //wp_set_auth_cookie($user_id);
 
         // $wpdb->query("UPDATE wp_users SET user_pass = '{$password}' WHERE ID = ".$user->ID);
 	}else{
