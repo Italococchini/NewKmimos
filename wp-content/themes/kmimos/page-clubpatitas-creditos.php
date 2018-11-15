@@ -51,7 +51,7 @@
 		</aside>
 		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
 			
-			<dir class="col-md-10 col-xs-12">
+			<dir class="col-md-12 col-xs-12">
 				
 				<section clss="text-center" style="padding: 20px 0px!important; ">
 		            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Club Patitas Felices</a>
