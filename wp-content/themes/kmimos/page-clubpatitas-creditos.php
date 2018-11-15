@@ -18,7 +18,7 @@
 	}
 	
     $url_img = get_home_url() .'/wp-content/themes/kmimos/images/club-patitas/';
-    $no_top_menu = false;
+    //$no_top_menu = false;
 
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
     wp_enqueue_style('club_responsive', getTema()."/css/responsive/club-patitas-felices.css", array(), '1.0.0');

@@ -15,7 +15,7 @@
 	}
 	
     $url_img = get_home_url() .'/wp-content/themes/kmimos/images/club-patitas/';
-    $no_top_menu = true;
+    //$no_top_menu = true;
 	$nombre = "";
 	if( $user->ID > 0 ){
 		$nombre = get_user_meta( $user->ID, 'first_name', true );
