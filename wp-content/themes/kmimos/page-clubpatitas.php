@@ -16,6 +16,13 @@
 	$display_registro = '';
 	$center_content = '';
 	$user = wp_get_current_user();
+	$nombre = "";
+	if( !empty($nombre) ){
+		$nombre = get_user_meta( $user->ID, 'first_name', true );
+		$nombre .= " ";
+		$nombre .= get_user_meta( $user->ID, 'last_name', true );
+	}
+
 	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
  	if( !empty($cupon) ){
 		$display_registro = 'hidden';
@@ -56,7 +63,7 @@
 	</header>
 	<div class="body-club">
 		<aside class="col-xs-12 col-sm-12 col-md-7 hidden-md hidden-lg">
-			<h3 class="text-center" style="margin:10px 0px;"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
+			<h3 class="text-center" style="margin:10px 0px;"><strong style="color:#0D7AD8;">¡Bienvenido al club <?php echo $nombre; ?>!</strong></h3>
 		</aside>
 		<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 <?php echo $display_registro; ?>">
 			<div class="text-center col-md-10 col-md-offset-1 text-center">
