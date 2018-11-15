@@ -10,10 +10,8 @@
     }
     
     $info = array();
-    // $info['user_login']     = sanitize_user($usu, true);
-    // $info['user_password']  = sanitize_text_field($clv);
-    $info['user_login']     = $usu;
-    $info['user_password']  = $clv;
+    $info['user_login']     = sanitize_user($usu, true);
+    $info['user_password']  = sanitize_text_field($clv);
     $info['remember']  = ( $check == 'active' )? true : false ;
 
     $user_signon = wp_signon( $info, true );
