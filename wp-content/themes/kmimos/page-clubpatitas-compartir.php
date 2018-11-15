@@ -3,9 +3,10 @@
         Template Name: Club patitas Compartir
     */
 
-/*error_reporting(E_ERROR || E_WARNING);
-ini_set('display_errors', '1');
-*/
+	/*
+	error_reporting(E_ERROR || E_WARNING);
+	ini_set('display_errors', '1');
+	*/
 
 	$user = wp_get_current_user();
 	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
@@ -44,11 +45,15 @@ ini_set('display_errors', '1');
 	<div class="content-compartir-club">
 		<aside id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
 		</aside>
+		<section clss="text-center" style="padding: 20px 0px!important; ">
+            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Club Patitas Felices</a>
+			<span style="padding:0px 10px;">|</span>
+			<a href="<?php echo get_home_url(); ?>/club-patitas-felices/creditos">Ver mis créditos</a>
+		</section>				
 		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
-			
 			<div class="col-md-8 col-md-offset-2">
-				
 				<div class="row">
+
 					<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
 					<h2 class="titulo">¡Ya eres parte del club!</h2>
 					<p style="
@@ -71,7 +76,7 @@ ini_set('display_errors', '1');
 					<div id="redes-sociales" class="row text-center" style="margin: 30px 0px 0px 0px; background: #e8e8e8; border-radius: 5px; padding: 10px 0px; display:none;">
 						<div class="col-md-6 col-sm-6 col-xs-6 text-right">
 							<a class="btn btn-info twitter-share-button"
-								style="color:#fff;"
+								style="color:#fff!important;padding: 4px 25px!important;"
 						  		href="https://twitter.com/intent/tweet?text=Suma%20huellas%20y%20gana%20descuentos%20CUPON%20<?php echo strtoupper($cupon);?>"
 						  		target="_blank">
 								<i class="fa fa-twitter"></i> Tweet

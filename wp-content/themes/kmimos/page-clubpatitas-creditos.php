@@ -40,6 +40,11 @@
 	<div class="content-compartir-club">
 		<aside id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
 		</aside>
+		<section clss="text-center" style="padding: 20px 0px!important; ">
+            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Club Patitas Felices</a>
+			<span style="padding:0px 10px;">|</span>
+            <a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
+		</section>				
 		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
 			
 			<dir class="col-md-10 col-xs-12">
