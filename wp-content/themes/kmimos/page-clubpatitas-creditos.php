@@ -8,6 +8,14 @@
  	if( empty($cupon) ){
 		header('location:'.get_home_url().'/club-patitas-felices');
 	}
+
+
+	$nombre = "";
+	if( $user->ID > 0 ){
+		$nombre = get_user_meta( $user->ID, 'first_name', true );
+		$nombre .= " ";
+		$nombre .= get_user_meta( $user->ID, 'last_name', true );
+	}
 	
     $url_img = get_home_url() .'/wp-content/themes/kmimos/images/club-patitas/';
     $no_top_menu = false;
@@ -35,6 +43,7 @@
 
 
 	get_header();
+
 ?>
 	
 	<div class="content-compartir-club" style="z-index: 5px!important;">
@@ -51,7 +60,7 @@
 				</section>				
 				<div class="row">
 					<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
-					<h2 style="margin: 10px 0px;"class="titulo">¡Tus cr&eacute;ditos del club!</h2>
+					<h2 style="margin: 10px 0px;"class="titulo">¡Tus cr&eacute;ditos del club <?php echo $nombre; ?>!</h2>
 					<hr>
 					<table id="example" class="table table-striped table-bordered nowrap" cellspacing="0" style="width: 100%;">
 		                <thead>

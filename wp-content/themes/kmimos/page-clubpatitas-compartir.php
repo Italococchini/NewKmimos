@@ -16,6 +16,12 @@
 	
     $url_img = get_home_url() .'/wp-content/themes/kmimos/images/club-patitas/';
     $no_top_menu = true;
+	$nombre = "";
+	if( $user->ID > 0 ){
+		$nombre = get_user_meta( $user->ID, 'first_name', true );
+		$nombre .= " ";
+		$nombre .= get_user_meta( $user->ID, 'last_name', true );
+	}
 
 
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
@@ -55,7 +61,7 @@
 				</section>				
 				<div class="row">
 					<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
-					<h2 class="titulo">¡Ya eres parte del club!</h2>
+					<h2 class="titulo">¡Ya eres parte del club <?php echo $nombre; ?>!</h2>
 					<p style="
 						font-weight: bold; 
 						font-size: 18px; 

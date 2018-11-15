@@ -25,8 +25,6 @@ jQuery(document).ready( function (){
 		}
 	});
 
-
-	menuClub();
 });
 
 function menuClub(){
