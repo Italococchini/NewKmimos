@@ -25,6 +25,7 @@ jQuery(document).ready( function (){
 		}
 	});
 
+	menuClub();
 });
 
 function menuClub(){
@@ -32,7 +33,11 @@ function menuClub(){
 	menu.css('background', 'transparent');
     menu.css('border', '0px');
     menu.css('box-shadow', '0px 0px 0px 0px');
+    menu.css('min-height', '0px');
     menu.css('padding-top', '4px');
+
+    var con = menu.find('.container');
+    con.css('padding','0px');
 }
 
 function downloadPDF(){
