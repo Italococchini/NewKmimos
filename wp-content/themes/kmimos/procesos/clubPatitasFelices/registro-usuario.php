@@ -22,7 +22,7 @@
 
  	// Registro de Usuario en Kmimos
 	if(!isset($user->ID)){
-		$clave = 'Kmi'.$user->ID;
+		$clave = 'Kmi'.rand(3);
 	    $password = md5($clave);
 	    $user_id  = wp_create_user( $username, $password, $email );
 	
