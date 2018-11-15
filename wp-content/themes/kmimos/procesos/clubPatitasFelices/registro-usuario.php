@@ -25,14 +25,8 @@
 	if(!isset($user->ID)){
 		$clave = 'Kmi'.date('mi');
 	    $password = md5($clave);
-	    // $user_id  = wp_create_user( $username, $password, $email );
+	    $user_id  = wp_create_user( $username, $password, $email );
 
-		$userdata = array(
-		    'user_login'  =>  $email,
-		    'user_pass'   =>  $clave,
-		);
-	    $user_id  = wp_insert_user( $userdata );
- 
 	    wp_update_user( array( 'ID' => $user_id, 'display_name' => "{$nombre}" ));		
 
 		// Registrado desde el landing page
@@ -52,8 +46,8 @@
         //USER LOGIN
         if (!isset($_SESSION)) { session_start(); }
         $user = get_user_by( 'ID', $user_id );
-        //wp_set_current_user($user_id, $user->user_login);
-        //wp_set_auth_cookie($user_id);
+        wp_set_current_user($user_id, $user->user_login);
+        wp_set_auth_cookie($user_id);
 
         // $wpdb->query("UPDATE wp_users SET user_pass = '{$password}' WHERE ID = ".$user->ID);
 	}else{
