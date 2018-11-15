@@ -68,7 +68,6 @@
 						text-align: center;
 						margin-top: 10%;
 						">Tu código único del club</p>
-
 					<div class="cupon">
 						<?php echo strtoupper($cupon); ?>
 					</div>

@@ -4,6 +4,7 @@
 	include ( '../../../../../wp-load.php' );
 
 // Parametros
+	global $wpdb;
 
 	$nombre  = $_POST['nombre'];
 	$apellido  = $_POST['apellido'];
@@ -17,8 +18,8 @@
 
 	$mail_seccion_usuario ='';
 
-	//$URL_SITE = get_home_url();
-	$URL_SITE = 'http://kmimosmx.sytes.net/QA2/';
+	$URL_SITE = get_home_url();
+	//$URL_SITE = 'http://kmimosmx.sytes.net/QA2/';
 
  	// Registro de Usuario en Kmimos
 	if(!isset($user->ID)){
@@ -46,9 +47,15 @@
         $user = get_user_by( 'ID', $user_id );
         wp_set_current_user($user_id, $user->user_login);
         wp_set_auth_cookie($user_id);
+
+        $wpdb->query("UPDATE wp_users SET user_pass = '{$password}' WHERE ID = ".$user->ID);
+	}else{
+
 	}
 
  	// Registro de Usuario en Club de patitas felices
+	$sts = 1;
+	$msg ='';
  	$cupon = get_user_meta( $user->ID, 'club-patitas-cupon', true );
  	if( empty($cupon) || $cupon == null ){
 		// generar cupon
@@ -79,7 +86,10 @@
 		        wp_mail( 'italococchini@gmail.com', "¡Bienvenid@ al club!", $message_mail);
 			}
 		}
+ 	}else{
+ 		$sts = 0;
+ 		$msg ='Debes iniciar sesion para registrate en el club';
  	}
 
+	echo json_encode(['sts'=>$sts,'msg'=>$msg]);
 
- 	echo $cupon;

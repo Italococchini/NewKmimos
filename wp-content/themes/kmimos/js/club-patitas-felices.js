@@ -14,14 +14,20 @@ jQuery(document).ready( function (){
 		var btn = jQuery('#form-registro button[type="submit"]');
 		if( !btn.hasClass('disabled') ){
 			btn.addClass('disabled');
+			btn.html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Procesando');
 			jQuery.post(
 		        HOME+'procesos/clubPatitasFelices/registro-usuario.php',
 		        jQuery(this).serialize(),
 		        function(d){
 		        	console.log(d);
-					btn.removeClass('disabled');
-					location.href=RAIZ+'/club-patitas-felices/compartir';
-		    });
+		        	if(d.sts == 1){
+						location.href=RAIZ+'/club-patitas-felices/compartir';
+		        	}else{
+						btn.html('Genera tu código aquí');
+						btn.removeClass('disabled');
+						alert(d.msg);
+		        	}
+		    }, 'json');
 		}
 	});
 
