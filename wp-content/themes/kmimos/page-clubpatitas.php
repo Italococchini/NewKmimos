@@ -64,7 +64,7 @@
 	</header>
 	<div class="body-club">
 		<aside class="col-xs-12 col-sm-12 col-md-7 hidden-md hidden-lg">
-			<h3 class="text-center" style="margin:10px 0px;"><strong style="color:#0D7AD8;">¡Bienvenido al club <?php echo $nombre; ?>!</strong></h3>
+			<h3 class="text-center" style="margin:10px 0px;"><strong style="color:#0D7AD8;">¡Bienvenido al club  <?php echo $nombre; ?>!</strong></h3>
 		</aside>
 		<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 <?php echo $display_registro; ?>">
 			<div class="text-center col-md-10 col-md-offset-1 text-center">
@@ -86,7 +86,7 @@
 		</aside>
 		<section id="club-content" class="col-xs-12 col-sm-12 col-md-7 <?php echo $center_content; ?>">
 
-			<h3 class="hidden-xs hidden-sm text-left"><strong style="color:#0D7AD8;">¡Bienvenido al club!</strong></h3>
+			<h3 class="hidden-xs hidden-sm text-left"><strong style="color:#0D7AD8;">¡Bienvenido al club  <?php echo $nombre; ?>!</strong></h3>
 
 		 	<p class="text-justify">El club de las patitas felices te recompensa con $150 MXN para que los uses en cualquiera de nuestros servicios. Es muy sencillo, por cada vez que compartas tu código de las patitas felices tu referido obtendrá $150 MXN para utilizarlo en su primera reserva y una vez que complete su reservación a ti se te abonarán tus $150 MXN de crédito en Kmimos. </p>
 			<div class="item col-md-10">	
