@@ -43,17 +43,17 @@
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
-	<div class="content-compartir-club">
+	<div class="content-compartir-club" style="z-index:5px!important;">
 		<aside id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
 		</aside>
+		<section clss="text-center" style="padding: 20px 0px!important;z-index:5px!important; ">
+            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Club Patitas Felices</a>
+			<span style="padding:0px 10px;">|</span>
+			<a href="<?php echo get_home_url(); ?>/club-patitas-felices/creditos">Ver mis créditos</a>
+		</section>				
 		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
 			<div class="col-md-8 col-md-offset-2">
 				<div class="row">
-					<section clss="text-center" style="padding: 20px 0px!important; ">
-			            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Club Patitas Felices</a>
-						<span style="padding:0px 10px;">|</span>
-						<a href="<?php echo get_home_url(); ?>/club-patitas-felices/creditos">Ver mis créditos</a>
-					</section>				
 					<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
 					<h2 class="titulo">¡Ya eres parte del club!</h2>
 					<p style="
