@@ -44,6 +44,7 @@
         $mail_seccion_usuario = file_get_contents($mail_file);
 
         //USER LOGIN
+        if (!isset($_SESSION)) { session_start(); }
         $user = get_user_by( 'ID', $user_id );
         wp_set_current_user($user_id, $user->user_login);
         wp_set_auth_cookie($user_id);
