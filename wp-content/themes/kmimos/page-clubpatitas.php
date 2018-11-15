@@ -16,8 +16,9 @@
 	$display_registro = '';
 	$center_content = '';
 	$user = wp_get_current_user();
+
 	$nombre = "";
-	if( !empty($nombre) ){
+	if( $user->ID > 0 ){
 		$nombre = get_user_meta( $user->ID, 'first_name', true );
 		$nombre .= " ";
 		$nombre .= get_user_meta( $user->ID, 'last_name', true );
