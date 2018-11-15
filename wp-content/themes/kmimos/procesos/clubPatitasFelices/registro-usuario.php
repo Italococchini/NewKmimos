@@ -48,7 +48,7 @@
         wp_set_current_user($user_id, $user->user_login);
         wp_set_auth_cookie($user_id);
 
-        $wpdb->query("UPDATE wp_users SET user_pass = '{$password}' WHERE ID = ".$user->ID);
+        // $wpdb->query("UPDATE wp_users SET user_pass = '{$password}' WHERE ID = ".$user->ID);
 	}else{
 
 	}
