@@ -22,7 +22,7 @@
 
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
     wp_enqueue_style('club_responsive', getTema()."/css/responsive/club-patitas-felices.css", array(), '1.0.0');
-	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.0');
+	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.1');
 
 
 	// datatable
@@ -41,10 +41,10 @@
 	wp_enqueue_script('club8-js', get_home_url()."/panel/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js", array("jquery", "global_js"), '2.0.0');
 	wp_enqueue_script('club9-js', get_home_url()."/panel/assets/vendor/datatables.net-buttons/js/buttons.print.min.js", array("jquery", "global_js"), '2.0.0');
 
-
 	get_header();
-
 ?>
+	 
+
 	
 	<div class="content-compartir-club" style="z-index: 5px!important;">
 		<aside id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
@@ -83,7 +83,7 @@
 		jQuery(document).ready( function (){
 			loadTabla();
 		});
-	</script>
+ 	</script>
 <?php 
 	$no_display_footer = true;
  	get_footer(); 

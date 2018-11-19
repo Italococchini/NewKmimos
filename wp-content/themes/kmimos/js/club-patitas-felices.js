@@ -1,4 +1,5 @@
 var table;
+var URL_SALIR;
 jQuery(document).ready( function (){
 
 	jQuery('#compartir_now').on('click', function(e){
@@ -44,6 +45,11 @@ function menuClub(){
 
     var con = menu.find('.container');
     con.css('padding','0px');
+
+    // URL Cerrar Sesion
+    console.log( jQuery('[menu-id="salir"]').attr('href') );
+    jQuery('[menu-id="salir"]').attr('href', URL_SALIR);
+    console.log( jQuery('[menu-id="salir"]').attr('href') );
 }
 
 function downloadPDF(){

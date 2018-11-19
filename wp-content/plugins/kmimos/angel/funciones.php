@@ -405,10 +405,19 @@
 
             if( is_user_logged_in() ){
 
+                //URL actual
+                $obj_id = get_queried_object_id();
+                $current_url = get_permalink( $obj_id );
+                $url_redirec = home_url();
+                if( strtolower($current_url) == strtolower(get_home_url().'/club-patitas-felices/compartir/')){
+                    $url_redirec = $current_url;
+                }
+
                 $current_user = wp_get_current_user();
                 $user_id = $current_user->ID;
                 $user = new WP_User( $user_id );
-                $salir = wp_logout_url( home_url() );
+                $salir = wp_logout_url( $url_redirec );
+
 
                 $MENUS = array(
                     "vendor" => array(
@@ -479,7 +488,8 @@
                         array(
                             "url"   => $salir,
                             "name"  => "Cerrar Sesión",
-                            "icono" => "476"
+                            "icono" => "476",
+                            "menu-id"=> "salir"
                         ),
                     ),
                     "subscriber" => array(
@@ -520,7 +530,8 @@
                         array(
                             "url"   => $salir,
                             "name"  => "Cerrar Sesión",
-                            "icono" => "476"
+                            "icono" => "476",
+                            "menu-id"=> "salir"
                         )
                     ),
                     "administrator" => array(
@@ -566,7 +577,8 @@
                         array(
                             "url"   => $salir,
                             "name"  => "Cerrar Sesión",
-                            "icono" => "476"
+                            "icono" => "476",
+                            "menu-id"=> "salir"
                         )
                     )
                 );
@@ -595,9 +607,10 @@
                         
                         if( isset($value["icono"]) ){ $icono = '<i class="pfadmicon-glyph-'.$value["icono"].'"></i> '; }
                         if( isset($value["icono_2"]) ){ $icono = '<i class="'.$value["icono_2"].'"></i> '; }
+                        $attr = ( isset($value['menu-id']) && !empty($value['menu-id']) )? 'menu-id="'.$value['menu-id'].'"' : '' ;
                         $MENU["body"] .=
                             '<li class="'.$sts.'">
-                                <a href="'.$value["url"].'" class="pd-tb11 menu-link">
+                                <a href="'.$value["url"].'" class="pd-tb11 menu-link" '.$attr.'>
                                     '.$icono.'
                                     '.$value["name"].'
                                 </a>

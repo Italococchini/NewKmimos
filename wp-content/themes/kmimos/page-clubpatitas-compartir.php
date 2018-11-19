@@ -26,7 +26,7 @@
 
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
     wp_enqueue_style('club_responsive', getTema()."/css/responsive/club-patitas-felices.css", array(), '1.0.0');
-	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.0');
+	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.1');
 
 	$metas = '
 		<meta property="og:url"           content="https://www.kmimos.com.mx" />
@@ -36,9 +36,10 @@
 		<meta property="og:image"         content="https://www.kmimos.com.mx" />
 	';
 
+	$salir = wp_logout_url( get_home_url().'/club-patitas-felices' );
+
 	get_header();
 ?>
-
 	<!-- Load Facebook SDK for JavaScript -->
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
@@ -108,7 +109,6 @@
 
 		</section>
 	</div>
-
 <?php 
 	$no_display_footer = true;
  	get_footer(); 

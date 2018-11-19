@@ -23,34 +23,53 @@
 
  	// Registro de Usuario en Kmimos
 	if(!isset($user->ID)){
-//		$clave = 'Kmi'.date('mi');
-        $clave = wp_generate_password( 5, false );
+        //$clave = wp_generate_password( 5, false );
+		$clave = 'Kmi'.date('mi');
+/*
 	    $password = md5($clave);
 	    $user_id  = wp_create_user( $username, $password, $email );
-
 	    wp_update_user( array( 'ID' => $user_id, 'display_name' => "{$nombre}" ));		
+*/
+        $hoy = date("Y-m-d H:i:s");
 
-		// Registrado desde el landing page
-		update_user_meta( $user_id, 'first_name', $nombre );
-		update_user_meta( $user_id, 'last_name', $apellido );
-		update_user_meta( $user_id, 'user_referred', 'Amigo/Familiar' );
-		update_user_meta( $user_id, 'user_mobile', '' );
-		update_user_meta( $user_id, "landing-club-patitas", date('Y-m-d H:i:s') ); 		
+        $new_user = "
+            INSERT INTO wp_users VALUES (
+                NULL,
+                '".$email."',
+                '".md5($clave)."',
+                '".$email."',
+                '".$email."',
+                '',
+                '".$hoy."',
+                '',
+                0,
+                '".$nombre." ".$apellido."'
+            );
+        ";
+        $wpdb->query( utf8_decode( $new_user ) );
+		$user = get_user_by( 'email', $email );	
+		if( isset($user->ID) && $user->ID > 0 ){
+			$user_id = $user->ID;
+			// Registrado desde el landing page
+			update_user_meta( $user_id, 'first_name', $nombre );
+			update_user_meta( $user_id, 'last_name', $apellido );
+			update_user_meta( $user_id, 'user_referred', 'Amigo/Familiar' );
+			update_user_meta( $user_id, 'user_mobile', '' );
+			update_user_meta( $user_id, "landing-club-patitas", date('Y-m-d H:i:s') ); 		
 
-	    $user = new WP_User( $user_id );
-	    $user->set_role( 'subscriber' );
+		    $user = new WP_User( $user_id );
+		    $user->set_role( 'subscriber' );
 
-	    //MESSAGE
-        $mail_file = realpath('../../template/mail/clubPatitas/parte/nuevo_usuario.php');
-        $mail_seccion_usuario = file_get_contents($mail_file);
+		    //MESSAGE
+	        $mail_file = realpath('../../template/mail/clubPatitas/parte/nuevo_usuario.php');
+	        $mail_seccion_usuario = file_get_contents($mail_file);
 
-        //USER LOGIN
-        if (!isset($_SESSION)) { session_start(); }
-        $user = get_user_by( 'ID', $user_id );
-        wp_set_current_user($user_id, $user->user_login);
-        wp_set_auth_cookie($user_id);
-
-        // $wpdb->query("UPDATE wp_users SET user_pass = '{$password}' WHERE ID = ".$user->ID);
+	        //USER LOGIN
+	        if (!isset($_SESSION)) { session_start(); }
+	        $user = get_user_by( 'id', $user_id );
+	        wp_set_current_user($user_id, $user->user_login);
+	        wp_set_auth_cookie($user_id);
+		}
 	}else{
 
 	}

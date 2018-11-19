@@ -9,7 +9,7 @@
     wp_enqueue_style('club_style', getTema()."/css/club-patitas-felices.css", array(), '1.0.0');
     wp_enqueue_style('club_responsive', getTema()."/css/responsive/club-patitas-felices.css", array(), '1.0.0');
 
-	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.0');
+	wp_enqueue_script('club_script', getTema()."/js/club-patitas-felices.js", array(), '1.0.1');
 
 	get_header();
 
@@ -40,9 +40,7 @@
 		$readonly = 'readonly';
 	}
 ?>
-	
-
-	
+	 
 	
 	<header class="row" style="background-image: url(<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-2.jpg'; ?>)">
 		<div class="col-xm-12 col-sm-12 col-md-12">
