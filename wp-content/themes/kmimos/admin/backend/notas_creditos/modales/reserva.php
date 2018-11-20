@@ -1,4 +1,3 @@
- 
 <?php
 	$raiz = dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))));
 	include_once($raiz.'/wp-load.php');
@@ -39,7 +38,7 @@
 		$msg = 'No se puede generar la nota de cr&eacute;dito, la reserva inicia el '.$fecha_start;
 	}else if( $pedido_id > 0 ){
 		$show_nc = true;
-		$reserva = kmimos_desglose_reserva_data( $pedido_id, true );
+		$reserva = kmimos_desglose_reserva_data( $pedido_id, true );	
 		$hoy = date('Y-m-d');
 		$ini = date('Y-m-d', $reserva['servicio']['inicio']);
 		$fin = date('Y-m-d', $reserva['servicio']['fin']);
@@ -92,7 +91,7 @@
 
 			<!-- Mostrar Resumen de Reserva  -->
 			<section class="col-md-12" style="margin: 5px 0px;">
-				<h2 style="padding: 5px;background: #ccc; color:#fff;">Por Reserva</h2>
+				<h2 style="padding: 5px;background: #ccc; color:#4d4d4d;">POR RESERVA</h2>
 				<div class="row">
 					<div class="col-md-12">
 						<strong>Servicio: </strong><?php echo  strtoupper($reserva['servicio']['tipo']); ?>
@@ -110,60 +109,113 @@
 						<br> $ <?php echo $reserva['servicio']['desglose']['total']; ?>
 					</article>
 					<article class="col-md-3">
-						<button style="width: 100%" class="btn btn-primary">Editar</button>
+						<button class="btn btn-sm btn-primary" style="width: 100%;">Editar reserva</button>
 					</article>
 				</div>
 			</section>
 
 			<!-- Mostrar Mascotas ( Eliminar - Editar ) -->
 			<section class="col-md-12" style="margin: 5px 0px;">
-				<h2 style="padding: 5px;background: #ccc; color:#fff;">Por Mascota</h2>
+				<h2 style="padding: 5px;background: #ccc; color:#4d4d4d;">POR MASCOTA</h2>
 				<div class="row">				
 
-					<article class="col-md-3">
-						<div style="border:1px solid #ccc;">
-							<button style="width: 20%; position: absolute; border-radius:0px 0px 0px 10px; right: 15px; top: 0px;" class="btn btn-sm btn-danger">x</button>
-							<img src="" width="100%" height="100px">
-							<h2 style="margin:10px;text-align: center;">Mascota</h2>
-							<button style="width: 100%;  border-radius:0px!important;" class="btn btn-sm btn-primary">Editar</button>
-						</div>
-					</article>
-
-					<article class="col-md-3">
-						<div style="border:1px solid #ccc;">
-							<button style="width: 20%; position: absolute; border-radius:0px 0px 0px 10px; right: 15px; top: 0px;" class="btn btn-sm btn-danger">x</button>
-							<img src="" width="100%" height="100px">
-							<h2 style="margin:10px;text-align: center;">Mascota</h2>
-							<button style="width: 100%;  border-radius:0px!important;" class="btn btn-sm btn-primary">Editar</button>
-						</div>
-					</article>
-
-					<article class="col-md-3">
-						<div style="border:1px solid #ccc;">
-							<button style="width: 20%; position: absolute; border-radius:0px 0px 0px 10px; right: 15px; top: 0px;" class="btn btn-sm btn-danger">x</button>
-							<img src="" width="100%" height="100px">
-							<h2 style="margin:10px;text-align: center;">Mascota</h2>
-							<button style="width: 100%;  border-radius:0px!important;" class="btn btn-sm btn-primary">Editar</button>
-						</div>
-					</article>
-
-					<article class="col-md-3">
-						<div style="border:1px solid #ccc;">
-							<button style="width: 20%; position: absolute; border-radius:0px 0px 0px 10px; right: 15px; top: 0px;" class="btn btn-sm btn-danger">x</button>
-							<img src="" width="100%" height="100px">
-							<h2 style="margin:10px;text-align: center;">Mascota</h2>
-							<button style="width: 100%;  border-radius:0px!important;" class="btn btn-sm btn-primary">Editar</button>
-						</div>
-					</article>
+					<?php foreach( $reserva['servicio']['variaciones'] as $row ){ ?>
+						<?php for ($i=1; $i <= $row[0]; $i++) { ?>
+							<article class="col-md-3">
+								<div style="border:1px solid #ccc;">
+									<div style="text-align: right;">
+										<button style="border-radius: 0px 0px 0px 10px;" class="btn btn-sm">x</button>
+									</div>
+									<h2 style="margin:10px;text-align: center; font-weight:bold;">
+										Mascota <?php echo $row[1] . " #".$i; ?>											
+									</h2>
+									<button style="width: 100%; border-radius: 0px;" class="btn btn-sm btn-primary">Editar</button>
+								</div>
+							</article>
+						<?php } ?>
+					<?php } ?>
 
 				</div>
 			</section>
 
 		</section>
 
-		<!-- Detalle -->
-		<section id="seccion-2" class="row">
+		<!-- Detalle Por Mascota -->
 
+		<!-- Detalle Por Reserva -->
+		
+		<hr> Seccion para editar por reserva <hr>
+
+		<section id="seccion-2" class="row">
+			<input type="hidden" name="" data-tipo="" data-value="" >  <!-- Reserva | Mascota -->
+			<section class="col-md-12">
+				<h1 style="padding: 5px;background: #ccc; color:#4d4d4d;">
+					<?php echo strtoupper($reserva['servicio']['tipo']); ?>
+				</h1>
+				<article class="row" style="margin-bottom:20px; ">
+ 			
+					<div data-target="reserva_prorrateo" class="col-sm-4">
+						<label>Hasta: </label> 
+						<input type="date" name="noches" class="form-control"   value="0.00" style="margin: 0px;">
+					</div>
+					<div data-target="reserva_prorrateo" class="col-sm-4">
+						<label>Noches/D&iacute;as Restantes: </label>
+						<input type="text" name="noches" class="form-control" readonly value="0.00">
+					</div>
+					<div data-target="reserva_prorrateo" class="col-sm-4">	
+						<label>Monto: </label>
+						<input type="text" name="prorrateo" class="form-control" readonly value="0.00">
+					</div>
+
+				</article>
+			</section>
+
+			<?php if( !empty($reserva['servicio']['adicionales']) ){ ?>
+			<section class="col-md-12">
+				<h1 style="padding: 5px;background: #ccc; color:#4d4d4d;">SERVICIOS ADICIONALES</h1>
+				<?php foreach( $reserva['servicio']['adicionales'] as $item ){ ?>
+				<article class="row">		
+					<div class="col-md-8">
+						<label>
+							<input 
+								type="checkbox" name="servicios[]" 
+								value="<?php echo md5($item[0]); ?>"  
+								data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>">
+							<?php echo "{$item[0]} - {$item[1]} x {$item[2]}"; ?>
+						</label>
+					</div>
+					<div class="col-md-4 monto text-right">
+						$ <?php echo $item[3]; ?>
+					</div>
+				</article>
+				<?php } ?>
+			</section>
+			<?php } ?>
+
+			<?php if( !empty($reserva['servicio']['transporte']) ){ ?>
+			<section class="col-md-12">
+				<h1 style="padding: 5px;background: #ccc; color:#4d4d4d;">TRANSPORTACIÓN</h1>
+				<?php foreach( $reserva['servicio']['transporte'] as $item){ ?>
+				<article>
+					<div class="row">		
+						<div class="col-md-8">
+							<label>
+								<input type="checkbox" 
+									name="transporte[]" 
+									value="<?php echo md5($item[0]); ?>"
+									data-monto="<?php echo  str_replace(',','.', str_replace('.', '', $item[3]) ); ?>"
+								> 
+								<?php echo str_replace('<br>', ' - ', $item[0] ); ?>
+							</label>
+						</div>
+						<div class="col-md-4 monto text-right">
+							$ <?php echo $item[3]; ?>
+						</div>
+					</div>
+				</article>
+				<?php } ?>
+			</section>
+			<?php } ?>
 		</section>
 
 		<!-- Verificacion y Aprobacion -->
@@ -177,3 +229,16 @@
 	</div>
 
 <?php } ?>
+
+
+<?php
+
+	/*	Estructura
+
+		[
+			inicio:
+			fin: 
+			
+		]
+	
+	*/

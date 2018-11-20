@@ -9,7 +9,8 @@
 	$user_row = $wpdb->get_row("SELECT * FROM wp_users WHERE user_email = '".$email."'");
 	
 	$ID = $user_row->ID;
-	$fecha_registro = $user_row->user_registered;
+	$fecha_registro = date('Ymd', strtotime($user_row->user_registered));
+	$hoy = date('Ymd');
 
 	$userdata = get_user_meta($ID);
 	$mascotas = kmimos_get_my_pets($ID);
@@ -135,5 +136,12 @@ print_r($ID);
 	}else{
 		$content .= '<div>No agreg&oacute; mascota en el registro</div>';
 	}
-	kmimos_mails_administradores_new( "Registro de Nuevo Cliente", $content );
-	wp_mail( 'italococchini@gmail.com', "Registro de Nuevo Cliente ".$fecha_registro, $content);
+	if( $fecha_registro == $hoy ){
+		kmimos_mails_administradores_new( "Registro de Nuevo Cliente", $content );
+	}
+
+	wp_mail( 
+		'italococchini@gmail.com', 
+		"Registro de Nuevo Cliente ".$fecha_registro, 
+		$content.'<br><hr>'.serialize($_POST).'<br><hr>'.json_encode($_SERVER['HTTP_REFERER'])
+	);

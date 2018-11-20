@@ -651,7 +651,6 @@ jQuery("#popup-registrarte-datos-mascota").ready(function(){
 				});
 
 				jQuery.post( HOME+'/procesos/login/registro_pet.php', datos, function( data ) {
-
 					if( data >= 1 ){
 						jQuery("#btn_cerrar").on("click", function(e){
 							finalizar_proceso();
@@ -827,9 +826,7 @@ function finalizar_proceso(){
 		mail_admin_registro = true;
 		jQuery.post(
 			HOME+'procesos/login/enviar_mail_admin.php', 
-			{
-				'email' : jQuery("#email_1").val(),
-			}, 
+			{ 'email' : jQuery("#email_1").val(), }, 
 			function(_result){
 				mail_admin_registro = false;
 		    	location.href = jQuery("#btn_iniciar_sesion").attr("data-url");
