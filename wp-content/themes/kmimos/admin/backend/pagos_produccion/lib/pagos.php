@@ -132,8 +132,6 @@ class Pagos {
 								}
 							}
 						}
-
-  
  
 						if( $count == 4 ){
 							$separador = '<br><br>';
