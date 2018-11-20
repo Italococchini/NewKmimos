@@ -1,0 +1,369 @@
+#popover-content{
+	padding-bottom: 5px;
+	padding-top: 5px;
+	visibility: hidden;
+}
+
+.badge-total{
+	padding: 0px 10px;
+	border-radius: 25px;
+	background: #8c8b8b;
+	color:#fff;
+	font-weight: bold;
+}
+
+[role="tab"] span{
+	display: none;
+}
+[role="tab"].active span{
+	display: inline-block;
+}
+
+#popover-content,
+.leyenda,
+.leyenda ul{
+	margin-bottom: 0px;
+}
+
+.list-inline li div:hover{
+	background-color: #22712c;
+}
+.list-inline li div a:hover{
+	text-decoration: none;
+}
+.list-inline li aside{
+	color: #fff;
+}
+.list-inline li aside,
+.list-inline li div{
+	padding:10px;
+	border-radius: 10px 0px 10px 0px;
+	background-color: #ccc;
+	height: 3px;
+	width: 15px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.list-inline li{
+	display: inline-block!important;
+	margin:5px ;
+	vertical-align: middle;
+}
+.list-inline {
+	font-size: 12px;
+}
+.titulos{
+	margin-top: 15px;
+}
+.status{
+    width: 15px;
+    height: 15px;
+    margin: 0px auto;
+    border-radius: 50%;
+}
+.buttons-html5{
+	border-radius: 5px;
+	margin: 0px!important;
+	padding: 5px 10px!important;
+}
+#myTab{
+	margin-bottom:10px;
+}
+.status-2{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+ 
+input[type="date"]{
+	border-radius: 5px;
+	margin: 5px 5px 0px 5px ;
+	padding: 5px;
+}
+
+.status-ok{
+	background: #1bb11b;
+}
+
+.status-ok-medio{
+	background: orange;
+}
+
+.status-mal{
+	background: red;
+}
+
+.status-medio{
+	background: yellow;
+}
+
+.status-inicio{
+	background: #9c9c9c;
+}
+
+.status-futuro{
+	background: #FFF;
+	border: solid 1px #9c9c9c;
+}
+
+.modal > div > div * {
+	font-size: 13px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.tabla_vertical > tbody > tr > th{
+	text-align: left;
+	width: 100px;
+}
+
+.tabla_vertical > tbody > tr > td{
+	text-align: left;
+}
+
+.tabla_horizontal{
+	border: solid 1px #CCC;
+	border-bottom: solid 1px #CCC;
+}
+
+.tabla_horizontal > tbody > tr > th{
+	background: #EEE;
+	border-bottom: solid 1px #CCC;
+	border-right: solid 1px #CCC;
+    padding: 5px;
+    text-align: center;
+}
+
+.tabla_horizontal > tbody > tr > td:last-child{
+	border-right: solid 1px #CCC;
+}
+
+table.table-bordered.dataTable tbody th, 
+table.table-bordered.dataTable tbody td{
+	vertical-align: middle;
+}
+
+.items-span{
+	color: #555;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	padding: 5px; 
+	border-radius: 5px;
+	font-size: 12px;
+	margin: 5px;
+	display: inline-flex;
+}
+.items-span span{
+	background:#fff;
+	color:#000;
+	font-size: 12px;
+}
+.tabla_horizontal > tbody > tr > td{
+	border-bottom: solid 1px #CCC;
+	padding: 5px;
+    text-align: center;
+}
+
+.tabla_horizontal > tbody > tr:hover td{
+	background: #EEE;
+}
+
+.left{
+	text-align: left !important;
+}
+
+.right{
+	text-align: right !important;
+}
+
+.center{
+	text-align: center !important;
+}
+
+.top{
+	vertical-align: top !important;
+}
+
+.legenda{
+	margin: 0px 10px 10px;
+}
+
+.legenda th span {
+	margin: 5px;
+	border-bottom: solid 1px #CCC;
+	display: block;
+	padding: 5px;
+}
+
+.legenda *{
+	font-size: 13px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.modal .legenda *{
+	font-size: 11px;
+}
+
+.fotos_moderar {
+	overflow: hidden;
+}
+
+.fotos_moderar > div {
+	float: left;
+	width: calc( 50% - 20px );
+	height: 190px;
+	box-sizing: border-box;
+	margin: 10px;
+	background-color: #000;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+.fotos_moderar input {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.botones_container {
+    background: #f7f7f7;
+    margin: 10px 15px;
+    padding: 10px;
+    text-align: left;
+    border-radius: 3px;
+}
+
+.botones_container input {
+	border: solid 1px #CCC;
+    background: #CCC;
+    padding: 10px 20px;
+    cursor: pointer;
+	box-shadow: 0px 0px 0px #CCC;
+}
+
+.botones_container input:hover {
+	background: #dfdfdf;
+	box-shadow: 0px 0px 0px #CCC !important;
+	border: solid 1px #CCC;
+}
+
+.botones_container input:focus {
+	box-shadow: 0px 0px 0px #CCC !important;
+	border: solid 1px #CCC;
+}
+
+.img{
+    margin: 4px;
+	max-width: 270px;
+    max-height: 182px;
+}
+
+.img_vista{    
+	margin: 4px;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.img_collage{
+	max-width: 270px;
+    max-height: 190px;
+    margin: 4px;
+}
+
+#fondo{
+	display: none;
+}
+
+#base_table{
+	position: fixed;
+	top: -99999999999999999999px;
+	display: inline-block; 
+	background-color: #CCC; 
+	padding: 0px; 
+	margin: 20px; 
+	border: solid 1px #CCC; 
+	border-radius: 4px;
+	left: 10px;
+}
+
+#myCanvas{
+	position: fixed;
+	top: -99999999999999999999px;
+	right: 10px;
+}
+
+input[type=checkbox]:checked:before {
+	margin: 0px -2px;
+    font-size: 20px;
+}
+
+input[type=checkbox] {
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.fotos_container{
+	position: relative;
+	overflow: hidden;
+    width: 450px;
+}
+
+.fotos_container > div {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	background-color: #EEE;
+	margin: 5px;
+	width: 100px;
+    height: 60px;
+    display: inline-block;
+	position: relative;
+}
+
+.fotos_container > div input {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;	
+}
+
+.fotos_container > div > span {    
+    position: relative;
+    display: inline-block;
+    top: 30px;
+    left: 15px;
+    background: #FFF;
+    padding: 2px 10px 1px;
+    border-radius: 3px;
+    border: solid 1px #888;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.procesando_fotos {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background: #777;
+    text-align: center;
+    font-size: 16px !important;
+    color: #FFF;
+    padding: 10px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+@media (max-width: 500px){
+	.container-search label{
+		width: 100%!important;
+	}
+	.container-search input[type="date"]{
+		width: 100%!important;
+		margin: 5px 0px 5px 0px;
+	}
+	.container-search button{
+		width: 100%!important;
+	}
+}

@@ -2,8 +2,7 @@
     session_start();
     date_default_timezone_set('America/Mexico_City');
 
-    $tema = dirname(dirname(dirname(dirname(__DIR__))));
-    include_once($tema.'/lib/pagos/pagos_cuidador.php');
+    include_once('../lib/pagos.php');
 
     $data = array(
         "data" => array()
@@ -15,20 +14,10 @@
 
     $display_reserva_check = true;
     $display_btn_liberar = false;
-    $display_total_input = false;
-    $validar_cuenta = true;
-    $display_comentario_input = false;
-    
+
     switch ( strtolower($tipo) ) {
-        case 'aprobar':
-            $pagos_lists = $pagos->getPagosPorAprobar( $desde, $hasta );
-            $validar_cuenta = false;
-            break;
         case 'nuevo':
-            $pagos_lists = $pagos->getPagosPendientes();
-            $display_total_input = true;
-            $display_reserva_check = false;
-            $display_comentario_input = true;
+            $pagos_lists = $pagos->getPagoCuidador( $desde, $hasta );    
             break;
         case 'generados':
             $pagos_lists = $pagos->getPagoGenerados( $desde, $hasta );
@@ -48,8 +37,7 @@
 
     $estatus=[
         "" => "",
-        "pendiente" => "Pendiente",
-        "por_autorizar" => "No procesado",
+        "por_autorizar" => "No procesado",   
         "autorizado" => "No procesado",
         "negado" => "Negado",  
         "in_progress" => "En progreso",  
@@ -59,11 +47,12 @@
         "error" => "Error",
     ];
 
+//print_r($pagos_lists);
+
     $_SESSION['pago_cuidador'] = [];
 
     if( $pagos_lists != false ){
         $i = 0;
-
         foreach ($pagos_lists as $pago) {
 
             $_SESSION['pago_cuidador'][ $pago->user_id ] = $pago;
@@ -76,8 +65,8 @@
             
             // Validar si el cuidador tiene datos bancarios
                 $token = md5(serialize($pago->detalle));
-                $checkbox = "<input type='checkbox' data-type='item_selected' data-parcial='false' data-total='".$pago->total."' name='item_selected[]' data-token='".$token."' value='".$pago->user_id."' data-global='".$pago->user_id."'>";
-                if( !empty($cuidador->banco) || !$validar_cuenta ){
+                $checkbox = "<input type='checkbox' data-type='item_selected' data-total='".$pago->total."' name='item_selected[]' data-token='".$token."' value='".$pago->user_id."' data-global='".$pago->user_id."'>";
+                if( !empty($cuidador->banco) ){
                     //$botones .= "<button style='padding:5px;'><i class='fa fa-money'></i> Generar Solicitud de pago</button>"; 
                 }else{
                     $botones .= "No posee datos bancarios"; 
@@ -115,6 +104,7 @@
                             'saldo' => '#88e093',
                             'ambos' => '#e0888c',
                         ];
+
 
                         $info = '';
                         $color = $colores['normal'];
@@ -201,17 +191,6 @@
 
                 $comentarios .= '<br>'.$pago->observaciones;
 
-            $input_total = "$ <span id='monto_".$pago->user_id."'>".number_format($pago->total, 2,',', '.')."</span>";
-
-            if( $display_total_input ){
-                $input_total = "<input class='form-control' data-target='input_total' data-user='".$pago->user_id."' id='monto_".$pago->user_id."' value='".$pago->total."' >
-                <div>Disponible: $ ".number_format($pago->total, 2,',', '.')."</div>";
-            }
-            if( $display_comentario_input ){
-                $input_comentario = "<input maxlength='300' class='form-control' id='comentario_".$pago->user_id."' value='' > 
-                <div>Longitud Maxima. 300 </div>";
-            }
-
             $data["data"][] = array(
                 $checkbox,
                 date('Y-m-d',strtotime($pago->fecha_creacion)),
@@ -219,14 +198,14 @@
                 $pago->user_id,
                 utf8_encode($cuidador->nombre),
                 utf8_encode($cuidador->apellido),
-                $input_total,
-                $input_comentario,
+                "$ <span id='monto_".$pago->user_id."'>".number_format($pago->total, 2,',', '.')."</span>",
                 "<span id='cantidad_".$pago->user_id."'>".$pago->cantidad."</span>",
                 $detalle,
                 $autorizado_por,
                 $botones,
                 $comentarios,
             );
+
         }
     }
 

@@ -25,11 +25,11 @@
 	if(!isset($user->ID)){
         //$clave = wp_generate_password( 5, false );
 		$clave = 'Kmi'.date('mi');
-/*
+		/*
 	    $password = md5($clave);
 	    $user_id  = wp_create_user( $username, $password, $email );
 	    wp_update_user( array( 'ID' => $user_id, 'display_name' => "{$nombre}" ));		
-*/
+		*/
         $hoy = date("Y-m-d H:i:s");
 
         $new_user = "

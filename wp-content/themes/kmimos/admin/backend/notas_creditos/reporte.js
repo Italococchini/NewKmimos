@@ -109,6 +109,7 @@ jQuery(document).ready(function() {
 
 	jQuery(document).on('change', '[name="reserva"]', function(e){
 		if( jQuery(this).val() != '' ){
+			jQuery('#show_notas_creditos').attr('data-titulo', 'Crear Nota de Cr&eacute;dito  - Reserva #' + jQuery(this).val());	
 			jQuery('#show_notas_creditos').attr('data-id', jQuery(this).val());	
 		}else{
 			alert( "Debe agregar el numero de reserva" );

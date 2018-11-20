@@ -27,9 +27,9 @@
             <div class="col-sm-12 col-md-5">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1"># Reserva: </span>
-                    <input name="reserva" type="text" class="form-control" placeholder="000000" aria-describedby="basic-addon1" required>
+                    <input name="reserva" type="text" class="form-control" placeholder="000000" aria-describedby="basic-addon1" value="199873" required>
                     <span class="input-group-btn">
-                        <button id="show_notas_creditos" class="btn btn-success" data-titulo='Datos de la Reserva' data-modal='reserva' data-id="0" > Crear Nota de Cr&eacute;dito</button>
+                        <button id="show_notas_creditos" class="btn btn-success" data-titulo='Crear Nota de Cr&eacute;dito' data-modal='reserva' data-id="0" > Crear Nota de Cr&eacute;dito</button>
                     </span>
                 </div>
             </div>
