@@ -100,7 +100,10 @@ jQuery(document).ready(function() {
 			noches += 1;
 		}
 
-		var total = (cant_masc) * (monto) * (noches);
+		var total = 0;
+		if( cant_masc > 0 ){
+			total = (cant_masc) * (monto) * (noches);
+		}
 		// diferencia en monto 
 		jQuery('[name="noches_'+code+'"]').val( noches );
 		jQuery('[name="prorrateo_'+code+'"]').val( total );
