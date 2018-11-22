@@ -126,7 +126,7 @@
 						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-2">
 							<label>Cant. Mascotas: </label> 
 							<select name="mascotas_<?php echo $code; ?>">
-							<?php for ($i=$s_principal[0]; $i <= $s_principal[0]; $i--) { ?>
+							<?php for ($i=$s_principal[0]; $i > 0; $i--) { ?>
 								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
 							<?php } ?>
 							</select>
