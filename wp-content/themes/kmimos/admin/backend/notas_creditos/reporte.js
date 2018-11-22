@@ -83,33 +83,10 @@ jQuery(document).ready(function() {
 	});
 
 	jQuery(document).on('change', '[data-name="hasta"]', function(e){
-		var code = jQuery(this).attr('data-code');
-		// monto por noche
-		var monto= jQuery(this).attr('data-monto');		
-		// Fecha final de reserva
-		var max = jQuery(this).attr('max');
-		// Nueva fecha hasta reserva
-		var hasta = jQuery(this).val();
-
-		var cant_masc = jQuery('[name="mascotas_'+code+'"]').val();
-		// diferencia de noches/dias restantes
-		var noches = num_noches( hasta, max );			
-
-		console.log(tipo_servicio);		
-		if( tipo_servicio.trim() != 'hospedaje' ){
-			noches += 1;
-		}
-
-		var total = 0;
-		if( cant_masc > 0 ){
-			total = (cant_masc) * (monto) * (noches);
-		}
-		// diferencia en monto 
-		jQuery('[name="noches_'+code+'"]').val( noches );
-		jQuery('[name="prorrateo_'+code+'"]').val( total );
-
-		calcular_total();
-
+		actualizar();
+	});
+	jQuery(document).on('change', '[data-name="cant_mascotas"]', function(e){
+		actualizar();
 	});
 
 	jQuery(document).on('change', '[name="reserva"]', function(e){
@@ -140,6 +117,35 @@ jQuery(document).ready(function() {
 	});
 
 });
+
+function actualizar(){
+	var code = jQuery(this).attr('data-code');
+	// monto por noche
+	var monto= jQuery(this).attr('data-monto');		
+	// Fecha final de reserva
+	var max = jQuery(this).attr('max');
+	// Nueva fecha hasta reserva
+	var hasta = jQuery('[name="hasta_'+code+'"]').val();
+
+	var cant_masc = jQuery('[name="mascotas_'+code+'"]').val();
+	// diferencia de noches/dias restantes
+	var noches = num_noches( hasta, max );			
+
+	console.log(tipo_servicio);		
+	if( tipo_servicio.trim() != 'hospedaje' ){
+		noches += 1;
+	}
+
+	var total = 0;
+	if( cant_masc > 0 ){
+		total = (cant_masc) * (monto) * (noches);
+	}
+	// diferencia en monto 
+	jQuery('[name="noches_'+code+'"]').val( noches );
+	jQuery('[name="prorrateo_'+code+'"]').val( total );
+
+	calcular_total();
+}
 
 function num_noches( ini, fin ){
 

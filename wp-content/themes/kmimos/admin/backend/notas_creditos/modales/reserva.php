@@ -125,13 +125,13 @@
 				
 						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-2">
 							<label>Mascotas: </label> 
-							<select class="form-control" name="mascotas_<?php echo $code; ?>">
+							<select class="form-control" data-name="cant_mascotas" name="mascotas_<?php echo $code; ?>">
 							<?php for ($i=$s_principal[0]; $i > 0; $i--) { ?>
 								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
 							<?php } ?>
 							</select>
 						</div>
-						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-4">
+						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-4" style="padding: 7px 10px;">
 							<label>Hasta: </label> 
 							<input type="date" data-name="hasta" name="hasta_<?php echo $code; ?>" 
 							 data-code="<?php echo $code; ?>" 
