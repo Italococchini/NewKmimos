@@ -122,11 +122,12 @@ jQuery(document).ready(function() {
 });
 
 function actualizar(){
-	var code = jQuery(this).attr('data-code');
+	
+	var code = jQuery('[name="hasta_'+code+'"]').attr('data-code');
 	// monto por noche
-	var monto= jQuery(this).attr('data-monto');		
+	var monto= jQuery('[name="hasta_'+code+'"]').attr('data-monto');		
 	// Fecha final de reserva
-	var max = jQuery(this).attr('max');
+	var max = jQuery('[name="hasta_'+code+'"]').attr('max');
 	// Nueva fecha hasta reserva
 	var hasta = jQuery('[name="hasta_'+code+'"]').val();
 
