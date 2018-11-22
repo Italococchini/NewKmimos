@@ -131,7 +131,7 @@
 							<?php } ?>
 							</select>
 						</div>
-						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-4" style="padding: 7px 10px;">
+						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-4" style="padding: 0px 10px;">
 							<label>Hasta: </label> 
 							<input type="date" data-name="hasta" name="hasta_<?php echo $code; ?>" 
 							 data-code="<?php echo $code; ?>" 
