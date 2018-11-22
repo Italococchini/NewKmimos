@@ -90,6 +90,7 @@ jQuery(document).ready(function() {
 		var max = jQuery(this).attr('max');
 		// Nueva fecha hasta reserva
 		var hasta = jQuery(this).val();
+		var cant_masc = jQuery('[name="mascotas_'+code+'"]').val();
 		// diferencia de noches/dias restantes
 		var noches = num_noches( hasta, max );			
 
