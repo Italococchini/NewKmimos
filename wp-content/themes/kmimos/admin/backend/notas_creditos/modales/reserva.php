@@ -123,7 +123,15 @@
 						</div>
 						<div class="col-md-4 monto" >$ <?php echo $s_principal[4]; ?></div>
 				
-						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-4">
+						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-3">
+							<label>Cant. Mascotas: </label> 
+							<select name="mascotas_<?php echo $code; ?>">
+							<?php for ($i=0; $i <= $s_principal[0]; $i++) { ?>
+								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
+							<?php } ?>
+							</select>
+						</div>
+						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-3">
 							<label>Hasta: </label> 
 							<input type="date" data-name="hasta" name="hasta_<?php echo $code; ?>" 
 							 data-code="<?php echo $code; ?>" 
@@ -132,11 +140,11 @@
 							 min="<?php echo $ini; ?>"
 							 max="<?php echo $fin; ?>">
 						</div>
-						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-4">
+						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-3">
 							<label>Noches/D&iacute;as Restantes: </label>
 							<input type="text" name="noches_<?php echo $code; ?>" class="form-control" readonly value="0.00">
 						</div>
-						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-4">	
+						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-3">	
 							<label>Monto: </label>
 							<input type="text" name="prorrateo_<?php echo $code; ?>" class="form-control" readonly value="0.00">
 						</div>
