@@ -90,6 +90,7 @@ jQuery(document).ready(function() {
 		var max = jQuery(this).attr('max');
 		// Nueva fecha hasta reserva
 		var hasta = jQuery(this).val();
+
 		var cant_masc = jQuery('[name="mascotas_'+code+'"]').val();
 		// diferencia de noches/dias restantes
 		var noches = num_noches( hasta, max );			
@@ -99,7 +100,7 @@ jQuery(document).ready(function() {
 			noches += 1;
 		}
 
-		var total = (monto) * (noches);
+		var total = (cant_masc) * (monto) * (noches);
 		// diferencia en monto 
 		jQuery('[name="noches_'+code+'"]').val( noches );
 		jQuery('[name="prorrateo_'+code+'"]').val( total );
