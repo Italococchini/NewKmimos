@@ -125,7 +125,7 @@
 				
 						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-2">
 							<label>Mascotas: </label> 
-							<select name="mascotas_<?php echo $code; ?>">
+							<select class="form-control" name="mascotas_<?php echo $code; ?>">
 							<?php for ($i=$s_principal[0]; $i > 0; $i--) { ?>
 								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
 							<?php } ?>
