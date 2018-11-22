@@ -86,10 +86,10 @@ jQuery(document).ready(function() {
 	});
 
 	jQuery(document).on('change', '[data-name="hasta"]', function(e){
-		actualizar();
+		actualizar( jQuery(this).attr('data-code') );
 	});
 	jQuery(document).on('change', '[data-name="cant_mascotas"]', function(e){
-		actualizar();
+		actualizar( jQuery(this).attr('data-code') );
 	});
 
 	jQuery(document).on('change', '[name="reserva"]', function(e){
@@ -121,9 +121,9 @@ jQuery(document).ready(function() {
 
 });
 
-function actualizar(){
-	
-	var code = jQuery('[name="hasta_'+code+'"]').attr('data-code');
+function actualizar( code ){
+
+	// var code = jQuery('[name="hasta_'+code+'"]').attr('data-code');
 	// monto por noche
 	var monto= jQuery('[name="hasta_'+code+'"]').attr('data-monto');		
 	// Fecha final de reserva

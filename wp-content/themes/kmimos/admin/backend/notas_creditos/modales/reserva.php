@@ -117,7 +117,12 @@
 					<div class="row" style="margin-bottom:20px; ">
 						<div class="col-md-8">
 							<label>
-								<input type="checkbox" name="s_principal[]" value="<?php echo $code; ?>" data-group="prorrateo_<?php echo $code; ?>"> 
+								<input type="checkbox" 
+								name="s_principal[]" 
+								value="<?php echo $code; ?>" 
+								data-group="prorrateo_<?php echo $code; ?>"
+								data-code="<?php echo $code; ?>"
+								> 
 								<?php echo "{$s_principal[0]} {$s_principal[1]} x {$s_principal[2]} x {$s_principal[3]}"; ?>
 							</label>
 						</div>
@@ -125,7 +130,12 @@
 				
 						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-2">
 							<label>Mascotas: </label> 
-							<select class="form-control" data-name="cant_mascotas" name="mascotas_<?php echo $code; ?>">
+							<select 
+								class="form-control" 
+								data-name="cant_mascotas" 
+								name="mascotas_<?php echo $code; ?>"
+								data-code="<?php echo $code; ?>"
+								>
 							<?php for ($i=$s_principal[0]; $i > 0; $i--) { ?>
 								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
 							<?php } ?>
@@ -166,6 +176,7 @@
 								<input 
 									type="checkbox" name="servicios[]" 
 									value="<?php echo md5($item[0]); ?>"  
+									data-code="<?php echo $code; ?>"
 									data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>">
 								<?php echo "{$item[0]} - {$item[1]} x {$item[2]}"; ?>
 							</label>
@@ -190,6 +201,7 @@
 								<input type="checkbox" 
 									name="transporte[]" 
 									value="<?php echo md5($item[0]); ?>"
+									data-code="<?php echo $code; ?>"
 									data-monto="<?php echo  str_replace(',','.', str_replace('.', '', $item[3]) ); ?>"
 								> 
 								<?php echo $item[0]; ?>
