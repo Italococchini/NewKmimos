@@ -47,7 +47,7 @@
 						$detalle[] = [  
 							'fecha' => $_POST[ 'hasta_'.$code ],
 							'titulo'=> "{$item[0]} {$item[1]} x {$item[2]} x {$item[3]}",
-							'cantidad'=> $item[0],
+							'cantidad'=> $_POST[ 'mascotas_'.$code ],
 							'tamano'=> $item[1],
 							'noches'=> $item[2],
 							'costo' => $prorrateo,
