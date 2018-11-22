@@ -81,6 +81,9 @@ jQuery(document).ready(function() {
 	jQuery(document).on('change', '[name="servicios[]"]', function(e){
 		calcular_total();
 	});
+	jQuery(document).on('change', '[name="transporte[]"]', function(e){
+		calcular_total();
+	});
 
 	jQuery(document).on('change', '[data-name="hasta"]', function(e){
 		actualizar();
@@ -171,6 +174,11 @@ function calcular_total(){
 
 		// servicios adicionales
 		jQuery.each( jQuery('[name="servicios[]"]:checked'), function(i){
+			total += parseFloat( jQuery(this).attr('data-monto') );
+		});
+
+		// servicios transporte
+		jQuery.each( jQuery('[name="transporte[]"]:checked'), function(i){
 			total += parseFloat( jQuery(this).attr('data-monto') );
 		});
 
