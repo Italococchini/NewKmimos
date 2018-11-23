@@ -170,13 +170,13 @@
 			<?php if( !empty($reserva['servicio']['adicionales']) ){ ?>
 			<section class="servicios">
 				<h1 class="popup-titulo">SERVICIOS ADICIONALES</h1>
-				<table>
+				<table width="100%">
 					<thead>
 						<tr>
-							<td>Descripci&oacute;n</td>
-							<td>Costo x Masc.</td>
-							<td>Cant. Mascota</td>
-							<td>Total</td>
+							<td width="50%">Descripci&oacute;n</td>
+							<td width="10%">Costo x Masc.</td>
+							<td width="20%">Cant. Mascota</td>
+							<td width="20%">Total</td>
 						</tr>
 					</thead>
 					<tbody>					
