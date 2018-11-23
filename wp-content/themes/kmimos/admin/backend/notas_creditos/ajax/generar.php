@@ -35,6 +35,8 @@
 	// *************************************
 
 		// Servicio principal
+		$_comision = 0;
+		$sql_servicio_cupo = '';
 		if( !empty($reserva['servicio']['variaciones']) && !empty($s_principal) ){	
 			foreach( $reserva['servicio']['variaciones'] as $item ){ 
 				$code = md5($item[1]);
@@ -54,6 +56,7 @@
 						];
 						$total += $prorrateo;
 					}
+
 				}
 			}
 		}
@@ -104,20 +107,24 @@
 			'cuidador' => ['id'=>$reserva['cuidador']['id']],
 			'cliente' => ['id'=>$reserva['cliente']['id']],
 			'tipo' => '',
+			'comision' => 0,
 		];
 
 	// Validar tipo de nota de credito
 		$observaciones = '';
 		if( strtolower($tipo_usuario) == 'cliente' ){
-			$comision = $total * 0.20;
+			$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
+			$NC_data['user_id'] = $reserva['cliente']['id'];
+			$NC_data['tipo'] = 'cliente';
+			$NC_data['comision'] = 0.20;
+
+			$comision = $total * $NC_data['comision'];
 			$total -= $comision;
 
 			$r = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 
-			$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
-			$NC_data['user_id'] = $reserva['cliente']['id'];
-			$NC_data['tipo'] = 'cliente';
 		}else{
+			$NC_data['comision'] = 0;
 			$NC_data['user_id'] = $reserva['cuidador']['id'];
 			$NC_data['tipo'] = 'cuidador';
 		}
@@ -158,4 +165,6 @@
 				";
 				$wpdb->query( $sql_saldo );
 			}
+
+
 		}

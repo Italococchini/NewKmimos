@@ -160,6 +160,11 @@ class CFDI {
 			$_impuesto = 0;
 			$_total = 0;
 
+			$descuento = 0;
+			if( isset($data['descuento']) && $data['descuento'] > 0 ){
+				$descuento = $data['descuento'];
+			}
+
 		// Parametros obligatorios segun EnlaceFiscal 
 			$serie = 'NC';
 			$uso = 'G02';
@@ -177,6 +182,10 @@ class CFDI {
 						$base = $item['costo'] / $base_iva; // Costo del servicio sin Impuesto
 
 						$subtotal = $base * $cantidad;
+					// Cobro de comision Kmimos
+						if( $data['comision'] > 0 ){
+							$subtotal -= $subtotal * $data['comision'];
+						}
 
 					// Calcular impuestos
 						$impuesto = $subtotal * $tasaCuota;
