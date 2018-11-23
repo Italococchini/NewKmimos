@@ -273,24 +273,33 @@ class PagoCuidador {
 				"SELECT * from cuidadores_pagos where user_id = {$user_id} and estatus = 'pendiente'");
 			if( isset($existe_retiro->id) && $existe_retiro->id > 0 ){
 
+				// merge
 				$row_detalle = unserialize($existe_retiro->detalle);
-				foreach ( $row_detalle as $key => $value) {
-					if( array_key_exists($value['reserva'], $reservas) ){
-						$row_detalle[$key]['monto'] += ($reservas[ $value['reserva'] ])+0; 
-					}else{
+print_r($row_detalle);				
+print_r($reservas);				
+				foreach ( $reservas as $id => $val) {
+					$nuevo = true;
+					foreach ($row_detalle as $key => $value) {
+						if( $id == $value['reserva'] ){
+							$row_detalle[$key]['monto'] += $val;
+							$nuevo = false;
+						}
+					}				
+					if( $nuevo ){
 						$row_detalle[] = [
-							'reserva' => $value['reserva'], 
-							'monto' => $reservas[ $value['reserva'] ], 
+							'monto' => $val,
+							'reserva' => $id,
 						];
 					}
 				}
 
+
 				$sql_pago = "UPDATE cuidadores_pagos SET 
 						total = total + {$monto_pago}
-						detalle = '".serialize($row_detalle)."'
+						detalle = '".serialize($__det)."'
 					WHERE id = ".$existe_retiro->id
 				;
-echo $sql_pago;				
+echo $sql_pago;	
 				$this->db->query($sql_pago);
 				$pago_id = $existe_retiro->id;
 			}else{
