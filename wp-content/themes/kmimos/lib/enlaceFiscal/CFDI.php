@@ -242,7 +242,7 @@ class CFDI {
 						"rfc" => $this->RFC, //$data['receptor']['rfc'],
 						"nombre" => $data['receptor']['razon_social'],
 						"usoCfdi" => $uso, //"gastos"
-						"DomicilioFiscal" => [
+						/*"DomicilioFiscal" => [
 			                "calle" => $data['receptor']['calle'],
 			                "colonia" => $data['receptor']['colonia'],
 			                "noExterior" => $data['receptor']['noExterior'],
@@ -252,7 +252,7 @@ class CFDI {
 			                "estado" => $data['receptor']['estado'],
 			                "pais" => "Mexico",
 			                "cp" => $data['receptor']['postcode']
-			            ]
+			            ]*/
 					],
 					"Partidas" => $partidas,
 					"Impuestos" => [
