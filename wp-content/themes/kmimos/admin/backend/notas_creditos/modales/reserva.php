@@ -213,9 +213,7 @@
 				<table width="100%">
 					<thead>
 						<tr>
-							<td width="40%">Descripci&oacute;n</td>
-							<td width="20%">Costo x Masc.</td>
-							<td width="20%">Cant. Mascota</td>
+							<td width="80%">Descripci&oacute;n</td>
 							<td width="20%" class="text-right">Total</td>
 						</tr>
 					</thead>
@@ -234,7 +232,7 @@
 								</label>
 							</td>
 							<td>
-								<div class="col-md-4 monto">$ <?php echo $item[3]; ?></div>
+								<div class="monto">$ <?php echo $item[3]; ?></div>
 							</td>
 						</tr>
 						<?php } ?>
