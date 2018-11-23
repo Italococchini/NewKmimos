@@ -170,37 +170,47 @@
 			<?php if( !empty($reserva['servicio']['adicionales']) ){ ?>
 			<section class="servicios">
 				<h1 class="popup-titulo">SERVICIOS ADICIONALES</h1>
-				
-				<?php foreach( $reserva['servicio']['adicionales'] as $item ){ ?>
-				<article>
-					<div class="row">		
-						<div class="col-md-6">
-							<label>
-								<input 
-									type="checkbox" name="servicios[]" 
-									value="<?php echo md5($item[0]); ?>"  
+				<table>
+					<thead>
+						<tr>
+							<td>Descripci&oacute;n</td>
+							<td>Costo x Masc.</td>
+							<td>Cant. Mascota</td>
+							<td>Total</td>
+						</tr>
+					</thead>
+					<tbody>					
+						<?php foreach( $reserva['servicio']['adicionales'] as $item ){ ?>
+						<tr>
+							<td>
+								<label>
+									<input 
+										type="checkbox" name="servicios[]" 
+										value="<?php echo md5($item[0]); ?>"  
+										data-code="<?php echo $code; ?>"
+										data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>">
+									<?php echo "{$item[0]} - {$item[1]} x {$item[2]}"; ?>
+								</label>
+							</td>
+							<td>
+								<select 
+									class="form-control" 
+									data-name="cant_mascotas" 
+									name="mascotas_<?php echo $code; ?>"
 									data-code="<?php echo $code; ?>"
-									data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>">
-								<?php echo "{$item[0]} - {$item[1]} x {$item[2]}"; ?>
-							</label>
-						</div>
-						<div class="col-md-2">
-							<label>Mascotas: </label> 
-							<select 
-								class="form-control" 
-								data-name="cant_mascotas" 
-								name="mascotas_<?php echo $code; ?>"
-								data-code="<?php echo $code; ?>"
-								>
-							<?php for ($i=$total_mascotas; $i > 0; $i--) { ?>
-								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
-							<?php } ?>
-							</select>
-						</div>
-						<div class="col-md-4 monto">$ <?php echo $item[3]; ?></div>
-					</div>
-				</article>
-				<?php } ?>
+									>
+								<?php for ($i=$total_mascotas; $i > 0; $i--) { ?>
+									<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
+								<?php } ?>
+								</select>
+							</td>
+							<td> 
+								<div class="monto">$ <?php echo $item[3]; ?></div>
+							</td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
 				
 			</section>
 			<?php } ?>
