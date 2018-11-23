@@ -210,9 +210,7 @@ class PagoCuidador {
 		$reservas=[];
 		$reservas_pagos=[];
 		if( $disponible >= $monto ){
-			print_r($disponible['detalle']);
-			sort($disponible['detalle']);
-			print_r($disponible['detalle']);
+			// sort($disponible['detalle']);
 			$resto = $monto;
 			foreach ( $disponible['detalle'] as $reserva => $value ) {
 				if( $value >= $resto ){
