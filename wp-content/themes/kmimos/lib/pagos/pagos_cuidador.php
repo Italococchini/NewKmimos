@@ -402,9 +402,9 @@ class PagoCuidador {
 		$total_NC = $this->get_NC( $user_id );
 		$total_en_progreso = $this->pagos_en_progreso( $user_id );
 		$total_disponible = $this->detalle_disponible( $user_id );
-		$proximo_pago = $this->proximo_pago( $user_id );
 		$total_retenido = $this->total_retenido( $user_id );
 		$no_disponible = $this->pagos_no_disponible();
+		$proximo_pago = $this->proximo_pago( $user_id );
 
 		$ultimo_retiro = $this->ultimo_retiro( $user_id );
 		if( !empty($ultimo_retiro) ){
@@ -452,7 +452,7 @@ class PagoCuidador {
 			$tr = $this->total_transacciones_by_reserva( $user_id, $reserva->reserva_id );
 			$nc = $this->get_NC( $user_id, $reserva->reserva_id );
 			$total = $reserva->total - ( $tr + $nc );
-
+echo "{$reserva->total} - ( $tr + $nc );";
 			if( $total > 0 ){
 				$list['detalle'][$reserva->reserva_id] = $total;
 				$list['total'] += $total;
