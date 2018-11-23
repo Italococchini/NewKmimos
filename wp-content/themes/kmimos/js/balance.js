@@ -89,6 +89,7 @@ jQuery(document).ready(function(){
         var total = jQuery(this).attr('data-value');
 
         if( monto > total ){
+            console.log( monto +' > '+ total );
             jQuery(this).val( total );
             monto = total;
             alert( "El monto no debe ser mayor al saldo disponible" );
