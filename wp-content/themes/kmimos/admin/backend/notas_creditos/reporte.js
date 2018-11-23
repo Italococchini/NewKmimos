@@ -129,10 +129,24 @@ jQuery(document).ready(function() {
 	 	calcular_total();
 	});
 
+	jQuery(document).on('click','[data-pdfxml]', function(e){
 
+        e.preventDefault();
+		console.log("file");
+        var file = [];
+            file.push( jQuery(this).attr('data-PdfXml') );
+        download( file );
+    });
 
 });
-
+function download( archivos ){
+    jQuery.post(HOME+"procesos/generales/download_zip.php", {'fact_selected': archivos}, function(e){
+        e = JSON.parse(e);
+        if( e['estatus'] == "listo" ){
+            location.href = e['url'];
+        }
+    });
+}
 function actualizar_monto_adicional( ID ){
 	var check = jQuery('[data-check="'+ID+'"');
 	var selec = jQuery('[data-select="'+ID+'"');
