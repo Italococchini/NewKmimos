@@ -162,8 +162,7 @@
 					'".$cfdi_nc["ack"]->AckEnlaceFiscal->descargaXmlCFDi."',
 					'".$cfdi_nc["ack"]->AckEnlaceFiscal->folioFiscalUUID."'
 				);";
-echo $sql;
-exit();				
+
 			$wpdb->query( $sql );
 			if( $NC_data['tipo'] == 'cliente'){
 				$sql_saldo = "
