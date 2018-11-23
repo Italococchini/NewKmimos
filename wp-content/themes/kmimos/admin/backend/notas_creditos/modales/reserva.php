@@ -193,7 +193,7 @@
 										name="servicios[]"
 										value="<?php echo md5($item[0]); ?>"
 										data-check="<?php echo $count; ?>"
-										data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[2]) ); ?>"
+										data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>"
 								>
 									<?php echo "{$item[0]} "; ?>
 								</label>
