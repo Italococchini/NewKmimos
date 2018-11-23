@@ -170,16 +170,6 @@
 			<?php if( !empty($reserva['servicio']['adicionales']) ){ ?>
 			<section class="servicios">
 				<h1 class="popup-titulo">SERVICIOS ADICIONALES</h1>
-				<table width="100%">
-					<thead>
-						<tr>
-							<td width="45%">Descripci&oacute;n</td>
-							<td width="20%" class="text-center">Costo x Masc.</td>
-							<td width="15%">Cant. Mascota</td>
-							<td width="20%" class="text-right">Total</td>
-						</tr>
-					</thead>
-					<tbody>					
 						<?php foreach( $reserva['servicio']['adicionales'] as $item ){ ?>
 						<tr>
 							<td>
@@ -214,32 +204,42 @@
 						<?php } ?>
 					</tbody>
 				</table>
-				
 			</section>
 			<?php } ?>
 
 			<?php if( !empty($reserva['servicio']['transporte']) ){ ?>
 			<section class="servicios">
 				<h1 class="popup-titulo">TRANSPORTACIÓN</h1>
-
-				<?php foreach( $reserva['servicio']['transporte'] as $item){ ?>
-				<article>
-					<div class="row">		
-						<div class="col-md-8">
-							<label>
-								<input type="checkbox" 
-									name="transporte[]" 
-									value="<?php echo md5($item[0]); ?>"
-									data-code="<?php echo $code; ?>"
-									data-monto="<?php echo  str_replace(',','.', str_replace('.', '', $item[3]) ); ?>"
-								> 
-								<?php echo $item[0]; ?>
-							</label>
-						</div>
-						<div class="col-md-4 monto">$ <?php echo $item[3]; ?></div>
-					</div>
-				</article>
-				<?php } ?>
+				<table width="100%">
+					<thead>
+						<tr>
+							<td width="40%">Descripci&oacute;n</td>
+							<td width="20%">Costo x Masc.</td>
+							<td width="20%">Cant. Mascota</td>
+							<td width="20%" class="text-right">Total</td>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach( $reserva['servicio']['transporte'] as $item){ ?>
+						<tr>
+							<td>
+								<label>
+									<input type="checkbox" 
+										name="transporte[]" 
+										value="<?php echo md5($item[0]); ?>"
+										data-code="<?php echo $code; ?>"
+										data-monto="<?php echo  str_replace(',','.', str_replace('.', '', $item[3]) ); ?>"
+									> 
+									<?php echo $item[0]; ?>
+								</label>
+							</td>
+							<td>
+								<div class="col-md-4 monto">$ <?php echo $item[3]; ?></div>
+							</td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
 			</section>
 			<?php } ?>
 
