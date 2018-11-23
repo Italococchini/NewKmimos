@@ -22,9 +22,7 @@
 	*/
 
     $factura_id = $wpdb->get_var( "SELECT id FROM facturas WHERE receptor = 'cliente' and reserva_id = {$ID}" );
-
     $nc_id = $wpdb->get_var( "SELECT id FROM notas_creditos WHERE reserva_id = {$ID}" );
-
 	$show_nc = false;
 
 	$reserva = [];
@@ -34,8 +32,10 @@
 		$msg = 'Ingrese un n&uacute;mero de reserva para generar la nota de cr&eacute;dito';
 	}else if( $factura_id > 0 ){
 		$msg = 'No se puede generar la nota de cr&eacute;dito por que la reserva ya esta facturada.';
-	}else if( $pedido_id == null ){
+	}else if( $pedido_id == null && date('Y-m-d') < $fecha_start ){
 		$msg = 'No se puede generar la nota de cr&eacute;dito, la reserva inicia el '.$fecha_start;
+	}else if( $pedido_id == null ){
+		$msg = 'No se puede generar la nota de cr&eacute;dito';
 	}else if( $pedido_id > 0 ){
 		$show_nc = true;
 		$reserva = kmimos_desglose_reserva_data( $pedido_id, true );
