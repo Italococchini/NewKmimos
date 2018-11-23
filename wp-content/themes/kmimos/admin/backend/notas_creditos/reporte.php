@@ -100,6 +100,7 @@
                         <th>Factura</th>
                         <th>Detalle</th>
                         <th>Estatus</th>
+                        <th>Opciones</th>
                         <th>Observaciones</th>
                     </tr>
                 </thead>

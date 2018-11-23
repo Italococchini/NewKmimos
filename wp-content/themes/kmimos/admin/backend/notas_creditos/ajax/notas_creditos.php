@@ -48,6 +48,9 @@
                 $item->factura,
                 $detalle,
                 $item->estatus,
+                '<button style="padding:5px;" data-pdfxml="<?php echo $item->factura."_".$item->cfdi_referencia; ?>">
+                    <i class="fa fa-cloud-download"></i> Descargar PDF y XML 
+                </button>'
                 utf8_encode($item->observaciones)
             );
 

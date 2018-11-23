@@ -147,7 +147,8 @@
 					factura,
 					cfdi_pdf,
 					cfdi_xml,
-					cfdi_id
+					cfdi_id,
+					cfdi_referencia
 				) VALUES (
 					'".$NC_data['tipo']."', 
 					".$NC_data['user_id'].", 
@@ -159,7 +160,8 @@
 					'{$factura_id}',
 					'".$cfdi_nc["ack"]->AckEnlaceFiscal->descargaArchivoPDF."',
 					'".$cfdi_nc["ack"]->AckEnlaceFiscal->descargaXmlCFDi."',
-					'".$cfdi_nc["ack"]->AckEnlaceFiscal->folioFiscalUUID."'
+					'".$cfdi_nc["ack"]->AckEnlaceFiscal->folioFiscalUUID."',
+					'".$cfdi_nc["ack"]->AckEnlaceFiscal->numeroReferencia."'
 				);";
 
 			$wpdb->query( $sql );
