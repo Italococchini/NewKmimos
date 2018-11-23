@@ -113,7 +113,6 @@
 	// Validar tipo de nota de credito
 		$observaciones = '';
 		if( strtolower($tipo_usuario) == 'cliente' ){
-			$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
 			$NC_data['user_id'] = $reserva['cliente']['id'];
 			$NC_data['tipo'] = 'cliente';
 			$NC_data['comision'] = 0.20;
@@ -123,6 +122,7 @@
 
 			$r = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 
+			$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
 		}else{
 			$NC_data['comision'] = 0;
 			$NC_data['user_id'] = $reserva['cuidador']['id'];
