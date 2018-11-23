@@ -133,29 +133,35 @@
 		$cfdi_nc = $CFDI->generar_Cfdi_NotasCreditos( $NC_data );
 		$factura_id = $reserva_id . $NC_data['consecutivo'];
 
-	// Nota de Credito - Cliente
-		$sql = "INSERT INTO notas_creditos ( 
-				`tipo`,
-				`user_id`,
-				`reserva_id`,
-				`monto`,
-				`detalle`,
-				`observaciones`,
-				`estatus`,
-				factura
-			) VALUES (
-				'".$NC_data['tipo']."', 
-				".$NC_data['user_id'].", 
-				$reserva_id, 
-				$total,
-				'{$_detalle}',
-				'{$observaciones}',
-				'pendiente',
-				'{$factura_id}'
-			);";
 
 	// Agregar registro de NC si enlaceFiscal lo acepta
 		if( isset($cfdi_nc['estatus']) && $cfdi_nc['estatus']=='aceptado'){
+			// Nota de Credito - Cliente
+			$sql = "INSERT INTO notas_creditos ( 
+					`tipo`,
+					`user_id`,
+					`reserva_id`,
+					`monto`,
+					`detalle`,
+					`observaciones`,
+					`estatus`,
+					factura,
+					cfdi_pdf,
+					cfdi_xml,
+					cfdi_id
+				) VALUES (
+					'".$NC_data['tipo']."', 
+					".$NC_data['user_id'].", 
+					$reserva_id, 
+					$total,
+					'{$_detalle}',
+					'{$observaciones}',
+					'pendiente',
+					'{$factura_id}',
+					'".$cfdi_nc["ack"]["AckEnlaceFiscal"]["descargaArchivoPDF"]."',
+					'".$cfdi_nc["ack"]["AckEnlaceFiscal"]["descargaXmlCFDi"]."',
+					'".$cfdi_nc["ack"]["AckEnlaceFiscal"]["folioFiscalUUID"]."'
+				);";
 			$wpdb->query( $sql );
 			if( $NC_data['tipo'] == 'cliente'){
 				$sql_saldo = "
@@ -165,6 +171,4 @@
 				";
 				$wpdb->query( $sql_saldo );
 			}
-
-
 		}

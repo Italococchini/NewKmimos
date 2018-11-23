@@ -298,7 +298,7 @@ class CFDI {
 		}
 
 		return [ 
-			'ack' => $cfdi_respuesta, 
+			'ack' => json_decode($cfdi_respuesta), 
 			'estatus' => $estatus,
 			'referencia' => $referencia,
 		];
