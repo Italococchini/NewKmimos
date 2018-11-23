@@ -119,7 +119,19 @@ jQuery(document).ready(function() {
 		);
 	});
 
+
+	// actualizar servicios adicionales
+	jQuery(document).on('çhange', '.update', function(){
+		actualizar_monto_adicional( jQuery(this).attr('data-group') );
+	});
 });
+
+function actualizar_monto_adicional( ID ){
+	var check = jQuery('[data-checkbox="'+ID+'"');
+	var selec = jQuery('[data-select="'+ID+'"');
+	var total = parseFloat( selec.attr('data-costo') ) * parseFloat( selec.val() );
+	jQuery('[data-monto="'+ID+'"]').html( total );
+}
 
 function actualizar( code ){
 

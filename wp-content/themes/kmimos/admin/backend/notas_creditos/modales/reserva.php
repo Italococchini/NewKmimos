@@ -180,13 +180,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach( $reserva['servicio']['adicionales'] as $item ){ ?>
+						<?php 
+						$count=0;
+						foreach( $reserva['servicio']['adicionales'] as $item ){ 
+							$count++;
+						?>
 						<tr>
 							<td>
 								<label>
-									<input 
-										type="checkbox" name="servicios[]" 
-										value="<?php echo md5($item[0]); ?>"  
+									<input class="update"
+										type="checkbox" 
+										name="servicios[]"
+										value="<?php echo md5($item[0]); ?>"
+										data-group="<?php echo $count; ?>"
 										data-code="<?php echo $code; ?>"
 										data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>">
 									<?php echo "{$item[0]} "; ?>
@@ -196,11 +202,10 @@
 								$ <?php echo $item[2]; ?>
 							</td>
 							<td>
-								<select 
-									class="form-control" 
-									data-name="cant_mascotas" 
-									name="mascotas_<?php echo $code; ?>"
-									data-code="<?php echo $code; ?>"
+								<select class="form-control update"  
+									data-group="<?php echo $count; ?>"
+									data-costo="<?php echo $item[2]; ?>"
+									name="adic_mascotas_<?php echo $code; ?>"
 									>
 								<?php for ($i=$total_mascotas; $i > 0; $i--) { ?>
 									<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
@@ -208,7 +213,7 @@
 								</select>
 							</td>
 							<td> 
-								<div class="monto">$ <?php echo $item[3]; ?></div>
+								<div data-monto="<?php echo $count; ?>" class="monto">$ <?php echo $item[3]; ?></div>
 							</td>
 						</tr>
 						<?php } ?>
