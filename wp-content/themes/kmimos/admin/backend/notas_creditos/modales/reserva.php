@@ -11,15 +11,15 @@
 		$reserva_start = get_post_meta( $ID, '_booking_start', true );
 		$fecha_start = date('Y-m-d', strtotime($reserva_start));
 		if( $pedido_id > 0 && date('Y-m-d') < $fecha_start ){
-			$pedido_id = null;
+//			$pedido_id = null;
 	 	}
 
-	/* // Solo reservas completadas
-		$reserva_end = get_post_meta( $ID, '_booking_end', true );
-		if( $pedido_id > 0 && date('Y-m-d') < date('Y-m-d', strtotime($reserva_end)) ){
-			$pedido_id = 0;
-	 	}
-	*/
+	// Solo reservas completadas
+		// $reserva_end = get_post_meta( $ID, '_booking_end', true );
+		// if( $pedido_id > 0 && date('Y-m-d') < date('Y-m-d', strtotime($reserva_end)) ){
+		// 	$pedido_id = 0;
+		// }
+	
 
     $factura_id = $wpdb->get_var( "SELECT id FROM facturas WHERE receptor = 'cliente' and reserva_id = {$ID}" );
     $nc_id = $wpdb->get_var( "SELECT id FROM notas_creditos WHERE reserva_id = {$ID}" );
@@ -35,7 +35,7 @@
 	}else if( $pedido_id == null && date('Y-m-d') < $fecha_start ){
 		$msg = 'No se puede generar la nota de cr&eacute;dito, la reserva inicia el '.$fecha_start;
 	}else if( $pedido_id == null ){
-		$msg = 'No se puede generar la nota de cr&eacute;dito';
+		$msg = 'No se puede generar la nota de cr&eacute;dito, Reserva no encontrada';
 	}else if( $pedido_id > 0 ){
 		$show_nc = true;
 		$reserva = kmimos_desglose_reserva_data( $pedido_id, true );

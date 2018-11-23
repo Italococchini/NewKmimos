@@ -26,7 +26,6 @@
 		exit();
 	}
 
-
 	$reserva = kmimos_desglose_reserva_data( $pedido_id, true );
 	$inicio = date('Y-m-d',$reserva['servicio']['inicio']) ;
 
