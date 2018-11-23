@@ -27,16 +27,27 @@
     	}
 
     	// Configurar serie 
-    	if( !empty($id_sucursal) ){		
-	    	$_serie = $aliados->clienteSeries( 
-	    		$prospecto->serie, 
-	    		$prospecto->tipoComprobante, 
-	    		$prospecto->regimenFiscal, 
-	    		$prospecto->numFolioFiscal, 
-	    		$prospecto->rfc,
-	    		$id_sucursal
-	    	);
+    	if( !empty($id_sucursal) ){
+            // Series para Facturas
+            $_serie = $aliados->clienteSeries( 
+                $prospecto->serie, 
+                $prospecto->tipoComprobante, 
+                $prospecto->regimenFiscal, 
+                $prospecto->numFolioFiscal, 
+                $prospecto->rfc,
+                $id_sucursal
+            );
 	    	$serie = json_decode($_serie);
+
+            // Serie Notas de Credito
+            $_serieNC = $aliados->clienteSeries( 
+                'NC',
+                'devolucion_desc_bonif',
+                $prospecto->regimenFiscal, 
+                $prospecto->numFolioFiscal, 
+                $prospecto->rfc,
+                $id_sucursal
+            );
     	}
 
     	// Buscar datos de prospectos
