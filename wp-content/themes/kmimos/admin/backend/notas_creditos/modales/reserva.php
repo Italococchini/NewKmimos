@@ -189,8 +189,11 @@
 										value="<?php echo md5($item[0]); ?>"  
 										data-code="<?php echo $code; ?>"
 										data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>">
-									<?php echo "{$item[0]} - {$item[1]} x {$item[2]}"; ?>
+									<?php echo "{$item[0]} "; ?>
 								</label>
+							</td>
+							<td>
+								<?php echo $item[2]; ?>
 							</td>
 							<td>
 								<select 
