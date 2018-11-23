@@ -78,13 +78,6 @@ jQuery(document).ready(function() {
 		}
 	});
 
-	jQuery(document).on('change', '[name="servicios[]"]', function(e){
-		calcular_total();
-	});
-	jQuery(document).on('change', '[name="transporte[]"]', function(e){
-		calcular_total();
-	});
-
 	jQuery(document).on('change', '[data-name="hasta"]', function(e){
 		actualizar( jQuery(this).attr('data-code') );
 	});
@@ -121,9 +114,19 @@ jQuery(document).ready(function() {
 
 
 	// actualizar servicios adicionales
-	jQuery(document).on('çhange', '.update', function(){
+	jQuery(document).on('change', '[name="servicios[]"]', function(e){
 		actualizar_monto_adicional( jQuery(this).attr('data-group') );
+		calcular_total();
 	});
+	jQuery(document).on('çhange', '.update', function(e){
+		actualizar_monto_adicional( jQuery(this).attr('data-group') );
+		calcular_total();
+	});
+	jQuery(document).on('change', '[name="transporte[]"]', function(e){
+		actualizar_monto_adicional( jQuery(this).attr('data-group') );
+		calcular_total();
+	});
+
 });
 
 function actualizar_monto_adicional( ID ){
