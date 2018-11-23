@@ -139,7 +139,7 @@ jQuery(document).ready(function() {
 function actualizar_monto_adicional( ID ){
 	var check = jQuery('[data-check="'+ID+'"');
 	var selec = jQuery('[data-select="'+ID+'"');
-	var total = parseFloat( selec.attr('data-costo') ) * parseFloat( selec.val() );
+	var total = parseFloat( check.attr('data-costo') ) * parseFloat( selec.val() );
 
 	console.log('pago:'+total);
 
