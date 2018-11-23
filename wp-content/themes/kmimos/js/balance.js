@@ -85,8 +85,8 @@ jQuery(document).ready(function(){
     });
 
     jQuery('[name="monto"]').on('change', function(e){
-        var monto = jQuery(this).val();
-        var total = jQuery(this).attr('data-value');
+        var monto = parseFloat( jQuery(this).val() );
+        var total = parseFloat( jQuery(this).attr('data-value') );
 
         if( monto > total ){
             console.log( monto +' > '+ total );
