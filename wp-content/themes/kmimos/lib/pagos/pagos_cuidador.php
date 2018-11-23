@@ -274,29 +274,29 @@ class PagoCuidador {
 			if( isset($existe_retiro->id) && $existe_retiro->id > 0 ){
 
 				// merge
-				$row_detalle = unserialize($existe_retiro->detalle);
-print_r($row_detalle);				
-print_r($reservas);				
-				foreach ( $reservas as $id => $val) {
-					$nuevo = true;
-					foreach ($row_detalle as $key => $value) {
-						if( $id == $value['reserva'] ){
-							$row_detalle[$key]['monto'] += $val;
-							$nuevo = false;
-						}
-					}				
-					if( $nuevo ){
-						$row_detalle[] = [
-							'monto' => $val,
-							'reserva' => $id,
-						];
-					}
-				}
+// 				$row_detalle = unserialize($existe_retiro->detalle);
+// print_r($row_detalle);				
+// print_r($reservas);				
+// 				foreach ( $reservas as $id => $val) {
+// 					$nuevo = true;
+// 					foreach ($row_detalle as $key => $value) {
+// 						if( $id == $value['reserva'] ){
+// 							$row_detalle[$key]['monto'] += $val;
+// 							$nuevo = false;
+// 						}
+// 					}				
+// 					if( $nuevo ){
+// 						$row_detalle[] = [
+// 							'monto' => $val,
+// 							'reserva' => $id,
+// 						];
+// 					}
+// 				}
 
 
 				$sql_pago = "UPDATE cuidadores_pagos SET 
 						total = total + {$monto_pago}
-						detalle = '".serialize($__det)."'
+						detalle = concat(detalle,'||".serialize($reservas)."')
 					WHERE id = ".$existe_retiro->id
 				;
 echo $sql_pago;	
