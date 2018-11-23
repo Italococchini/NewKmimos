@@ -188,13 +188,13 @@
 						<tr>
 							<td>
 								<label>
-									<input class="update"
+									<input
 										type="checkbox" 
 										name="servicios[]"
 										value="<?php echo md5($item[0]); ?>"
-										data-group="<?php echo $count; ?>"
-										data-code="<?php echo $code; ?>"
-										data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>">
+										data-check="<?php echo $count; ?>"
+										data-costo="<?php echo $item[2]; ?>"
+								>
 									<?php echo "{$item[0]} "; ?>
 								</label>
 							</td>
@@ -202,11 +202,10 @@
 								$ <?php echo $item[2]; ?>
 							</td>
 							<td>
-								<select class="form-control update"  
+								<select class="form-control" 
+									data-action="adic_update" 
 									data-group="<?php echo $count; ?>"
-									data-costo="<?php echo $item[2]; ?>"
-									name="adic_mascotas_<?php echo $code; ?>"
-									>
+								>
 								<?php for ($i=$total_mascotas; $i > 0; $i--) { ?>
 									<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
 								<?php } ?>

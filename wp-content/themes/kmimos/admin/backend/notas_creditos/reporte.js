@@ -114,27 +114,34 @@ jQuery(document).ready(function() {
 
 
 	// actualizar servicios adicionales
-	jQuery(document).on('change', '[name="servicios[]"]', function(e){
+	// jQuery(document).on('change', '[name="servicios[]"]', function(e){
+	// 	actualizar_monto_adicional( jQuery(this).attr('data-group') );
+	// 	calcular_total();
+	// });
+	// jQuery(document).on('change', '[name="transporte[]"]', function(e){
+	// 	actualizar_monto_adicional( jQuery(this).attr('data-group') );
+	// 	calcular_total();
+	// });
+	// jQuery(document).on('çhange', '.update', function(e){
+	// 	actualizar_monto_adicional( jQuery(this).attr('data-group') );
+	// 	calcular_total();
+	// });
+
+	jQuery(document).on('change', '[data-action="adic_update"]', function(e){
 		actualizar_monto_adicional( jQuery(this).attr('data-group') );
 		calcular_total();
 	});
-	jQuery(document).on('çhange', '.update', function(e){
-		actualizar_monto_adicional( jQuery(this).attr('data-group') );
-		calcular_total();
-	});
-	jQuery(document).on('change', '[name="transporte[]"]', function(e){
-		actualizar_monto_adicional( jQuery(this).attr('data-group') );
-		calcular_total();
-	});
+
+
 
 });
 
 function actualizar_monto_adicional( ID ){
-	var check = jQuery('[data-checkbox="'+ID+'"');
+	var check = jQuery('[data-check="'+ID+'"');
 	var selec = jQuery('[data-select="'+ID+'"');
 	var total = parseFloat( selec.attr('data-costo') ) * parseFloat( selec.val() );
 
-console.log('pago:'+total);
+	console.log('pago:'+total);
 
 	jQuery('[data-monto="'+ID+'"]').html( total );
 }
