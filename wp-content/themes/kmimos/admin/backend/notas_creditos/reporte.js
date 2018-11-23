@@ -130,6 +130,9 @@ function actualizar_monto_adicional( ID ){
 	var check = jQuery('[data-checkbox="'+ID+'"');
 	var selec = jQuery('[data-select="'+ID+'"');
 	var total = parseFloat( selec.attr('data-costo') ) * parseFloat( selec.val() );
+
+console.log('pago:'+total);
+
 	jQuery('[data-monto="'+ID+'"]').html( total );
 }
 
