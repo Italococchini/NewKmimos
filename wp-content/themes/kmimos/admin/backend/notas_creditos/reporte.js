@@ -144,6 +144,7 @@ function actualizar_monto_adicional( ID ){
 	console.log('pago:'+total);
 
 	jQuery('[data-monto="'+ID+'"]').html( total );
+	check.attr("data-costo", total);
 }
 
 function actualizar( code ){
