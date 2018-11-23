@@ -173,10 +173,10 @@
 				<table width="100%">
 					<thead>
 						<tr>
-							<td width="50%">Descripci&oacute;n</td>
-							<td width="15%">Costo x Masc.</td>
+							<td width="45%">Descripci&oacute;n</td>
+							<td width="20%" class="text-center">Costo x Masc.</td>
 							<td width="15%">Cant. Mascota</td>
-							<td width="20%">Total</td>
+							<td width="20%" class="text-right">Total</td>
 						</tr>
 					</thead>
 					<tbody>					
@@ -193,7 +193,7 @@
 								</label>
 							</td>
 							<td>
-								<?php echo $item[2]; ?>
+								$ <?php echo $item[2]; ?>
 							</td>
 							<td>
 								<select 
