@@ -142,7 +142,7 @@ class CFDI {
 
 		$razon_social = $this->db->get_var("SELECT meta_value from wp_usermeta where meta_key = 'billing_razon_social' AND user_id = ".$data['cliente']['id']);
 
-		$data['receptor']['razon_social'] = ( !empty($razon_social) )? $razon_social : 'Publico en General';
+		$data['receptor']['razon_social'] = ( !empty($razon_social) )? utf8_encode($razon_social) : 'Publico en General';
 		$data['tipo_pago'] = 'PAGO'; 
 
 		if( !array_key_exists( 'consecutivo', $data ) ){
@@ -244,9 +244,9 @@ class CFDI {
 						"usoCfdi" => $uso, //"gastos"
 						"DomicilioFiscal" => [
 			                "calle" => $data['receptor']['calle'],
+			                "colonia" => $data['receptor']['colonia'],
 			                "noExterior" => $data['receptor']['noExterior'],
 			                "noInterior" => $data['receptor']['noInterior'],
-			                "colonia" => $data['receptor']['colonia'],
 			                "localidad" => $data['receptor']['localidad'],
 			                "municipio" => $data['receptor']['city'],
 			                "estado" => $data['receptor']['estado'],
