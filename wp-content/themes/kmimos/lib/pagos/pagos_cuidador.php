@@ -215,7 +215,10 @@ class PagoCuidador {
 			foreach ( $disponible['detalle'] as $reserva => $value ) {
 				if( $value >= $resto ){
 					$reservas[ $reserva ] = $resto;
-					$reservas_pagos[] = ['reserva'=>$reserva, "monto"=>$resto];
+					$reservas_pagos[] = [
+						'reserva'=>$reserva, 
+						"monto"=>$resto
+					];
 					$resto = 0;
 					break;
 				}
@@ -225,7 +228,10 @@ class PagoCuidador {
 						$value += $resto;
 					}
 					$reservas[ $reserva ] = $value;
-					$reservas_pagos[] = ['reserva'=>$reserva, "monto"=>$value];
+					$reservas_pagos[] = [
+						'reserva'=>$reserva, 
+						"monto"=>$value
+					];
 				}
 			}
 		}
@@ -267,14 +273,24 @@ class PagoCuidador {
 				"SELECT * from cuidadores_pagos where user_id = {$user_id} and estatus = 'pendiente'");
 			if( isset($existe_retiro->id) && $existe_retiro->id > 0 ){
 
-				// italo Ajustar detalle de reserva (merge)
+				$row_detalle = unserialize($existe_retiro->detalle);
+				foreach ( $row_detalle as $key => $value) {
+					if( array_key_exists($value['reserva'], $reservas) ){
+						$row_detalle[$key]['monto'] += ($reservas[ $value['reserva'] ])+0; 
+					}else{
+						$row_detalle[] = [
+							'reserva' => $value['reserva'], 
+							'monto' => $reservas[ $value['reserva'] ], 
+						];
+					}
+				}
 
 				$sql_pago = "UPDATE cuidadores_pagos SET 
 						total = total + {$monto_pago}
+						detalle = '".serialize($row_detalle)."'
 					WHERE id = ".$existe_retiro->id
 				;
 				$this->db->query($sql_pago);
-				
 				$pago_id = $existe_retiro->id;
 			}else{
 				$sql_pago = "
