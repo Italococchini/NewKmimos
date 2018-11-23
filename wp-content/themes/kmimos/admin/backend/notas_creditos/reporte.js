@@ -121,11 +121,7 @@ jQuery(document).ready(function() {
 	jQuery(document).on('change', '[name="transporte[]"]', function(e){
 	 	calcular_total();
 	});
-	// jQuery(document).on('çhange', '.update', function(e){
-	// 	actualizar_monto_adicional( jQuery(this).attr('data-group') );
-	// 	calcular_total();
-	// });
-
+ 
 	jQuery(document).on('change', '[data-action="adic_update"]', function(e){
 		actualizar_monto_adicional( jQuery(this).attr('data-group') );
 	});
@@ -137,12 +133,12 @@ jQuery(document).ready(function() {
 function actualizar_monto_adicional( ID ){
 	var check = jQuery('[data-check="'+ID+'"');
 	var selec = jQuery('[data-select="'+ID+'"');
-	var total = parseFloat( check.attr('data-costo') ) * parseFloat( selec.val() );
+	var total = parseFloat( check.attr('data-monto') ) * parseFloat( selec.val() );
 
 	console.log('pago:'+total);
 
 	jQuery('[data-monto="'+ID+'"]').html( total );
-	check.attr("data-costo", total);
+	check.attr("data-monto", total);
 }
 
 function actualizar( code ){
