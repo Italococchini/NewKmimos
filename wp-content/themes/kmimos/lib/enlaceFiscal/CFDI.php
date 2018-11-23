@@ -140,7 +140,9 @@ class CFDI {
 
 	public function generar_Cfdi_NotasCreditos( $data=[] ){
 
-		$data['receptor']['razon_social'] = 'Publico en General';
+		$razon_social = $this->db->get_var("SELECT meta_value from wp_usermeta where meta_key = 'billing_razon_social' AND user_id = ".$data['cliente']['id']);
+
+		$data['receptor']['razon_social'] = ( !empty($razon_social) )? $razon_social : 'Publico en General';
 		$data['tipo_pago'] = 'PAGO'; 
 
 		if( !array_key_exists( 'consecutivo', $data ) ){
