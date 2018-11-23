@@ -115,7 +115,7 @@ jQuery(document).ready(function(){
                 {'monto': jQuery('[name="monto"]').val(), 'ID': user_id, 'descripcion': jQuery('[name="descripcion"]').val()},
                 function(d){
                     console.log(d);
-                    location.reload();
+                    // location.reload();
                 }
             );
         }else{
