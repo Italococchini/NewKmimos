@@ -114,14 +114,13 @@ jQuery(document).ready(function() {
 
 
 	// actualizar servicios adicionales
-	// jQuery(document).on('change', '[name="servicios[]"]', function(e){
-	// 	actualizar_monto_adicional( jQuery(this).attr('data-group') );
-	// 	calcular_total();
-	// });
-	// jQuery(document).on('change', '[name="transporte[]"]', function(e){
-	// 	actualizar_monto_adicional( jQuery(this).attr('data-group') );
-	// 	calcular_total();
-	// });
+	jQuery(document).on('change', '[name="servicios[]"]', function(e){
+		actualizar_monto_adicional( jQuery(this).attr('data-group') );
+	 	calcular_total();
+	});
+	jQuery(document).on('change', '[name="transporte[]"]', function(e){
+	 	calcular_total();
+	});
 	// jQuery(document).on('çhange', '.update', function(e){
 	// 	actualizar_monto_adicional( jQuery(this).attr('data-group') );
 	// 	calcular_total();
@@ -129,7 +128,6 @@ jQuery(document).ready(function() {
 
 	jQuery(document).on('change', '[data-action="adic_update"]', function(e){
 		actualizar_monto_adicional( jQuery(this).attr('data-group') );
-		calcular_total();
 	});
 
 
