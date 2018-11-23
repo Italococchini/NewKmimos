@@ -80,9 +80,18 @@ jQuery(document).ready(function() {
 
 	jQuery(document).on('change', '[data-name="hasta"]', function(e){
 		actualizar( jQuery(this).attr('data-code') );
+		calcular_total();
+	});
+	jQuery(document).on('blur', '[data-name="hasta"]', function(e){
+		actualizar( jQuery(this).attr('data-code') );
 	});
 	jQuery(document).on('change', '[data-name="cant_mascotas"]', function(e){
 		actualizar( jQuery(this).attr('data-code') );
+		calcular_total();
+	});
+	jQuery(document).on('blur', '[data-name="cant_mascotas"]', function(e){
+		actualizar( jQuery(this).attr('data-code') );
+		calcular_total();
 	});
 
 	jQuery(document).on('change', '[name="reserva"]', function(e){
