@@ -205,6 +205,7 @@
 								<select class="form-control" 
 									data-action="adic_update" 
 									data-group="<?php echo $count; ?>"
+									data-select="<?php echo $count; ?>"
 								>
 								<?php for ($i=$total_mascotas; $i > 0; $i--) { ?>
 									<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
