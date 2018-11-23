@@ -193,7 +193,7 @@
 										name="servicios[]"
 										value="<?php echo md5($item[0]); ?>"
 										data-check="<?php echo $count; ?>"
-										data-costo="<?php echo $item[2]; ?>"
+										data-costo="<?php echo str_replace(',','.', str_replace('.', '', $item[2]) ); ?>"
 								>
 									<?php echo "{$item[0]} "; ?>
 								</label>
