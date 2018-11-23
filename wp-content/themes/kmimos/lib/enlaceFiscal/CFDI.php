@@ -195,9 +195,9 @@ class CFDI {
 
 					// Desglose general de la factura
 					// *************************************
-						$_impuesto += number_format($impuesto, 2, ".", "" );
-						$_subtotal += number_format($subtotal, 2, ".", "" );
-						$_total += $_subtotal + $_impuesto; 
+						$_impuesto += $impuesto;
+						$_subtotal += $subtotal;
+						$_total += $subtotal + $impuesto; 
 
 					// Agregar la partida a la factura
 					// *************************************
