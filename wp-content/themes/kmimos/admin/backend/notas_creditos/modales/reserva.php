@@ -174,8 +174,8 @@
 					<thead>
 						<tr>
 							<td width="50%">Descripci&oacute;n</td>
-							<td width="10%">Costo x Masc.</td>
-							<td width="20%">Cant. Mascota</td>
+							<td width="15%">Costo x Masc.</td>
+							<td width="15%">Cant. Mascota</td>
 							<td width="20%">Total</td>
 						</tr>
 					</thead>
