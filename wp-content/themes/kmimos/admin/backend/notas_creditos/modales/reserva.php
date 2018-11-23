@@ -5,6 +5,8 @@
 
 	extract($_POST);
 
+	$total_mascotas = 0;
+
 	$pedido_id = $wpdb->get_var("SELECT post_parent FROM wp_posts where ID = {$ID} and post_status in ( 'confirmed', 'complete', 'completed' )");
 
 	// Solo reservas en progreso
@@ -112,6 +114,7 @@
 				<h1 class="popup-titulo">SERVICIO: <?php echo strtoupper($reserva['servicio']['tipo']); ?></h1>
 				<article>
 				<?php foreach( $reserva['servicio']['variaciones'] as $key => $s_principal ){ 
+					$total_mascotas += $s_principal[0];
 					$code = md5($s_principal[1]);
 				?>
 					<div class="row" style="margin-bottom:20px; ">
@@ -171,7 +174,7 @@
 				<?php foreach( $reserva['servicio']['adicionales'] as $item ){ ?>
 				<article>
 					<div class="row">		
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<label>
 								<input 
 									type="checkbox" name="servicios[]" 
@@ -180,6 +183,19 @@
 									data-monto="<?php echo str_replace(',','.', str_replace('.', '', $item[3]) ); ?>">
 								<?php echo "{$item[0]} - {$item[1]} x {$item[2]}"; ?>
 							</label>
+						</div>
+						<div class="col-md-2">
+							<label>Mascotas: </label> 
+							<select 
+								class="form-control" 
+								data-name="cant_mascotas" 
+								name="mascotas_<?php echo $code; ?>"
+								data-code="<?php echo $code; ?>"
+								>
+							<?php for ($i=$total_mascotas; $i > 0; $i--) { ?>
+								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
+							<?php } ?>
+							</select>
 						</div>
 						<div class="col-md-4 monto">$ <?php echo $item[3]; ?></div>
 					</div>
