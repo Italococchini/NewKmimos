@@ -124,6 +124,7 @@ jQuery(document).ready(function() {
  
 	jQuery(document).on('change', '[data-action="adic_update"]', function(e){
 		actualizar_monto_adicional( jQuery(this).attr('data-group') );
+	 	calcular_total();
 	});
 
 
