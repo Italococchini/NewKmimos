@@ -452,7 +452,8 @@ class PagoCuidador {
 			$tr = $this->total_transacciones_by_reserva( $user_id, $reserva->reserva_id );
 			$nc = $this->get_NC( $user_id, $reserva->reserva_id );
 			$total = $reserva->total - ( $tr + $nc );
-echo "{$reserva->total} - ( $tr + $nc );";
+echo "SELECT * FROM cuidadores_reservas WHERE user_id = {$user_id} and estatus='pendiente'";
+echo $reserva->reserva_id." ---- {$reserva->total} - ( $tr + $nc );<br>";
 			if( $total > 0 ){
 				$list['detalle'][$reserva->reserva_id] = $total;
 				$list['total'] += $total;
