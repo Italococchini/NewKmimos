@@ -400,6 +400,7 @@ echo $sql_pago;
 						$sql_update = "UPDATE cuidadores_pagos SET 
 								estatus = 'in_progress', 
 								detalle = '".serialize($reserva_update)."',
+								cantidad = ".count($reserva_update).",
 								total = {$resto},
 								openpay_id='$openpay_id',
 								observaciones=concat(observaciones,'<br>', '{$comentario}')
@@ -424,7 +425,7 @@ echo $sql_pago;
 							".$solicitud->admin_id.", 
 							".$solicitud->user_id.", 
 							".$solicitud->total.", 
-							".$solicitud->cantidad.", 
+							".count($reserva_insert).", 
 							'pendiente',
 							'".serialize($reserva_insert)."', 
 							'".$solicitud->autorizado."', 
