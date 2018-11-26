@@ -392,8 +392,6 @@ echo $sql_pago;
 								];
 								$total_temp = 0;
 							}
-							
-
 						}
 
 
@@ -406,7 +404,6 @@ echo $sql_pago;
 								observaciones=concat(observaciones,'<br>', '{$comentario}')
 							WHERE id = ".$solicitud->id;
 						$this->db->query($sql_update);
-
 
 
 						$sql_insert = "INSERT INTO `cuidadores_pagos`(
@@ -438,6 +435,8 @@ echo $sql_pago;
 						);";
 						$this->db->query($sql_insert);
 						$resto = 0;
+echo $sql_update;
+echo $sql_insert;
  
 						#generar una solicitud por el resto
 							# dividir reservas
