@@ -6,12 +6,16 @@
 
 	$hoy = date( "Y/m/d H:i:s" );
 
-    if( $periodo == 'mensual' ){    
+    if( $periodo == 'quincenal' ){    
         if( date('d') <= $primera_quincena ){
             $dia = $primera_quincena;
         }else{
             $dia = $segunda_quincena;
         }
+    }
+    if( $periodo == 'mensual' ){
+        $dia = $primera_quincena;
+        $segunda_quincena = $primera_quincena;
     }
 
 	$proximo_pago = $pagos->dia_semana( $dia, $periodo );
