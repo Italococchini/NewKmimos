@@ -6,7 +6,7 @@
 
 	$hoy = date( "Y/m/d H:i:s" );
 
-    if( $periodo != 'semanal' ){    
+    if( $periodo == 'mensual' ){    
         if( date('d') <= $primera_quincena ){
             $dia = $primera_quincena;
         }else{
@@ -25,9 +25,8 @@
 	];
 
 	$dato = serialize($cuidador_periodo);
-    $result = $pagos->db->query( 
-    	"UPDATE cuidadores SET pago_periodo = '{$dato}' WHERE user_id={$ID}" 
-    );
+    $sql = "UPDATE cuidadores SET pago_periodo = '{$dato}' WHERE user_id={$ID}";
+    $result = $pagos->db->query( $sql );
     
     echo $proximo_pago;
 
