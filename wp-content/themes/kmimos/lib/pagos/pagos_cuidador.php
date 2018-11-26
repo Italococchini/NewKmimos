@@ -358,7 +358,6 @@ class PagoCuidador {
 						# diferencia
 						$solicitud->total -= $resto;
 
-
 						// ordenar reservas 
 						$order_reserva = [];
 						$sol_detalle = unserialize($solicitud->detalle);
@@ -370,9 +369,11 @@ class PagoCuidador {
 						$reserva_insert = [];
 						$total_temp = $resto;
 						foreach ($order_reserva as $_reserva => $_monto) {
-							
+
+echo $total_temp;
 							if( $total_temp > $_monto  ){
 								$total_temp -= $_monto;
+echo "[ PasoA: $_monto || $total_temp ]" ;
 								$reserva_update[] = [
 									'reserva' => $_reserva,
 									'monto' => $_monto,
@@ -380,8 +381,10 @@ class PagoCuidador {
 							}
 							
 							if( $_monto >= $total_temp ){
+echo "[ PasoB: $_monto || $total_temp ]" ;
 								$_monto -= $total_temp;
 								if( $total_temp > 0 ){								
+echo "[ PasoC: $_monto || $total_temp ]" ;
 									$reserva_update[] = [
 										'reserva' => $_reserva,
 										'monto' => $total_temp,
