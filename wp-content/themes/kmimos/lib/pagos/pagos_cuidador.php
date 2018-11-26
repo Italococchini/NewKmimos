@@ -854,8 +854,6 @@ echo $sql_pago;
 	public function dia_semana( $dia, $periodo ){
     	$d = getdate();
 		$hoy = $d[0];
-
-echo "[ ".date('d-m-Y', $hoy) ." <= $dia ]";
  
 	    $_periodo = [
 	    	'semanal' => 7,
@@ -881,7 +879,7 @@ echo "[ ".date('d-m-Y', $hoy) ." <= $dia ]";
 			break;
 		case 'quincenal':
 		case 'mensual':
-			if( date('d', $hoy) <= $dia ){
+			if( date('d') <= $dia ){
 				$fecha = date('Y-m-'.$dia);
 			}else{
 				$mon = date('m',strtotime('next mon', $hoy));
