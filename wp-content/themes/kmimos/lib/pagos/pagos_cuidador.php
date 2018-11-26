@@ -879,15 +879,12 @@ echo $sql_pago;
 			break;
 		case 'quincenal':
 		case 'mensual':
-			if( date('d') <= $dia ){
+			if( date('d', strtotime($hoy)) <= $dia ){
 				$fecha = date('Y-m-'.$dia);
 			}else{
 				$mon = date('m',strtotime('next mon', $hoy));
 				$fecha = date('Y-'.$mon.'-'.$dia);
 			}
-
-			echo date('d')." <= $dia";
-
 			break;
 	    default:	
 	    	$hoy = date('Y-m-d H:i:s');
