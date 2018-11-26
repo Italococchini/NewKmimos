@@ -292,7 +292,7 @@ class PagoCuidador {
 						detalle = '".serialize($reservas_pagos)."'
 					WHERE id = ".$existe_retiro->id
 				;
-echo $sql_pago;	
+
 				$this->db->query($sql_pago);
 				$pago_id = $existe_retiro->id;
 			}else{
