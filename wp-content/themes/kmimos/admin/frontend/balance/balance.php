@@ -68,13 +68,9 @@
 			break;
 	}
 
-
-$tst =  date('Y-m-d',strtotime("next 15", $hoy));
-
-
 ?>
 
-<h1 class="titulo">Balance <?php echo $tst; ?></h1>
+<h1 class="titulo">Balance</h1>
 
 <section class="row text-right" style="margin-bottom: 10px;">
 

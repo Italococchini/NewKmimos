@@ -273,30 +273,14 @@ class PagoCuidador {
 				"SELECT * from cuidadores_pagos where user_id = {$user_id} and estatus = 'pendiente'");
 			if( isset($existe_retiro->id) && $existe_retiro->id > 0 ){
 
-				// merge
-// 				$row_detalle = unserialize($existe_retiro->detalle);
-// print_r($row_detalle);				
-// print_r($reservas);				
-// 				foreach ( $reservas as $id => $val) {
-// 					$nuevo = true;
-// 					foreach ($row_detalle as $key => $value) {
-// 						if( $id == $value['reserva'] ){
-// 							$row_detalle[$key]['monto'] += $val;
-// 							$nuevo = false;
-// 						}
-// 					}				
-// 					if( $nuevo ){
-// 						$row_detalle[] = [
-// 							'monto' => $val,
-// 							'reserva' => $id,
-// 						];
-// 					}
-// 				}
-
+				$row_detalle = unserialize($existe_retiro->detalle);
+				foreach ($reservas_pagos as $key => $value) {
+					
+				}
 
 				$sql_pago = "UPDATE cuidadores_pagos SET 
 						total = total + {$monto_pago}
-						detalle = concat(detalle,'||".serialize($reservas)."')
+						detalle = '".serialize($reservas_pagos)."'
 					WHERE id = ".$existe_retiro->id
 				;
 echo $sql_pago;	
@@ -877,7 +861,8 @@ echo $sql_pago;
 	    	'mensual' => 30,
 	    ];
 
-	    if( $periodo == 'semanal' ){	    	
+	    switch( $periodo ){
+	    case 'semanal':	    	
 			$dias = [
 				'lunes' => 'Monday',
 				'martes' => 'Tuesday',
@@ -891,9 +876,20 @@ echo $sql_pago;
 			}else{
 				$fecha = date('Y-m-d',strtotime('next '.$dias[ strtolower($dia) ], $lunes));
 			}
-	    }else{	
+			break;
+		case 'quincenal':
+		case 'mensual':
+			if( date('d') <= $dia ){
+				$fecha = date('Y-m-'.$dia);
+			}else{
+				$mon = date('m',strtotime('next mon', $hoy));
+				$fecha = date('Y-'.$mon.'-'.$dia);
+			}
+			break;
+	    default:	
 	    	$hoy = date('Y-m-d H:i:s');
 			$fecha = date('Y-m-d',strtotime($hoy.' +'.$_periodo[ strtolower($periodo) ].' day') );
+			break;
 	    }
 		return $fecha;
 	}
