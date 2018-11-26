@@ -305,8 +305,6 @@ class CFDI {
 			'referencia' => $referencia,
 			'cfdi' => $CFDi
 		];
-	
-
 	}
 
 	// Generar CFDI para el Cliente ( Monto: 100% )

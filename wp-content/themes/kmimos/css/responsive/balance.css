@@ -1,11 +1,11 @@
 
 @media (max-width: 700px) { 
 	.col-md-sp-3{
-	    width: 33.33333%;
+	    width: 33.33333%!important;
 	}
 }
 @media (max-width: 600px) { 
 	.col-md-sp-3{
-	    width: 66.666%;
+	    width: 66.666%!important;
 	}
 }
