@@ -886,7 +886,10 @@ class CFDI {
 					'".$data['servicio']['tipo']."'
 				 );
 				";
-				$this->db->query( $sql );
+
+				if( strtoupper($ef->serie) != 'NC' ){
+					$this->db->query( $sql );
+				}
 
 				// descargar archivo PDF
 				$path = $this->raiz.'/wp-content/uploads/facturas/';

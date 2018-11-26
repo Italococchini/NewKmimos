@@ -1,7 +1,15 @@
 <?php
 	global $wpdb;
 	$user_id = get_current_user_id();
-	$notas_creditos = $wpdb->get_results("SELECT * FROM notas_creditos WHERE user_id = {$user_id}");
+
+	$is_cuidador = $wpdb->get_var("SELECT ID FROM cuidadores WHERE user_id = {$user_id}");
+	
+	$field = 'cliente_id';
+	if( $is_cuidador > 0 ){
+		$field = 'cuidador_id';
+	}
+
+	$notas_creditos = $wpdb->get_results("SELECT * FROM notas_creditos WHERE {$field} = {$user_id}");
 
 	function get_notas_credito_html( $bufer ){
 		global $NotasCredito;
