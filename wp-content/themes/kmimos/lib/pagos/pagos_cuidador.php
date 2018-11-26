@@ -380,9 +380,7 @@ echo "[ PasoA: $_monto || $total_temp ]" ;
 										'monto' => $_monto,
 									];
 								}
-							}
-							
-							if( $_monto >= $total_temp ){
+							}else if( $_monto >= $total_temp ){
 echo "[ PasoB: $_monto || $total_temp ]" ;
 								$_monto -= $total_temp;
 								if( $total_temp > 0 ){								
