@@ -398,6 +398,7 @@ echo "[ PasoC: $_monto || $total_temp ]" ;
 								}
 								$total_temp = 0;
 							}
+							
 						}
 
 

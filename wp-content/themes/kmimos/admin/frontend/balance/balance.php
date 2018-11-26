@@ -143,7 +143,7 @@
 <section class="row" style="margin-top: 20px;">
 
 	<!-- Disponible -->
-	<article class="col-md-3" style="width: 20%;">
+	<article class="col-md-3" style="display:inline-block;width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>DISPONIBLE: </strong> Saldo disponible en cuenta"></i>
 			<span>DISPONIBLE</span> 
@@ -153,7 +153,7 @@
 	</article>
 
 	<!-- Proximo pago -->
-	<article class="col-md-3" style="width: 20%;">
+	<article class="col-md-3" style="display:inline-block;width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" data-action="popover" data-content="<strong>PROXIMO PAGO: </strong> Monto a pagar en la proxima periodo de pago" aria-hidden="true"></i>
 			<span>PROXIMO PAGO</span> 
@@ -163,7 +163,7 @@
 	</article>
 
 	<!-- En progreso -->
-	<article class="col-md-3" style="width: 20%;">
+	<article class="col-md-3" style="display:inline-block;width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>EN TRANSITO: </strong>Pagos realizados pendientes por aprobaci&oacute;n del banco, el estatus puede tardar dos horas en cambiar"></i>
 			<span>EN TRANSITO</span> 
@@ -173,7 +173,7 @@
 	</article>
 
 	<!-- Retenido -->
-	<article class="col-md-3" style="width: 20%;">
+	<article class="col-md-3" style="display:inline-block;width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>RETENIDO: </strong>Saldo pendientes por asignar en cuenta"></i>
 			<span>RETENIDO</span> 
@@ -183,7 +183,7 @@
 	</article>
 
 	<!-- Pagos futuros -->
-	<article class="col-md-3" style="width: 20%;">
+	<article class="col-md-3" style="display:inline-block;width: 20%;">
 		<div class="alert bg-kmimos">
 			<i class="fa balance-help fa-question-circle" aria-hidden="true" data-action="popover" data-content="<strong>NO DISPONIBLE: </strong>Pagos a futuro disponibles una vez que inicie la reserva."></i>
 			<span>NO DISPONIBLE</span> 
