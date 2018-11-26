@@ -390,10 +390,12 @@ echo "[ PasoC: $_monto || $total_temp ]" ;
 										'monto' => $total_temp,
 									];
 								}
-								$reserva_insert[] = [
-									'reserva' => $_reserva,
-									'monto' => $_monto,
-								];
+								if( $_monto > 0 ){
+									$reserva_insert[] = [
+										'reserva' => $_reserva,
+										'monto' => $_monto,
+									];
+								}
 								$total_temp = 0;
 							}
 						}
