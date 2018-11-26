@@ -169,6 +169,7 @@
 			wp_enqueue_script('datos-de-facturacion-panel-js', getTema()."/js/datos-de-facturacion.js", array("jquery", "global_js"), '2.0.0');
 		break;		
 		case 'balance':
+			wp_enqueue_style('balance-responsive-css', getTema().'/css/responsive/balance.css', array(), '1.0.0');
 			wp_enqueue_style('balance0-css', getTema().'/css/balance.css', array(), '2.0.0');
 			wp_enqueue_style('balance1-css', getTema().'/admin/recursos/css/dataTables.bootstrap4.min.css', array(), '2.0.0');
 			wp_enqueue_style('balance2-css', getTema().'/admin/recursos/css/buttons.dataTables.min.css', array(), '2.0.0');
