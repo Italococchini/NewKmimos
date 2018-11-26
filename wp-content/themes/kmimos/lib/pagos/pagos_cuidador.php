@@ -279,7 +279,7 @@ class PagoCuidador {
 				}
 
 				$sql_pago = "UPDATE cuidadores_pagos SET 
-						total = total + {$monto_pago}
+						total = total + {$monto_pago},
 						detalle = '".serialize($reservas_pagos)."'
 					WHERE id = ".$existe_retiro->id
 				;
