@@ -274,8 +274,17 @@ class PagoCuidador {
 			if( isset($existe_retiro->id) && $existe_retiro->id > 0 ){
 
 				$row_detalle = unserialize($existe_retiro->detalle);
-				foreach ($reservas_pagos as $key => $value) {
-					
+				foreach ( $row_detalle as $row ) {
+					$_existe = false;
+					foreach ( $reservas_pagos as $key => $val) {
+						if( $val['reserva'] == $row['reserva'] ){
+							$reservas_pagos[ $key ]['monto'] += $row['monto'];
+							$_existe = true;
+						}
+					}
+					if( !$_existe ){
+						$reservas_pagos[] = $row;
+					}
 				}
 
 				$sql_pago = "UPDATE cuidadores_pagos SET 
