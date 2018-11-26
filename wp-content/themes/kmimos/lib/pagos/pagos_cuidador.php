@@ -885,6 +885,9 @@ echo $sql_pago;
 				$mon = date('m',strtotime('next mon', $hoy));
 				$fecha = date('Y-'.$mon.'-'.$dia);
 			}
+
+			echo date('d')." <= $dia";
+
 			break;
 	    default:	
 	    	$hoy = date('Y-m-d H:i:s');
