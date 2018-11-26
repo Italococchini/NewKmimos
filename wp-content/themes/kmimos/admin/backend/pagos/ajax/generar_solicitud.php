@@ -27,7 +27,7 @@
     		$pago = $_pagos[ $item['user_id'] ];
     		$total = 0;
 
-print_r($pago);
+			print_r($pago);
 
     		// Metadatos
 	    		$cuidador = $pagos->db->get_row("SELECT user_id, nombre, apellido, banco, email FROM cuidadores WHERE user_id = {$pago->user_id}");

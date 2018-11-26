@@ -348,15 +348,54 @@ echo $sql_pago;
 					if( $resto >= $solicitud->total ){
 						$resto -= $solicitud->total;
 						$sql = "UPDATE cuidadores_pagos SET 
-								estatus = 'in_progress', 
-								openpay_id='$openpay_id' 
-								observaciones=concat(observaciones,'<br>', {$comentario})
-							WHERE id = ".$solicitud->id;
+									estatus = 'in_progress', 
+									openpay_id='$openpay_id' 
+									observaciones=concat(observaciones,'<br>', {$comentario})
+								WHERE id = ".$solicitud->id;
 						$this->db->query($sql);
 					}else{
 					// Si el monto es menor 
 						# diferencia
 						$solicitud->total -= $resto;
+
+
+						// ordenar reservas 
+						$order_reserva = [];
+						foreach ($solicitud->detalle as $row) {
+							$order_reserva[ $row['reserva'] ] = $row['monto'];
+						}
+						// separar reservas
+						$reserva_update = [];
+						$reserva_insert = [];
+						$total_temp = $resto;
+						foreach ($order_reserva as $_reserva => $_monto) {
+							
+							if( $total_temp > $_monto  ){
+								$total_temp -= $_monto;
+								$reserva_update[] = [
+									'reserva' => $_reserva,
+									'monto' => $_monto,
+								];
+							}
+							
+							if( $_monto >= $total_temp ){
+								$_monto -= $total_temp;
+								if( $total_temp > 0 ){								
+									$reserva_update[] = [
+										'reserva' => $_reserva,
+										'monto' => $total_temp,
+									];
+								}
+								$reserva_insert[] = [
+									'reserva' => $_reserva,
+									'monto' => $_monto,
+								];
+								$total_temp = 0;
+							}
+							
+
+						}
+
 
 						# cambiar referencia y estatus: modificacion
 						$sql_update = "UPDATE cuidadores_pagos SET 
@@ -366,6 +405,9 @@ echo $sql_pago;
 								observaciones=concat(observaciones,'<br>', '{$comentario}')
 							WHERE id = ".$solicitud->id;
 						$this->db->query($sql_update);
+
+
+
 						$sql_insert = "INSERT INTO `cuidadores_pagos`(
 							`admin_id`, 
 							`user_id`, 
