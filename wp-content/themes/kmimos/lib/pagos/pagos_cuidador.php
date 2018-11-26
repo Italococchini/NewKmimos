@@ -855,7 +855,7 @@ echo $sql_pago;
     	$d = getdate();
 		$hoy = $d[0];
 
-echo "[ ".date('d', $hoy) ." <= $dia ]";
+echo "[ ".date('d-m-Y', $hoy) ." <= $dia ]";
  
 	    $_periodo = [
 	    	'semanal' => 7,
