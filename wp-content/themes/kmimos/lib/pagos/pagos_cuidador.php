@@ -400,6 +400,7 @@ echo $sql_pago;
 						# cambiar referencia y estatus: modificacion
 						$sql_update = "UPDATE cuidadores_pagos SET 
 								estatus = 'in_progress', 
+								detalle = '".serialize($reserva_update)."',
 								total = {$resto},
 								openpay_id='$openpay_id',
 								observaciones=concat(observaciones,'<br>', '{$comentario}')
@@ -427,7 +428,7 @@ echo $sql_pago;
 							".$solicitud->total.", 
 							".$solicitud->cantidad.", 
 							'pendiente',
-							'".$solicitud->detalle."', 
+							'".serialize($reserva_insert)."', 
 							'".$solicitud->autorizado."', 
 							'".$openpay_id."', 
 							'".$solicitud->observaciones."', 
