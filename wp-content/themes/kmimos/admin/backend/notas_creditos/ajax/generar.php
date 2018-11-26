@@ -139,6 +139,7 @@
 			$sql = "INSERT INTO notas_creditos ( 
 					`tipo`,
 					`user_id`,
+					`cuidador_id`,
 					`reserva_id`,
 					`monto`,
 					`detalle`,
@@ -150,8 +151,9 @@
 					cfdi_id,
 					cfdi_referencia
 				) VALUES (
-					'".$NC_data['tipo']."', 
-					".$NC_data['user_id'].", 
+					'".$NC_data['tipo']."',
+					".$NC_data['cliente']['id'].", 
+					".$NC_data['cuidador']['id'].", 
 					$reserva_id, 
 					$total,
 					'{$_detalle}',
