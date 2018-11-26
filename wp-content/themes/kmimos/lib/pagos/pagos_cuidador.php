@@ -374,10 +374,12 @@ echo $total_temp;
 							if( $total_temp > $_monto  ){
 								$total_temp -= $_monto;
 echo "[ PasoA: $_monto || $total_temp ]" ;
-								$reserva_update[] = [
-									'reserva' => $_reserva,
-									'monto' => $_monto,
-								];
+								if( $_monto > 0 ){
+									$reserva_update[] = [
+										'reserva' => $_reserva,
+										'monto' => $_monto,
+									];
+								}
 							}
 							
 							if( $_monto >= $total_temp ){
