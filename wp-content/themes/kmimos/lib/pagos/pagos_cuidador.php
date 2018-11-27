@@ -353,6 +353,7 @@ class PagoCuidador {
 									observaciones=concat(observaciones,'<br>', {$comentario})
 								WHERE id = ".$solicitud->id;
 						$this->db->query($sql);
+echo $sql;						
 					}else{
 					// Si el monto es menor 
 						# diferencia

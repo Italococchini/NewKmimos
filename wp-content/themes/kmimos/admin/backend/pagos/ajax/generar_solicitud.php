@@ -52,7 +52,7 @@ error_reporting(E_ALL);
                     'description' => 'UID: #'.$row_id
                 );
                 
-echo $payoutData;
+
             //  Enviar solicitud a OpenPay
                 $estatus = 'Autorizado';
                 try{
@@ -64,6 +64,7 @@ echo $payoutData;
                     }else{
                         $observaciones = $payout->status;
                     }
+print_r($payout);                    
                 }catch(OpenpayApiConnectionError $c){
                     $estatus = 'error';
                     $observaciones = $c->getMessage();
