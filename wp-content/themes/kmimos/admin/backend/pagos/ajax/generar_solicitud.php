@@ -27,20 +27,20 @@ error_reporting(E_ALL);
     		$pago = $_pagos[ $item['user_id'] ];
     		$total = 0;
 
-    		// Metadatos
-	    		$cuidador = $pagos->db->get_row("SELECT user_id, nombre, apellido, banco, email FROM cuidadores WHERE user_id = {$pago->user_id}");
-	    		$banco = unserialize($cuidador->banco);
-			
-		    // Autorizaciones
-		    	$autorizaciones[$admin_id] = [
+            // Metadatos
+                $cuidador = $pagos->db->get_row("SELECT user_id, nombre, apellido, banco, email FROM cuidadores WHERE user_id = {$pago->user_id}");
+                $banco = unserialize($cuidador->banco);
+            
+            // Autorizaciones
+                $autorizaciones[$admin_id] = [
                     'fecha'=>date('Y-m-d'),
                     'user_id'=> $admin_id,
                     'accion'=> $accion,
                     'comentario'=> $comentarios,
                 ];
-				
+                
  
-			// Parametros solicitud
+            // Parametros solicitud
                 $payoutData = array(
                     'method' => 'bank_account',
                     'amount' => number_format($item['monto'], 2, '.', ''),
@@ -52,6 +52,7 @@ error_reporting(E_ALL);
                     'description' => 'UID: #'.$row_id
                 );
                 
+echo $payoutData;
             //  Enviar solicitud a OpenPay
                 $estatus = 'Autorizado';
                 try{
@@ -86,28 +87,30 @@ error_reporting(E_ALL);
                             break;
                     }
                 }
-            
+echo 'paso2';            
             //  Actualizar registro
-	           	if( !empty($openpay_id) && $estatus != 'error'){
-	                $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id, $item['comentario'] );
-	                if( $item['parcial'] ){
-	                	include($raiz.'/wp-load.php');
-					    $mensaje = buildEmailTemplate(
-					        'pagos/parcial',
-					        [
-	                			'name' => $pago->nombre.' '.$pago->apellido,
-	                			'monto' => $item['monto'],
-	                			'comentarios' => $item['comentario']
-	                		]
-					    );
-					    $mensaje = buildEmailHtml(
-					        $mensaje, 
-					        []
-					    );
-					    wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
-	                }
-	           	}else{
+                if( !empty($openpay_id) && $estatus != 'error'){
+echo 'paso3';            
+                    $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id, $item['comentario'] );
+                    if( $item['parcial'] ){
+                        include($raiz.'/wp-load.php');
+                        $mensaje = buildEmailTemplate(
+                            'pagos/parcial',
+                            [
+                                'name' => $pago->nombre.' '.$pago->apellido,
+                                'monto' => $item['monto'],
+                                'comentarios' => $item['comentario']
+                            ]
+                        );
+                        $mensaje = buildEmailHtml(
+                            $mensaje, 
+                            []
+                        );
+                        wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
+                    }
+                }else{
+echo 'paso4';            
                     echo $estatus;
                 }
-    	}
+        }
     }
