@@ -1,6 +1,6 @@
 <?php
 	session_start();
-
+error_reporting(E_ALL);
     date_default_timezone_set('America/Mexico_City');
 
     $raiz = dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))));
