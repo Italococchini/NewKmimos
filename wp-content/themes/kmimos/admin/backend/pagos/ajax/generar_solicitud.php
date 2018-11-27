@@ -106,6 +106,8 @@
 					    );
 					    wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
 	                }
-	           	}
+	           	}else{
+                    echo $estatus;
+                }
     	}
     }
