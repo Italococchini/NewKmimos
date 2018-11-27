@@ -349,7 +349,7 @@ class PagoCuidador {
 						$resto -= $solicitud->total;
 						$sql = "UPDATE cuidadores_pagos SET 
 									estatus = 'in_progress', 
-									openpay_id='$openpay_id' 
+									openpay_id='$openpay_id',
 									observaciones=concat(observaciones,'<br>', {$comentario})
 								WHERE id = ".$solicitud->id;
 						$this->db->query($sql);
