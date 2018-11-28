@@ -3,8 +3,8 @@ require_once('base_db.php');
 require_once('GlobalFunction.php');
 
 function getmetaUser($user_id=0){
-	// $condicion = " AND m.meta_key IN ( 'nickname', 'first_name', 'last_name', 'user_phone', 'user_mobile', 'user_referred')";
-	// $result = get_metaUser($user_id, $condicion);
+	//$condicion = " AND m.meta_key IN ( 'nickname', 'first_name', 'last_name', 'user_phone', 'user_mobile', 'user_referred')";
+	//$result = get_metaUser($user_id, $condicion);
 	$result = get_metaUser($user_id);
 	$data = [
 		'first_name' =>'', 
@@ -27,7 +27,7 @@ function getUsers($desde="", $hasta=""){
 	$filtro_adicional = "";
 	if( !empty($desde) && !empty($hasta) ){
 		$filtro_adicional .= " 
-			AND DATE_FORMAT(u.user_registered, '%m-%d-%Y') between DATE_FORMAT('{$desde}','%m-%d-%Y') and DATE_FORMAT('{$hasta}','%m-%d-%Y')
+			AND ( u.user_registered >= '{$desde}' AND u.user_registered <= '{$hasta}' )
 		";
 	}
 	$sql = "
@@ -70,11 +70,23 @@ function getMascotas($user_id){
         $anio = strtotime($_anio);
         $anio = ceil ( time()-$anio );
         $edad = (@date("Y", $anio)-1970);
+	
+$tamanos[] = 'Pequeño';
+$tamanos[] = 'Mediano';
+$tamanos[] = 'Grande';
+$tamanos[] = 'Gigante';
+$tamano_pet = '--';
+$r = get_post_meta($mascota->ID, "size_pet", true);
+try{
+	$tamano_pet = $tamanos[$r];
+} catch(Exception $e){ $tamano_pet = ''; }
 
         $mascotas[] = array(
             "nombre" => $mascota->post_title,
             "raza" => get_post_meta($mascota->ID, "breed_pet", true),
-            "edad" => $edad
+            "edad" => $edad,
+            "tamano" => $tamano_pet ,
+
         );
     }
 	return $mascotas;

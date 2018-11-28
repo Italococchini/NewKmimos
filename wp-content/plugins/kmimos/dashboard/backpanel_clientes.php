@@ -29,7 +29,7 @@ $users = getUsers($desde, $hasta);
 		<!-- Filtros -->
 		<div class="row text-left pull-right"> 
 			<div class="col-sm-12">
-		    	<form class="form-inline" action="<?php echo get_home_url(); ?>/wp-admin/admin.php?page=bp_clientes" method="POST">
+		    	<form class="form-inline" action="/wp-admin/admin.php?page=bp_clientes" method="POST">
 
 					<div class="col-sm-1">
 						<label>Filtrar:</label>
@@ -88,10 +88,11 @@ $users = getUsers($desde, $hasta);
 			      	<?php if( $mostrar_total_reserva ){ ?>
 			      		<th>Cant. Reservas</th>
 			      	<?php } ?>
-			      	<!--
+			      	
 			      		<th>Mascota(s)</th>
 			      		<th>Raza(s)</th>
-			  		-->
+			  		<th>Edad(es)</th>
+					<th>Tamaño(s)</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -145,18 +146,20 @@ $users = getUsers($desde, $hasta);
 						<th><?php echo $usermeta['user_age']; ?></th>
 
 						<?php 
-							/*
+							
 					  		# Mascotas del Cliente
 					  		$mypets = getMascotas($row['ID']); 
 					  		$pets_nombre = array();
 					  		$pets_razas  = array();
 					  		$pets_edad	 = array();
+							$pets_tamano = array();
 							foreach( $mypets as $pet_id => $pet) { 
 								$pets_nombre[] = $pet['nombre'];
-								$pets_razas[] = $pet['raza'];
+								$pets_razas[] = $razas[$pet['raza']];
 								$pets_edad[] = $pet['edad'];
+								$pets_tamano[] = $pet['tamano'];
 							} 
-
+							/*
 							if( count($pets_nombre) > 0 ){
 
 						  		$raza = "Bien";
@@ -183,11 +186,12 @@ $users = getUsers($desde, $hasta);
 						  		$pets_razas  = "_";
 						  		$pets_edad	 = "_";
 							}
-						?>
-						<th><?php echo $pets_nombre; ?></th>
-						<th><?php echo $pets_razas; ?></th>
-						<th><?php echo $pets_edad; ?></th>
 						*/ ?>
+						<th><?php echo implode("<br> ",$pets_nombre); ?></th>
+						<th><?php echo implode("<br>",$pets_razas); ?></th>
+						<th><?php echo implode("<br>",$pets_edad); ?></th>
+						<th><?php echo implode("<br>",$pets_tamano); ?></th>
+						 
 
 				    </tr>
 			   	<?php } ?>
