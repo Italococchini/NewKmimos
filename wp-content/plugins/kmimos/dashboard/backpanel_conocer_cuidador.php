@@ -89,6 +89,8 @@ $solicitudes = getSolicitud($desde, $hasta);
 				  		$_reserva = get_primera_reserva( $solicitud['Cliente_id'] );
 				  		$reserva = $_reserva['rows'][0];
 				  		$detalle = kmimos_desglose_reserva_data( $reserva['post_parent'], true);
+				  		
+				  		print_r($detalle);
 
 				  		// *************************************
 				  		// Cargar Metadatos
