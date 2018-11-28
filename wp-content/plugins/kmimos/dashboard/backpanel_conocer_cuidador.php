@@ -74,6 +74,8 @@ $solicitudes = getSolicitud($desde, $hasta);
 
 
 					<th>Donde nos conocio?</th>
+					<th>Servicio</th>
+					<th># Noches</th>
 
 					<th>Estatus</th>
 			    </tr>
@@ -124,6 +126,8 @@ $solicitudes = getSolicitud($desde, $hasta);
 						<th><?php echo $cuidador['email'];?></th>
 
 						<th><?php echo $cuidador['user_referred'];?></th>
+						<th><?php echo $detalle['servicio']['tipo'];?></th>
+						<th><?php echo $detalle['servicio']['duracion'];?></th>
 
 						<th><?php echo $solicitud['Estatus'];?></th>
 				    </tr>
