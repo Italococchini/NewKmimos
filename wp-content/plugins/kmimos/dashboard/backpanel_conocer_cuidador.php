@@ -72,6 +72,9 @@ $solicitudes = getSolicitud($desde, $hasta);
 					<th>Teléfono del cuidador</th>
 					<th>Correo del cuidador</th>
 
+
+					<th>Donde nos conocio?</th>
+
 					<th>Estatus</th>
 			    </tr>
 			  </thead>
@@ -80,6 +83,13 @@ $solicitudes = getSolicitud($desde, $hasta);
 			  	<?php foreach($solicitudes['rows'] as $solicitud ){ ?>
  
 				  	<?php 
+				  		// *************************************
+				  		// Buscar Reservas
+				  		// *************************************
+				  		$_reserva = get_primera_reserva( $solicitud['Cliente_id'] );
+				  		$reserva = $_reserva['rows'][0];
+				  		$detalle = kmimos_desglose_reserva_data( $reserva['post_parent'], true);
+
 				  		// *************************************
 				  		// Cargar Metadatos
 				  		// *************************************
@@ -110,6 +120,8 @@ $solicitudes = getSolicitud($desde, $hasta);
 						<th><?php echo "{$cuidador['first_name']} {$cuidador['last_name']}"; ?></th>
 						<th><?php echo $cuidador['phone'];?></th>
 						<th><?php echo $cuidador['email'];?></th>
+
+						<th><?php echo $cuidador['user_referred'];?></th>
 
 						<th><?php echo $solicitud['Estatus'];?></th>
 				    </tr>
