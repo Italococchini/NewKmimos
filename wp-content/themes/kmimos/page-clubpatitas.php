@@ -84,14 +84,25 @@
 			</div>
 		</aside>
 		<section id="club-content" class="col-xs-12 col-sm-12 col-md-7 <?php echo $center_content; ?>">
-			<div style="border: 1px solid #ccc">
+			<div>
 				<h3 class="hidden-xs hidden-sm text-left gotham-bold" style="font-weight:bold;"><strong style="color:#0D7AD8;">¡Bienvenido al club<?php echo $nombre; ?>!</strong></h3>
 
 			 	<p class="text-justify">El club de las patitas felices te recompensa con $150 MXN para que los uses en cualquiera de nuestros servicios. Es muy sencillo, por cada vez que compartas tu código de las patitas felices tu referido obtendrá $150 MXN para utilizarlo en su primera reserva y una vez que complete su reservación a ti se te abonarán tus $150 MXN de crédito en Kmimos. </p>
 			</div>
-			<div style="height: 70vh; border: 1px solid #ccc">
+			<div style="
+				height: 55vh; 
+				display: -ms-flexbox;
+				display: -webkit-flex;
+				display: flex;
 
-				<div class="media-body" style="border: 1px solid green;">
+				-ms-flex-align: center;
+				-webkit-align-items: center;
+				-webkit-box-align: center;
+
+				align-items: center;
+				">
+
+				<div class="media-body">
 
 					<div class="media">
 					  <div class="media-left">
