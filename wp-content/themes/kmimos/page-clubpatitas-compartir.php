@@ -56,7 +56,7 @@
 		<section class="col-xs-12 col-sm-12 col-md-7 compartir-section" style="<?php echo $center_content; ?>">
 			<div class="col-md-8 col-md-offset-2">
 				<section clss="text-center" style="padding: 20px 0px!important; ">
-		            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Club Patitas Felices</a>
+		            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Como funciona</a>
 					<span style="padding:0px 10px;">|</span>
 					<a href="<?php echo get_home_url(); ?>/club-patitas-felices/creditos">Ver mis créditos</a>
 				</section>				
@@ -80,7 +80,7 @@
 
 					<!-- INI Compartir -->
 					<div id="redes-sociales" class="row text-center" style="margin: 30px 0px 0px 0px; background: #e8e8e8; border-radius: 5px; padding: 10px 0px; display:none;">
-						<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+						<div class="col-md-4 col-sm-4 col-xs-4 text-center">
 							<a class="btn btn-info twitter-share-button"
 								style="color:#fff!important;padding: 4px 25px!important;"
 						  		href="https://twitter.com/intent/tweet?text=Suma%20huellas%20y%20gana%20descuentos%20CUPON%20<?php echo strtoupper($cupon);?>"
@@ -88,8 +88,11 @@
 								<i class="fa fa-twitter"></i> Tweet
 							</a>
 						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6 text-left">
+						<div class="col-md-4 col-sm-4 col-xs-4 text-center">
 							<div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4 text-center">
+							<a style="color: #fff!important; font-size:11px; font-weight: bold; background: #25D366!important;"  class="btn btn-sm" href="https://api.whatsapp.com/send?phone=5213312614186&text=Hola%2C%20deseo%20adquirir%20un%20soporte%20con%20ustedes"><i class="fa fa-whatsapp"></i> +52 1 (33) 12614186</a>
 						</div>
 					</div>
 					<!-- FIN Compartir -->

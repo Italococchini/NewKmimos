@@ -54,7 +54,7 @@
 			<dir class="col-md-12 col-xs-12">
 				
 				<section clss="text-center" style="padding: 20px 0px!important; ">
-		            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Club Patitas Felices</a>
+		            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Como funciona</a>
 					<span style="padding:0px 10px;">|</span>
 		            <a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
 				</section>				

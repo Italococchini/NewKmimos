@@ -1,31 +1,4 @@
-body {
-    font-family: 'Gotham-Pro-Regular', arial, sans-serif;
-    font-size: 13px;
-}
-@font-face {
-    font-family: 'Poetsen';
-    src: url(../fonts/poetsen_one/PoetsenOne-Regular.ttf) format('truetype');
-}
-@font-face {
-    font-family: 'Gotham-Pro-Light';
-    src: url(../fonts/gotham_pro/gotham-pro-light.otf) format('opentype');
-}
-@font-face {
-    font-family: 'Gotham-Pro-Regular';
-    src: url(../fonts/gotham_pro/gotham-pro-regular.otf) format('opentype');
-}
-@font-face {
-    font-family: 'Gotham-Pro-Medium';
-    src: url(../fonts/gotham_pro/gotham-pro-medium.otf) format('opentype');
-}
-@font-face {
-    font-family: 'Gotham-Pro-Bold';
-    src: url(../fonts/gotham_pro/gotham-pro-bold.otf) format('opentype');
-}
-@font-face {
-    font-family: 'Gotham-Pro-Black';
-    src: url(../fonts/gotham_pro/gotham-pro-black.otf) format('opentype');
-}
+
 input[type="checkbox"]{
 	margin: 20px 0px!important;
 }
@@ -45,10 +18,6 @@ section{
 h2{
 	font-size: 40px!important;
 	color: #fff!important;
-	font-family: "Gotham-Pro-Black"!important;
-}
-.gotham-bold{
-	font-family: "Gotham-Pro-Black"!important;
 }
 .km-ficha-bg{
 	height: 260px!important;
@@ -153,7 +122,6 @@ p.subtitle{
 	font-size: 23px!important;
 }
 .cupon{
-	font-family: "Gotham-Pro-Black";
 	padding:20px 20px!important; 
 	background:#ccc;
 	color:#7D169E;

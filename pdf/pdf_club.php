@@ -14,7 +14,7 @@ try{
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 			<link rel="stylesheet" type="text/css" media="all" href="'.getTema().'/css/bootstrap.min.css"></link>
-		    <link rel="stylesheet" type="text/css" media="all" href="'.getTema().'/css/club-patitas-felices.css"></link>
+		    <link rel="stylesheet" type="text/css" media="all" href="'.get_home_url().'/pdf/club-patitas-felices.css"></link>
 		</head>
 		<body>
 		<div style="width:1080px; background: url('.getTema().'/images/club-patitas/club_pdf.jpg);background-repeat:no-repeat;margin-top:30px;">
