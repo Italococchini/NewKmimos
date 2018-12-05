@@ -36,17 +36,10 @@
 
 	[INFO]
 
-	<div style="
-		width: 100%;
-		text-align:center;
-		padding: 20px 0px;
-		background: #0d7ad8 url([IMG_URL]/club-patitas/logo-footer-mail.png);
-		background-position: left center;
-		background-repeat: no-repeat;
-		font-weight: normal;
-		font-size: 13px;
-	">
-		<a href="https://www.kmimos.com.mx/club-patitas-felices" style="text-decoration: none; color:#fff!important;">kmimos.com.mx/club-patitas-felices</a>
+	<div>
+		<a href="https://www.kmimos.com.mx/club-patitas-felices" style="text-decoration: none;">
+			<img src="[IMG_URL]/club-patitas/mail-footer.png">
+		</a>
 	</div>
 
 </div>
