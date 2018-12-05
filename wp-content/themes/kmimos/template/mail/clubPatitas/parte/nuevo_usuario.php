@@ -23,7 +23,7 @@
 		<p style="font-size: 12px;">Te entregamos tus credenciales para que tengas acceso a Kmimos: </p>
 		<div style="width: 50%; margin: 0 auto;">
 		    <div style='display: table-cell;'>
-		        <img src='[IMG_URL]/identificacion.png' style='' >
+		        <img src='[IMG_URL]/club-patitas/identificacion.png' style='' >
 		    </div>
 		    <div style='display: table-cell; vertical-align:top; width: 80%; height: 10vh; text-align: left; padding-left: 16px;'>
 		        <div style='font-size: 11px; font-weight: bold; letter-spacing: -0.1px; color: #0d7ad9;'>E-mail</div>                   
