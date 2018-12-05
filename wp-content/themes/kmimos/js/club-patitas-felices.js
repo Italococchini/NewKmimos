@@ -10,6 +10,7 @@ jQuery(document).ready( function (){
 			obj.css('display', 'none');
 		}
 	});
+	
 	jQuery('#form-registro').on('submit', function(e){
 		e.preventDefault();
 		var btn = jQuery('#form-registro button[type="submit"]');
@@ -31,9 +32,22 @@ jQuery(document).ready( function (){
 		    }, 'json');
 		}
 	});
-
+	
+	total_generado();
 	menuClub();
 });
+
+function total_generado(){
+
+	jQuery.post(
+        HOME+'/procesos/clubPatitasFelices/ajax/creditos.php',
+        {},
+        function(d){
+        	jQuery('#total_creditos').html( d.total );
+	    }, 'json'
+	);
+
+}
 
 function menuClub(){
 	var menu = jQuery('nav.navbar');

@@ -146,7 +146,7 @@ p.subtitle{
 	height: calc(100vh - 30px) ; 
 	margin-top: 30px;
 	vertical-align: middle;
-	padding: 0px 15px;
+	padding: 0px 0px!important;
 }
 .titulo{
 	color: #515151!important;
