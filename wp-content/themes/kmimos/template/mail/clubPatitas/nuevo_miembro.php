@@ -51,7 +51,7 @@
 
 	<div>
 		<a href="https://www.kmimos.com.mx/club-patitas-felices" style="text-decoration: none;">
-			<img src="[IMG_URL]/club-patitas/mail-footer.jpg">
+			<img src="[IMG_URL]/club-patitas/email-footer.jpg">
 		</a>
 	</div>
 
