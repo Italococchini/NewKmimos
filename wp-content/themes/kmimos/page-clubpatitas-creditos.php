@@ -58,7 +58,7 @@
 				<section class="text-center col-md-6 col-md-offset-3" style="padding: 5% 0px!important; ">
 		            <a href="<?php echo get_home_url(); ?>/club-patitas-felices">Como funciona</a>
 					<span style="padding:0px 10px;">|</span>
-					<a href="<?php echo get_home_url(); ?>/club-patitas-felices/creditos">Ver mis créditos</a>
+					<a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
 					<br>
 					<br>
 					<div class="row">
