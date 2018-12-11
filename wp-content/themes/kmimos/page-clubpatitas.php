@@ -70,13 +70,13 @@
 				<h3 class="title-secundario">¡Estás a un paso de ser parte del club!</h3>
 				<form method="post" action="#" id="form-registro">
 					<div class="col-md-12">
-						<input required class="form-control" style="margin:5px 0px; border-radius: 10px;" type="text" name="nombre" placeholder="Nombre" value="<?php echo $nombre; ?>" <?php echo $readonly; ?>>
+						<input required class="form-control col-sm-12 col-xs-12" style="margin:5px 0px; border-radius: 10px;" type="text" name="nombre" placeholder="Nombre" value="<?php echo $nombre; ?>" <?php echo $readonly; ?>>
 					</div>
 					<div class="col-md-12">
-						<input required class="form-control" style="margin:5px 0px; border-radius: 10px;" type="text" name="apellido" placeholder="Apellido" value="<?php echo $apellido; ?>" <?php echo $readonly; ?>>
+						<input required class="form-control col-sm-12 col-xs-12" style="margin:5px 0px; border-radius: 10px;" type="text" name="apellido" placeholder="Apellido" value="<?php echo $apellido; ?>" <?php echo $readonly; ?>>
 					</div>
 					<div class="col-md-12">
-						<input required class="form-control" style="margin:5px 0px; border-radius: 10px;" type="email" name="email" placeholder="Direccion correo electronico" value="<?php echo $email; ?>" <?php echo $readonly; ?>>
+						<input required class="form-control col-sm-12 col-xs-12" style="margin:5px 0px; border-radius: 10px;" type="email" name="email" placeholder="Direccion correo electronico" value="<?php echo $email; ?>" <?php echo $readonly; ?>>
 					</div>
 					 
 				    <label class="terminos">
