@@ -44,7 +44,7 @@ input[type="text"]{
 	margin: 2px 0px 0px 0px!important;
 	margin: 10px 0px!important;
 	text-align: center;
-	width: 100%;
+	width: 100%!important;
 }
 a{
 	color: #17ad8f!important;
