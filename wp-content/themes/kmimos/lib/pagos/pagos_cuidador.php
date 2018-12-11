@@ -989,63 +989,68 @@ echo "[ PasoC: $_monto || $total_temp ]" ;
 			if( !empty($cupones) ){
 				foreach ($cupones as $cupon) {
 
+					if( $cupon->name == '+2MASC' ){
+                        $total -= $cupon->monto; 
+                        $pago_cuidador = $total / 1.25;
+                        $pago_kmimos = $total - $pago_cuidador;
+					}else{
+						$cupon_id = $this->db->get_var("SELECT ID FROM wp_posts WHERE post_title = '".$cupon->name."' ");
+						$metas =  $this->db->get_results("SELECT meta_key, meta_value FROM wp_postmeta WHERE meta_key like 'descuento%' and post_id = ".$cupon_id );
 
-					$cupon_id = $this->db->get_var("SELECT ID FROM wp_posts WHERE post_title = '".$cupon->name."' ");
-					$metas =  $this->db->get_results("SELECT meta_key, meta_value FROM wp_postmeta WHERE meta_key like 'descuento%' and post_id = ".$cupon_id );
-
-					$meta_cupon[ $cupon->name ][ 'total' ] = $cupon->monto; 
-					if( $cupon->monto > 0 ){
-						if( !empty($metas) ){
-							foreach ($metas as $meta) {
-								$meta_cupon[ $cupon->name ][ $meta->meta_key ] = $meta->meta_value;
+						$meta_cupon[ $cupon->name ][ 'total' ] = $cupon->monto; 
+						if( $cupon->monto > 0 ){
+							if( !empty($metas) ){
+								foreach ($metas as $meta) {
+									$meta_cupon[ $cupon->name ][ $meta->meta_key ] = $meta->meta_value;
+								}
 							}
-						}
- 
-						// tipo de descuento
-						$_cupon = $meta_cupon[ $cupon->name ];
- 						
-						$_cupon['descuento_tipo'] = ( isset($_cupon['descuento_tipo']) )? $_cupon['descuento_tipo'] : ''; 
-						switch ( strtolower($_cupon['descuento_tipo']) ) {
-							case 'kmimos':
-								if( $pago_kmimos < $_cupon['total'] ){
-									$diferencia = $_cupon['total'] - $pago_kmimos;
-									$pago_cuidador -= $diferencia;
-								}else{
-									$pago_kmimos -= $_cupon['total'];
-								}
-								break;
-							case 'cuidador':
-								if( $pago_cuidador < $_cupon['total'] ){
-									$pago_cuidador = 0;
-								}else{
-									$pago_cuidador -= $_cupon['total'];
-								}
-								break;						
-							case 'compartido':
-								// Calculo de descuentos
-								$descuento_kmimos = ( $_cupon['descuento_kmimos'] * $_cupon['total'] ) / 100;
-								$descuento_cuidador = ( $_cupon['descuento_cuidador'] * $_cupon['total'] ) / 100;
-								if( $pago_cuidador <= $descuento_cuidador ){
-									$pago_cuidador = 0;
-								}else{
-									// validar si el monto de kmimos es superior a la comision
-									$diferencia = 0;
-									if( $pago_kmimos < $descuento_kmimos ){
-										$diferencia = $descuento_kmimos - $pago_kmimos;
-										$descuento_cuidador += $diferencia;
-										$pago_kmimos = 0;
+	 
+							// tipo de descuento
+							$_cupon = $meta_cupon[ $cupon->name ];
+	 						
+							$_cupon['descuento_tipo'] = ( isset($_cupon['descuento_tipo']) )? $_cupon['descuento_tipo'] : ''; 
+							switch ( strtolower($_cupon['descuento_tipo']) ) {
+								case 'kmimos':
+									if( $pago_kmimos < $_cupon['total'] ){
+										$diferencia = $_cupon['total'] - $pago_kmimos;
+										// $pago_cuidador -= $diferencia;
+									}else{
+										$pago_kmimos -= $_cupon['total'];
 									}
-
-									if( $descuento_cuidador >= $pago_cuidador ){
+									break;
+								case 'cuidador':
+									if( $pago_cuidador < $_cupon['total'] ){
 										$pago_cuidador = 0;
 									}else{
-										$pago_cuidador -= $descuento_cuidador;
+										$pago_cuidador -= $_cupon['total'];
 									}
-								}
-								break;
-							default:
-								$pago_cuidador -= $_cupon['total'];
-								break;
+									break;						
+								case 'compartido':
+									// Calculo de descuentos
+									$descuento_kmimos = ( $_cupon['descuento_kmimos'] * $_cupon['total'] ) / 100;
+									$descuento_cuidador = ( $_cupon['descuento_cuidador'] * $_cupon['total'] ) / 100;
+									if( $pago_cuidador <= $descuento_cuidador ){
+										$pago_cuidador = 0;
+									}else{
+										// validar si el monto de kmimos es superior a la comision
+										$diferencia = 0;
+										if( $pago_kmimos < $descuento_kmimos ){
+											$diferencia = $descuento_kmimos - $pago_kmimos;
+											$descuento_cuidador += $diferencia;
+											$pago_kmimos = 0;
+										}
+
+										if( $descuento_cuidador >= $pago_cuidador ){
+											$pago_cuidador = 0;
+										}else{
+											$pago_cuidador -= $descuento_cuidador;
+										}
+									}
+									break;
+								default:
+									$pago_cuidador -= $_cupon['total'];
+									break;
+							}
 						}
 					}
 				}
