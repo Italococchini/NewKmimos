@@ -26,12 +26,22 @@ body {
     font-family: 'Gotham-Pro-Black';
     src: url(../fonts/gotham_pro/gotham-pro-black.otf) format('opentype');
 }
+
+/********** Error **********/
+
+.info-error{
+	border: 1px solid red!important; 
+}
+
+
 input[type="checkbox"]{
 	margin: 20px 0px!important;
 }
 input[type="email"],
 input[type="text"]{
+	border-radius: 2px;
 	padding: 20px;
+	margin: 2px 0px 0px 0px!important;
 	margin: 10px 0px!important;
 	text-align: center;
 }
@@ -132,6 +142,18 @@ p.subtitle{
 	margin-left: 5px;
 }
 
+.body-content{
+	height: 55vh; 
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+
+	align-items: center;
+}
 
 
 /* ******************** Compartir ******************** */
@@ -140,17 +162,20 @@ p.subtitle{
 	height:100vh;
 	background-position: center bottom ; 
 	background-size: cover;
+	position: fixed;
 }
 .compartir-section{
 	display:inline-flex; 
 	height: calc(100vh - 30px) ; 
-	margin-top: 30px;
+	margin-top: 40px;
 	vertical-align: middle;
 	padding: 0px 0px!important;
+	float: right!important;
 }
 .titulo{
 	color: #515151!important;
 	font-size: 23px!important;
+	margin-top: 20px;
 }
 .cupon{
 	font-family: "Gotham-Pro-Black";

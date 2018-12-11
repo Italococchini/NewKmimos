@@ -7,18 +7,22 @@
 	    background-position: top;
 	}
 	header img {
-		width: 50px;
+		width: 90px;
 	}
 	header > div{
 		text-align: center;
 		margin-bottom: 10px;
 	}
 	header h2{
-		font-size: 12px!important;
+		font-size: 22px!important;
 	}
 	header p{
-		font-size: 10px!important;
+		font-size: 15px!important;
 	}
+	.title-secundario{
+		font-size: 16px!important;
+	}
+
 	#sidebar{
 		padding-left: 15px!important;
 		height: auto;
@@ -37,10 +41,36 @@
 		width: 100%;
 	}
 
+	/********** content **********/
+
+	.media-body .media,
+	#club-content div{
+		margin-bottom: 30px;
+		text-align: justify;
+	}
+
+	#club-content,
+	#club-content div p,
+	.media-body p,
+	.body-content{
+		display: inline;
+	    font-size: 18px!important;
+	    line-height: 30px!important;
+		height: auto!important;
+	    text-align: justify!important;
+	}
+
+
+	/********** imagen content **********/
+	.media-object{
+	    text-align: justify;
+	    padding: 5px;
+	}
 
 	/******** compartir **********/
 	#compartir-club-cover{ 
 		height:40vh;
+		position: relative!important;
 	}
 	.btn-club-azul{
 		width: 100%;

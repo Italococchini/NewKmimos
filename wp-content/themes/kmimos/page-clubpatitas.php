@@ -55,7 +55,7 @@
 	            <a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
 			<?php } ?>
 		</div>
-		<div class="col-sm-8 col-xs-8 col-md-6 text-center pull-right">
+		<div class="col-sm-12 col-xs-12 col-md-6 text-center pull-right">
 			<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-5.png'; ?>">
 			<h2>Club de las patitas felices</h2>
 			<p class="subtitle">El club que te recompensa por que tus amigos reserven estadías con Kmimos</p>
@@ -63,15 +63,21 @@
 	</header>
 	<div class="body-club">
 		<aside class="col-xs-12 col-sm-12 col-md-7 hidden-md hidden-lg">
-			<h3 class="text-center gotham-bold" style="font-weight:bold; margin:10px 0px;"><strong style="color:#0D7AD8;">¡Bienvenido al club<?php echo $nombre; ?>!</strong></h3>
+			<h3 class="text-center gotham-bold" style="font-size: 33px; font-weight:bold; margin:10px 0px;"><strong style="color:#0D7AD8;">¡Bienvenido al club<?php echo $nombre; ?>!</strong></h3>
 		</aside>
 		<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 <?php echo $display_registro; ?>">
 			<div class="text-center col-md-10 col-md-offset-1 text-center">
 				<h3 class="title-secundario">¡Estás a un paso de ser parte del club!</h3>
 				<form method="post" action="#" id="form-registro">
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="nombre" placeholder="Nombre" value="<?php echo $nombre; ?>" <?php echo $readonly; ?>>
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="apellido" placeholder="Apellido" value="<?php echo $apellido; ?>" <?php echo $readonly; ?>>
-					<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="email" name="email" placeholder="Direccion correo electronico" value="<?php echo $email; ?>" <?php echo $readonly; ?>>
+					<div class="col-md-12">
+						<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="nombre" placeholder="Nombre" value="<?php echo $nombre; ?>" <?php echo $readonly; ?>>
+					</div>
+					<div class="col-md-12">
+						<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="text" name="apellido" placeholder="Apellido" value="<?php echo $apellido; ?>" <?php echo $readonly; ?>>
+					</div>
+					<div class="col-md-12">
+						<input required class="form-control col-md-6" style="margin:5px 0px; border-radius: 10px;" type="email" name="email" placeholder="Direccion correo electronico" value="<?php echo $email; ?>" <?php echo $readonly; ?>>
+					</div>
 					 
 				    <label class="terminos">
 				      <input name="terminos" required type="checkbox"> <strong>Acepto los <a href="javascript:;" data-toggle="modal" data-target="#myModal">términos y condiciones</a> del club</strong>
@@ -89,18 +95,7 @@
 
 			 	<p class="text-justify">El club de las patitas felices te recompensa con $150 MXN para que los uses en cualquiera de nuestros servicios. Es muy sencillo, por cada vez que compartas tu código de las patitas felices tu referido obtendrá $150 MXN para utilizarlo en su primera reserva y una vez que complete su reservación a ti se te abonarán tus $150 MXN de crédito en Kmimos. </p>
 			</div>
-			<div style="
-				height: 55vh; 
-				display: -ms-flexbox;
-				display: -webkit-flex;
-				display: flex;
-
-				-ms-flex-align: center;
-				-webkit-align-items: center;
-				-webkit-box-align: center;
-
-				align-items: center;
-				">
+			<div class="body-content">
 
 				<div class="media-body">
 
@@ -111,7 +106,7 @@
 					    </a>
 					  </div>
 					  <div class="media-body text-left ">
-					  	<p>Inscríbete al club de manera fácil y recibe tu código <br> único del club.</p>
+					  	<p>Inscríbete al club de manera fácil y recibe tu código único del club.</p>
 					  </div>
 					</div>
 					<div class="media">

@@ -32,10 +32,28 @@ jQuery(document).ready( function (){
 		    }, 'json');
 		}
 	});
+
+	jQuery('#form-registro button[type="submit"]').on('click', function(){
+		club_validar();
+	});
+	
+	jQuery('#form-registro input').on('blur', function(){
+		club_validar();
+	});
 	
 	total_generado();
 	menuClub();
 });
+
+function club_validar(){
+	jQuery.each( jQuery('#form-registro input'), function(i){
+		var input = jQuery(this);
+		input.removeClass('info-error');
+		if( input.val() == '' ){
+			input.addClass('info-error');
+		}
+	});
+}
 
 function total_generado(){
 
