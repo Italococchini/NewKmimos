@@ -123,6 +123,10 @@
 			$r = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 
 			$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
+			$detalle[] = [
+				'titulo'=> "Comision por penalizacion",
+				'costo' => $comision,
+			];
 		}else{
 			$NC_data['comision'] = 0;
 			$NC_data['user_id'] = $reserva['cuidador']['id'];

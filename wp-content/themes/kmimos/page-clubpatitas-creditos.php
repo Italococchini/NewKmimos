@@ -83,7 +83,7 @@ plataforma Kmimos. Aplican para cualquier servicio ofrecido por tu Cuidador Favo
 				</section>
 				<div class="col-md-12 bg-primary" style="text-align: justify;  font-size: 17px;padding: 25px 0px; position: absolute;  bottom: 0px;">
 					<div class="col-md-10 col-md-offset-1">
-					Recuerda, por cada ves que alguien use tu código y complete una reservación con un Cuidador Kmimos, tu <strong>ganarás $150 MXN acumulables</strong> para que los uses en cualquiera de nuestros servicios		
+					Recuerda, por cada vez que alguien use tu código y complete una reservación con un Cuidador Kmimos, tu <strong>ganarás $150 MXN acumulables</strong> para que los uses en cualquiera de nuestros servicios		
 					</div>
 				</div>
 			</div>
