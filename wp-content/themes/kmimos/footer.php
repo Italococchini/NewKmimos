@@ -250,6 +250,14 @@ $HTML = '
 /*	echo "<pre style='display: none;'>";
         	print_r($_SERVER);
     	echo "</pre>";*/
+        echo '
+        <script>
+          !function() {
+          var t; if (t = window.botsify = window.botsify = window.botsify || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Botsify snippet included twice.")) : (
+          t.load =function(e){  var o,n;    o=document.createElement("script"); e.type="text/javscript"; o.async=!0; o.crossorigin="anonymous";
+          o.src="https://botsify.com/web-bot/script/frame/"+e+"/botsify.js";    n=document.getElementsByTagName("script")[0];   n.parentNode.insertBefore(o,n); });
+          }(); botsify.load(\'n6LBSxHkX1HrbXuJrLMjSdkJLFyCZqQdcAQlsjN9\');
+        </script>';
 
     echo "</body></html>";
 
