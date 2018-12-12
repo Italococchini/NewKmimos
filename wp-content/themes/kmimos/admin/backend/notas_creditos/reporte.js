@@ -107,13 +107,14 @@ jQuery(document).ready(function() {
 		var btn = jQuery(this);
 			btn.addClass('disabled');
 			btn.html('Guardando');
-		if( !btn.has('disabled') ){
+		if( !btn.hasClass('disabled') ){
 			jQuery.post(
 				TEMA+'/admin/backend/notas_creditos/ajax/generar.php',
 				jQuery('[name="form-nc"]').serialize(),
 				function(data){
 					loadTabla( _tipo, _hiddenColumns );	
 					btn.html('Guardar');
+					btn.removeClass('disabled');
 					cerrar();
 				}
 			);
