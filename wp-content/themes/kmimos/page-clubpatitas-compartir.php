@@ -92,7 +92,7 @@
 							<div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-6 text-center">
-							<a style="color: #fff!important; font-size:11px; font-weight: bold; background: #25D366!important;"  class="btn btn-sm" href="https://api.whatsapp.com/send?phone=5213312614186&text=Hola%2C%20deseo%20adquirir%20un%20soporte%20con%20ustedes"><i class="fa fa-whatsapp"></i> +52 1 (33) 12614186</a>
+							<a style="color: #fff!important; font-size:11px; font-weight: bold; background: #25D366!important;"  class="btn btn-sm" href="https://api.whatsapp.com/send?phone=+52 1 55 6560 2472&amp;text=hola"><i class="fa fa-whatsapp"></i> +52 1 55 6560 2472</a>
 						</div>
 					</div>
 					<!-- FIN Compartir -->
