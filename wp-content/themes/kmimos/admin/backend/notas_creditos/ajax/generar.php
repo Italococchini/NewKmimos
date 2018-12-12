@@ -124,7 +124,7 @@
 
 			$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
 			$detalle[] = [
-				'titulo'=> "Comision por penalizacion",
+				'titulo'=> "Comision por penalización",
 				'costo' => $comision,
 			];
 		}else{
