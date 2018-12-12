@@ -13,7 +13,7 @@
 		$reserva_start = get_post_meta( $ID, '_booking_start', true );
 		$fecha_start = date('Y-m-d', strtotime($reserva_start));
 		if( $pedido_id > 0 && date('Y-m-d') < $fecha_start ){
-//			$pedido_id = null;
+			$pedido_id = null;
 	 	}
 
 	// Solo reservas completadas

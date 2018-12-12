@@ -105,9 +105,9 @@ jQuery(document).ready(function() {
 
 	jQuery(document).on('click', "#nc_save", function(e){
 		var btn = jQuery(this);
+		if( !btn.hasClass('disabled') ){
 			btn.addClass('disabled');
 			btn.html('Guardando');
-		if( !btn.hasClass('disabled') ){
 			jQuery.post(
 				TEMA+'/admin/backend/notas_creditos/ajax/generar.php',
 				jQuery('[name="form-nc"]').serialize(),
