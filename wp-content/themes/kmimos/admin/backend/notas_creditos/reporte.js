@@ -104,14 +104,20 @@ jQuery(document).ready(function() {
 	});	
 
 	jQuery(document).on('click', "#nc_save", function(e){
-		jQuery.post(
-			TEMA+'/admin/backend/notas_creditos/ajax/generar.php',
-			jQuery('[name="form-nc"]').serialize(),
-			function(data){
-				loadTabla( _tipo, _hiddenColumns );	
-				cerrar();
-			}
-		);
+		var btn = jQuery(this);
+			btn.addClass('disabled');
+			btn.html('Guardando');
+		if( !btn.has('disabled') ){
+			jQuery.post(
+				TEMA+'/admin/backend/notas_creditos/ajax/generar.php',
+				jQuery('[name="form-nc"]').serialize(),
+				function(data){
+					loadTabla( _tipo, _hiddenColumns );	
+					btn.html('Guardar');
+					cerrar();
+				}
+			);
+		}
 	});
 
 
