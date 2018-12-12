@@ -118,10 +118,13 @@
 			$comision = $total * $NC_data['comision'];
 			$total -= $comision;
 
+			$NC_data['descuento'] = $comision;
+
 			$detalle[] = [
 				'titulo'=> "Comision por penalizaci&oacute;n",
-				'costo' => $comision,
+				'costo' => '-'.$comision,
 			];
+
 			$r = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 
 			$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
