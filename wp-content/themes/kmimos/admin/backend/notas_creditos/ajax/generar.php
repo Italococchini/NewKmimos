@@ -95,8 +95,6 @@
 			}
 		}
 
-		$_detalle = serialize($detalle);
-
 	// Configuracion Notas de Credito EnlaceFiscal
 		$NC_data = [
 			'user_id' => 0,
@@ -132,6 +130,8 @@
 			$NC_data['user_id'] = $reserva['cuidador']['id'];
 			$NC_data['tipo'] = 'cuidador';
 		}
+
+		$_detalle = serialize($detalle);
 
 	// Generar notas de creditos
 		$cfdi_nc = $CFDI->generar_Cfdi_NotasCreditos( $NC_data );
