@@ -108,7 +108,7 @@
 	</div>
 
 	<div class="col-md-4 text-left" id="semanal" 
-	style=" display:<?php echo $display_semanal; ?>; margin-top: 10px;">
+	style=" display:<?php echo $display_semanal; ?>; margin-top: 5px;">
 		<div class="input-group">
 			<span class="input-group-addon" id="basic-addon1">D&iacute;a de retiro: </span>	
 			<select class="form-control" name="periodo_dia">	
@@ -123,7 +123,7 @@
 	</div>
 
 	<div class="col-md-4 text-left" id="primera_quincena" 
-	style=" display:<?php echo $display_p_quincena; ?>; margin-top: 10px;">
+	style=" display:<?php echo $display_p_quincena; ?>; margin-top: 5px;">
 		<div class="input-group">
 			<span class="input-group-addon" id="lbl-p-quincena"><?php echo $titulo_q1; ?></span>	
 			<select class="form-control" name="primera_quincena" style="font-size: 12px;">
@@ -138,7 +138,7 @@
 	</div>	
 
 	<div class="col-md-4 text-left" id="segunda_quincena" 
-	style=" display:<?php echo $display_s_quincena; ?>; margin-top: 10px;">
+	style=" display:<?php echo $display_s_quincena; ?>; margin-top: 5px;">
 		<div class="input-group">
 			<span class="input-group-addon" id="lbl-s-quincena"><?php echo $titulo_q2; ?></span>	
 			<input class="form-control disabled" readonly data-id="input_segunda_quincena" style="font-size: 12px;" 
