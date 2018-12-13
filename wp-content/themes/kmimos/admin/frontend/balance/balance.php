@@ -22,6 +22,7 @@
 	}
 
 // print_r($user_id);
+	$rango_periodo = [ 1, 5, 10, 15 ];
 
 	$periodo_retiro = [
 		'semanal',
@@ -79,15 +80,13 @@
 ?>
 
 <h1 class="titulo">Balance</h1>
-
+<div class="alert text-left alert-warning <?php echo $mostrar_mensaje; ?>">
+	<span style="font-size:16px;">No olvides actualizar tus datos bancarios lo antes posible dentro de tu perfil, con el objetivo de <strong>poder recibir todos tus pagos de servicios kmimos.</strong></span>
+	<div class="text-center">
+		<a href="<?php echo get_home_url(); ?>/perfil-usuario" class="btn btn-warning"> IR A MI PERFIL <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+	</div>
+</div>
 <section class="row text-right" style="margin-bottom: 10px;">
-
-	<div class="col-md-12 text-left alert-warning <?php echo $mostrar_mensaje; ?>">
-		<span style="font-size:16px;">No olvides actualizar tus datos bancarios lo antes posible dentro de tu perfil, con el objetivo de <strong>poder recibir todos tus pagos de servicios kmimos.</strong></span>
-		<div class="text-center">
-			<a href="<?php echo get_home_url(); ?>/perfil-usuario" class="btn btn-warning"> IR A MI PERFIL <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-		</div>
-   	</div>
 
 	<h4 class="text-left col-md-12" style="margin-bottom: 0px; font-weight: bold">
 		Puedes programar tus pagos semanal, quincenal o mensual de manera gratuita
@@ -129,7 +128,7 @@
 			<span class="input-group-addon" id="lbl-p-quincena"><?php echo $titulo_q1; ?></span>	
 			<select class="form-control" name="primera_quincena" style="font-size: 12px;">
 				<?php
-				for ($i=1; $i < 31; $i++) { 
+				foreach( $rango_periodo as $i ){
 				 	$select = ( $i == $cuidador_periodo['primera_quincena'] )? 'selected':'';
 					echo "<option value='{$i}' {$select}>D&iacute;a ".$i." de cada mes</option>";
 				}
@@ -144,7 +143,8 @@
 			<span class="input-group-addon" id="lbl-s-quincena"><?php echo $titulo_q2; ?></span>	
 			<select class="form-control" name="segunda_quincena" style="font-size: 12px;">
 				<?php
-				for ($i=1; $i < 31; $i++) { 
+				foreach( $rango_periodo as $i ){
+					$i += 15; 
 				 	$select = ( $i == $cuidador_periodo['segunda_quincena'] )? 'selected':'';
 					echo "<option value='{$i}' {$select}>D&iacute;a ".$i." de cada mes</option>";
 				}
