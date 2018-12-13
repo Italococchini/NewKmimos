@@ -30,10 +30,13 @@
 				$sql = "SELECT numeroReferencia FROM facturas WHERE reserva_id = ".$item->factura;
 				$numeroReferencia = $wpdb->get_var($sql);
 
+				$codigo_factura = $item->factura.'_'.$numeroReferencia;
+				/*
 				$codigo_factura = $item->factura;
 				if( !empty($numeroReferencia) ){
 					$codigo_factura = $item->factura.'_'.$numeroReferencia;
 				}
+				*/
 			?>
 
 			<div class="vlz_tabla vlz_desplegado col-md-12">

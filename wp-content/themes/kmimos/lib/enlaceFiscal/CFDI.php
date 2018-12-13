@@ -220,9 +220,9 @@ class CFDI {
 						    ]
 						];
 
-						if( count($partidas) == 1 ){
-							$partidas["descuento"] = (float) number_format( $descuento, 2, '.', '');
-						}
+						// if( count($partidas) == 1 ){
+						// 	$partidas["descuento"] = (float) number_format( $descuento, 2, '.', '');
+						// }
 				}
 			}
 
@@ -238,7 +238,7 @@ class CFDI {
 					"subTotal" => (float) number_format($_subtotal,2, ".", "" ), //"20.00", ( Sin IVA )
 					"total" => (float) number_format( $_total, 2, '.', ''), // "23.20" ( Con IVA )
 					"rfc" => $this->RFC,
-					"descuento" => (float) number_format( $descuento, 2, '.', ''),					
+					//"descuento" => (float) number_format( $descuento, 2, '.', ''),					
 					"DatosDePago" => [
 						"metodoDePago" => "PUE",
 						"formaDePago" => $formaDePago, 

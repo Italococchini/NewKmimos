@@ -95,91 +95,94 @@
 			}
 		}
 
-	// Configuracion Notas de Credito EnlaceFiscal
-		$NC_data = [
-			'user_id' => 0,
-			'detalle' => $detalle,
-			'total'   => $total,
-			'reserva_id' => $reserva_id,
-			'consecutivo' => 1,
-			'cuidador' => ['id'=>$reserva['cuidador']['id']],
-			'cliente' => ['id'=>$reserva['cliente']['id']],
-			'tipo' => '',
-			'comision' => 0,
-		];
-
-	// Validar tipo de nota de credito
-		$observaciones = '';
-		if( strtolower($tipo_usuario) == 'cliente' ){
-			$NC_data['user_id'] = $reserva['cliente']['id'];
-			$NC_data['tipo'] = 'cliente';
-			$NC_data['comision'] = 0.20;
-
-			$comision = $total * $NC_data['comision'];
-			$total -= $comision;
-
-			$NC_data['descuento'] = $comision;
-
-			$detalle[] = [
-				'titulo'=> "Comision por penalizaci&oacute;n",
-				'costo' => '-'.$comision,
+	if( $total > 0 ){	
+		// Configuracion Notas de Credito EnlaceFiscal
+			$NC_data = [
+				'user_id' => 0,
+				'detalle' => $detalle,
+				'total'   => $total,
+				'reserva_id' => $reserva_id,
+				'consecutivo' => 1,
+				'cuidador' => ['id'=>$reserva['cuidador']['id']],
+				'cliente' => ['id'=>$reserva['cliente']['id']],
+				'tipo' => '',
+				'comision' => 0,
 			];
 
-			$r = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
+		// Validar tipo de nota de credito
+			$observaciones = '';
+			if( strtolower($tipo_usuario) == 'cliente' ){
+				$NC_data['user_id'] = $reserva['cliente']['id'];
+				$NC_data['tipo'] = 'cliente';
+				$NC_data['comision'] = 0.20;
 
-			$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
-		}else{
-			$NC_data['comision'] = 0;
-			$NC_data['user_id'] = $reserva['cuidador']['id'];
-			$NC_data['tipo'] = 'cuidador';
-		}
+				$comision = $total * $NC_data['comision'];
+				$total -= $comision;
 
-		$_detalle = serialize($detalle);
+				$NC_data['descuento'] = $comision;
+				$NC_data['total'] += $comision;
 
-	// Generar notas de creditos
-		$cfdi_nc = $CFDI->generar_Cfdi_NotasCreditos( $NC_data );
-		$factura_id = $reserva_id . $NC_data['consecutivo'];
+				$detalle[] = [
+					'titulo'=> "Comision por penalizaci&oacute;n",
+					'costo' => '-'.$comision,
+				];
 
-	// Agregar registro de NC si enlaceFiscal lo acepta
-		if( isset($cfdi_nc['estatus']) && $cfdi_nc['estatus']=='aceptado'){
-			// Nota de Credito - Cliente
-			$sql = "INSERT INTO notas_creditos ( 
-					`tipo`,
-					`user_id`,
-					`cuidador_id`,
-					`reserva_id`,
-					`monto`,
-					`detalle`,
-					`observaciones`,
-					`estatus`,
-					factura,
-					cfdi_pdf,
-					cfdi_xml,
-					cfdi_id,
-					cfdi_referencia
-				) VALUES (
-					'".$NC_data['tipo']."',
-					".$NC_data['cliente']['id'].", 
-					".$NC_data['cuidador']['id'].", 
-					$reserva_id, 
-					$total,
-					'{$_detalle}',
-					'{$observaciones}',
-					'pendiente',
-					'{$factura_id}',
-					'".$cfdi_nc["ack"]->AckEnlaceFiscal->descargaArchivoPDF."',
-					'".$cfdi_nc["ack"]->AckEnlaceFiscal->descargaXmlCFDi."',
-					'".$cfdi_nc["ack"]->AckEnlaceFiscal->folioFiscalUUID."',
-					'".$cfdi_nc["ack"]->AckEnlaceFiscal->numeroReferencia."'
-				);";
+				$r = factura_penalizacion( $reserva['cliente']['id'], $pedido_id, $reserva_id, $comision );
 
-			$wpdb->query( $sql );
-			if( $NC_data['tipo'] == 'cliente'){
-				$sql_saldo = "
-					UPDATE wp_usermeta SET 
-						meta_value = meta_value + {$total} 
-					WHERE meta_key='kmisaldo' and user_id = {$reserva['cliente']['id']}
-				";
-				$wpdb->query( $sql_saldo );
+				$observaciones .= ' ( Comision por penalizacion $ '.$comision ." )";
+			}else{
+				$NC_data['comision'] = 0;
+				$NC_data['user_id'] = $reserva['cuidador']['id'];
+				$NC_data['tipo'] = 'cuidador';
 			}
-		}
+
+			$_detalle = serialize($detalle);
+
+		// Generar notas de creditos
+			$cfdi_nc = $CFDI->generar_Cfdi_NotasCreditos( $NC_data );
+			$factura_id = $reserva_id . $NC_data['consecutivo'];
+
+		// Agregar registro de NC si enlaceFiscal lo acepta
+			if( isset($cfdi_nc['estatus']) && $cfdi_nc['estatus']=='aceptado'){
+				// Nota de Credito - Cliente
+				$sql = "INSERT INTO notas_creditos ( 
+						`tipo`,
+						`user_id`,
+						`cuidador_id`,
+						`reserva_id`,
+						`monto`,
+						`detalle`,
+						`observaciones`,
+						`estatus`,
+						factura,
+						cfdi_pdf,
+						cfdi_xml,
+						cfdi_id,
+						cfdi_referencia
+					) VALUES (
+						'".$NC_data['tipo']."',
+						".$NC_data['cliente']['id'].", 
+						".$NC_data['cuidador']['id'].", 
+						$reserva_id, 
+						$total,
+						'{$_detalle}',
+						'{$observaciones}',
+						'pendiente',
+						'{$factura_id}',
+						'".$cfdi_nc["ack"]->AckEnlaceFiscal->descargaArchivoPDF."',
+						'".$cfdi_nc["ack"]->AckEnlaceFiscal->descargaXmlCFDi."',
+						'".$cfdi_nc["ack"]->AckEnlaceFiscal->folioFiscalUUID."',
+						'".$cfdi_nc["ack"]->AckEnlaceFiscal->numeroReferencia."'
+					);";
+
+				$wpdb->query( $sql );
+				if( $NC_data['tipo'] == 'cliente'){
+					$sql_saldo = "
+						UPDATE wp_usermeta SET 
+							meta_value = meta_value + {$total} 
+						WHERE meta_key='kmisaldo' and user_id = {$reserva['cliente']['id']}
+					";
+					$wpdb->query( $sql_saldo );
+				}
+			}
+	}
