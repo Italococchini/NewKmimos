@@ -9,7 +9,7 @@
 <script>
     var ID = <?php echo $user->ID; ?>;
     var fecha = { 
-        ini:'<?php echo $fecha['ini']; ?>', 
+        ini:'<?php echo $fecha['fin']; ?>', 
         fin:'<?php echo $fecha['fin']; ?>'
     };    
 </script>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-sm-12 col-md-7 container-search text-right">
                 <form id="form-search" name="search">
-                    <span><label class="fecha">Desde: </label><input type="date" name="ini" value="<?php echo $fecha['ini']; ?>"></span>
+                    <span><label class="fecha">Desde: </label><input type="date" name="ini" value="<?php echo $fecha['fin']; ?>"></span>
                     <span><label class="fecha">Hasta: <input type="date" name="fin" 
                         value="<?php echo $fecha['fin']; ?>"></label></span> 
                     <button class="btn btn-defaut" id="btn-search"><i class="fa fa-search"></i> Buscar</button>
