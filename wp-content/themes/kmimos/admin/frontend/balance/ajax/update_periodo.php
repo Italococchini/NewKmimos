@@ -6,6 +6,11 @@
 
 	$hoy = date( "Y/m/d H:i:s" );
 
+    $segunda_quincena = 15;
+    if( $primera_quincena > 0 ){
+        $segunda_quincena += $primera_quincena;
+    }
+
     if( $periodo == 'quincenal' ){    
         if( date('d') <= $primera_quincena ){
             $dia = $primera_quincena;

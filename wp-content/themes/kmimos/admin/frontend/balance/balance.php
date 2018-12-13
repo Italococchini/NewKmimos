@@ -141,15 +141,8 @@
 	style=" display:<?php echo $display_s_quincena; ?>; margin-top: 10px;">
 		<div class="input-group">
 			<span class="input-group-addon" id="lbl-s-quincena"><?php echo $titulo_q2; ?></span>	
-			<select class="form-control" name="segunda_quincena" style="font-size: 12px;">
-				<?php
-				foreach( $rango_periodo as $i ){
-					$i += 15; 
-				 	$select = ( $i == $cuidador_periodo['segunda_quincena'] )? 'selected':'';
-					echo "<option value='{$i}' {$select}>D&iacute;a ".$i." de cada mes</option>";
-				}
-				?>
-			</select>		 
+			<input class="form-control disabled" readonly id="input_segunda_quincena" style="font-size: 12px;" 
+				value="D&iacute;a <?php echo $cuidador_periodo['segunda_quincena']; ?> de cada mes">
 		</div>
 	</div>
 	 
