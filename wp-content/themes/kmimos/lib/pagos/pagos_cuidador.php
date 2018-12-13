@@ -904,7 +904,7 @@ echo "[ PasoC: $_monto || $total_temp ]" ;
 
 	public function getRangoFechas(){
     	$d = getdate();
-    	$strFecha = strtotime( date("Y-m-d", $d[0]) );
+    	$strFecha = strtotime( date("Y-m-d", $d[0]) . " -1 Day " );
 		$fecha = $this->inicio_fin_semana( $strFecha, 'tue' );
 		return $fecha;
 	}
