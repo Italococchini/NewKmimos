@@ -82,7 +82,7 @@
 
 <section class="row text-right" style="margin-bottom: 10px;">
 
-	<div class="alert text-left alert-warning <?php echo $mostrar_mensaje; ?>">
+	<div class="col-md-12 text-left alert-warning <?php echo $mostrar_mensaje; ?>">
 		<span style="font-size:16px;">No olvides actualizar tus datos bancarios lo antes posible dentro de tu perfil, con el objetivo de <strong>poder recibir todos tus pagos de servicios kmimos.</strong></span>
 		<div class="text-center">
 			<a href="<?php echo get_home_url(); ?>/perfil-usuario" class="btn btn-warning"> IR A MI PERFIL <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
