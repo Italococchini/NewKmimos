@@ -8,7 +8,7 @@
 
 	$pay = $pagos->balance( $user_id );
 
-	$cuidador = $pagos->db->get_row(" SELECT pago_periodo FROM cuidadores WHERE user_id = {$user_id}");
+	$cuidador = $pagos->db->get_row(" SELECT pago_periodo, banco FROM cuidadores WHERE user_id = {$user_id}");
 
 	$cuidador_periodo = [
 		'periodo'=>'semanal',
@@ -42,8 +42,6 @@
 	$fecha2 = new DateTime($pay->retiro->tiempo_restante);
 	$intervalo = $fecha1->diff($fecha2);
 
-
-		
 	$display_semanal = 'none';
 	$display_p_quincena = 'none';
 	$display_s_quincena = 'none';
@@ -68,11 +66,28 @@
 			break;
 	}
 
+	$mostrar_mensaje = '';
+	$banco = unserialize($cuidador->banco);
+	if( isset($banco['cuenta']) && isset($banco['banco']) && isset($banco['titular']) ){
+		if( !empty($banco['banco']) && !empty($banco['titular']) && !empty($banco['cuenta']) ) {
+			if( strlen($banco['cuenta']) == 18 ){
+				$mostrar_mensaje = 'hidden';
+			}
+		}
+	}
+
 ?>
 
 <h1 class="titulo">Balance</h1>
 
 <section class="row text-right" style="margin-bottom: 10px;">
+
+	<div class="alert text-left alert-warning <?php echo $mostrar_mensaje; ?>">
+		No olvides actualizar tus datos bancarios lo antes posible dentro de tu perfil, con el objetivo de <strong>poder recibir todos tus pagos de servicios kmimos.</strong>
+		<div class="text-center">
+			<a href="<?php echo get_home_url(); ?>/perfil-usuario" class="btn btn-warning"> IR A MI PERFIL <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+		</div>
+   	</div>
 
 	<h4 class="text-left col-md-12" style="margin-bottom: 0px; font-weight: bold">
 		Puedes programar tus pagos semanal, quincenal o mensual de manera gratuita
