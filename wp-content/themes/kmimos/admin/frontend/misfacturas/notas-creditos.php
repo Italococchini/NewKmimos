@@ -30,7 +30,7 @@
 				$sql = "SELECT cfdi_referencia FROM notas_creditos WHERE factura = ".$item->factura;
 				$numeroReferencia = $wpdb->get_var($sql);
 
-				 $codigo_factura = $sql; //$item->factura.'_'.$numeroReferencia;
+				 $codigo_factura = $numeroReferencia.$sql; //$item->factura.'_'.$numeroReferencia;
 				
 				/*$codigo_factura = $item->factura;
 				if( !empty($numeroReferencia) ){
