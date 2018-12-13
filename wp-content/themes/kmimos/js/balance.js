@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
         update_periodo();
     });
     jQuery('[name="primera_quincena"]').on('change', function(e){
-        var date = jQuery(this).val() + 15;
+        var date = parseFloat(jQuery(this).val()) + 15;
         jQuery('[data-id="input_segunda_quincena"]').val("Día "+date+" de cada mes");
         update_periodo();
     });
