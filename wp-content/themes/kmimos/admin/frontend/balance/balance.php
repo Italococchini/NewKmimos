@@ -89,7 +89,8 @@
 <section class="row text-right" style="margin-bottom: 10px;">
 
 	<h4 class="text-left col-md-12" style="margin-bottom: 0px; font-weight: bold">
-		Puedes programar tus pagos semanal, quincenal o mensual de manera gratuita
+		Puedes programar tus pagos semanal, quincenal o mensual de manera gratuita <br>
+		<small><strong>Se tomará en cuenta el monto que tenga a la 11:59 del día anterior</strong></small>
 	</h4>
  
 	<div class="col-md-4 text-left" style="margin-top: 5px;">
