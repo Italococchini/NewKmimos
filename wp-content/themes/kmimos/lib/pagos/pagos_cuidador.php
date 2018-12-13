@@ -331,6 +331,7 @@ class PagoCuidador {
 		return 0;
 	}
 
+	// guardar datos de pagos a cuidador
 	public function registrar_pago( $user_id, $total, $openpay_id, $comentario='' ){
 		// buscar solicitudes de pago del cuidador
 		$solicitudes = $this->db->get_results( "
@@ -353,7 +354,6 @@ class PagoCuidador {
 									observaciones=concat(observaciones,'<br>', '{$comentario}')
 								WHERE id = ".$solicitud->id;
 						$this->db->query($sql);
-echo $sql;						
 					}else{
 					// Si el monto es menor 
 						# diferencia
@@ -371,10 +371,8 @@ echo $sql;
 						$total_temp = $resto;
 						foreach ($order_reserva as $_reserva => $_monto) {
 
-echo $total_temp;
 							if( $total_temp > $_monto  ){
 								$total_temp -= $_monto;
-echo "[ PasoA: $_monto || $total_temp ]" ;
 								if( $_monto > 0 ){
 									$reserva_update[] = [
 										'reserva' => $_reserva,
@@ -382,10 +380,8 @@ echo "[ PasoA: $_monto || $total_temp ]" ;
 									];
 								}
 							}else if( $_monto >= $total_temp ){
-echo "[ PasoB: $_monto || $total_temp ]" ;
 								$_monto -= $total_temp;
 								if( $total_temp > 0 ){								
-echo "[ PasoC: $_monto || $total_temp ]" ;
 									$reserva_update[] = [
 										'reserva' => $_reserva,
 										'monto' => $total_temp,

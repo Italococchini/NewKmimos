@@ -404,10 +404,16 @@
 					   		}
 							if( $propietario_id > 0 ){
 
-								// agregar saldo a favor
-								$saldo = get_user_meta( $propietario_id, 'kmisaldo', true );
-								$saldo += 150;
-								update_user_meta( $propietario_id, 'kmisaldo', $saldo );
+								if( !is_petsitters( $propietario_id ) ){
+									// agregar saldo a favor
+									$saldo = get_user_meta( $propietario_id, 'kmisaldo', true );
+									$saldo += 150;
+									update_user_meta( $propietario_id, 'kmisaldo', $saldo );
+								}else{
+									// agregar pago a cuidador
+									include_once( $PATH_TEMPLATE.'/lib/pagos_cuidador.php');
+									$pagos->cargar_retiros( $propietario_id, 150, 'Pago por uso de cupon Club patitas felices' );
+								}
 
 								// agregar transaccion en balance
 								$wpdb->query("INSERT INTO cuidadores_transacciones (

@@ -183,10 +183,12 @@
 	}
 
 	if(!function_exists('is_petsitters')){
-		function is_petsitters( ){
+		function is_petsitters( $user_id = 0 ){
 			global $wpdb;
-			$current_user = wp_get_current_user();
-		    $user_id = $current_user->ID;
+			if( $id == 0 ){
+				$current_user = wp_get_current_user();
+			    $user_id = $current_user->ID;
+			}
 			$cuidador = $wpdb->get_row("SELECT * FROM cuidadores WHERE user_id = {$user_id}");
 			 
 			if( isset($cuidador->id) && $cuidador->id > 0 ){
