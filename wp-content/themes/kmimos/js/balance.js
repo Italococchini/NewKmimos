@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
         update_periodo();
     });
     jQuery('[name="primera_quincena"]').on('change', function(e){
-        jQuery('#input_segunda_quincena').val("D&iacute;a ".jQuery(this).val()." de cada mes");
+        jQuery('[data-id="input_segunda_quincena"]').val("D&iacute;a ".jQuery(this).val()." de cada mes");
         update_periodo();
     });
     // jQuery('[name="segunda_quincena"]').on('change', function(e){

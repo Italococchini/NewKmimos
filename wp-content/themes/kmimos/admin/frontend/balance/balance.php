@@ -141,7 +141,7 @@
 	style=" display:<?php echo $display_s_quincena; ?>; margin-top: 10px;">
 		<div class="input-group">
 			<span class="input-group-addon" id="lbl-s-quincena"><?php echo $titulo_q2; ?></span>	
-			<input class="form-control disabled" readonly id="input_segunda_quincena" style="font-size: 12px;" 
+			<input class="form-control disabled" readonly data-id="input_segunda_quincena" style="font-size: 12px;" 
 				value="D&iacute;a <?php echo $cuidador_periodo['segunda_quincena']; ?> de cada mes">
 		</div>
 	</div>
