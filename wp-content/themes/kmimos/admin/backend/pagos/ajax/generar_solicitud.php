@@ -64,7 +64,6 @@ error_reporting(E_ALL);
                     }else{
                         $observaciones = $payout->status;
                     }
-print_r($payout);                    
                 }catch(OpenpayApiConnectionError $c){
                     $estatus = 'error';
                     $observaciones = $c->getMessage();
@@ -88,10 +87,9 @@ print_r($payout);
                             break;
                     }
                 }
-echo 'paso2';            
+
             //  Actualizar registro
                 if( !empty($openpay_id) && $estatus != 'error'){
-echo 'paso3';            
                     $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id, $item['comentario'] );
                     if( $item['parcial'] ){
                         include($raiz.'/wp-load.php');
@@ -110,7 +108,6 @@ echo 'paso3';
                         wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
                     }
                 }else{
-echo 'paso4';            
                     echo $estatus;
                 }
         }

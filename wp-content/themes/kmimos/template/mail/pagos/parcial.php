@@ -19,6 +19,12 @@
 	        Motivos: [comentarios]
 	    </div>
 
+	    <hr>
+	    <div style='display: block; margin-bottom: 8px; text-align: left;'>
+	    	[desglose]
+	    </div>
+
+
 	</div>
 
 </div>

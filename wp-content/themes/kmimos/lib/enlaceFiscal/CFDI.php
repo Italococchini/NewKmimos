@@ -59,9 +59,9 @@ class CFDI {
 				$this->saldo = $r['AckEnlaceFiscal']['saldo'];
 				if( $this->saldo < 0.89 ){
 					wp_mail( 
-						'italococchini@gmail.com', 
+						'i.cocchini@kmimos.la', 
 						'Notificacion enlaceFiscal', 
-						'ERROR AL EMITIR LOS CFDI. <BR> DESCRIPCION: SALDO INSUFICIENTE <br> Monto: '.$this->saldo 
+						'ERROR AL EMITIR LOS CFDI. <BR> DESCRIPCION: SALDO INSUFICIENTE <br> Saldo actual: '.$this->saldo 
 					);
 				}
 			}
@@ -325,7 +325,7 @@ class CFDI {
 			] );
 			extract($conf);
 
-		// Datos de configuracion del cuidador
+		// Datos de configuracion del cuidador ( Cuidador emite factura )
 			if( $this->modo != 'debug' ){
 				$info_cfdi = $this->db->get_row( "SELECT * FROM FACTURAS_ALIADOS WHERE estatus='Activo' AND user_id =".$data['cuidador']['id'] );
 				$serie = $info_cfdi->serie;
@@ -600,6 +600,14 @@ class CFDI {
                 "valor" => $data['servicio']['id_reserva']
 	        ];
 
+	    // Cargar Tipo de Pago
+	        $tipopago = 'PUE'; 
+			if( count($partidas) == 1 ){
+			    if( $_total >= 1500 ){
+			    	$tipopago = ''; buscar en enlacefiscal el pago diferido
+			    }
+			}
+
 		// Estructura de datos CFDI
 			$CFDi = [
 				"CFDi" => [
@@ -614,7 +622,7 @@ class CFDI {
 					"rfc" => $this->RFC,
 					"descuentos" => (float) number_format( $data['servicio']['desglose']['descuento'], 2, '.', ''),
 					"DatosDePago" => [
-						"metodoDePago" => "PUE",
+						"metodoDePago" => $tipopago, //"PUE",
 						"formaDePago" => $formaDePago, 
 					],
 					"Receptor" => [
@@ -680,7 +688,7 @@ class CFDI {
 				'servicio_tipo_pago' => $data['servicio']['tipo_pago'] 
 			] );
 			extract($conf);
-
+			$tipopago = 'PUE';
 
 			$data['rfc'] = $this->RFC; // RFC Kmimos
 			$data['fechaEmision'] = date('Y-m-d H:i:s');
@@ -722,7 +730,7 @@ class CFDI {
 						$descuento_partida = $notas_creditos->monto;						
 						$notas_creditos_list[] = $notas_credito->id;
 						$personalizados[] = [
-			                "nombreCampo" => "Nota de Credito No. ".$notas_creditos->id,
+			                "nombreCampo" => "Nota de Credito No. ".$notas_creditos->factura,
 			                "valor" => $notas_creditos->monto
 				        ];	
 					}
@@ -747,6 +755,14 @@ class CFDI {
 						    ]
 					    ]				
 					];
+
+			    // Validar Metodo de Pago
+			    if( count($partidas) == 1 ){
+			        if( $_total >= 1500 ){
+			        	$tipopago = ''; buscar en enlacefiscal el pago diferido
+			        }
+			    }
+	
 			}
 
 
@@ -774,7 +790,7 @@ class CFDI {
 					"descuentos" => (float) number_format( $descuento, 2, '.', ''),
 					"rfc" => $data['rfc'],
 					"DatosDePago" => [
-						"metodoDePago" => "PUE",
+						"metodoDePago" => $tipopago, //"PUE",
 						"formaDePago" => $formaDePago, 
 					],
 					"Receptor" => [
@@ -823,8 +839,6 @@ class CFDI {
 
 	// Registra el CFDI en la data de Kmimos
 	public function guardarCfdi( $CFDi_receptor, $data, $ack ){
-
-		
 
 		if( empty($data) || empty($ack) ){ return false; }		
 

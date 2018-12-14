@@ -204,6 +204,10 @@ class PagoCuidador {
 		return $total_a_pagar;
 	}
 
+	public function cargar_retiro_especial( $user_id, $monto, $descripcion, $id_admin = 0 ){
+
+	}
+
 	public function cargar_retiros( $user_id, $monto, $descripcion, $id_admin = 0 ){
 
 		$disponible = $this->detalle_disponible( $user_id );
@@ -289,7 +293,10 @@ class PagoCuidador {
 
 				$sql_pago = "UPDATE cuidadores_pagos SET 
 						total = total + {$monto_pago},
-						detalle = '".serialize($reservas_pagos)."'
+						detalle = '".serialize($reservas_pagos)."',
+						cuenta = '".$banco['cuenta']."',
+						titular = '".$banco['titular']."',
+						banco = '".$banco['banco']."'
 					WHERE id = ".$existe_retiro->id
 				;
 

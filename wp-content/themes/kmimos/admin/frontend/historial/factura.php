@@ -1,7 +1,4 @@
 <?php
-
-
-
 include_once( dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))) ."/vlz_config.php");
 include_once( dirname(dirname(dirname(__DIR__))) . "/procesos/funciones/db.php");
 include_once( dirname(dirname(dirname(__DIR__))) . "/lib/enlaceFiscal/CFDI.php" );
