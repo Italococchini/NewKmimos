@@ -1,6 +1,7 @@
 <?php
 	session_start();
-error_reporting(E_ALL);
+    error_reporting(E_ALL);
+
     date_default_timezone_set('America/Mexico_City');
 
     $raiz = dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))));
@@ -38,8 +39,7 @@ error_reporting(E_ALL);
                     'accion'=> $accion,
                     'comentario'=> $comentarios,
                 ];
-                
- 
+
             // Parametros solicitud
                 $payoutData = array(
                     'method' => 'bank_account',
@@ -49,9 +49,8 @@ error_reporting(E_ALL);
                         'clabe' => $banco['cuenta'],
                         'holder_name' => utf8_encode($banco['titular']),
                     ),
-                    'description' => 'UID: #'.$row_id
-                );
-                
+                    'description' => 'UID: #'.$cuidador->user_id .' '. utf8_encode($banco['titular'])
+                );                
 
             //  Enviar solicitud a OpenPay
                 $estatus = 'Autorizado';
@@ -90,23 +89,11 @@ error_reporting(E_ALL);
 
             //  Actualizar registro
                 if( !empty($openpay_id) && $estatus != 'error'){
-                    $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id, $item['comentario'] );
-                    if( $item['parcial'] ){
-                        include($raiz.'/wp-load.php');
-                        $mensaje = buildEmailTemplate(
-                            'pagos/parcial',
-                            [
-                                'name' => $pago->nombre.' '.$pago->apellido,
-                                'monto' => $item['monto'],
-                                'comentarios' => $item['comentario']
-                            ]
-                        );
-                        $mensaje = buildEmailHtml(
-                            $mensaje, 
-                            []
-                        );
-                        wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
-                    }
+                    $list_pagos_id = $pagos->registrar_pago( $item['user_id'], $item['monto'], $openpay_id, $item['comentario'] );
+                    $pago_parcial = (boolean) $item['parcial'];
+                    include($raiz.'/wp-load.php');
+                    include('../email/index.php');
+                    print_r( $payout);
                 }else{
                     echo $estatus;
                 }

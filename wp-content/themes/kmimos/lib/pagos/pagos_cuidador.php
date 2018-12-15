@@ -205,7 +205,6 @@ class PagoCuidador {
 	}
 
 	public function cargar_retiro_especial( $user_id, $monto, $descripcion, $id_admin = 0 ){
-
 	}
 
 	public function cargar_retiros( $user_id, $monto, $descripcion, $id_admin = 0 ){
@@ -348,6 +347,7 @@ class PagoCuidador {
 		");
 
 		// debitar y asignar pago a las solicitudes
+		$pagos_list_id = [];
 		if( !empty($solicitudes) ){
 			$resto = $total;
 			foreach ($solicitudes as $solicitud) {
@@ -402,9 +402,7 @@ class PagoCuidador {
 								}
 								$total_temp = 0;
 							}
-							
 						}
-
 
 						# cambiar referencia y estatus: modificacion
 						$sql_update = "UPDATE cuidadores_pagos SET 
@@ -416,7 +414,6 @@ class PagoCuidador {
 								observaciones=concat(observaciones,'<br>', '{$comentario}')
 							WHERE id = ".$solicitud->id;
 						$this->db->query($sql_update);
-
 
 						$sql_insert = "INSERT INTO `cuidadores_pagos`(
 							`admin_id`, 
@@ -447,18 +444,12 @@ class PagoCuidador {
 						);";
 						$this->db->query($sql_insert);
 						$resto = 0;
-
-						#generar una solicitud por el resto
-							# dividir reservas
-
-						#generar una solicitud por la diferencia de la solicitud
-							# dividir reservas diferencia					
 					}
+					$pagos_list_id[] = $solicitud->id;
 				}
 			}
-
-
 		}
+		return $pagos_list_id;
 	}
 
 	/// *************************

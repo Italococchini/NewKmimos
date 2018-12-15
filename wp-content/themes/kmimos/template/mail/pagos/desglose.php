@@ -1,21 +1,34 @@
 
-<div>Codigo: [openpay_id]</div>
-<div>Cuenta Transferida: [total]</div>
-<div>Total: [total]</div>
-<div>Estatus: [estatus]</div>
+<br>
+<div style="margin: 10px 0px;">
+	<div style="font-size:17px;font-weight:600;letter-spacing:-0.1px;margin-bottom:15px;padding-bottom:5px;border-bottom:solid 1px #bbb">
+        DATOS DE TRANSFERENCIA
+    </div>
+	<br>
+	<div style="padding:2px 0px;"><strong>Referencia:</strong>  [transaccion_id]</div><br>
+	<div style="padding:2px 0px;"><strong>Titular:</strong>  [titular]</div><br>
+	<div style="padding:2px 0px;"><strong>Cuenta:</strong>  [cuenta]</div><br>
+	<div style="padding:2px 0px;"><strong>Total:</strong>  [total]</div><br>
+	<div style="padding:2px 0px;"><strong>Estatus:</strong>  [estatus]</div><br>
+</div>
+<br>
 
-<div>Detalle de pago</div>
-<table>
+<div style="font-size:17px;font-weight:600;letter-spacing:-0.1px;margin-bottom:15px;padding-bottom:5px;border-bottom:solid 1px #bbb">
+	DETALLE DE PAGO
+</div>
+<br>
+<table width="100%" style="width: 100%;">
 	<thead>
-		<tr>
-			<td width="80%">Concepto</td>
-			<td width="20%">Monto</td>
+		<tr style="color:#940d99;line-height:1.07;letter-spacing:0.3px;font-weight:600;font-size:14px;">
+			<td width="70%">CONCEPTO</td>
+			<td width="30%" style="text-align: right!important;">MONTO</td>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>Concepto</td>
-			<td>Monto</td>
-		</tr>		
+		[desglose_detalle]		
+		<tr style="font-weight: bold;border: 1px solid #ccc; background: #efefee;padding: 5px;">
+			<td>TOTAL: </td>
+			<td style="text-align: right;color:#940d99;"><strong>$ [total]</strong></td>
+		</tr>
 	</tbody>
 </table>

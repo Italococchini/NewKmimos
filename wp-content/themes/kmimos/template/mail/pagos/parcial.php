@@ -1,4 +1,3 @@
-
 <div style='text-align:center; margin-bottom: 34px;'>
 	<img src='[URL_IMGS]/Image-1.jpg' style='width: 100%;' >
 </div>
@@ -12,18 +11,21 @@
 		</div>	
 
 		<div style='font-family: Arial; font-size: 14px; line-height: 1.07; letter-spacing: 0.3px; color: #000000; padding-bottom: 25px; text-align: left;'>
-            Tu solicitud de pago esta en revision, procesamos un pago parcial por $[monto].
+            Tu solicitud de pago esta en revision, procesamos un pago parcial por <strong>$[monto]</strong>.
         </div>
 
-	    <div style='display: block; margin-bottom: 8px; text-align: left;'>
-	        Motivos: [comentarios]
+	    <div style='display: block; margin-bottom: 8px; text-align: left; background: #efefee; padding:10px;'>
+	        <div>
+	        	<strong>MOTIVOS: </strong>
+	        </div>
+	        <div style="text-align:justify;">
+		        [comentarios]
+	        </div>
 	    </div>
 
-	    <hr>
 	    <div style='display: block; margin-bottom: 8px; text-align: left;'>
 	    	[desglose]
 	    </div>
-
 
 	</div>
 

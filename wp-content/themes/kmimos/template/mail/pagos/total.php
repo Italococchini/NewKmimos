@@ -12,7 +12,7 @@
 		</div>	
 
 		<div style='font-family: Arial; font-size: 14px; line-height: 1.07; letter-spacing: 0.3px; color: #000000; padding-bottom: 25px; text-align: left;'>
-            Tu solicitud de pago fue procesada por $[monto].
+            Tu solicitud de pago fue procesada por <strong>$[monto]</strong>.
         </div>
 
 	    <div style='display: block; margin-bottom: 8px; text-align: left;'>
