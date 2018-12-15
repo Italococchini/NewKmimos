@@ -604,7 +604,7 @@ class CFDI {
 	        $tipopago = 'PUE'; 
 			if( count($partidas) == 1 ){
 			    if( $_total >= 1500 ){
-			    	$tipopago = ''; buscar en enlacefiscal el pago diferido
+			    	$tipopago = 'PPD'; 
 			    }
 			}
 
@@ -759,7 +759,7 @@ class CFDI {
 			    // Validar Metodo de Pago
 			    if( count($partidas) == 1 ){
 			        if( $_total >= 1500 ){
-			        	$tipopago = ''; buscar en enlacefiscal el pago diferido
+			        	$tipopago = 'PPD';
 			        }
 			    }
 	
