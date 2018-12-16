@@ -1,15 +1,15 @@
 
 <br>
 <div style="margin: 10px 0px;">
-	<div style="font-size:17px;font-weight:600;letter-spacing:-0.1px;margin-bottom:15px;padding-bottom:5px;border-bottom:solid 1px #bbb">
+	<div style="font-size:17px;font-weight:600;letter-spacing:-0.1px;margin-bottom:15px;padding-bottom:5px;border-bottom:solid 1px #bbb;color:#bbb">
         DATOS DE TRANSFERENCIA
     </div>
 	<br>
-	<div style="padding:2px 0px;"><strong>Referencia:</strong>  [transaccion_id]</div><br>
-	<div style="padding:2px 0px;"><strong>Titular:</strong>  [titular]</div><br>
-	<div style="padding:2px 0px;"><strong>Cuenta:</strong>  [cuenta]</div><br>
-	<div style="padding:2px 0px;"><strong>Total:</strong>  [total]</div><br>
-	<div style="padding:2px 0px;"><strong>Estatus:</strong>  [estatus]</div><br>
+	<div style="padding:1px 0px;"><strong>Referencia:</strong>  [transaccion_id]</div>
+	<div style="padding:1px 0px;"><strong>Titular:</strong>  [titular]</div>
+	<div style="padding:1px 0px;"><strong>Cuenta:</strong>  [cuenta]</div>
+	<div style="padding:1px 0px;"><strong>Total:</strong>  [total]</div>
+	<div style="padding:1px 0px;"><strong>Estatus:</strong>  [estatus]</div>
 </div>
 <br>
 

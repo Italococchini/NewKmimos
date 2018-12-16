@@ -110,7 +110,9 @@ jQuery(document).ready(function() {
  	// *********************************
     jQuery(document).on('click', '[data-action="aprobar"]', function(e){
     	e.preventDefault();
-    	if( jQuery(this).attr('data-target') == 'autorizado' ){		
+    	if( jQuery(this).attr('data-target') == 'autorizado' && !jQuery(this).hasClass('disabled') ){		
+    		jQuery(this).addClass('disabled');
+			jQuery(this).html('Procesando');
 	    	var users = [];
 			jQuery.each( jQuery("[data-type='item_selected']:checked"), function(){
 				var user = jQuery(this).val();
@@ -128,8 +130,6 @@ jQuery(document).ready(function() {
 			});
 			console.log(users);
 			aprobar_pago( users, jQuery(this).attr('data-target') );
-    	}else{
-    		cerrar();
     	}
 	});
 
@@ -146,7 +146,9 @@ jQuery(document).ready(function() {
  	// *********************************
     jQuery(document).on('click', '[data-action="procesar"]', function(e){
     	e.preventDefault();
-    	if( jQuery(this).attr('data-target') == 'autorizado' ){		
+    	if( jQuery(this).attr('data-target') == 'autorizado' && !jQuery(this).hasClass('disabled') ){
+    		jQuery(this).addClass('disabled');
+    		jQuery(this).html('Procesando');
 	    	var users = [];
 			jQuery.each(jQuery("[data-type='item_selected']:checked"), function(){
 				var user = jQuery(this).val();
@@ -159,8 +161,6 @@ jQuery(document).ready(function() {
 			});
 			console.log(users);
 			generar_solicitud( users, jQuery(this).attr('data-target') );
-    	}else{
-    		cerrar();
     	}
 	});
 	  
@@ -283,6 +283,7 @@ function generar_solicitud( users, accion ){
 		},
 		function(data){
 			jQuery('#pagosNuevos-tab span').html('$ 0');
+			jQuery('[data-action="procesar"]').removeClass('disabled');
 			loadTabla( _tipo, _hiddenColumns );	
 			cerrar();
 		}
@@ -300,6 +301,7 @@ function aprobar_pago( users, accion ){
 		},
 		function(data){
 			jQuery('.nav-item a.active span').html('$ 0');
+			jQuery('[data-action="aprobar"]').removeClass('disabled');
 			loadTabla( _tipo, _hiddenColumns );	
 			cerrar();
 		}

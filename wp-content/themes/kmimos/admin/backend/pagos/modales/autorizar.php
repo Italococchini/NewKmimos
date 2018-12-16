@@ -5,7 +5,6 @@
     </div>
 </div>
 <div class="modal-footer text-center">
-	
 	<button class='btn btn-success' data-action="procesar" data-target="autorizado">
 		Autorizar
 	</button>

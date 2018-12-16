@@ -4,13 +4,16 @@
     include_once($tema.'/lib/pagos/pagos_cuidador.php'); 
     $fecha = $pagos->getRangoFechas();
     $user = wp_get_current_user();
+
+    // Ayer
+    $ayer = date('Y-m-d', strtotime( $fecha['fin']." -1 Day " ) );
 ?>
 </pre>
 <script>
     var ID = <?php echo $user->ID; ?>;
     var fecha = { 
-        ini:'<?php echo $fecha['fin']; ?>', 
-        fin:'<?php echo $fecha['fin']; ?>'
+        ini:'<?php echo $ayer; ?>',
+        fin:'<?php echo $ayer; ?>',
     };    
 </script>
 <link rel='stylesheet' type='text/css' href='<?php echo getTema() ?>/admin/backend/pagos/reporte_pagos.css'>
@@ -31,9 +34,10 @@
             </div>
             <div class="col-sm-12 col-md-7 container-search text-right">
                 <form id="form-search" name="search">
-                    <span><label class="fecha">Desde: </label><input type="date" name="ini" value="<?php echo $fecha['fin']; ?>"></span>
-                    <span><label class="fecha">Hasta: <input type="date" name="fin" 
-                        value="<?php echo $fecha['fin']; ?>"></label></span> 
+
+                    <span><label class="fecha">Desde: </label><input type="date" name="ini" value="<?php echo $ayer; ?>"></span>
+                    <span><label class="fecha">Hasta: <input type="date" name="fin" value="<?php echo $ayer; ?>"></label></span> 
+
                     <button class="btn btn-defaut" id="btn-search"><i class="fa fa-search"></i> Buscar</button>
                     <!--
                         min="<?php echo $fecha['min']; ?>" 
