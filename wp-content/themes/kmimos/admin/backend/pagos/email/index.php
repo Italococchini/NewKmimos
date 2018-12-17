@@ -60,5 +60,5 @@
 			$mensaje, 
 			[]
 		);
-		// wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
+		wp_mail( $cuidador->email, "Notificación de pago", $mensaje );
 		wp_mail( 'italococchini@gmail.com', "Notificación de pago", $mensaje );
