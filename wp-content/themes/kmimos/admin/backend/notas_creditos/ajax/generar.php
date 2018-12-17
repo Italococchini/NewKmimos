@@ -47,9 +47,7 @@
 					$mascotas = $item[0] - $_POST[ 'mascotas_'.$code ];	
 
 					$prorrateo = $mascotas * $noches * $item[3];
-print_r($item);
-print_r("{$prorrateo} ====> {$mascotas} * {$noches} * {$item[0]}");
-
+ 
 					if( $prorrateo > 0 ){				
 						$detalle[] = [  
 							'fecha' => $_POST[ 'hasta_'.$code ],
@@ -100,8 +98,7 @@ print_r("{$prorrateo} ====> {$mascotas} * {$noches} * {$item[0]}");
 			}
 		}
 
-print_r($detalle);
-exit();
+  
 
 	if( $total > 0 ){	
 		// Configuracion Notas de Credito EnlaceFiscal
@@ -184,7 +181,7 @@ print_r($cfdi_nc);
 						'".$cfdi_nc["ack"]->AckEnlaceFiscal->folioFiscalUUID."',
 						'".$cfdi_nc["ack"]->AckEnlaceFiscal->numeroReferencia."'
 					);";
-print_r($sql);
+ 
 				$wpdb->query( $sql );
 				if( $NC_data['tipo'] == 'cliente'){
 					$sql_saldo = "
