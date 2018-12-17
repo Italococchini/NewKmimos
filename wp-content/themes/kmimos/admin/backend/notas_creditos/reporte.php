@@ -13,7 +13,7 @@
     };
 </script>
 <link rel='stylesheet' type='text/css' href='<?php echo getTema() ?>/admin/backend/notas_creditos/reporte.css'>
-<script src='<?php echo getTema(); ?>/admin/backend/notas_creditos/reporte.js'></script>
+<script src='<?php echo getTema(); ?>/admin/backend/notas_creditos/reporte.js?v=0.1.0'></script>
 
 <div class="container_listados">
 
