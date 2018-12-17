@@ -107,7 +107,7 @@
 				'detalle' => $detalle,
 				'total'   => $total,
 				'reserva_id' => $reserva_id,
-				'consecutivo' => 1,
+				'consecutivo' => 2,
 				'cuidador' => ['id'=>$reserva['cuidador']['id']],
 				'cliente' => ['id'=>$reserva['cliente']['id']],
 				'tipo' => '',
