@@ -178,6 +178,7 @@ function actualizar( code ){
 
 	// cantidad de Noches
 	var noches_total = num_noches( min, max );
+
 	// cantidad de mascotas
 	var total_masc = parseFloat( jQuery('[name="mascotas_'+code+'"]').attr('data-mascotas') );
 	var cant_masc_select = parseFloat( jQuery('[name="mascotas_'+code+'"]').val() );
@@ -185,14 +186,16 @@ function actualizar( code ){
 	// valores default	
 	var noches = noches_total;
 	var cant_masc = total_masc;
-	if( hasta == min || cant_masc_select == 0){
+	if( cant_masc_select == 0){
 		hasta = max;
 	}else{
 		if( cant_masc_select != cant_masc ){
 			cant_masc -= cant_masc_select;
 		}
 		noches_nuevo = num_noches( min, hasta );
-		noches = noches_total - noches_nuevo;
+		if( noches != noches_nuevo ){
+			noches = noches_total - noches_nuevo;
+		}
 	}
 
 	// diferencia de noches/dias restantes
