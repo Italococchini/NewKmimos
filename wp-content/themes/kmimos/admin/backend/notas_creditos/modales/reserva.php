@@ -148,7 +148,7 @@
 							<label>Hasta: </label> 
 							<input type="date" data-name="hasta" name="hasta_<?php echo $code; ?>" 
 							 data-code="<?php echo $code; ?>" 
-							 data-monto="<?php echo str_replace(',','.', str_replace('.', '', $s_principal[3]) ); ?>" 
+							 data-monto="<?php echo str_replace(',','.', str_replace('.', '', $fin) ); ?>" 
 							 value=""
 							 min="<?php echo $ini; ?>"
 							 max="<?php echo $fin; ?>">

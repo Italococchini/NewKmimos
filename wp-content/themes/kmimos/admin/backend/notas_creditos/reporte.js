@@ -171,13 +171,13 @@ function actualizar( code ){
 	// monto por noche
 	var monto= jQuery('[name="hasta_'+code+'"]').attr('data-monto');		
 	// Fecha final de reserva
-	var max = jQuery('[name="hasta_'+code+'"]').attr('max');
+	var min = jQuery('[name="hasta_'+code+'"]').attr('min');
 	// Nueva fecha hasta reserva
 	var hasta = jQuery('[name="hasta_'+code+'"]').val();
 
 	var cant_masc = jQuery('[name="mascotas_'+code+'"]').val();
 	// diferencia de noches/dias restantes
-	var noches = num_noches( hasta, max );			
+	var noches = num_noches( min, hasta );			
 
 	console.log(tipo_servicio);		
 	if( tipo_servicio.trim() != 'hospedaje' ){
