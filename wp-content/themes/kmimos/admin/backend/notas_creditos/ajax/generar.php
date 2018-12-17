@@ -147,6 +147,7 @@
 			$cfdi_nc = $CFDI->generar_Cfdi_NotasCreditos( $NC_data );
 			$factura_id = $reserva_id . $NC_data['consecutivo'];
 
+print_r($NC_data);
 print_r($cfdi_nc);
 
 		// Agregar registro de NC si enlaceFiscal lo acepta
