@@ -44,7 +44,7 @@
 				if( in_array($code, $s_principal) ){
 
 					$noches = $_POST[ 'noches_'.$code ];
-					$mascotas = $item[3] - $_POST[ 'mascotas_'.$code ];	
+					$mascotas = $item[0] - $_POST[ 'mascotas_'.$code ];	
 
 					$prorrateo = $mascotas * $noches * $item[0];
 print_r($item);
