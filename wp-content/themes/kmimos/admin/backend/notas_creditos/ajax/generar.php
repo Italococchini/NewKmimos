@@ -43,14 +43,16 @@
 
 				if( in_array($code, $s_principal) ){
 
-					$noches = $_POST[ 'noches_'.$code ];	
-					$prorrateo = $item[3] * $noches * $item[0];
+					$noches = $_POST[ 'noches_'.$code ];
+					$mascotas = $item[3] - $_POST[ 'mascotas_'.$code ];	
+
+					$prorrateo = $mascotas * $noches * $item[0];
 
 					if( $prorrateo > 0 ){				
 						$detalle[] = [  
 							'fecha' => $_POST[ 'hasta_'.$code ],
 							'titulo'=> "{$item[0]} {$item[1]} x {$item[2]} x {$item[3]}",
-							'cantidad'=> $_POST[ 'mascotas_'.$code ],
+							'cantidad'=> $mascotas,
 							'tamano'=> $item[1],
 							'noches'=> $item[2],
 							'costo' => $prorrateo,
