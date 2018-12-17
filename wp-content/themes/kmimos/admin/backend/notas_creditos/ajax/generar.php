@@ -51,7 +51,7 @@
 					if( $prorrateo > 0 ){				
 						$detalle[] = [  
 							'fecha' => $_POST[ 'hasta_'.$code ],
-							'titulo'=> "{$item[0]} {$item[1]} x {$item[2]} x {$item[3]}",
+							'titulo'=> "{$mascotas} {$item[1]} x {$item[2]} x {$item[3]}",
 							'cantidad'=> $mascotas,
 							'tamano'=> $item[1],
 							'noches'=> $item[2],
