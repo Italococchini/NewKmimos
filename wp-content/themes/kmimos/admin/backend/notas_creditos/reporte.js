@@ -186,7 +186,7 @@ function actualizar( code ){
 	// valores default	
 	var noches = noches_total;
 	var cant_masc = total_masc;
-	if( cant_masc_select == 0){
+	if( hasta == min || cant_masc_select == 0){
 		hasta = max;
 	}else{
 		if( cant_masc_select != cant_masc ){
