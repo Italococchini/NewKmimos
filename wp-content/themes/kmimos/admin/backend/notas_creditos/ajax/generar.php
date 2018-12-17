@@ -47,7 +47,9 @@
 					$mascotas = $item[3] - $_POST[ 'mascotas_'.$code ];	
 
 					$prorrateo = $mascotas * $noches * $item[0];
+print_r($item);
 print_r("{$prorrateo} ====> {$mascotas} * {$noches} * {$item[0]}");
+
 					if( $prorrateo > 0 ){				
 						$detalle[] = [  
 							'fecha' => $_POST[ 'hasta_'.$code ],
