@@ -138,18 +138,20 @@
 								data-name="cant_mascotas" 
 								name="mascotas_<?php echo $code; ?>"
 								data-code="<?php echo $code; ?>"
+								data-mascotas="<?php echo $s_principal[0]; ?>"
 								>
 							<?php for ($i=$s_principal[0]; $i > 0; $i--) { ?>
 								<option value="<?php echo $i; ?>"><?php echo $i; ?></option>			
 							<?php } ?>
+							<option value="0">Sin mascotas</option>			
 							</select>
 						</div>
 						<div data-target="prorrateo_<?php echo $code; ?>" class="col-sm-4" style="padding: 0px 10px;">
 							<label>Hasta: </label> 
 							<input type="date" data-name="hasta" name="hasta_<?php echo $code; ?>" 
 							 data-code="<?php echo $code; ?>" 
-							 data-monto="<?php echo str_replace(',','.', str_replace('.', '', $fin) ); ?>" 
-							 value=""
+							 data-monto="<?php echo str_replace(',','.', str_replace('.', '', $s_principal[3]) ); ?>" 
+							 value="<?php echo $fin; ?>"
 							 min="<?php echo $ini; ?>"
 							 max="<?php echo $fin; ?>">
 						</div>

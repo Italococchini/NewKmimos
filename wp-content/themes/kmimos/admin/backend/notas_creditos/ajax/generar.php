@@ -42,8 +42,10 @@
 				$code = md5($item[1]);
 
 				if( in_array($code, $s_principal) ){
+
 					$noches = $_POST[ 'noches_'.$code ];	
 					$prorrateo = $item[3] * $noches * $item[0];
+
 					if( $prorrateo > 0 ){				
 						$detalle[] = [  
 							'fecha' => $_POST[ 'hasta_'.$code ],
@@ -56,7 +58,6 @@
 						];
 						$total += $prorrateo;
 					}
-
 				}
 			}
 		}
@@ -142,6 +143,8 @@
 			$cfdi_nc = $CFDI->generar_Cfdi_NotasCreditos( $NC_data );
 			$factura_id = $reserva_id . $NC_data['consecutivo'];
 
+print_r($cfdi_nc);
+
 		// Agregar registro de NC si enlaceFiscal lo acepta
 			if( isset($cfdi_nc['estatus']) && $cfdi_nc['estatus']=='aceptado'){
 				// Nota de Credito - Cliente
@@ -174,7 +177,7 @@
 						'".$cfdi_nc["ack"]->AckEnlaceFiscal->folioFiscalUUID."',
 						'".$cfdi_nc["ack"]->AckEnlaceFiscal->numeroReferencia."'
 					);";
-
+print_r($sql);
 				$wpdb->query( $sql );
 				if( $NC_data['tipo'] == 'cliente'){
 					$sql_saldo = "

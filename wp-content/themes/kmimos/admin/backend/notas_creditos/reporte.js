@@ -171,15 +171,31 @@ function actualizar( code ){
 	// monto por noche
 	var monto= jQuery('[name="hasta_'+code+'"]').attr('data-monto');		
 	// Fecha final de reserva
+	var max = jQuery('[name="hasta_'+code+'"]').attr('max');
 	var min = jQuery('[name="hasta_'+code+'"]').attr('min');
 	// Nueva fecha hasta reserva
 	var hasta = jQuery('[name="hasta_'+code+'"]').val();
 
-	var cant_masc = jQuery('[name="mascotas_'+code+'"]').val();
-	// diferencia de noches/dias restantes
-	var noches = num_noches( min, hasta );			
+	// cantidad de Noches
+	var noches_total = num_noches( min, max );
+	// cantidad de mascotas
+	var total_masc = parseFloat( jQuery('[name="mascotas_'+code+'"]').attr('data-mascotas') );
+	var cant_masc_select = parseFloat( jQuery('[name="mascotas_'+code+'"]').val() );
+	
+	// valores default	
+	var noches = noches_total;
+	var cant_masc = total_masc;
+	if( hasta == min || cant_masc_select == 0){
+		hasta = max;
+	}else{
+		if( cant_masc_select != cant_masc ){
+			cant_masc -= cant_masc_select;
+		}
+		noches_nuevo = num_noches( min, hasta );
+		noches = noches_total - noches_nuevo;
+	}
 
-	console.log(tipo_servicio);		
+	// diferencia de noches/dias restantes
 	if( tipo_servicio.trim() != 'hospedaje' ){
 		noches += 1;
 	}
@@ -191,6 +207,8 @@ function actualizar( code ){
 	// diferencia en monto 
 	jQuery('[name="noches_'+code+'"]').val( noches );
 	jQuery('[name="prorrateo_'+code+'"]').val( total );
+
+console.log( "("+cant_masc+") * ("+monto+") * ("+noches+") ");
 
 	calcular_total();
 }
