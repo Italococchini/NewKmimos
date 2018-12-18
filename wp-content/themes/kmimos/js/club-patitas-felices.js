@@ -145,7 +145,7 @@ function loadTabla(){
  
 jQuery(window).scroll(function() {
 	jQuery('#logo-white').attr('src', jQuery('#logo-black').attr('src') );
-	if( jQuery(window).width() > 600 ){
+	if( jQuery(window).width() < 700 ){
 		if( jQuery(this).scrollTop() > 10 ){
 			jQuery('nav').css('position', 'relative');
 		}else{
