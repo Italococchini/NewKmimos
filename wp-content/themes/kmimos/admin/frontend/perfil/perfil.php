@@ -173,7 +173,7 @@ if( is_petsitters() ){
                     </label>
                 </section>
                 <section>
-                    <label for="banco_cuenta" class="lbl-text">'.esc_html__('No. de Cuenta bancaria','kmimos').':</label>
+                    <label for="banco_cuenta" class="lbl-text">No. de Cuenta bancaria <strong style="color:#6b1c9b;">(CLABE)</strong>:</label>
                     <label class="lbl-ui">
                         <input type="text" id="banco_cuenta" name="banco_cuenta" value="'.$datos_banco['cuenta'].'" data-valid="requerid" autocomplete="off" />
                     </label>
