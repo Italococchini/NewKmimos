@@ -1,5 +1,11 @@
 @media (max-width: 992px){
 
+	.logo-white{
+		display: none;
+	}
+	.logo-black{
+		display: block;
+	}
 	header {
 		margin-right: 0px!important;
 		margin-left: 0px!important;
