@@ -32,7 +32,7 @@
 		<meta property="og:url"           content="https://www.kmimos.com.mx" />
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="Kmimos - Club de las Patitas Felices" />
-		<meta property="og:description"   content="Hola" />
+		<meta property="og:description"   content="Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. ¡Utiliza mi código '. strtoupper($cupon) .' para que recibas $150 MXP de descuento en su primera estadía!" />
 		<meta property="og:image"         content="https://www.kmimos.com.mx" />
 	';
 
@@ -92,7 +92,9 @@
 								</a>
 							</div>
 							<div class="col-md-4 col-sm-12 col-xs-12 text-center">
-								<div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
+								<!-- div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div -->
+
+								<div class="fb-share-button" data-href="https://www.kmimos.com.mx" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.kmimos.com.mx%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
 							</div>
 							<div class="col-md-4 col-sm-12 col-xs-12 text-center">
 								<a style="color: #fff!important; font-size:11px; font-weight: bold; background: #25D366!important;"  class="btn btn-sm" href="https://api.whatsapp.com/send?text=Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. ¡Utiliza mi código <?php echo strtoupper($cupon);?> para que recibas $150 MXP de descuento en su primera estadía!"><i class="fa fa-whatsapp"></i> Whatsapp</a>
