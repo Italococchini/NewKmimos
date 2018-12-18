@@ -49,6 +49,7 @@
   js.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.2&appId=264829233920818&autoLogAppEvents=1';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+
 	<div class="content-compartir-club" style="z-index:5!important;">
 		<aside id="compartir-club-cover" class="col-xs-12 col-sm-12 col-md-5" style="background-image: url(<?php echo getTema();?>/images/club-patitas/Kmimos-Club-de-las-patitas-felices-1.jpg);">
 		</aside>
@@ -81,7 +82,7 @@
 
 						<!-- INI Compartir -->
 						<div id="redes-sociales" class="row text-center" style="margin: 30px 0px 0px 0px; background: #e8e8e8; border-radius: 5px; padding: 10px 0px; display:none;">
-							<div class="col-md-4 col-sm-6 col-xs-6 text-center">
+							<div class="col-md-4 col-sm-12 col-xs-12 text-center">
 								<a class="btn btn-info twitter-share-button"
 									style="color:#fff!important;padding: 4px 25px!important;"
 							  		href="https://twitter.com/intent/tweet?text=
@@ -90,10 +91,10 @@
 									<i class="fa fa-twitter"></i> Tweet
 								</a>
 							</div>
-							<div class="col-md-4 col-sm-6 col-xs-6 text-center">
+							<div class="col-md-4 col-sm-12 col-xs-12 text-center">
 								<div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div>
 							</div>
-							<div class="col-md-4 col-sm-6 col-xs-6 text-center">
+							<div class="col-md-4 col-sm-12 col-xs-12 text-center">
 								<a style="color: #fff!important; font-size:11px; font-weight: bold; background: #25D366!important;"  class="btn btn-sm" href="https://api.whatsapp.com/send?text=Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. ¡Utiliza mi código <?php echo strtoupper($cupon);?> para que recibas $150 MXP de descuento en su primera estadía!"><i class="fa fa-whatsapp"></i> Whatsapp</a>
 							</div>
 						</div>
