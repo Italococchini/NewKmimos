@@ -81,6 +81,10 @@
 	.cupon{
 		padding: 20px 15px!important; 
 	}
+	.button-mensaje{
+		position: relative;
+		width: 100%;
+	}
 }
 @media (max-width: 768px){
 }
