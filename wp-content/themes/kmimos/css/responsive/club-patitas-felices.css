@@ -84,11 +84,18 @@
 	.button-mensaje{
 		position: relative;
 		width: 100%;
+	    line-height: 18px;
+	}
+	.button-mensaje div{
+	    font-size: 12px!important;
 	}
 }
 @media (max-width: 768px){
 	.content-compartir-club{
 		width: 100%;
+	}
+	.cupon{
+		padding: 0px!important; 
 	}
 }
 @media (max-width: 480px){

@@ -62,28 +62,32 @@
 					<br>
 					<br>
 					<div class="row">
-						<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
-						<h2 class="titulo">¡Tus cr&eacute;ditos del club <?php echo $nombre; ?>!</h2><hr>
-						<p style="
-							font-weight: bold; 
-							font-size: 24px; 
-							text-align: center;
-							margin-top: 10%;
-							color: #337ab7;
-							">Créditos disponibles para usar</p>
-						<div class="cupon" style="background: transparent!important; border: 2px solid #4f4f4f;">
-							$ <span id="total_creditos">0.00</span>
+						
+						<div class="col-md-12 col-sm-10 col-sm-offset-1 col-xs-12">
+							<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
+							<h2 class="titulo">¡Tus cr&eacute;ditos del club <?php echo $nombre; ?>!</h2><hr>
+							<p style="
+								font-weight: bold; 
+								font-size: 24px; 
+								text-align: center;
+								margin-top: 10%;
+								color: #337ab7;
+								">Créditos disponibles para usar</p>
+							<div class="cupon" style="background: transparent!important; border: 2px solid #4f4f4f;">
+								$ <span id="total_creditos">0.00</span>
+							</div>
+
+							 
+							<p>*Los créditos disponibles No son intercambiables por dinero en efectivo. válido dentro de la plataforma Kmimos. Aplican para cualquier servicio ofrecido por tu Cuidador Favorito. </p>
+							 
 						</div>
 
-						 
-						<p>*Los créditos disponibles No son intercambiables por dinero en efectivo. válido dentro de la
-plataforma Kmimos. Aplican para cualquier servicio ofrecido por tu Cuidador Favorito. </p>
-						 
 					</div>
+
 				</section>
 				<div class="col-md-12 bg-primary bottom-mensaje">
 					<div class="col-md-10 col-md-offset-1">
-					Recuerda, por cada vez que alguien use tu código y complete una reservación con un Cuidador Kmimos, tú <strong>ganarás $150 MXN acumulables</strong> para que los uses en cualquiera de nuestros servicios		
+						<p>Recuerda, por cada vez que alguien use tu código y complete una reservación con un Cuidador Kmimos, tú <strong>ganarás $150 MXN acumulables</strong> para que los uses en cualquiera de nuestros servicios</p>
 					</div>
 				</div>
 			</div>
