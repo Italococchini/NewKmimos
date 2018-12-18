@@ -6,7 +6,8 @@
     $user = wp_get_current_user();
 
     // Ayer
-    $ayer = date('Y-m-d', strtotime( $fecha['fin']." -1 Day " ) );
+    // $ayer = date('Y-m-d', strtotime( $fecha['fin']." -1 Day " ) );
+    $ayer = date('Y-m-d', strtotime( $fecha['fin'] ) );
 ?>
 </pre>
 <script>
