@@ -1,6 +1,7 @@
 var table;
 var URL_SALIR;
 jQuery(document).ready( function (){
+	jQuery('#logo-white').attr('src', jQuery('#logo-black').attr('src') );
 
 	jQuery('#compartir_now').on('click', function(e){
 		var obj = jQuery('#redes-sociales');
@@ -141,3 +142,14 @@ function loadTabla(){
         }
 	});
 }
+ 
+jQuery(window).scroll(function() {
+	jQuery('#logo-white').attr('src', jQuery('#logo-black').attr('src') );
+	if( jQuery(window).width() > 600 ){
+		if( jQuery(this).scrollTop() > 10 ){
+			jQuery('nav').css('position', 'relative');
+		}else{
+			jQuery('nav').css('position', 'fixed');
+		}
+	}
+});
