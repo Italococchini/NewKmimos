@@ -61,28 +61,27 @@
 					<a href="<?php echo get_home_url(); ?>/club-patitas-felices/compartir">Obtener mi código</a>
 					<br>
 					<br>
-					<div class="row">
-						
-						<div class="col-md-12 col-sm-10 col-sm-offset-1 col-xs-12">
-							<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
-							<h2 class="titulo">¡Tus cr&eacute;ditos del club <?php echo $nombre; ?>!</h2><hr>
-							<p style="
-								font-weight: bold; 
-								font-size: 24px; 
-								text-align: center;
-								margin-top: 10%;
-								color: #337ab7;
-								">Créditos disponibles para usar</p>
-							<div class="cupon" style="background: transparent!important; border: 2px solid #4f4f4f;">
-								$ <span id="total_creditos">0.00</span>
-							</div>
-
-							 
-							<p>*Los créditos disponibles No son intercambiables por dinero en efectivo. válido dentro de la plataforma Kmimos. Aplican para cualquier servicio ofrecido por tu Cuidador Favorito. </p>
-							 
+				 
+					<div class="col-md-12">
+						<img src="<?php echo getTema().'/images/club-patitas/Kmimos-Club-de-las-patitas-felices-6.png'; ?>">
+						<h2 class="titulo">¡Tus cr&eacute;ditos del club <?php echo $nombre; ?>!</h2><hr>
+						<p style="
+							font-weight: bold; 
+							font-size: 24px; 
+							text-align: center;
+							margin-top: 10%;
+							color: #337ab7;
+							">Créditos disponibles para usar</p>
+						<div class="cupon" style="background: transparent!important; border: 2px solid #4f4f4f;">
+							$ <span id="total_creditos">0.00</span>
 						</div>
 
+						 
+						<p>*Los créditos disponibles No son intercambiables por dinero en efectivo. válido dentro de la plataforma Kmimos. Aplican para cualquier servicio ofrecido por tu Cuidador Favorito. </p>
+						 
 					</div>
+
+					<div class="clear"></div>
 
 				</section>
 				<div class="col-md-12 bg-primary bottom-mensaje">

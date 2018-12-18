@@ -19,6 +19,9 @@
 	header p{
 		font-size: 15px!important;
 	}
+	.navbar-fixed-top{
+		position: relative!important;
+	}
 	.title-secundario{
 		font-size: 16px!important;
 	}
@@ -86,7 +89,7 @@
 		width: 100%;
 	    line-height: 18px;
 	}
-	.button-mensaje div{
+	.button-mensaje p{
 	    font-size: 12px!important;
 	}
 }
@@ -96,6 +99,10 @@
 	}
 	.cupon{
 		padding: 0px!important; 
+	}
+	.row{
+		padding-left: 0px!important;
+		padding-right: 0px!important;
 	}
 }
 @media (max-width: 480px){
