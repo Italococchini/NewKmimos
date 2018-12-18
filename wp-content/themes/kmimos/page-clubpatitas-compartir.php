@@ -32,7 +32,7 @@
 		<meta property="og:url"           content="https://www.kmimos.com.mx" />
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="Kmimos - Club de las Patitas Felices" />
-		<meta property="og:description"   content="Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. Cupón'. strtoupper($cupon) .'" />
+		<meta property="og:description"   content="Deja a tu mejor amigo peludo en las mejores manos'" />
 		<meta property="og:image"         content="https://www.kmimos.com.mx" />
 	';
 
