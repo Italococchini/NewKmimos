@@ -76,7 +76,15 @@
             
             // Validar si el cuidador tiene datos bancarios
                 $token = md5(serialize($pago->detalle));
-                $checkbox = "<input type='checkbox' data-type='item_selected' data-parcial='false' data-total='".$pago->total."' name='item_selected[]' data-token='".$token."' value='".$pago->user_id."' data-global='".$pago->user_id."'>";
+                $checkbox = "<input type='checkbox' 
+                    data-type='item_selected' 
+                    data-parcial='false' 
+                    data-total='".$pago->total."'  
+                    name='item_selected[]' 
+                    data-token='".$token."' 
+                    value='".$pago->user_id."' 
+                    data-global='".$pago->user_id."'
+                >";
                 
                 $datos_banco = false;
                 if( !empty($cuidador->banco) ){
@@ -92,7 +100,11 @@
                     //$botones .= "<button style='padding:5px;'><i class='fa fa-money'></i> Generar Solicitud de pago</button>"; 
                 }else{
                     $botones .= "No posee datos bancarios"; 
-                    $checkbox = "<input type='checkbox' class='disabled' data-action='error' title='".utf8_encode($cuidador->nombre." ".$cuidador->apellido)." no posee datos bancarios'>";
+                    $checkbox = "<input type='checkbox' 
+                        class='disabled' 
+                        data-action='error' 
+                        title='".utf8_encode($cuidador->nombre." ".$cuidador->apellido)." no posee datos bancarios'
+                    >";
                 }
 
             if( $tipo == 'generados' || $tipo == 'completado' ){
@@ -215,7 +227,12 @@
             $input_total = "$ <span id='monto_".$pago->user_id."'>".number_format($pago->total, 2,',', '.')."</span>";
 
             if( $display_total_input ){
-                $input_total = "<input class='form-control' data-target='input_total' data-user='".$pago->user_id."' id='monto_".$pago->user_id."' value='".$pago->total."' >
+                $input_total = "<input class='form-control' 
+                    data-target='input_total' 
+                    data-user='".$pago->user_id."' 
+                    id='monto_".$pago->user_id."' 
+                    data-total = '".$pago->total."'
+                    value='".$pago->total."' >
                 <div>Disponible: $ ".number_format($pago->total, 2,',', '.')."</div>";
             }
             if( $display_comentario_input ){

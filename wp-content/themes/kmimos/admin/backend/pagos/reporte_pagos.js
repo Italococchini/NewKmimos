@@ -150,17 +150,42 @@ jQuery(document).ready(function() {
     		jQuery(this).addClass('disabled');
     		jQuery(this).html('Procesando');
 	    	var users = [];
+
+	    	var procesar = true;
 			jQuery.each(jQuery("[data-type='item_selected']:checked"), function(){
+
 				var user = jQuery(this).val();
+				var pagado = jQuery('#monto_'+user).val(); 
+				var total = jQuery('#monto_'+user).attr('data-total'); 
+				var comentario =  jQuery('#comentario_'+user).val();
+				var parcial = true;
+
+				if( total > pagado ){
+					parcial = false;
+				}
+				if( parcial && comentario == '' ){
+					var parent = jQuery(this).parent().parent();
+						parent.css("background-color", "#f5c6cb!important");
+						parent.css("color", "#721c24!important");
+					;
+					procesar = false;
+				}
 				users.push({
 					'user_id':user, 
-					'monto': jQuery('#monto_'+user).val(),
-					'comentario': jQuery('#comentario_'+user).val(),
-					'parcial': jQuery(this).attr('data-parcial'), 
+					'monto': pagado,
+					'comentario': comentario,
+					'parcial': parcial, 
 				});
 			});
-			console.log(users);
-			generar_solicitud( users, jQuery(this).attr('data-target') );
+
+			if( procesar ){
+				alert( "Solicitud cancelada, debes completar los comentario para los pagos paciales" );
+				cerrar();
+			}else{
+				generar_solicitud( users, jQuery(this).attr('data-target') );
+			}
+    	}else{
+    		cerrar();
     	}
 	});
 	  
