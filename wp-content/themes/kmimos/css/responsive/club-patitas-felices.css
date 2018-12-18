@@ -87,6 +87,9 @@
 	}
 }
 @media (max-width: 768px){
+	.content-compartir-club{
+		width: 100%;
+	}
 }
 @media (max-width: 480px){
 }
