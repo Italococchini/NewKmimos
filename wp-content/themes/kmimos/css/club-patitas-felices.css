@@ -84,7 +84,9 @@ header div{
 	vertical-align: middle; 
 	right: 0px;
 }
-
+.redes-sociales-hidden{
+	position: absolute; left: -6000px; 
+}
 p.subtitle{
 	font-size: 14px;
 	color: #fff;
