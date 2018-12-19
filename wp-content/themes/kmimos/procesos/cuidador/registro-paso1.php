@@ -132,36 +132,36 @@
         }else{
             $token = md5(microtime());
             $temp = array( "token" => $token );
-            Requests::register_autoloader();
-            $options = array(
-                'wstoken' => "e8738b6e6fad761768364d25c916f5e5",
-                'wsfunction' => "kmimos_user_create_users",
-                'moodlewsrestformat' => "json",
-                'users' => array(
-                    0 => array(
-                        'username' => $username,
-                        'password' => $clave,
-                        'firstname' => $nombres,
-                        "lastname" => $apellidos,
-                        "email" => $email,
-                        "preferences" => array(
-                            0 => array(
-                                "type" => 'kmimostoken',
-                                "value" => $token
-                            )
-                        ),
-                        "cohorts" => array(
-                            0 => array(
-                                "type" => 'idnumber',
-                                "value" => "kmi-qsc"
-                            )
-                        )
-                    )
-                )
-            );
+            // Requests::register_autoloader();
+            // $options = array(
+            //     'wstoken' => "e8738b6e6fad761768364d25c916f5e5",
+            //     'wsfunction' => "kmimos_user_create_users",
+            //     'moodlewsrestformat' => "json",
+            //     'users' => array(
+            //         0 => array(
+            //             'username' => $username,
+            //             'password' => $clave,
+            //             'firstname' => $nombres,
+            //             "lastname" => $apellidos,
+            //             "email" => $email,
+            //             "preferences" => array(
+            //                 0 => array(
+            //                     "type" => 'kmimostoken',
+            //                     "value" => $token
+            //                 )
+            //             ),
+            //             "cohorts" => array(
+            //                 0 => array(
+            //                     "type" => 'idnumber',
+            //                     "value" => "kmi-qsc"
+            //                 )
+            //             )
+            //         )
+            //     )
+            // );
             
             // Registro en iLernus
-            $request = Requests::post('http://kmimos.ilernus.com/webservice/rest/server.php', array(), $options );
+            //$request = Requests::post('http://kmimos.ilernus.com/webservice/rest/server.php', array(), $options );
 
             $atributos = array(
                 "nacimiento" => $fecha

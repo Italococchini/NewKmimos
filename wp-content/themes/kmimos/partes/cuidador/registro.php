@@ -312,14 +312,13 @@
 				<div class="overlay"></div>
 				<div class="popup-registro-exitoso-text">
 					<h2 style="font-size: 18px; color: white;">¡LISTO <span data-target="name"></span>!</h2>
-					<h2 style="font-size: 18px; color: white;">Recibimos con éxito tu solicitud para sumarte a la familia de Cuidadores Kmimos</h2>		
+					<p style="font-size: 12px;">Recibimos tu solicitud para sumarte a la familia de cuidadores Kmimos.</p>		
 
 					<aside class="text-center col-sm-10 col-sm-offset-1">
-						<p style="font-size: 15px;">Siguientes Pasos para activar tu perfil</p>
-						<p style="font-size: 12px;">Ahora serás dirigido a hacia el paso 1, PRUEBAS DE CONOCIMIENTO VETERINARIO.</p>
-						<p style="font-size: 12px;">Guarda el siguiente link, ahí puedes continuar con las pruebas en caso de no terminarlas por algún imprevisto y/o para cargar documentos.</p>
-						<p style="font-size: 12px;">Link para continuar es: http://kmimos.ilernus.com</p>
-						<p style="font-size: 12px;">INGRESA CON EL NOMBRE DE USUARIO Y CONTRASEÑA:</p>
+						<h2 style="font-size: 18px; color: white;">SIGUIENTES PASOS PARA ACTIVAR TU PERFIL:</h2>
+						<p style="font-size: 12px; text-align: justify;">1. En el transcurso del día, te enviaremos un correo con la liga de las pruebas de conocimientos y psicometría, es necesario que las contestes para poder continuar con el proceso.</p>
+						<p style="font-size: 12px; text-align: justify;">2. El equipo de certificación Kmimos te contactará en breve para acompañarte y resolver tus dudas, también puedes contactarnos a través de Whatsapp al +57 318 665 7330.</p>
+						<p style="font-size: 12px;">Te recordamos tus credenciales para tu perfil de Kmimos:</p>
 						<p style="font-size: 12px;">
 							<strong>Usuario:</strong> <span data-id="ilernus-user"></span>
 							</br>
