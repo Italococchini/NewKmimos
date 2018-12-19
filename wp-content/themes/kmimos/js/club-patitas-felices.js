@@ -5,10 +5,10 @@ jQuery(document).ready( function (){
 
 	jQuery('#compartir_now').on('click', function(e){
 		var obj = jQuery('#redes-sociales');
-		if( obj.css('display') == 'none' ){
-			obj.css('display', 'block');
+		if( obj.css('visibility') == 'hidden' ){
+			obj.css('visibility', 'visible');
 		}else{
-			obj.css('display', 'none');
+			obj.css('visibility', 'hidden');
 		}
 	});
 	
