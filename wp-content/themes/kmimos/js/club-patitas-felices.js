@@ -5,8 +5,13 @@ jQuery(document).ready( function (){
 
 	jQuery('#compartir_now').on('click', function(e){
 		var obj = jQuery('#redes-sociales');
+
+		if( obj.hasClass('redes-sociales-hidden') ){
 			obj.removeClass('redes-sociales-hidden');
-		if( obj.css('display') == 'none' || !obj.hasClass('redes-sociales-hidden')){
+			obj.css('display', 'none');
+		}
+
+		if( obj.css('display') == 'none' ){
 			obj.css('display', 'block');
 		}else{
 			obj.css('display', 'none');
