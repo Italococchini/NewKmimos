@@ -5,10 +5,10 @@ jQuery(document).ready( function (){
 
 	jQuery('#compartir_now').on('click', function(e){
 		var obj = jQuery('#redes-sociales');
-		if( obj.css('visibility') == 'hidden' ){
-			obj.css('visibility', 'visible');
+		if( obj.css('display') == 'none' ){
+			obj.css('display', 'block');
 		}else{
-			obj.css('visibility', 'hidden');
+			obj.css('display', 'none');
 		}
 	});
 	
@@ -44,6 +44,8 @@ jQuery(document).ready( function (){
 	
 	total_generado();
 	menuClub();
+
+	jQuery('#redes-sociales').css('display', 'none');
 });
 
 function club_validar(){
