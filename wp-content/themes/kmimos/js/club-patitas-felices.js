@@ -5,6 +5,7 @@ jQuery(document).ready( function (){
 
 	jQuery('#compartir_now').on('click', function(e){
 		var obj = jQuery('#redes-sociales');
+			obj.css('position', 'relative');
 		if( obj.css('display') == 'none' ){
 			obj.css('display', 'block');
 		}else{
