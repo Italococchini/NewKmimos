@@ -46,7 +46,6 @@ jQuery(document).ready( function (){
 	total_generado();
 	menuClub();
 
-	jQuery('#redes-sociales').css('display', 'none');
 });
 
 function club_validar(){
