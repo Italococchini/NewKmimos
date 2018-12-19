@@ -73,9 +73,7 @@ function getUsers($desde="", $hasta=""){
 	$filtro_adicional = "";
 	if( !empty($desde) && !empty($hasta) ){
 		$filtro_adicional .= (!empty($filtro_adicional))? ' AND ' : '' ;
-		$filtro_adicional .= " 
-			DATE_FORMAT(u.user_registered, '%m-%d-%Y') between DATE_FORMAT('{$desde}','%m-%d-%Y') and DATE_FORMAT('{$hasta}','%m-%d-%Y')
-		";
+		$filtro_adicional .= "u.user_registered >= '{$desde} 00:00:00' and u.user_registered <='{$hasta} 23:59:59'";
 	}
 
 	$filtro_adicional = (!empty($filtro_adicional))? ' WHERE '.$filtro_adicional : $filtro_adicional ;

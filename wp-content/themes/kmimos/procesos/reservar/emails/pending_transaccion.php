@@ -54,7 +54,7 @@
         if( isset($NO_ENVIAR) ){
             echo $mensaje_cliente;
         }else{
-            wp_mail( $cliente["email"], "Solicitud de reserva", $mensaje_cliente);
+            //wp_mail( $cliente["email"], "Solicitud de reserva", $mensaje_cliente);
         }
 
 
@@ -121,7 +121,7 @@
         if( isset($NO_ENVIAR) ){
             echo $mensaje_admin;
         }else{
-            kmimos_mails_administradores_new("Solicitud de reserva #".$servicio["id_reserva"], $mensaje_admin);
+            //kmimos_mails_administradores_new("Solicitud de reserva #".$servicio["id_reserva"], $mensaje_admin);
         }
         
 ?>

@@ -161,7 +161,7 @@ if(!function_exists('kmimos_get_email_footer')){
                     <div style='float:left; width:600px; margin-bottom: 31px;'>   
                         <div style='text-align:center;'>
                             <p style='font-family: Arial; font-size:14px; color:#666; text-align: center; '>
-                                En caso de dudas, puedes contactarte con nuestro equipo de atención al cliente al teléfono ".get_region('telefono').", Whatsapp <a href='telf:".get_region('telefono_corrido')."' target='_blank' style='text-decoration: none;'>".get_region('telefono')."</a>, o al correo 
+                                En caso de dudas, puedes contactarte con nuestro equipo de atención al cliente <!-- al teléfono ".get_region('telefono')." -->, Whatsapp <a href='telf:".get_region('telefono_corrido')."' target='_blank' style='text-decoration: none;'>".get_region('telefono')."</a>, o al correo 
                                 <a href='mailto:".get_region('email')."' target='_blank' style='text-decoration: none; '>".get_region('email')."</a>
                             </p>
                             <div  style='clear:both;'></div>

@@ -102,7 +102,7 @@
 				<div style='width: 5px; height: 5px; background-color: #6b1c9b; margin: 6px; border-radius: 50%;'></div>
 			</div>
 			<div style='display: table-cell; vertical-align: top; font-family: Arial; font-size: 14px; letter-spacing: 0.3px; color: #666666; text-align: justify;'>
-				Además nos puedes contactar al Staff Kmimos a los teléfonos <?php echo get_region('telefono'); ?> y WhatsApp <?php echo get_region('whatsapp'); ?>
+				Además nos puedes contactar al Staff Kmimos al <!-- os teléfonos <?php echo get_region('telefono'); ?> y --> WhatsApp <?php echo get_region('whatsapp'); ?>
 			</div>
 		</div>
 	</div>

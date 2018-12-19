@@ -230,7 +230,7 @@
 <div style='float:left;width:100%;margin-bottom: 31px;'>   
     <div style='text-align:center;'>
         <p style='font-family: Arial;font-weight: bold; font-size:13px; color:#666; text-align: center; '>
-            En caso de dudas, puedes contactarte con nuestro equipo de atención al cliente al teléfono <?php echo get_region('telefono'); ?>, Whatsapp <?php echo get_region('whatsapp'); ?>, o al correo <?php echo get_region('email'); ?>
+            En caso de dudas, puedes contactarte con nuestro equipo de atención al cliente al <!-- teléfono <?php echo get_region('telefono'); ?>, --> Whatsapp <?php echo get_region('whatsapp'); ?>, o al correo <?php echo get_region('email'); ?>
         </p>
         <div  style='clear:both;'></div>
     </div>

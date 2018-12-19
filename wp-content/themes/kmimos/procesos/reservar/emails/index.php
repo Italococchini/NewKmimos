@@ -1,5 +1,5 @@
 <?php
-	
+
 	extract($_GET);
 	if( isset($_GET["id_orden"]) ){
 		include((dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))."/wp-load.php");
@@ -14,9 +14,9 @@
     global $wpdb;
 	$id = $id_orden;
 
-	if( $id_orden+0 == 0 ){ exit(); }
+	if( $id_orden+0 == 0 ){ echo 1; exit(); }
 	$es_orden = $wpdb->get_var("SELECT post_type FROM wp_posts WHERE ID = '".$id."'");
-	if( $es_orden != "shop_order" ){ exit(); }
+	if( $es_orden != "shop_order" ){ echo 2; exit(); }
 
 	$data = kmimos_desglose_reserva_data($id, true);
 
@@ -161,6 +161,16 @@
 	    	$confirmacion_titulo = "Confirmación de Reserva Inmediata";
     	}
     }
+
+
+
+// **************
+// Testing
+// **************
+include(__DIR__."/pending_transaccion.php");
+exit();
+
+
 
 	if( $acc == "" || $confirmacion_titulo == "Confirmación de Reserva Inmediata" ){
 		/*		

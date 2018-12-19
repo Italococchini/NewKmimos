@@ -8,6 +8,9 @@
 
 	extract($_POST);
 
+	$cupones = ( isset($cupones) )? $cupones : [] ;
+
+
 	$db = new db( new mysqli($host, $user, $pass, $db) );
 
 	function aplicarCupon($db, $cupon, $cupones, $total, $validar, $cliente = "", $servicio = ""){
@@ -166,7 +169,6 @@
 		}
 	}else{
 		$cupones[] = aplicarCupon($db, $cupon, $cupones, $total, true, $cliente, $servicio);
-
 	}
 
 	/* Retorno */

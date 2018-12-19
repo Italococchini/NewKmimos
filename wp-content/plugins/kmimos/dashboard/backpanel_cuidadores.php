@@ -160,7 +160,7 @@ $users = getUsers($desde, $hasta);
 				    <tr>
 				    	<th class="text-center"><?php echo $row['ID']; ?></th>
 						<th><?php echo $flash; ?></th>
-						<th><?php echo date_convert($row['user_registered'], 'd-m-Y') ; ?></th>
+						<th><?php echo date_convert($row['user_registered'], 'Y-m-d') ; ?></th>
 						<th><?php echo $atributos["nacimiento"] ; ?></th>
 						<th><?php echo $name; ?></th>
 						<th><?php echo $usermeta["first_name"]; ?></th>

@@ -47,7 +47,7 @@ $HTML = '
                     <div class="col-xs-12 col-sm-3">
                         <h5>CONTÁCTANOS</h5>
                         
-                        <p>Tlf. '.get_region('telefono').'</p>
+                        <!--p>Tlf. '.get_region('telefono').'</p-->
                         <!--p>Llamada Sin Costo: '.$datos['telefono_sincosto'].'</p>-->
                         <p>WhatsApp: '.get_region('whatsapp').'</p>
                         <p>Email: '.get_region('email').'</p>
