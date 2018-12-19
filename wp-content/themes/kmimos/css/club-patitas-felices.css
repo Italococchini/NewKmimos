@@ -94,6 +94,27 @@ p.subtitle{
 	bottom: 0px;
 }
 
+.btn-facebook,
+.btn-whatsapp,
+.btn-twitter{
+	padding-left: 5px!important;
+    padding-right: 5px!important;
+}
+.btn-twitter a{
+	color:#fff!important;
+	width: 99px!important;
+	height: 28px!important;
+	padding: 3px 12px!important;
+}
+.btn-whatsapp a{
+	color: #fff!important;
+	font-size:11px; 
+	font-weight: bold; 
+	background: #25D366!important;  
+	width: 99px!important; 
+	height: 28px!important;
+}
+
 .btn-club{
 	border:1px solid #6B1C9A!important; 
 	background: #6B1C9A!important; 

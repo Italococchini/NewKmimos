@@ -82,22 +82,22 @@
 
 						<!-- INI Compartir -->
 						<div id="redes-sociales" class="row text-center" style="margin: 30px 0px 0px 0px; background: #e8e8e8; border-radius: 5px; padding: 10px 0px; display:none;">
-							<div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12 text-center">
+
+							<div style="margin-top: 10px;" class="col-md-4 col-sm-4 col-xs-4 text-center btn-twitter">
 								<a class="btn btn-info twitter-share-button"
-									style="color:#fff!important;padding: 4px 25px!important;"
 							  		href="https://twitter.com/intent/tweet?text=
 										Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. ¡Utiliza mi código <?php echo strtoupper($cupon);?> para que recibas $150 MXP de descuento en su primera estadía!"
 							  		target="_blank">
 									<i class="fa fa-twitter"></i> Tweet
 								</a>
 							</div>
-							<div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12 text-center">
+							<div style="margin-top: 10px;" class="col-md-4 col-sm-4 col-xs-4 text-center btn-facebook" >
 								<!-- div class="fb-share-button" data-href="<?php strtoupper($cupon);?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse">Compartir</a></div -->
 
-								<div class="fb-share-button" data-href="https://kmimos.com.mx" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. ¡Utiliza mi código <?php echo strtoupper($cupon);?> para que recibas $150 MXP de descuento en su primera estadía!&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div> 
+								<div class="fb-share-button btn btn-primary" data-href="https://kmimos.com.mx" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. ¡Utiliza mi código <?php echo strtoupper($cupon);?> para que recibas $150 MXP de descuento en su primera estadía!&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div> 
 							</div>
-							<div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12 text-center">
-								<a style="color: #fff!important; padding: 4px 25px!important;font-size:11px; font-weight: bold; background: #25D366!important;"  class="btn btn-sm" href="https://api.whatsapp.com/send?text=Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. ¡Utiliza mi código <?php echo strtoupper($cupon);?> para que recibas $150 MXP de descuento en su primera estadía!"><i class="fa fa-whatsapp"></i> Whatsapp</a>
+							<div style="margin-top: 10px;" class="col-md-4 col-sm-4 col-xs-4 text-center btn-whatsapp">
+								<a class="btn btn-sm" href="https://api.whatsapp.com/send?text=Deja a tu mejor amigo peludo en las mejores manos, las de un Cuidador Kmimos. ¡Utiliza mi código <?php echo strtoupper($cupon);?> para que recibas $150 MXP de descuento en su primera estadía!"><i class="fa fa-whatsapp"></i> Whatsapp</a>
 							</div>
 						</div>
 						<!-- FIN Compartir -->
