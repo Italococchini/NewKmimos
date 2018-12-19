@@ -81,7 +81,7 @@
 						<p style="font-weight:bold;font-size:16px;color:#0D7AD8;">¡Más compartes, más ganas! </p>
 
 						<!-- INI Compartir -->
-						<div id="redes-sociales" class="row text-center" style="margin: 30px 0px 0px 0px; background: #e8e8e8; border-radius: 5px; padding: 10px 0px; position: absolute; top: -5000; ">
+						<div id="redes-sociales" class="row text-center" style="margin: 30px 0px 0px 0px; background: #e8e8e8; border-radius: 5px; padding: 10px 0px; position: absolute; top: 0; ">
 
 							<div style="margin-top: 10px;" class="col-md-4 col-sm-4 col-xs-4 text-center btn-twitter">
 								<a class="btn btn-info twitter-share-button"
