@@ -218,3 +218,7 @@ p.subtitle{
 	position: absolute;
 	text-align: justify;
 }
+
+.btn-group-shared{
+	margin: 30px 0px;
+}
