@@ -11,7 +11,7 @@ class PagoCuidador {
 
 	protected $comision_retiro = 10;
 
-	public function PagoCuidador(){
+	function __construct(){
 		$this->raiz = dirname(dirname(dirname(dirname(dirname(__DIR__)))));
 		if( !isset($db) || is_string( $db ) ){
 			include($this->raiz.'/vlz_config.php');
