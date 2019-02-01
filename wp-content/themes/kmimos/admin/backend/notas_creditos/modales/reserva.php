@@ -28,9 +28,10 @@
 	$show_nc = false;
 
 	$reserva = [];
-	if( $nc_id > 0 ){
-		$msg = 'Ya existe una Nota de Credito asignada a la reserva #'.$ID;
-	}else if( empty($ID) ){
+	// if( $nc_id > 0 ){
+	// 	$msg = 'Ya existe una Nota de Credito asignada a la reserva #'.$ID;
+	// }else	 
+	if( empty($ID) ){
 		$msg = 'Ingrese un n&uacute;mero de reserva para generar la nota de cr&eacute;dito';
 	}else if( $factura_id > 0 ){
 		$msg = 'No se puede generar la nota de cr&eacute;dito por que la reserva ya esta facturada.';

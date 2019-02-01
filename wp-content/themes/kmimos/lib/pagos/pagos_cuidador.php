@@ -466,7 +466,8 @@ class PagoCuidador {
 		$total_disponible = $this->detalle_disponible( $user_id );
 		$total_retenido = $this->total_retenido( $user_id );
 		$no_disponible = $this->pagos_no_disponible();
-		$proximo_pago = $this->proximo_pago( $user_id );
+
+		$proximo_pago = $this->getPagosPendientes( $user_id );
 
 		$ultimo_retiro = $this->ultimo_retiro( $user_id );
 		if( !empty($ultimo_retiro) ){
@@ -476,10 +477,11 @@ class PagoCuidador {
 			}
 		}
 
+
 		$pay = (object)[
 			"disponible" 		=> $total_disponible['total'],
 			"no_disponible" 	=> $no_disponible,
-			"proximo_pago"		=> $proximo_pago,
+			"proximo_pago"		=> $proximo_pago->total,
 			"en_progreso"		=> $total_en_progreso,
 			"retenido"			=> $total_retenido,
 			"retiro"=>(object)[
@@ -719,9 +721,13 @@ class PagoCuidador {
 		return $obj_pagos;
 	}
 
-	public function getPagosPendientes(){
+	public function getPagosPendientes( $user_id=0 ){
 
-    	$sql = "SELECT * FROM cuidadores_pagos WHERE estatus = 'pendiente'";
+		$where = '';
+		if( $user_id > 0){
+			$where = ' AND user_id = '.$user_id;
+		}
+    	$sql = "SELECT * FROM cuidadores_pagos WHERE estatus = 'pendiente' ".$where;
     	$reservas = $this->db->get_results($sql);
 
     	$disponible = 0;
@@ -750,11 +756,15 @@ class PagoCuidador {
 	        $_pagos[ $row->user_id ]['fecha_creacion'] = date('Y-m-d', strtotime("now"));
     	}
 
-        $_pagos[ $row->user_id ] = (object) $_pagos[ $row->user_id ];
+    	if( $user_id > 0 ){
+    		$pagos = $_pagos[ $row->user_id ];
+    	}else{
+	        $_pagos[ $row->user_id ] = (object) $_pagos[ $row->user_id ];
+	        if( !empty($_pagos) ){
+	        	$pagos = (object) $_pagos;
+	        }
+    	}
 
-        if( !empty($_pagos) ){
-        	$pagos = (object) $_pagos;
-        }
         return (object) $pagos;
 	}
 

@@ -127,7 +127,7 @@ jQuery(document).ready(function(){
 
 });
 
-function update_periodo(){        
+function update_periodo(){
     jQuery.post(
         HOME+'admin/frontend/balance/ajax/update_periodo.php',
         {
@@ -140,8 +140,11 @@ function update_periodo(){
         function(d){
             jQuery('#fecha_pago').html(d);
             console.log(d);
-            alert( "Datos actualizados" );
     });
+    jQuery("option[data-type='mensual']").css("display", "none");
+    if( jQuery('[name="periodo"]').val() == 'mensual' ){
+        jQuery("option[data-type='mensual']").css("display", "block");
+    }
 }
 
 function loadTabla(){

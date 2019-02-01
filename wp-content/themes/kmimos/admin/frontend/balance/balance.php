@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 	require_once( dirname(dirname(dirname(__DIR__)))."/lib/pagos/pagos_cuidador.php" );
 	$user_id = get_current_user_id();
 
@@ -7,6 +10,7 @@
 	$hasta = date("Y-m-d");
 
 	$pay = $pagos->balance( $user_id );
+ 
 
 	$cuidador = $pagos->db->get_row(" SELECT pago_periodo, banco FROM cuidadores WHERE user_id = {$user_id}");
 
@@ -20,9 +24,6 @@
 	if( !empty($cuidador->pago_periodo) ){
 		$cuidador_periodo = unserialize($cuidador->pago_periodo);
 	}
-
-// print_r($user_id);
-	$rango_periodo = [ 1, 5, 10, 15 ];
 
 	$periodo_retiro = [
 		'semanal',
@@ -50,6 +51,8 @@
 	$titulo_q1="";
 	$titulo_q2="";
 
+	$include_js_script = '';
+
 	switch ($cuidador_periodo['periodo']) {
 		case 'quincenal':
 			$display_p_quincena = 'inline-block';
@@ -67,6 +70,29 @@
 			break;
 	}
 
+	$rango_periodo = '';
+
+	# ******************************
+	/*
+		'quincena': oculta los tipo 'mensual'
+		'mensual': muestra los tipo 'mensual'
+		funcion: update_periodo() ( js )
+	*/
+	# ******************************
+	$rango_periodo_pagos = [ 
+		"1" =>'quincenal',
+		"5" =>'quincenal',
+		"10"=>'quincenal',
+		"15"=>'quincenal',
+		"20"=>'mensual',
+		"24"=>'mensual',
+		"28"=>'mensual', 
+	];
+	foreach ($rango_periodo_pagos as $i => $tipo) {
+	 	$select = ( $i == $cuidador_periodo['primera_quincena'] )? 'selected':'';
+		$rango_periodo .= "<option data-type='{$tipo}' value='{$i}' {$select}>D&iacute;a ".$i." de cada mes</option>";
+	}
+
 	$mostrar_mensaje = '';
 	$banco = unserialize($cuidador->banco);
 	if( isset($banco['cuenta']) && isset($banco['banco']) && isset($banco['titular']) ){
@@ -76,7 +102,7 @@
 			}
 		}
 	}
-
+ 
 ?>
 
 <h1 class="titulo">Balance</h1>
@@ -128,12 +154,7 @@
 		<div class="input-group">
 			<span class="input-group-addon" id="lbl-p-quincena"><?php echo $titulo_q1; ?></span>	
 			<select class="form-control" name="primera_quincena" style="font-size: 12px;">
-				<?php
-				foreach( $rango_periodo as $i ){
-				 	$select = ( $i == $cuidador_periodo['primera_quincena'] )? 'selected':'';
-					echo "<option value='{$i}' {$select}>D&iacute;a ".$i." de cada mes</option>";
-				}
-				?>
+				<?php echo $rango_periodo; ?>
 			</select>
 		</div>
 	</div>	
@@ -164,7 +185,7 @@
 	<!-- Proximo pago -->
 	<article class="col-md-3 col-sm-4 col-xs-6 col-md-sp-3">
 		<div class="alert bg-kmimos">
-			<i class="fa balance-help fa-question-circle" data-action="popover" data-content="<strong>PROXIMO PAGO: </strong> Monto a pagar en la proxima periodo de pago" aria-hidden="true"></i>
+			<i class="fa balance-help fa-question-circle" data-action="popover" data-content="<strong>PROXIMO PAGO: </strong> Es un saldo que está en revisión. Para mayor información, llama al 01 (800) 9 564667" aria-hidden="true"></i>
 			<span>PROXIMO PAGO</span> 
 			<div style="padding:5px 0px; font-size: 18px;">$ <?php echo number_format($pay->proximo_pago, 2, ',','.'); ?></div>
 			<small>Fecha de pago <br> <span id="fecha_pago"><?php echo $cuidador_periodo['proximo_pago']; ?></span></small>
@@ -272,6 +293,7 @@
 	                        <th width="90">Referencia</th>
 	                        <th>Descripci&oacute;n</th>
 	                        <th width="150">Monto</th>
+	                        <th width="150">Comision</th>
 	                    </tr>
 	                </thead>
 	                <tbody></tbody>
@@ -334,4 +356,8 @@
         minuto: <?php echo $intervalo->format('%i') ?>,
         segundo: <?php echo $intervalo->format('%s') ?>
     };
+
+    <?php if( $cuidador_periodo['periodo'] == "quincenal" ) { ?>
+	   jQuery("option[data-type='mensual']").css("display", "none")
+	<?php } ?>
 </script>

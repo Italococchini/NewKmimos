@@ -21,7 +21,8 @@
 	    		date('Y-m-d', strtotime($transaccion->fecha)),
 	    		$transaccion->id,
 	    		$transaccion->descripcion,
-	    		$transaccion->monto,
+	    		"$ ".$transaccion->monto,
+                "$ -".$transaccion->comision,
 	    	);
 	    }
     }
